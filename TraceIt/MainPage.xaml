@@ -6,11 +6,39 @@
              mc:Ignorable="d"
              x:Class="TraceIt.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="70">
+
+        <StackLayout>
+
+            <Label Text="TraceIt"
+               HorizontalTextAlignment="Center"
+               FontSize="40"
+               TextColor="DarkBlue"/>
+
+            <Label Text="Your personal NCEA progress tracker" 
+               HorizontalTextAlignment="Center"
+               FontSize="17"/>
+
+        </StackLayout>
+
+        <StackLayout>
+
+            <Entry Placeholder="Enter your name here"/>
+
+            <Picker Title="Select your NCEA level">
+                <Picker.Items>
+                    <x:String>Level 1</x:String>
+                    <x:String>Level 2</x:String>
+                    <x:String>Level 3</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Text="Confirm"
+                    TextColor="White"
+                    CornerRadius="25"
+                    BackgroundColor="DarkBlue"/>
+
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>
