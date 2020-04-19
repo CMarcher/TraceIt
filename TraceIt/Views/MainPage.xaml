@@ -10,7 +10,8 @@
 
         <StackLayout>
 
-            <Label Text="TraceIt"
+            <Label 
+               Text="TraceIt"
                HorizontalTextAlignment="Center"
                FontSize="40"
                TextColor="DarkBlue"/>
@@ -23,9 +24,11 @@
 
         <StackLayout>
 
-            <Entry Placeholder="Enter your name here"/>
+            <Entry x:Name="entryName"
+                Placeholder="Enter your name here"/>
 
-            <Picker Title="Select your NCEA level">
+            <Picker x:Name="pickerLevel"
+                Title="Select your NCEA level">
                 <Picker.Items>
                     <x:String>Level 1</x:String>
                     <x:String>Level 2</x:String>
@@ -33,10 +36,12 @@
                 </Picker.Items>
             </Picker>
 
-            <Button Text="Confirm"
+            <Button x:Name="buttonConfirm"
+                    Text="Confirm"
                     TextColor="White"
                     CornerRadius="25"
-                    BackgroundColor="DarkBlue"/>
+                    BackgroundColor="DarkBlue"
+                    Clicked="buttonConfirm_Clicked"/>
 
         </StackLayout>
     </StackLayout>
