@@ -38,7 +38,8 @@
                         <DataTemplate>
                             <Label Text="{Binding Name}"
                                    FontSize="Large"
-                                   HorizontalTextAlignment="Center"/>
+                                   HorizontalTextAlignment="Center"
+                                   Padding="5"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
