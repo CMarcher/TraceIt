@@ -3,19 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ViewModels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage">
+
+    <!--<ContentPage.BindingContext>
+        <ViewModels:SubjectSelectionPageViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="Header">
+                <Setter Property="FontSize">Large</Setter>
+                <Setter Property="HorizontalTextAlignment">Center</Setter>
+                <Setter Property="TextColor">Black</Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-            
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            
-        </StackLayout>
+        <AbsoluteLayout Padding="20" VerticalOptions="FillAndExpand" BackgroundColor="White">
+
+            <StackLayout HeightRequest="400" Spacing="5">
+                <Label Text="Select your subjects"
+                       Style="{StaticResource Header}"/>
+
+                <CollectionView AbsoluteLayout.LayoutBounds=".5,.50,.7,.2"
+                            AbsoluteLayout.LayoutFlags="All"
+                            SelectionMode="Multiple"
+                            ItemsSource="{Binding subjects}"
+                            x:Name="subjectsCollecView"
+                            VerticalScrollBarVisibility="Always">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding Name}"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Center"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </StackLayout>
+
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,1.5,.6,.5"
+                         AbsoluteLayout.LayoutFlags="All">
+
+
+                <Label Text="Don't see the subject you want?"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"/>
+
+                <Button Text="Create new subject"
+                        TextColor="White"
+                        CornerRadius="20"
+                        BackgroundColor="MediumBlue"
+                        Clicked="Button_Clicked"/>
+
+                <Button Text="Confirm subjects"
+                        TextColor="White"
+                        CornerRadius="20"
+                        BackgroundColor="LimeGreen"/>
+
+            </StackLayout>
+
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
