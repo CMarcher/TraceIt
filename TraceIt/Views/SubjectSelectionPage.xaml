@@ -34,21 +34,41 @@
                             ItemsSource="{Binding subjects}"
                             x:Name="subjectsCollecView"
                             VerticalScrollBarVisibility="Always">
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding Name}"
+                            <StackLayout>
+
+                                <Label x:Name="label" Text="{Binding Name}"
                                    FontSize="Large"
                                    HorizontalTextAlignment="Center"
                                    Padding="5"/>
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" >
+
+                                        </VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#00a2ff" />
+                                                <Setter TargetName="label" Property="Label.TextColor" 
+                                                        Value="White"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                            </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+
                 </CollectionView>
 
             </StackLayout>
 
             <StackLayout AbsoluteLayout.LayoutBounds=".5,1.5,.6,.5"
                          AbsoluteLayout.LayoutFlags="All">
-
 
                 <Label Text="Don't see the subject you want?"
                        HorizontalTextAlignment="Center" 
@@ -63,7 +83,8 @@
                 <Button Text="Confirm subjects"
                         TextColor="White"
                         CornerRadius="20"
-                        BackgroundColor="LimeGreen"/>
+                        BackgroundColor="LimeGreen"
+                        FontSize="Subtitle"/>
 
             </StackLayout>
 
