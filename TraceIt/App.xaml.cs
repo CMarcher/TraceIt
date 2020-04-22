@@ -8,6 +8,7 @@ namespace TraceIt
     {
         public App()
         {
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());

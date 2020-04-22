@@ -22,13 +22,15 @@
 
 
     <ContentPage.Content>
+        
         <AbsoluteLayout Padding="20" VerticalOptions="FillAndExpand" BackgroundColor="White">
 
             <StackLayout HeightRequest="400" Spacing="5">
                 <Label Text="Select your subjects"
                        Style="{StaticResource Header}"/>
-
-                <CollectionView AbsoluteLayout.LayoutBounds=".5,.50,.7,.2"
+                
+                <Frame>
+                <CollectionView AbsoluteLayout.LayoutBounds=".5,.5,.7,.2"
                             AbsoluteLayout.LayoutFlags="All"
                             SelectionMode="Multiple"
                             ItemsSource="{Binding subjects}"
@@ -64,15 +66,18 @@
                     </CollectionView.ItemTemplate>
 
                 </CollectionView>
-
+                </Frame>
             </StackLayout>
 
-            <StackLayout AbsoluteLayout.LayoutBounds=".5,1.5,.6,.5"
+            <StackLayout AbsoluteLayout.LayoutBounds=".5,1.5,.7,.5"
                          AbsoluteLayout.LayoutFlags="All">
 
                 <Label Text="Don't see the subject you want?"
                        HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"/>
+                       VerticalTextAlignment="Center"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
 
                 <Button Text="Create new subject"
                         TextColor="White"
@@ -86,6 +91,8 @@
                         BackgroundColor="LimeGreen"
                         FontSize="Subtitle"/>
 
+                
+                
             </StackLayout>
 
         </AbsoluteLayout>
