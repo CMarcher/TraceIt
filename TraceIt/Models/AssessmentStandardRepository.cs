@@ -6,5 +6,6 @@ namespace TraceIt.Models
 {
     public class AssessmentStandardRepository
     {
+
     }
 }
