@@ -6,10 +6,7 @@
              xmlns:ViewModels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage">
-
-    <!--<ContentPage.BindingContext>
-        <ViewModels:SubjectSelectionPageViewModel/>
-    </ContentPage.BindingContext>-->
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="Header">
