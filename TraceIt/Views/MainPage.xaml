@@ -6,9 +6,9 @@
              mc:Ignorable="d"
              x:Class="TraceIt.MainPage">
 
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="70">
+    <AbsoluteLayout>
 
-        <StackLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
             <Label 
                Text="TraceIt"
@@ -22,7 +22,7 @@
 
         </StackLayout>
 
-        <StackLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
             <Entry x:Name="entryName"
                 Placeholder="Enter your name here"/>
@@ -44,6 +44,6 @@
                     Clicked="buttonConfirm_Clicked"/>
 
         </StackLayout>
-    </StackLayout>
+    </AbsoluteLayout>
 
 </ContentPage>
