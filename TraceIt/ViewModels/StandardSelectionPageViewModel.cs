@@ -4,7 +4,8 @@ using System.Text;
 
 namespace TraceIt.ViewModels
 {
-    class StandardSelectionPageViewModel
+    public class StandardSelectionPageViewModel
     {
+
     }
 }
