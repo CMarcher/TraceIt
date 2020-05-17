@@ -13,7 +13,7 @@ namespace TraceIt
 
         public App()
         {
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY"); Will implement this if I want it.
             InitializeComponent();
 
             NavigationService.Configure(ViewNames.SubjectSelectionPage, typeof(SubjectSelectionPage));
