@@ -18,7 +18,7 @@ namespace TraceIt
 
             NavigationService.Configure(ViewNames.SubjectSelectionPage, typeof(SubjectSelectionPage));
             NavigationService.Configure(ViewNames.StandardSelectionPage, typeof(StandardSelectionPage));
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
