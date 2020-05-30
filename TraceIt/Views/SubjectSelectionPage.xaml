@@ -47,7 +47,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <Frame CornerRadius="45" BackgroundColor="AliceBlue" Padding="20,10">
+                            <Frame CornerRadius="45" BackgroundColor="CadetBlue" Padding="20,10">
                                 <StackLayout>
                                     <Label Text="{Binding .}"
                                        TextColor="Black"/>
