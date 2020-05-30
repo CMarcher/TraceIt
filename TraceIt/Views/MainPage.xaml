@@ -10,7 +10,7 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
-            <Label 
+            <Label
                Text="TraceIt"
                HorizontalTextAlignment="Center"
                FontSize="40"
