@@ -7,7 +7,7 @@
              x:Class="TraceIt.MainPage"
              xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
 
-    <AbsoluteLayout BackgroundColor="DarkBlue">
+    <AbsoluteLayout d:BackgroundColor="#0006A3">
         
         <gradient:SfGradientView>
             <gradient:SfGradientView.BackgroundBrush>
@@ -42,7 +42,7 @@
             <Entry x:Name="entryName"
                    Placeholder="Enter your name here"
                    BackgroundColor="White"
-                   PlaceholderColor="Black"/>
+                   PlaceholderColor="Black" Margin="0"/>
 
             <Picker x:Name="pickerLevel"
                     Title="Select your NCEA level"

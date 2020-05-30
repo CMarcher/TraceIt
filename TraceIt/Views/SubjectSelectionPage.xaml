@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ViewModels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="Header">
@@ -19,79 +20,56 @@
 
 
     <ContentPage.Content>
-        
-        <AbsoluteLayout Padding="20" VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-            <StackLayout HeightRequest="400" Spacing="5">
-                <Label Text="Select your subjects"
-                       Style="{StaticResource Header}"/>
-                
-                <Frame>
-                <CollectionView AbsoluteLayout.LayoutBounds=".5,.5,.7,.2"
-                            AbsoluteLayout.LayoutFlags="All"
-                            SelectionMode="Multiple"
-                            ItemsSource="{Binding subjects}"
-                            x:Name="subjectsCollecView"
-                            VerticalScrollBarVisibility="Always">
+        <StackLayout Padding="20" VerticalOptions="FillAndExpand" BackgroundColor="White">
 
-                    <CollectionView.ItemTemplate>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <listview:SfListView x:Name="listView" IsScrollingEnabled="True" ItemSpacing="0,10"
+                                 SelectionMode="Multiple" SelectionBackgroundColor="Transparent">
+
+                    <listview:SfListView.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                            <x:String>Subject</x:String>
+                        </x:Array>
+                    </listview:SfListView.ItemsSource>
+
+                    <listview:SfListView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
-
-                                <Label x:Name="label" Text="{Binding Name}"
-                                   FontSize="Large"
-                                   HorizontalTextAlignment="Center"
-                                   Padding="5"/>
-
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Normal" >
-
-                                        </VisualState>
-                                        <VisualState Name="Selected">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="#00a2ff" />
-                                                <Setter TargetName="label" Property="Label.TextColor" 
-                                                        Value="White"/>
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-
-                            </StackLayout>
+                            <Frame CornerRadius="45" BackgroundColor="AliceBlue" Padding="20,10">
+                                <StackLayout>
+                                    <Label Text="{Binding .}"
+                                       TextColor="Black"/>
+                                </StackLayout>
+                            </Frame>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                    </listview:SfListView.ItemTemplate>
 
-                </CollectionView>
-                </Frame>
+                    <listview:SfListView.SelectedItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="45" BackgroundColor="Orange" Padding="20,10">
+                                <StackLayout VerticalOptions="FillAndExpand">
+                                    <Label Text="{Binding .}"
+                                       TextColor="White"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </listview:SfListView.SelectedItemTemplate>
+
+                </listview:SfListView>
             </StackLayout>
 
-            <StackLayout AbsoluteLayout.LayoutBounds=".5,1.5,.7,.5"
-                         AbsoluteLayout.LayoutFlags="All">
-
-                <Label Text="Don't see the subject you want?"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Subtitle"
-                       FontAttributes="Bold"
-                       TextColor="Black"/>
-
-                <Button Text="Create new subject"
-                        TextColor="White"
-                        CornerRadius="20"
-                        BackgroundColor="MediumBlue"
-                        Clicked="Button_Clicked"/>
-
-                <Button Text="Confirm subjects"
-                        TextColor="White"
-                        CornerRadius="20"
-                        BackgroundColor="LimeGreen"
-                        FontSize="Subtitle"/>
-
-                
-                
-            </StackLayout>
-
-        </AbsoluteLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

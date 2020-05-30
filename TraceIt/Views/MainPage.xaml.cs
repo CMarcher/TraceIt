@@ -27,7 +27,7 @@ namespace TraceIt
             }
             else
             {
-                await Navigation.PushAsync(new SubjectSelectionPage());
+                await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
             }
         }
 
