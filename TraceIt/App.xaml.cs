@@ -13,7 +13,7 @@ namespace TraceIt
 
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("@31382e312e30JjoK2h5lbWLizVsj9T5ilsulMKsoSD4VYPGFcva8oiM=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY0ODgzQDMxMzgyZTMxMmUzMERoZVZvNG82NEcrOWphQnVaYmJ4c3pSMWU5NDhRaGdyM00rZHFOSWwxbDg9");
             InitializeComponent();
 
             NavigationService.Configure(ViewNames.SubjectSelectionPage, typeof(SubjectSelectionPage));
