@@ -21,55 +21,58 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
     <ContentPage.Content>
 
-        <StackLayout Padding="20" VerticalOptions="FillAndExpand" BackgroundColor="White">
+        <StackLayout Padding="20" BackgroundColor="White">
 
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <listview:SfListView x:Name="listView" IsScrollingEnabled="True" ItemSpacing="0,10"
+            <listview:SfListView x:Name="listView" IsScrollingEnabled="True" ItemSpacing="0,10"
                                  SelectionMode="Multiple" SelectionBackgroundColor="Transparent">
 
-                    <listview:SfListView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                            <x:String>Subject</x:String>
-                        </x:Array>
-                    </listview:SfListView.ItemsSource>
+                <listview:SfListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                        <x:String>Subject</x:String>
+                    </x:Array>
+                </listview:SfListView.ItemsSource>
 
-                    <listview:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame CornerRadius="45" BackgroundColor="CadetBlue" Padding="20,10">
-                                <StackLayout>
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="45" BackgroundColor="LightBlue" Padding="20,10"
+                                   HasShadow="False">
+                                <StackLayout VerticalOptions="FillAndExpand">
                                     <Label Text="{Binding .}"
                                        TextColor="Black"/>
                                 </StackLayout>
                             </Frame>
-                        </DataTemplate>
-                    </listview:SfListView.ItemTemplate>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
 
-                    <listview:SfListView.SelectedItemTemplate>
-                        <DataTemplate>
-                            <Frame CornerRadius="45" BackgroundColor="Orange" Padding="20,10">
+                <listview:SfListView.SelectedItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="45" BackgroundColor="Orange" Padding="20,10"
+                                   HasShadow="False">
                                 <StackLayout VerticalOptions="FillAndExpand">
                                     <Label Text="{Binding .}"
                                        TextColor="White"/>
                                 </StackLayout>
                             </Frame>
-                        </DataTemplate>
-                    </listview:SfListView.SelectedItemTemplate>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.SelectedItemTemplate>
 
-                </listview:SfListView>
-            </StackLayout>
-
+            </listview:SfListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
