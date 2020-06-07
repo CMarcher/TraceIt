@@ -9,6 +9,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
              x:Class="TraceIt.Views.SubjectSelectionPage">
 
     <ContentPage.Resources>
+
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="Header">
                 <Setter Property="FontSize">Large</Setter>
@@ -16,63 +17,46 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
                 <Setter Property="TextColor">Black</Setter>
             </Style>
         </ResourceDictionary>
+
     </ContentPage.Resources>
 
 
     <ContentPage.Content>
 
-        <StackLayout Padding="20" BackgroundColor="White">
+        <StackLayout Padding="20,10" BackgroundColor="White">
 
-            <listview:SfListView x:Name="listView" IsScrollingEnabled="True" ItemSpacing="0,10"
-                                 SelectionMode="Multiple" SelectionBackgroundColor="Transparent">
-
-                <listview:SfListView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                        <x:String>Subject</x:String>
-                    </x:Array>
-                </listview:SfListView.ItemsSource>
+            <listview:SfListView x:Name="subjectsListView" ItemSpacing="10"
+                                 SelectionMode="Multiple">
 
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Frame CornerRadius="45" BackgroundColor="LightBlue" Padding="20,10"
-                                   HasShadow="False">
-                                <StackLayout VerticalOptions="FillAndExpand">
-                                    <Label Text="{Binding .}"
-                                       TextColor="Black"/>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
+                        <Frame BackgroundColor="Aqua"
+                               HasShadow="False"
+                               Padding="20,10,0,10"
+                               CornerRadius="45"
+                               >
+                            <StackLayout>
+                                <Label Text="Text" TextColor="Black"/>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </listview:SfListView.ItemTemplate>
 
                 <listview:SfListView.SelectedItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Frame CornerRadius="45" BackgroundColor="Orange" Padding="20,10"
-                                   HasShadow="False">
-                                <StackLayout VerticalOptions="FillAndExpand">
-                                    <Label Text="{Binding .}"
-                                       TextColor="White"/>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
+                        <Frame BackgroundColor="Orange"
+                               HasShadow="False"
+                               Padding="20,10,0,10"
+                               CornerRadius="45">
+                            <StackLayout>
+                                <Label Text="Text" TextColor="White"/>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </listview:SfListView.SelectedItemTemplate>
-
+                
             </listview:SfListView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
