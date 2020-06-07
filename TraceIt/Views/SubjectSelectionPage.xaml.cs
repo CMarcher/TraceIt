@@ -18,6 +18,7 @@ namespace TraceIt.Views
             InitializeComponent();
             datathingy = new SubjectSelectionPageViewModel();
             BindingContext = datathingy;
+            subjectsListView.ItemsSource = datathingy.subjects;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
