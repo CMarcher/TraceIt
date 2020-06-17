@@ -8,7 +8,7 @@
              xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
 
     <AbsoluteLayout d:BackgroundColor="#0006A3">
-        
+
         <gradient:SfGradientView>
             <gradient:SfGradientView.BackgroundBrush>
                 <gradient:SfLinearGradientBrush>
@@ -19,7 +19,7 @@
                 </gradient:SfLinearGradientBrush>
             </gradient:SfGradientView.BackgroundBrush>
         </gradient:SfGradientView>
-        
+
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
             <Label
@@ -37,22 +37,27 @@
         </StackLayout>
 
         <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All"
-                     Spacing="10">
+                     Spacing="10" Margin="0" Padding="0">
 
-            <Entry x:Name="entryName"
+            <Frame CornerRadius="12">
+                <Entry x:Name="entryName"
                    Placeholder="Enter your name here"
                    BackgroundColor="White"
-                   PlaceholderColor="Black" Margin="0"/>
-
-            <Picker x:Name="pickerLevel"
+                   PlaceholderColor="Black" Margin="0,-20"/>
+            </Frame>
+            
+            <Frame CornerRadius="12">
+                <Picker x:Name="pickerLevel"
                     Title="Select your NCEA level"
-                    BackgroundColor="White" TitleColor="#000000">
-                <Picker.Items>
-                    <x:String>Level 1</x:String>
-                    <x:String>Level 2</x:String>
-                    <x:String>Level 3</x:String>
-                </Picker.Items>
-            </Picker>
+                    BackgroundColor="Transparent" TitleColor="#000000" Margin="0,-20"
+                        >
+                    <Picker.Items>
+                        <x:String>Level 1</x:String>
+                        <x:String>Level 2</x:String>
+                        <x:String>Level 3</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
 
             <Button x:Name="buttonConfirm"
                     Text="Confirm"
