@@ -7,6 +7,22 @@
              x:Class="TraceIt.MainPage"
              xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="Picker">
+                <Setter Property="TitleColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <AbsoluteLayout d:BackgroundColor="#0006A3">
 
         <gradient:SfGradientView>
@@ -42,15 +58,12 @@
             <Frame CornerRadius="12">
                 <Entry x:Name="entryName"
                    Placeholder="Enter your name here"
-                   BackgroundColor="White"
-                   PlaceholderColor="Black" Margin="0,-20"/>
+                   Margin="0,-20"/>
             </Frame>
-            
+
             <Frame CornerRadius="12">
                 <Picker x:Name="pickerLevel"
-                    Title="Select your NCEA level"
-                    BackgroundColor="Transparent" TitleColor="#000000" Margin="0,-20"
-                        >
+                    Title="Select your NCEA level" Margin="0,-20">
                     <Picker.Items>
                         <x:String>Level 1</x:String>
                         <x:String>Level 2</x:String>
