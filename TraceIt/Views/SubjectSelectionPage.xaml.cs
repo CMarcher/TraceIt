@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Utilities;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,6 +30,7 @@ namespace TraceIt.Views
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SubjectsPage());
+            App.NavigationService.NavigateTo(ViewNames.SubjectsPage);
         }
     }
 }
