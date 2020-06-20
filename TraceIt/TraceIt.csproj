@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Syncfusion.Licensing" Version="18.1.0.55" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.55" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.1.0.55" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.1.0.55" />
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
