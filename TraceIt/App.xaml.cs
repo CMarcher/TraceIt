@@ -17,7 +17,8 @@ namespace TraceIt
             InitializeComponent();
 
             NavigationService.Configure(ViewNames.SubjectSelectionPage, typeof(SubjectSelectionPage));
-            NavigationService.Configure(ViewNames.StandardSelectionPage, typeof(StandardSelectionPage));
+            NavigationService.Configure(ViewNames.SubjectsPage, typeof(SubjectsPage));
+
             MainPage = new MainPage();
         }
 
