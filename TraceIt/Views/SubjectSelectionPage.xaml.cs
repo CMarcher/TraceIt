@@ -25,5 +25,10 @@ namespace TraceIt.Views
         {
             DisplayPromptAsync("New subject", "Enter subject name", "Ok", "Never mind", "Subject");
         }
+
+        private void buttonConfirm_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new SubjectsPage());
+        }
     }
 }
