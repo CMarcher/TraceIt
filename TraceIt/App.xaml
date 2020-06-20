@@ -9,5 +9,9 @@
         <Style TargetType="Button">
             <Setter Property="CornerRadius" Value="25"/>
         </Style>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="#000C72" />
+        </Style>
     </Application.Resources>
 </Application>
