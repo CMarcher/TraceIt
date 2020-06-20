@@ -40,10 +40,10 @@ namespace TraceIt.ViewModels
                 new Subject("Subject 4")
 
         };
-        public string testString { get; set; }
+
         public SubjectSelectionPageViewModel()
         {
-            testString = "test";
+            
         }
     }
 }
