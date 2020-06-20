@@ -75,7 +75,6 @@
             <Button x:Name="buttonConfirm"
                     Text="Confirm"
                     TextColor="White"
-                    CornerRadius="25"
                     BackgroundColor="#2699FB"
                     Clicked="buttonConfirm_Clicked"/>
 
