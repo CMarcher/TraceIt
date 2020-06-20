@@ -6,6 +6,8 @@
              mc:Ignorable="d"
              x:Class="TraceIt.App">
     <Application.Resources>
-
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="25"/>
+        </Style>
     </Application.Resources>
 </Application>
