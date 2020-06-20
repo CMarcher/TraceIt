@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
 xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -72,36 +73,21 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
             </listview:SfListView>
 
-            <Frame AbsoluteLayout.LayoutFlags="All"
-                   AbsoluteLayout.LayoutBounds="0, 1, 1, 0.08"
-                   Margin="-3, -15"
-                   Padding="0"
-                   BackgroundColor="Transparent">
-                
-                <StackLayout BackgroundColor="Transparent" VerticalOptions="FillAndExpand"
-                             HorizontalOptions="FillAndExpand">
-                    
-                    <gradient:SfGradientView>
-                        <gradient:SfGradientView.BackgroundBrush>
-                            <gradient:SfLinearGradientBrush>
-                                <gradient:SfLinearGradientBrush.GradientStops>
-                                    <gradient:SfGradientStop Color="#0012FF" Offset="0.0"/>
-                                    <gradient:SfGradientStop Color="#000B98" Offset="1.0"/>
-                                </gradient:SfLinearGradientBrush.GradientStops>
-                            </gradient:SfLinearGradientBrush>
-                        </gradient:SfGradientView.BackgroundBrush>
-                    </gradient:SfGradientView>
-                    
-                    <Button Text="CONFIRM"
-                    TextColor="White"
-                    BackgroundColor="Transparent"
-                    Padding="0, 0, 0, 5">
-
-                    </Button>
-                </StackLayout>
-
-
-            </Frame>
+            <button:SfButton Text="CONFIRM"
+                             AbsoluteLayout.LayoutBounds="0, 1, 1, 50"
+                             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                             CornerRadius="25"
+                             Padding="0, 0, 0, 20"
+                             Margin="0, 0, 0, -22">
+                <button:SfButton.BackgroundGradient>
+                    <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 0.65">
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="#0012FF" Offset="0.0"/>
+                            <gradient:SfGradientStop Color="#000B98" Offset="1.0"/>
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </button:SfButton.BackgroundGradient>
+            </button:SfButton>
 
         </AbsoluteLayout>
     </ContentPage.Content>
