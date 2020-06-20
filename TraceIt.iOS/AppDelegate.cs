@@ -1,3 +1,4 @@
+using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.ListView.XForms.iOS;
 using System;
