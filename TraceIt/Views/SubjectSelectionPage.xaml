@@ -7,7 +7,8 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage"
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             Title="Select your subjects">
 
     <ContentPage.Resources>
 
@@ -21,11 +22,14 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="X"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-
+        
         <AbsoluteLayout BackgroundColor="White"
-                        VerticalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand"
                         HorizontalOptions="FillAndExpand">
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
@@ -35,7 +39,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
                                  AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
                                  VerticalOptions="FillAndExpand"
                                  HorizontalOptions="FillAndExpand"
-                                 Padding="20, 10">
+                                 Padding="20, 20, 10, 50">
 
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
