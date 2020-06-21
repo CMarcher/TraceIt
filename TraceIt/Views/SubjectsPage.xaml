@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
-             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects">
@@ -27,9 +28,19 @@
                 </gradient:SfGradientView.BackgroundBrush>
             </gradient:SfGradientView>
 
-            <listview:SfListView>
+            <CollectionView x:Name="collectionViewSubjects">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="2" HorizontalItemSpacing="30"
+                                     Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
                 
-            </listview:SfListView>
+            </CollectionView>
             
         </AbsoluteLayout>
     </ContentPage.Content>
