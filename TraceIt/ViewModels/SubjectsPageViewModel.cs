@@ -9,7 +9,11 @@ namespace TraceIt.ViewModels
     {
         public ObservableCollection<string> Subjects = new ObservableCollection<string>()
         {
-            "English"
+            "Sound Production",
+            "Calculus",
+            "Computer Studies",
+            "Drama",
+            "Chemistry"
         };
     }
 }
