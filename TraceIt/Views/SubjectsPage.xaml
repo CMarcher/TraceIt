@@ -23,6 +23,8 @@
     <ContentPage.Content>
         <AbsoluteLayout VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand">
+
+            <!--#region GradientBackground -->
             <gradient:SfGradientView>
                 <gradient:SfGradientView.BackgroundBrush>
                     <gradient:SfLinearGradientBrush>
@@ -33,8 +35,10 @@
                     </gradient:SfLinearGradientBrush>
                 </gradient:SfGradientView.BackgroundBrush>
             </gradient:SfGradientView>
+            <!--#endregion-->
 
-            <StackLayout Padding="14">
+            <StackLayout Padding="14" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0.5, 0, 1, 1">
                 <CollectionView x:Name="collectionViewSubjects">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
@@ -43,11 +47,10 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <border:SfBorder CornerRadius="28">
-                                <Grid RowDefinitions="10*, 30*, 30*, 30*"
-                                  ColumnDefinitions="40*, 40*">
+                            <border:SfBorder CornerRadius="28" >
+                                <AbsoluteLayout>
 
-                                    <gradient:SfGradientView Grid.RowSpan="4" Grid.ColumnSpan="2">
+                                    <gradient:SfGradientView>
                                         <gradient:SfGradientView.BackgroundBrush>
                                             <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                                                 <gradient:SfLinearGradientBrush.GradientStops>
@@ -58,23 +61,26 @@
                                         </gradient:SfGradientView.BackgroundBrush>
                                     </gradient:SfGradientView>
 
-                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.ColumnSpan="2"/>
-                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}" Grid.Row="1" Grid.ColumnSpan="2"/>
-                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}" Grid.Row="2" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"/>
+                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}"/>
 
-                                    <Button:SfButton Text="View Info" Grid.Row="3" Grid.Column="1"
-                                                     CornerRadius="30" Grid.ColumnSpan="2">
-                                        <Button:SfButton.BackgroundGradient>
-                                            <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                                                <gradient:SfLinearGradientBrush.GradientStops>
-                                                    <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
-                                                    <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
-                                                </gradient:SfLinearGradientBrush.GradientStops>
-                                            </gradient:SfLinearGradientBrush>
-                                        </Button:SfButton.BackgroundGradient>
+                                    <Button:SfButton Text="View Info" CornerRadius="30">
+                                        
+                                        <!--#region GradientBackground -->
+                                            <Button:SfButton.BackgroundGradient>
+                                                <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                    <gradient:SfLinearGradientBrush.GradientStops>
+                                                        <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
+                                                        <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
+                                                    </gradient:SfLinearGradientBrush.GradientStops>
+                                                </gradient:SfLinearGradientBrush>
+                                            </Button:SfButton.BackgroundGradient>
+                                            <!--#endregion-->
+                                        
                                     </Button:SfButton>
 
-                                </Grid>
+                                </AbsoluteLayout>
                             </border:SfBorder>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
