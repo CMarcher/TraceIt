@@ -17,6 +17,8 @@
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="17"/>
         </Style>
     </ContentPage.Resources>
 
@@ -37,7 +39,7 @@
             </gradient:SfGradientView>
             <!--#endregion-->
 
-            <StackLayout Padding="14" AbsoluteLayout.LayoutFlags="All"
+            <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0, 1, 1">
                 <CollectionView x:Name="collectionViewSubjects">
                     <CollectionView.ItemsLayout>
@@ -48,7 +50,7 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <border:SfBorder CornerRadius="28" >
-                                <AbsoluteLayout>
+                                <AbsoluteLayout HeightRequest="180">
 
                                     <gradient:SfGradientView>
                                         <gradient:SfGradientView.BackgroundBrush>
@@ -62,21 +64,25 @@
                                     </gradient:SfGradientView>
 
                                     <Label Text="{Binding Name}"
-                                           HorizontalTextAlignment="Center"
                                            AbsoluteLayout.LayoutFlags="All"
                                            AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
                                            FontSize="17"
                                            FontAttributes="Bold"/>
                                     
-                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"/>
+                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"
+                                           AbsoluteLayout.LayoutFlags="All"
+                                           AbsoluteLayout.LayoutBounds="0.5, 0.35, 0.9, 0.2"/>
                                     
-                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}"/>
+                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}"
+                                           AbsoluteLayout.LayoutFlags="All"
+                                           AbsoluteLayout.LayoutBounds="0.5, 0.53, 0.9, 0.2"/>
 
                                     <Button:SfButton Text="View Info" CornerRadius="30"
                                                      TextColor="Black"
                                                      FontAttributes="Bold"
+                                                     FontSize="17"
                                                      AbsoluteLayout.LayoutFlags="All"
-                                                     AbsoluteLayout.LayoutBounds="0.5, 0.8, 0.7, 0.3">
+                                                     AbsoluteLayout.LayoutBounds="0.5, 0.9, 0.7, 0.2">
                                         
                                         <!--#region GradientBackground -->
                                             <Button:SfButton.BackgroundGradient>
