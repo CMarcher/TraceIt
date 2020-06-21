@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SubjectsPage">
+             x:Class="TraceIt.Views.SubjectsPage"
+             Title="Subjects">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit"/>
@@ -24,6 +26,11 @@
                     </gradient:SfLinearGradientBrush>
                 </gradient:SfGradientView.BackgroundBrush>
             </gradient:SfGradientView>
+
+            <listview:SfListView>
+                
+            </listview:SfListView>
+            
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
