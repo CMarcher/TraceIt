@@ -81,9 +81,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
                              Text="CONFIRM"
                              AbsoluteLayout.LayoutBounds="0, 1, 1, 50"
                              AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
-                             CornerRadius="25"
-                             Padding="0, 0, 0, 20"
-                             Margin="0, 0, 0, -22"
+                             CornerRadius="25,25,0,0"
                              Clicked="buttonConfirm_Clicked">
                 
                 <button:SfButton.BackgroundGradient>
