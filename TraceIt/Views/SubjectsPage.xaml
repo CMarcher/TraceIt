@@ -11,6 +11,7 @@
              Title="Subjects">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"/>
         <ToolbarItem Text="Edit"/>
     </ContentPage.ToolbarItems>
 
