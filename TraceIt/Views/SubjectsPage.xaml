@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
              xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects">
@@ -13,6 +13,12 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit"/>
     </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
         <AbsoluteLayout VerticalOptions="FillAndExpand"
@@ -28,20 +34,53 @@
                 </gradient:SfGradientView.BackgroundBrush>
             </gradient:SfGradientView>
 
-            <CollectionView x:Name="collectionViewSubjects">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="2" HorizontalItemSpacing="30"
+            <StackLayout Padding="14">
+                <CollectionView x:Name="collectionViewSubjects">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
                                      Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                
-            </CollectionView>
-            
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <border:SfBorder CornerRadius="28">
+                                <Grid RowDefinitions="10*, 30*, 30*, 30*"
+                                  ColumnDefinitions="40*, 40*">
+
+                                    <gradient:SfGradientView Grid.RowSpan="4" Grid.ColumnSpan="2">
+                                        <gradient:SfGradientView.BackgroundBrush>
+                                            <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                <gradient:SfLinearGradientBrush.GradientStops>
+                                                    <gradient:SfGradientStop Color="#150B47" Offset="0.0"/>
+                                                    <gradient:SfGradientStop Color="#04020E" Offset="1"/>
+                                                </gradient:SfLinearGradientBrush.GradientStops>
+                                            </gradient:SfLinearGradientBrush>
+                                        </gradient:SfGradientView.BackgroundBrush>
+                                    </gradient:SfGradientView>
+
+                                    <Label Text="{Binding Name}" Grid.Row="0" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+                                    <Button:SfButton Text="View Info" Grid.Row="3" Grid.Column="1"
+                                                     CornerRadius="30" Grid.ColumnSpan="2">
+                                        <Button:SfButton.BackgroundGradient>
+                                            <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                <gradient:SfLinearGradientBrush.GradientStops>
+                                                    <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
+                                                    <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
+                                                </gradient:SfLinearGradientBrush.GradientStops>
+                                            </gradient:SfLinearGradientBrush>
+                                        </Button:SfButton.BackgroundGradient>
+                                    </Button:SfButton>
+
+                                </Grid>
+                            </border:SfBorder>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+            </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
