@@ -51,6 +51,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
                             <StackLayout>
                                 <Label Text="{Binding Name}" TextColor="Black"
+                                       FontSize="16"
                                        VerticalOptions="CenterAndExpand"/>
                             </StackLayout>
 
@@ -68,6 +69,7 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
                             <StackLayout>
                                 <Label Text="{Binding Name}" TextColor="White"
+                                       FontSize="16"
                                        VerticalOptions="CenterAndExpand"/>
                             </StackLayout>
 
