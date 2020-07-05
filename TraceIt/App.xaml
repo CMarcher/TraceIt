@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.App"
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms">
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
     <Application.Resources>
         <Style TargetType="Button">
             <Setter Property="CornerRadius" Value="25"/>
@@ -19,6 +19,49 @@
             <Style TargetType="border:SfBorder" x:Name="listItemBorder">
                 <Setter Property="CornerRadius" Value="28"/>
             </Style>
+
+            <!--#region Gradients -->
+            <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
+                <Setter Property="BackgroundBrush">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush>
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#4B7BFF" Offset="0"/>
+                                <gradient:SfGradientStop Color="#071D57" Offset="1.0"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="gradient:SfGradientView" x:Key="subjectItemGradient">
+                <Setter Property="BackgroundBrush">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#150B47" Offset="0"/>
+                                <gradient:SfGradientStop Color="#04020E" Offset="1"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Button:SfButton" x:Key="subjectButtonGradient">
+                <Setter Property="BackgroundGradient">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
+                                <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--#endregion-->
+
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
