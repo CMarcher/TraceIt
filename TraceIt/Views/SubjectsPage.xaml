@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
              xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects">
@@ -61,9 +62,9 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
         </ResourceDictionary>
-        
+
     </ContentPage.Resources>
 
     <ContentPage.Content>
@@ -87,7 +88,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <border:SfBorder CornerRadius="28" >
+                            <border:SfBorder Style="{DynamicResource listItemBorder}">
                                 <AbsoluteLayout HeightRequest="180">
 
                                     <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
@@ -98,11 +99,11 @@
                                            AbsoluteLayout.LayoutFlags="All"
                                            AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
                                            FontAttributes="Bold"/>
-                                    
+
                                     <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"
                                            AbsoluteLayout.LayoutFlags="All"
                                            AbsoluteLayout.LayoutBounds="0.5, 0.35, 0.9, 0.2"/>
-                                    
+
                                     <Label Text="{Binding Standards, StringFormat='{0} standards'}"
                                            AbsoluteLayout.LayoutFlags="All"
                                            AbsoluteLayout.LayoutBounds="0.5, 0.53, 0.9, 0.2"/>
@@ -119,6 +120,16 @@
                             </border:SfBorder>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+
+                    <CollectionView.Footer>
+                        <border:SfBorder Style="{DynamicResource listItemBorder}"
+                                         BackgroundColor="Black"
+                                         HeightRequest="180">
+                            <Button Text="Add Subject"
+                                    TextColor="Yellow"
+                                    BackgroundColor="Transparent"/>
+                        </border:SfBorder>
+                    </CollectionView.Footer>
 
                 </CollectionView>
             </StackLayout>

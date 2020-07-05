@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.App">
+             x:Class="TraceIt.App"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms">
     <Application.Resources>
         <Style TargetType="Button">
             <Setter Property="CornerRadius" Value="25"/>
@@ -13,5 +14,11 @@
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="#000C72" />
         </Style>
+
+        <ResourceDictionary>
+            <Style TargetType="border:SfBorder" x:Name="listItemBorder">
+                <Setter Property="CornerRadius" Value="28"/>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
