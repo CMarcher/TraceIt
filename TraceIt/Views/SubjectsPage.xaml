@@ -23,48 +23,6 @@
             <Setter Property="FontSize" Value="17"/>
         </Style>
 
-        <ResourceDictionary>
-            <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
-                <Setter Property="BackgroundBrush">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush>
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#4B7BFF" Offset="0"/>
-                                <gradient:SfGradientStop Color="#071D57" Offset="1.0"/>
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style TargetType="gradient:SfGradientView" x:Key="subjectItemGradient">
-                <Setter Property="BackgroundBrush">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#150B47" Offset="0"/>
-                                <gradient:SfGradientStop Color="#04020E" Offset="1"/>
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style TargetType="Button:SfButton" x:Key="subjectButtonGradient">
-                <Setter Property="BackgroundGradient">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
-                                <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-        </ResourceDictionary>
-
     </ContentPage.Resources>
 
     <ContentPage.Content>

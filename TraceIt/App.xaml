@@ -20,6 +20,7 @@
                 <Setter Property="CornerRadius" Value="28"/>
             </Style>
 
+
             <!--#region Gradients -->
             <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
                 <Setter Property="BackgroundBrush">
@@ -60,6 +61,7 @@
                 </Setter>
             </Style>
             <!--#endregion-->
+
 
         </ResourceDictionary>
         
