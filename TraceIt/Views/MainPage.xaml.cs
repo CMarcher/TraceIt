@@ -33,7 +33,7 @@ namespace TraceIt
 
         public bool InputFieldsInvalid()
         {
-            if (entryName.Text == "" || pickerLevel.SelectedItem == null)
+            if (entryName.Text == "" || pickerLevel.SelectedIndex == -1)
             {
                 return true;
             }
