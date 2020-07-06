@@ -5,15 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:local="clr-namespace:TraceIt.Views"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.TabbedPageHome">
-
-    <NavigationPage Title="Subjects">
-        <x:Arguments>
-            <local:SubjectsPage/>
-        </x:Arguments> 
-    </NavigationPage>
+             x:Class="TraceIt.Views.TabbedPageHome"
+             Title="Home">
     
-    <ContentPage Title="Tab 2" />
-    <ContentPage Title="Tab 3" />
+    <local:SubjectsPage/>
+    <ContentPage Title="Page 2"/>
+    <ContentPage Title="Page 3"/>
+
 
 </TabbedPage>
