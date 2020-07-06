@@ -7,7 +7,12 @@
              mc:Ignorable="d"
              x:Class="TraceIt.Views.TabbedPageHome">
 
-    <local:SubjectsPage/>
+    <NavigationPage Title="Subjects">
+        <x:Arguments>
+            <local:SubjectsPage/>
+        </x:Arguments> 
+    </NavigationPage>
+    
     <ContentPage Title="Tab 2" />
     <ContentPage Title="Tab 3" />
 
