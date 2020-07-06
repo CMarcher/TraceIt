@@ -29,7 +29,7 @@ namespace TraceIt.Views
 
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            App.NavigationService.NavigateTo(ViewNames.TabbedPageHome);
+            Navigation.PushModalAsync(new TabbedPageHome());
         }
     }
 }
