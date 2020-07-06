@@ -6,9 +6,16 @@
              xmlns:local="clr-namespace:TraceIt.Views"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.TabbedPageHome"
-             Title="Home">
+             Title="Home"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:TabbedPage.ToolbarPlacement="Bottom">
+
+    <NavigationPage Title="Subjects">
+        <x:Arguments>
+            <local:SubjectsPage/>
+        </x:Arguments>
+    </NavigationPage>
     
-    <local:SubjectsPage/>
     <ContentPage Title="Page 2"/>
     <ContentPage Title="Page 3"/>
 
