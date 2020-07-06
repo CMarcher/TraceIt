@@ -21,5 +21,10 @@ namespace TraceIt.Views
             BindingContext = ViewModel;
             collectionViewSubjects.ItemsSource = ViewModel.Subjects;
         }
+
+        private void buttonViewInfo_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new StandardSelectionPage());
+        }
     }
 }
