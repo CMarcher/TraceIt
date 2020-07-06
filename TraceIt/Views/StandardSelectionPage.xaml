@@ -7,51 +7,81 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.StandardSelectionPage">
+             x:Class="TraceIt.Views.StandardSelectionPage"
+             Title="Smart English">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="17"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <AbsoluteLayout>
             
             <gradient:SfGradientView Style="{DynamicResource backgroundGradient}"/>
 
-            <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
+            <StackLayout Padding="14, 14, 14, 14" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0, 1, 1">
                 
                 <CollectionView x:Name="selectedStandardsCollectionView">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <border:SfBorder Style="{DynamicResource listItemBorder}">
-                                <AbsoluteLayout HeightRequest="90">
+                                <AbsoluteLayout HeightRequest="135">
 
                                     <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
                                                              AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
                                                              Style="{DynamicResource subjectItemGradient}"/>
 
-                                    <Label Text="{Binding Name}"
+                                    <Label Text="{Binding Sub_Reference}"
+                                           HorizontalTextAlignment="Start"
                                            AbsoluteLayout.LayoutFlags="All"
                                            AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
                                            FontAttributes="Bold"/>
 
-                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"
+                                    <Label Text="{Binding Title}"
+                                           HorizontalTextAlignment="Start"
                                            AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.35, 0.9, 0.2"/>
+                                           AbsoluteLayout.LayoutBounds="0.55, 0.4, 0.9, 0.2"/>
 
-                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}"
+                                    <Label Text="{Binding Credits, StringFormat='{0} credits'}"
+                                           HorizontalTextAlignment="Start"
                                            AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.53, 0.9, 0.2"/>
+                                           AbsoluteLayout.LayoutBounds="0.55, 0.65, 0.9, 0.2"/>
 
-                                    <Button:SfButton Text="View Info" CornerRadius="30"
+                                    <Button:SfButton Text="More" CornerRadius="30"
                                                      TextColor="Black"
                                                      FontAttributes="Bold"
                                                      FontSize="17"
+                                                     BorderColor="Transparent"
                                                      AbsoluteLayout.LayoutFlags="All"
-                                                     AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.7, 0.2"
+                                                     AbsoluteLayout.LayoutBounds="0.95, 0.85, 0.3, 0.3"
                                                      Style="{DynamicResource subjectButtonGradient}"/>
 
                                 </AbsoluteLayout>
                             </border:SfBorder>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+
+                    <CollectionView.Footer>
+                        <border:SfBorder Style="{DynamicResource listItemBorder}"
+                                         BackgroundColor="Black"
+                                         HeightRequest="135">
+                            <Button Text="Add Standard"
+                                    FontSize="22"
+                                    TextColor="Yellow"
+                                    BackgroundColor="Transparent"/>
+                        </border:SfBorder>
+                    </CollectionView.Footer>
+                    
                 </CollectionView>
                 
             </StackLayout>
