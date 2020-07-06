@@ -6,23 +6,25 @@
              mc:Ignorable="d"
              x:Class="TraceIt.App"
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+
     <Application.Resources>
-        <Style TargetType="Button">
-            <Setter Property="CornerRadius" Value="25"/>
-        </Style>
-
-        <Style TargetType="NavigationPage">
-            <Setter Property="BarBackgroundColor" Value="#000C72" />
-        </Style>
-
+        
         <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="25"/>
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#000C72" />
+            </Style>
+            
             <Style TargetType="border:SfBorder" x:Name="listItemBorder">
                 <Setter Property="CornerRadius" Value="28"/>
             </Style>
 
-
-            <!--#region Gradients -->
             <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
                 <Setter Property="BackgroundBrush">
                     <Setter.Value>
@@ -61,8 +63,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <!--#endregion-->
-
 
         </ResourceDictionary>
         
