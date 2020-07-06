@@ -7,7 +7,8 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SubjectsPage">
+             x:Class="TraceIt.Views.SubjectsPage"
+             Title="Subjects">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"/>
@@ -70,7 +71,8 @@
                                                      FontSize="17"
                                                      AbsoluteLayout.LayoutFlags="All"
                                                      AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.7, 0.2"
-                                                     Style="{DynamicResource subjectButtonGradient}"/>
+                                                     Style="{DynamicResource subjectButtonGradient}"
+                                                     Clicked="buttonViewInfo_Clicked"/>
 
                                 </AbsoluteLayout>
                             </border:SfBorder>
