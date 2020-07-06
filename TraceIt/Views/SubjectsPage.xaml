@@ -7,8 +7,7 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SubjectsPage"
-             Title="Subjects">
+             x:Class="TraceIt.Views.SubjectsPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"/>
