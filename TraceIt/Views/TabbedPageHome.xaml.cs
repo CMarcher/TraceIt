@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace TraceIt.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TabbedPage1 : TabbedPage
+    public partial class TabbedPageHome : TabbedPage
     {
-        public TabbedPage1()
+        public TabbedPageHome()
         {
             InitializeComponent();
         }
