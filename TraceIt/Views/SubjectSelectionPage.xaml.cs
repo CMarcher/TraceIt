@@ -30,7 +30,7 @@ namespace TraceIt.Views
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SubjectsPage());
-            App.NavigationService.NavigateTo(ViewNames.SubjectsPage);
+            App.NavigationService.NavigateTo(ViewNames.TabbedPageHome);
         }
     }
 }
