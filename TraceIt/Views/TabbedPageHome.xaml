@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.TabbedPage1">
+             x:Class="TraceIt.Views.TabbedPageHome">
   <!--Pages can be added as references or inline-->
   <ContentPage Title="Tab 1" />
   <ContentPage Title="Tab 2" />
