@@ -6,7 +6,7 @@ using TraceIt.Models;
 
 namespace TraceIt.ViewModels
 {
-    public class StandardSelectionPageViewModel
+    public class SelectedStandardsPageViewModel
     {
         public ObservableCollection<AssessmentStandard> Standards = new ObservableCollection<AssessmentStandard>()
         {
