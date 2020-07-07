@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TraceIt.Models
 {
-    public class SelectedSubject
+    public class SelectedSubject : Subject
     {
-        public string Name { get; set; }
         public int Credits { get; set; }
         public int Standards { get; set; }
 
@@ -16,5 +17,7 @@ namespace TraceIt.Models
             Credits = credits;
             Standards = standards;
         }
+
+        
     }
 }
