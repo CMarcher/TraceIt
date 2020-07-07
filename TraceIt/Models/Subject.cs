@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TraceIt.Models
@@ -8,9 +10,9 @@ namespace TraceIt.Models
     {
         public string Name { get; set; }
 
-        public Subject(string name)
+        public Subject()
         {
-            Name = name;
+            
         }
     }
 }
