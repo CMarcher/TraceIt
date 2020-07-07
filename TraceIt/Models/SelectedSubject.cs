@@ -15,7 +15,7 @@ namespace TraceIt.Models
         {
             Name = name;
             Credits = credits;
-            Standards = standards;
+            Standards = standards; 
         }
 
         
