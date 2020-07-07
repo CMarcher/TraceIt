@@ -7,6 +7,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Syncfusion.XForms.iOS.Graphics;
+using Syncfusion.XForms.Buttons;
 
 namespace TraceIt.iOS
 {
@@ -27,6 +29,9 @@ namespace TraceIt.iOS
         {
             Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
+            SfBorderRenderer.Init();
+            SfButtonRenderer.Init();
+            SfGradientViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
