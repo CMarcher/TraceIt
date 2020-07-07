@@ -21,13 +21,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SelectedStandardsPage.xaml.cs">
+      <DependentUpon>SelectedStandardsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TabbedPageHome.xaml.cs">
       <DependentUpon>TabbedPageHome.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\StandardSelectionPage.xaml">
+    <EmbeddedResource Update="Views\SelectedStandardsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SubjectSelectionPage.xaml">
