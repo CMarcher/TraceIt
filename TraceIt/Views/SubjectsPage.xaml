@@ -79,15 +79,17 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 
-                    <CollectionView.Footer>
-                        <border:SfBorder Style="{DynamicResource listItemBorder}"
-                                         BackgroundColor="Black"
-                                         HeightRequest="180">
-                            <Button Text="Add Subject"
-                                    TextColor="Yellow"
-                                    BackgroundColor="Transparent"/>
-                        </border:SfBorder>
-                    </CollectionView.Footer>
+                    <CollectionView.FooterTemplate>
+                        <DataTemplate>
+                            <border:SfBorder Style="{DynamicResource listItemBorder}"
+                                                     BackgroundColor="Black"
+                                                     HeightRequest="180">
+                                <Button Text="Add Subject"
+                                                TextColor="Yellow"
+                                                BackgroundColor="Transparent"/>
+                            </border:SfBorder>
+                        </DataTemplate>
+                    </CollectionView.FooterTemplate>
 
                 </CollectionView>
             </StackLayout>
