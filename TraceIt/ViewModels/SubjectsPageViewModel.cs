@@ -19,23 +19,6 @@ namespace TraceIt.ViewModels
             new SelectedSubject("Drama", 24, 5)
         };
 
-        bool isVisible = false;   // The button is invisible by default
-
-        public bool IsVisible
-        {
-            get
-            {
-                return isVisible;
-            }
-
-            set
-            {
-                if (isVisible != value)
-                {
-                    isVisible = value;
-                    OnPropertyChanged(nameof(IsVisible));
-                }
-            }
-        }
+        
     }
 }
