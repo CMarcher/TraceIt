@@ -12,7 +12,7 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StandardSelectionPage : ContentPage
     {
-        public StandardSelectionPageViewModel ViewModel = new StandardSelectionPageViewModel();
+        public SelectedStandardsPageViewModel ViewModel = new SelectedStandardsPageViewModel();
 
         public StandardSelectionPage()
         {
