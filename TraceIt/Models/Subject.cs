@@ -10,9 +10,6 @@ namespace TraceIt.Models
     {
         public string Name { get; set; }
 
-        public Subject()
-        {
-            
-        }
+        public Subject() { }
     }
 }
