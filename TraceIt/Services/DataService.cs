@@ -41,7 +41,7 @@ namespace TraceIt.Services
             InitialiseAsync().SafeFireAndForget(false);
         }
 
-        public async Task InitialiseAsync()
+        async Task InitialiseAsync()
         {
             if (!Initialised)
             {
