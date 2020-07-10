@@ -10,7 +10,7 @@ namespace TraceIt
     public partial class App : Application
     {
         public static NavigationService NavigationService { get; } = new NavigationService();
-        public DataService DataService { get; } = new DataService();
+        public static DataService DataService { get; } = new DataService();
 
         public App()
         {
