@@ -8,50 +8,50 @@ namespace TraceIt.ViewModels
 {
     public class SelectedStandardsPageViewModel
     {
-        public ObservableCollection<AssessmentStandard> Standards = new ObservableCollection<AssessmentStandard>()
+        public ObservableCollection<AssessmentStandards> Standards = new ObservableCollection<AssessmentStandards>()
         {
-            new AssessmentStandard()
+            new AssessmentStandards()
             {
-                AS_Code = 97321,
+                Code = 97321,
                 Title = "Demonstrate understanding of something",
-                Sub_Reference = "Smart English 1.1",
-                AS_Type = "Achievement",
+                Subject_Reference = "Smart English 1.1",
+                Assessment_Type = "Achievement",
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandard()
+            new AssessmentStandards()
             {
-                AS_Code = 97321,
+                Code = 97321,
                 Title = "Demonstrate understanding of something",
-                Sub_Reference = "Smart English 1.1",
-                AS_Type = "Achievement",
+                Subject_Reference = "Smart English 1.1",
+                Assessment_Type = "Achievement",
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandard()
+            new AssessmentStandards()
             {
-                AS_Code = 97321,
+                Code = 97321,
                 Title = "Demonstrate understanding of something",
-                Sub_Reference = "Smart English 1.1",
-                AS_Type = "Achievement",
+                Subject_Reference = "Smart English 1.1",
+                Assessment_Type = "Achievement",
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandard()
+            new AssessmentStandards()
             {
-                AS_Code = 97321,
+                Code = 97321,
                 Title = "Demonstrate understanding of something",
-                Sub_Reference = "Smart English 1.1",
-                AS_Type = "Achievement",
+                Subject_Reference = "Smart English 1.1",
+                Assessment_Type = "Achievement",
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandard()
+            new AssessmentStandards()
             {
-                AS_Code = 97321,
+                Code = 97321,
                 Title = "Demonstrate understanding of something",
-                Sub_Reference = "Smart English 1.1",
-                AS_Type = "Achievement",
+                Subject_Reference = "Smart English 1.1",
+                Assessment_Type = "Achievement",
                 Hyperlink = "Whatever",
                 Credits = 4
             }
