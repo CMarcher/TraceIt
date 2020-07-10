@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Models;
 using TraceIt.Utilities;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
@@ -13,13 +16,21 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubjectSelectionPage : ContentPage
     {
-        public SubjectSelectionPageViewModel datathingy;
+        public SubjectSelectionPageViewModel ViewModel;
+        ObservableCollection<AssessmentStandards> standards;
+
         public SubjectSelectionPage()
         {
             InitializeComponent();
-            datathingy = new SubjectSelectionPageViewModel();
-            BindingContext = datathingy;
-            subjectsListView.ItemsSource = datathingy.subjects;
+            ViewModel = new SubjectSelectionPageViewModel();
+            BindingContext = ViewModel;
+            subjectsListView.ItemsSource = ViewModel.subjects;
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            SetStandards();
+            stopwatch.Stop();
+            var elapsed = stopwatch.ElapsedMilliseconds;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -30,6 +41,11 @@ namespace TraceIt.Views
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new TabbedPageHome());
+        }
+
+        async void SetStandards()
+        {
+            standards = await App.DataService.GetAssessmentStandards();
         }
     }
 }
