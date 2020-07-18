@@ -35,7 +35,7 @@ namespace TraceIt.Droid.Renderers
                 new int[] { control.TopColor.ToAndroid(), control.BottomColor.ToAndroid() }
                 );
 
-            var relativeLayout = this.GetChildAt(0) as Android.Widget.RelativeLayout;
+            var relativeLayout = GetChildAt(0) as Android.Widget.RelativeLayout;
             var bottomNavigationView = relativeLayout.GetChildAt(1) as BottomNavigationView;
             bottomNavigationView.SetBackground(gradient);
             bottomNavigationView.Elevation = 0;
