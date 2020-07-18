@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Controls;
 using TraceIt.Views;
 using Xamarin.Forms;
 
@@ -27,7 +28,7 @@ namespace TraceIt
             }
             else
             {
-                await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
+                await Navigation.PushModalAsync(new GradientNavigationPage(new SubjectSelectionPage()));
             }
         }
 
