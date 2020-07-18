@@ -4,46 +4,81 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.MainPage">
+             x:Class="TraceIt.MainPage"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
 
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="70">
+    <ContentPage.Resources>
+        <ResourceDictionary>
 
-        <StackLayout>
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
 
-            <Label 
+            <Style TargetType="Picker">
+                <Setter Property="TitleColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout d:BackgroundColor="#0006A3">
+
+        <gradient:SfGradientView>
+            <gradient:SfGradientView.BackgroundBrush>
+                <gradient:SfLinearGradientBrush>
+                    <gradient:SfLinearGradientBrush.GradientStops>
+                        <gradient:SfGradientStop Color="#000C72" Offset="0.0"/>
+                        <gradient:SfGradientStop Color="#1392FF" Offset="1.0"/>
+                    </gradient:SfLinearGradientBrush.GradientStops>
+                </gradient:SfLinearGradientBrush>
+            </gradient:SfGradientView.BackgroundBrush>
+        </gradient:SfGradientView>
+
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
+
+            <Label
                Text="TraceIt"
                HorizontalTextAlignment="Center"
                FontSize="40"
-               TextColor="DarkBlue"/>
+               TextColor="White"
+               FontAttributes="Bold"/>
 
             <Label Text="Your personal NCEA progress tracker" 
                HorizontalTextAlignment="Center"
-               FontSize="17"/>
+               FontSize="17"
+               TextColor="White"/>
 
         </StackLayout>
 
-        <StackLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All"
+                     Spacing="10" Margin="0" Padding="0">
 
-            <Entry x:Name="entryName"
-                Placeholder="Enter your name here"/>
+            <Frame CornerRadius="12">
+                <Entry x:Name="entryName"
+                   Placeholder="Enter your name here"
+                   Margin="0,-20"/>
+            </Frame>
 
-            <Picker x:Name="pickerLevel"
-                Title="Select your NCEA level">
-                <Picker.Items>
-                    <x:String>Level 1</x:String>
-                    <x:String>Level 2</x:String>
-                    <x:String>Level 3</x:String>
-                </Picker.Items>
-            </Picker>
+            <Frame CornerRadius="12">
+                <Picker x:Name="pickerLevel"
+                    Title="Select your NCEA level" Margin="0,-20">
+                    <Picker.Items>
+                        <x:String>Level 1</x:String>
+                        <x:String>Level 2</x:String>
+                        <x:String>Level 3</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Frame>
 
             <Button x:Name="buttonConfirm"
                     Text="Confirm"
                     TextColor="White"
-                    CornerRadius="25"
-                    BackgroundColor="DarkBlue"
+                    BackgroundColor="#2699FB"
                     Clicked="buttonConfirm_Clicked"/>
 
         </StackLayout>
-    </StackLayout>
+    </AbsoluteLayout>
 
 </ContentPage>

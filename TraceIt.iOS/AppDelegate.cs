@@ -1,9 +1,16 @@
-﻿using System;
+using Syncfusion.XForms.iOS.TabView;
+using Syncfusion.XForms.iOS.Border;
+using Syncfusion.XForms.iOS.Buttons;
+using Syncfusion.ListView.XForms.iOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
 using UIKit;
+using Syncfusion.XForms.iOS.Graphics;
+using Syncfusion.XForms.Buttons;
+using Sharpnado.Presentation.Forms.iOS;
 
 namespace TraceIt.iOS
 {
@@ -22,7 +29,12 @@ namespace TraceIt.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.Forms.Init();
+            SfListViewRenderer.Init();
+            SfBorderRenderer.Init();
+            SfButtonRenderer.Init();
+            SfGradientViewRenderer.Init();
+            SfTabViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

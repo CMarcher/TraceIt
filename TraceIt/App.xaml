@@ -4,8 +4,67 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.App">
-    <Application.Resources>
+             x:Class="TraceIt.App"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
 
+    <Application.Resources>
+        
+        <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="25"/>
+            </Style>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#000C72" />
+            </Style>
+            
+            <Style TargetType="border:SfBorder" x:Name="listItemBorder">
+                <Setter Property="CornerRadius" Value="28"/>
+            </Style>
+
+            <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
+                <Setter Property="BackgroundBrush">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush>
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#4B7BFF" Offset="0"/>
+                                <gradient:SfGradientStop Color="#071D57" Offset="1.0"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="gradient:SfGradientView" x:Key="subjectItemGradient">
+                <Setter Property="BackgroundBrush">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#150B47" Offset="0"/>
+                                <gradient:SfGradientStop Color="#04020E" Offset="1"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Button:SfButton" x:Key="subjectButtonGradient">
+                <Setter Property="BackgroundGradient">
+                    <Setter.Value>
+                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                            <gradient:SfLinearGradientBrush.GradientStops>
+                                <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
+                                <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
+                            </gradient:SfLinearGradientBrush.GradientStops>
+                        </gradient:SfLinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
