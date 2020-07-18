@@ -1,3 +1,4 @@
+using Syncfusion.XForms.iOS.TabView;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.ListView.XForms.iOS;
@@ -9,6 +10,7 @@ using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.Buttons;
+using Sharpnado.Presentation.Forms.iOS;
 
 namespace TraceIt.iOS
 {
@@ -32,6 +34,7 @@ namespace TraceIt.iOS
             SfBorderRenderer.Init();
             SfButtonRenderer.Init();
             SfGradientViewRenderer.Init();
+            SfTabViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
