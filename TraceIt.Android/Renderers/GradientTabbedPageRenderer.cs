@@ -30,11 +30,16 @@ namespace TraceIt.Droid.Renderers
 
             var control = (GradientTabbedPage)Element;
 
-            //var tabs = FindViewById<BottomNavigationView>(Resource.Id.main_tablayout);
-            //if (tabs == null) return;
+            var gradient = new GradientDrawable(
+                GradientDrawable.Orientation.TopBottom,
+                new int[] { control.TopColor.ToAndroid(), control.BottomColor.ToAndroid() }
+                );
 
-            //tabs.SetBackground(new GradientDrawable(GradientDrawable.Orientation.LeftRight,
-            //    new int[] { control.TopColor.ToAndroid(), control.BottomColor.ToAndroid() }));
+            var relativeLayout = this.GetChildAt(0) as Android.Widget.RelativeLayout;
+            var bottomNavigationView = relativeLayout.GetChildAt(1) as BottomNavigationView;
+            bottomNavigationView.SetBackground(gradient);
+            bottomNavigationView.Elevation = 0;
+
         }
     }
 }
