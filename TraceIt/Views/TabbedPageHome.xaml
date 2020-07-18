@@ -12,8 +12,7 @@
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              android:TabbedPage.ToolbarPlacement="Bottom">
 
-    
-
+    <local:SubjectsPage/>
     <ContentPage Title="Page 2"/>
     <ContentPage Title="Page 3"/>
 
