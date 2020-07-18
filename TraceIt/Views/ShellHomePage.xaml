@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:GradientShellPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="clr-namespace:TraceIt.Views"
+             xmlns:charts="clr-namespace:TraceIt.Views.Charts"
+             xmlns:controls="clr-namespace:TraceIt.Controls"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.ShellHomePage"
+             BackgroundColor="DarkBlue">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="primaryStyle" TargetType="Element">
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.UnselectedColor" Value="Gray"/>
+                <Setter Property="Shell.NavBarHasShadow" Value="True"/>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar Style="{StaticResource primaryStyle}">
+        <Tab Title="Subjects">
+            <ShellContent ContentTemplate="{DataTemplate pages:SubjectsPage}"/>
+        </Tab>
+
+        <Tab Title="Charts">
+            <ShellContent Title="Credits"
+                          ContentTemplate="{DataTemplate charts:CreditsChartPage}"/>
+            
+            <ShellContent Title="Endorsements"
+                          ContentTemplate="{DataTemplate charts:EndorsementsChartPage}"/>
+        </Tab>
+
+        <Tab Title="Settings">
+            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+        </Tab>
+    </TabBar>
+    
+</controls:GradientShellPage>
