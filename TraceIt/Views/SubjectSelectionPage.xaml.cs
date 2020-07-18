@@ -40,7 +40,8 @@ namespace TraceIt.Views
 
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new TabbedPageHome());
+            Navigation.PopToRootAsync();
+            Application.Current.MainPage = new ShellHomePage();
         }
 
         async void SetStandards()
