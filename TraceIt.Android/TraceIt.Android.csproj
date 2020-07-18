@@ -80,8 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Renderers\Appearance Trackers\GradientShellBottomTabBarAppearanceTracker.cs" />
+    <Compile Include="Renderers\Appearance Trackers\GradientShellToolbarAppearanceTracker.cs" />
     <Compile Include="Renderers\GradientNavigationPageRenderer.cs" />
-    <Compile Include="Renderers\GradientTabbedPageRenderer.cs" />
+    <Compile Include="Renderers\GradientShellPageRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
