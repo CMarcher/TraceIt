@@ -4,18 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.MainPage"
-             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
+             x:Class="TraceIt.Login"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:TraceIt.Controls">
 
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style TargetType="Entry">
+            <Style TargetType="controls:CustomEntry">
                 <Setter Property="PlaceholderColor" Value="DimGray"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
 
-            <Style TargetType="Picker">
+            <Style TargetType="controls:CustomPicker">
                 <Setter Property="TitleColor" Value="DimGray"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
@@ -25,7 +26,8 @@
 
     <AbsoluteLayout d:BackgroundColor="#0006A3">
 
-        <gradient:SfGradientView>
+        <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
+                                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
             <gradient:SfGradientView.BackgroundBrush>
                 <gradient:SfLinearGradientBrush>
                     <gradient:SfLinearGradientBrush.GradientStops>
@@ -55,21 +57,21 @@
         <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
-            <Frame CornerRadius="12">
-                <Entry x:Name="entryName"
+            <Frame CornerRadius="12" HasShadow="False">
+                <controls:CustomEntry x:Name="entryName"
                    Placeholder="Enter your name here"
                    Margin="0,-20"/>
             </Frame>
 
             <Frame CornerRadius="12">
-                <Picker x:Name="pickerLevel"
+                <controls:CustomPicker x:Name="pickerLevel"
                     Title="Select your NCEA level" Margin="0,-20">
                     <Picker.Items>
                         <x:String>Level 1</x:String>
                         <x:String>Level 2</x:String>
                         <x:String>Level 3</x:String>
                     </Picker.Items>
-                </Picker>
+                </controls:CustomPicker>
             </Frame>
 
             <Button x:Name="buttonConfirm"
