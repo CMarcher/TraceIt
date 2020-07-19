@@ -19,7 +19,8 @@ namespace TraceIt.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            Control.BorderStyle = UITextBorderStyle.None;
+            if (Element != null)
+                Control.BorderStyle = UITextBorderStyle.None;
         }
     }
 }
