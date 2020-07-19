@@ -36,7 +36,7 @@
             <!--#endregion-->
 
             <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0.5, 0, 1, 1">
+                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
                 <CollectionView x:Name="collectionViewSubjects">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
