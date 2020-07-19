@@ -14,8 +14,12 @@
         <ResourceDictionary>
             <Style x:Key="primaryStyle" TargetType="Element">
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TitleColor" Value="White"/>
+                <Setter Property="Shell.ForegroundColor" Value="White"/>
                 <Setter Property="Shell.UnselectedColor" Value="Gray"/>
                 <Setter Property="Shell.NavBarHasShadow" Value="True"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
