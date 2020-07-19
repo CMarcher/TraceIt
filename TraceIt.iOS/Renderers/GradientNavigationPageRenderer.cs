@@ -21,19 +21,23 @@ namespace TraceIt.iOS.Renderers
 
             var control = (GradientNavigationPage)Element;
 
-            var gradient = new CAGradientLayer()
+            if (Element != null)
             {
-                Colors = new[]
+                var gradient = new CAGradientLayer()
+                {
+                    Colors = new[]
                 {
                     control.TopColor.ToCGColor(),
                     control.BottomColor.ToCGColor()
                 },
 
-                Bounds = NavigationBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
-            };
+                    Bounds = NavigationBar.Bounds,
+                    Locations = new NSNumber[] { 0, 1 }
+                };
 
-            NavigationBar.Layer.AddSublayer(gradient);
+                NavigationBar.Layer.AddSublayer(gradient);
+            }
+
         }
     }
 }
