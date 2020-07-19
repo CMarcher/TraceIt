@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Converters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Sharpnado.Presentation.Forms" Version="1.7.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Syncfusion.Licensing" Version="18.2.0.45" />
@@ -23,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SelectedStandardsPage.xaml.cs">
       <DependentUpon>SelectedStandardsPage.xaml</DependentUpon>
     </Compile>
@@ -50,9 +59,5 @@
     <EmbeddedResource Update="Views\SubjectsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>
