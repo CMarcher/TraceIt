@@ -160,6 +160,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Renderers\Appearance Trackers\" />
     <Folder Include="Services\" />
   </ItemGroup>
 </Project>
