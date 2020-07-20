@@ -6,6 +6,7 @@ using CoreAnimation;
 using Foundation;
 using TraceIt.Controls;
 using TraceIt.iOS.Renderers;
+using TraceIt.iOS.Renderers.Appearance_Trackers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -15,69 +16,24 @@ namespace TraceIt.iOS.Renderers
 {
     public class GradientShellPageRenderer : ShellRenderer
     {
-        protected override IShellSectionRenderer CreateShellSectionRenderer(ShellSection shellSection)
+        private GradientShellPage page = null;
+
+        protected override void OnElementSet(Shell element)
         {
-            var renderer = base.CreateShellSectionRenderer(shellSection);
+            base.OnElementSet(element);
 
-            if (!(renderer is null))
-            {
-                (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Red;
-                (renderer as ShellSectionRenderer).Toolbar.BackgroundColor = UIColor.Red;
-
-
-                //var control = (GradientShellPage)Element;
-                //var navigationBar = (renderer as ShellSectionRenderer).Toolbar;
-                //var tabBar = new UITabBar();
-
-                //if ((renderer as ShellSectionRenderer).tool != null)
-                //    tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
-
-                //if ((renderer as ShellSectionRenderer).Toolbar != null)
-                //{
-                //    #region NavigationBar
-                //    var navigationGradient = new CAGradientLayer()
-                //    {
-                //        Colors = new[] {
-                //        control.ToolbarTopColor.ToCGColor(),
-                //        control.ToolbarBottomColor.ToCGColor() },
-
-                //        Bounds = navigationBar.Bounds,
-                //        Locations = new NSNumber[] { 0, 1 }
-                //    };
-
-                //    (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
-                //    (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
-                //    #endregion
-                //}
-
-                //if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
-                //{
-                //    #region TabBar
-                //    var tabBarGradient = new CAGradientLayer()
-                //    {
-                //        Colors = new[] {
-                //        control.BottomTabBarTopColor.ToCGColor(),
-                //        control.BottomTabBarBottomColor.ToCGColor()
-                //    },
-
-                //        Bounds = tabBar.Bounds,
-                //        Locations = new NSNumber[] { 0, 1 }
-                //    };
-
-                //    (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
-                //    (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
-                //    #endregion
-                //}
-
-            }
-
-            return renderer;
+            if (page is null)
+                page = element as GradientShellPage;
         }
 
-        public GradientShellPage GetPageInstance()
+        protected override IShellNavBarAppearanceTracker CreateNavBarAppearanceTracker()
         {
-            return (GradientShellPage)Element;
-            
+            return new GradientShellPageNavigationAppearanceTracker((GradientShellPage)Element);
+        }
+
+        protected override IShellTabBarAppearanceTracker CreateTabBarAppearanceTracker()
+        {
+            return new GradientShellPageTabBarAppearanceTracker((GradientShellPage)Element);
         }
     }
 }
