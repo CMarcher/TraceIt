@@ -23,7 +23,10 @@ namespace TraceIt.iOS.Renderers
             {
                 var control = (GradientShellPage)Element;
                 var navigationBar = (renderer as ShellSectionRenderer).NavigationBar;
-                var tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
+                var tabBar = new UITabBar();
+
+                if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
+                    tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
 
 
                 if ((renderer as ShellSectionRenderer).NavigationBar != null)
