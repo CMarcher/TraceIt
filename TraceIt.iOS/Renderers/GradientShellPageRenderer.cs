@@ -23,38 +23,46 @@ namespace TraceIt.iOS.Renderers
             {
                 var control = (GradientShellPage)Element;
                 var navigationBar = (renderer as ShellSectionRenderer).NavigationBar;
-                var tabBar = (renderer as ShellSectionRootHeader).TabBarController.TabBar;
+                var tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
 
-                #region NavigationBar
-                var navigationGradient = new CAGradientLayer()
+
+                if ((renderer as ShellSectionRenderer).NavigationBar != null)
                 {
-                    Colors = new[] {
+                    #region NavigationBar
+                    var navigationGradient = new CAGradientLayer()
+                    {
+                        Colors = new[] {
                         control.ToolbarTopColor.ToCGColor(),
                         control.ToolbarBottomColor.ToCGColor() },
 
-                    Bounds = navigationBar.Bounds,
-                    Locations = new NSNumber[] { 0, 1 }
-                };
+                        Bounds = navigationBar.Bounds,
+                        Locations = new NSNumber[] { 0, 1 }
+                    };
 
-                (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
-                (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
-                #endregion
+                    (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
+                    (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
+                    #endregion
+                }
 
-                #region TabBar
-                var tabBarGradient = new CAGradientLayer()
+                if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
                 {
-                    Colors = new[] {
+                    #region TabBar
+                    var tabBarGradient = new CAGradientLayer()
+                    {
+                        Colors = new[] {
                         control.BottomTabBarTopColor.ToCGColor(),
                         control.BottomTabBarBottomColor.ToCGColor()
                     },
 
-                    Bounds = tabBar.Bounds,
-                    Locations = new NSNumber[] { 0, 1 }
-                };
+                        Bounds = tabBar.Bounds,
+                        Locations = new NSNumber[] { 0, 1 }
+                    };
 
-                (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
-                (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
-                #endregion
+                    (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
+                    (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
+                    #endregion
+                }
+
             }
 
             return renderer;
@@ -63,6 +71,7 @@ namespace TraceIt.iOS.Renderers
         public GradientShellPage GetPageInstance()
         {
             return (GradientShellPage)Element;
+            
         }
     }
 }
