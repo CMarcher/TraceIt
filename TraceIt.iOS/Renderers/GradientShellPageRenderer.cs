@@ -22,14 +22,13 @@ namespace TraceIt.iOS.Renderers
             if (!(renderer is null))
             {
                 var control = (GradientShellPage)Element;
-                var navigationBar = (renderer as ShellSectionRenderer).NavigationBar;
+                var navigationBar = (renderer as ShellSectionRenderer).Toolbar;
                 var tabBar = new UITabBar();
 
-                if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
-                    tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
+                //if ((renderer as ShellSectionRenderer).tool != null)
+                //    tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
 
-
-                if ((renderer as ShellSectionRenderer).NavigationBar != null)
+                if ((renderer as ShellSectionRenderer).Toolbar != null)
                 {
                     #region NavigationBar
                     var navigationGradient = new CAGradientLayer()
@@ -47,24 +46,24 @@ namespace TraceIt.iOS.Renderers
                     #endregion
                 }
 
-                if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
-                {
-                    #region TabBar
-                    var tabBarGradient = new CAGradientLayer()
-                    {
-                        Colors = new[] {
-                        control.BottomTabBarTopColor.ToCGColor(),
-                        control.BottomTabBarBottomColor.ToCGColor()
-                    },
+                //if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
+                //{
+                //    #region TabBar
+                //    var tabBarGradient = new CAGradientLayer()
+                //    {
+                //        Colors = new[] {
+                //        control.BottomTabBarTopColor.ToCGColor(),
+                //        control.BottomTabBarBottomColor.ToCGColor()
+                //    },
 
-                        Bounds = tabBar.Bounds,
-                        Locations = new NSNumber[] { 0, 1 }
-                    };
+                //        Bounds = tabBar.Bounds,
+                //        Locations = new NSNumber[] { 0, 1 }
+                //    };
 
-                    (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
-                    (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
-                    #endregion
-                }
+                //    (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
+                //    (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
+                //    #endregion
+                //}
 
             }
 
