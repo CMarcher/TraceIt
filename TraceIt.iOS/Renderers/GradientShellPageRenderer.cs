@@ -21,30 +21,34 @@ namespace TraceIt.iOS.Renderers
 
             if (!(renderer is null))
             {
-                var control = (GradientShellPage)Element;
-                var navigationBar = (renderer as ShellSectionRenderer).Toolbar;
-                var tabBar = new UITabBar();
+                (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Red;
+                (renderer as ShellSectionRenderer).Toolbar.BackgroundColor = UIColor.Red;
+
+
+                //var control = (GradientShellPage)Element;
+                //var navigationBar = (renderer as ShellSectionRenderer).Toolbar;
+                //var tabBar = new UITabBar();
 
                 //if ((renderer as ShellSectionRenderer).tool != null)
                 //    tabBar = (renderer as ShellSectionRenderer).TabBarController.TabBar;
 
-                if ((renderer as ShellSectionRenderer).Toolbar != null)
-                {
-                    #region NavigationBar
-                    var navigationGradient = new CAGradientLayer()
-                    {
-                        Colors = new[] {
-                        control.ToolbarTopColor.ToCGColor(),
-                        control.ToolbarBottomColor.ToCGColor() },
+                //if ((renderer as ShellSectionRenderer).Toolbar != null)
+                //{
+                //    #region NavigationBar
+                //    var navigationGradient = new CAGradientLayer()
+                //    {
+                //        Colors = new[] {
+                //        control.ToolbarTopColor.ToCGColor(),
+                //        control.ToolbarBottomColor.ToCGColor() },
 
-                        Bounds = navigationBar.Bounds,
-                        Locations = new NSNumber[] { 0, 1 }
-                    };
+                //        Bounds = navigationBar.Bounds,
+                //        Locations = new NSNumber[] { 0, 1 }
+                //    };
 
-                    (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
-                    (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
-                    #endregion
-                }
+                //    (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
+                //    (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
+                //    #endregion
+                //}
 
                 //if ((renderer as ShellSectionRenderer).TabBarController.TabBar != null)
                 //{
