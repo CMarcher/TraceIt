@@ -21,48 +21,48 @@ namespace TraceIt.iOS.Renderers
 
             if (!(renderer is null))
             {
-                CreateGradients(
-                    (renderer as ShellSectionRenderer).NavigationBar, 
-                    (renderer as ShellSectionRenderer).TabBarController.TabBar);
+                var control = (GradientShellPage)Element;
+                var navigationBar = (renderer as ShellSectionRenderer).NavigationBar;
+                var tabBar = (renderer as ShellSectionRootHeader).TabBarController.TabBar;
+
+                #region NavigationBar
+                var navigationGradient = new CAGradientLayer()
+                {
+                    Colors = new[] {
+                        control.ToolbarTopColor.ToCGColor(),
+                        control.ToolbarBottomColor.ToCGColor() },
+
+                    Bounds = navigationBar.Bounds,
+                    Locations = new NSNumber[] { 0, 1 }
+                };
+
+                (renderer as ShellSectionRenderer).NavigationBar.BackgroundColor = UIColor.Clear;
+                (renderer as ShellSectionRenderer).NavigationBar.Layer.AddSublayer(navigationGradient);
+                #endregion
+
+                #region TabBar
+                var tabBarGradient = new CAGradientLayer()
+                {
+                    Colors = new[] {
+                        control.BottomTabBarTopColor.ToCGColor(),
+                        control.BottomTabBarBottomColor.ToCGColor()
+                    },
+
+                    Bounds = tabBar.Bounds,
+                    Locations = new NSNumber[] { 0, 1 }
+                };
+
+                (renderer as ShellSectionRootHeader).TabBarController.TabBar.BackgroundColor = UIColor.Clear;
+                (renderer as ShellSectionRootHeader).TabBarController.TabBar.Layer.AddSublayer(tabBarGradient);
+                #endregion
             }
 
             return renderer;
         }
 
-        private void CreateGradients(UINavigationBar navigationBar, UITabBar tabBar)
+        public GradientShellPage GetPageInstance()
         {
-            var control = (GradientShellPage)Element;
-
-            #region NavigationBar
-            var navigationGradient = new CAGradientLayer()
-            {
-                Colors = new[] {
-                        control.ToolbarTopColor.ToCGColor(),
-                        control.ToolbarBottomColor.ToCGColor() },
-
-                Bounds = navigationBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
-            };
-
-            navigationBar.BackgroundColor = UIColor.Clear;
-            navigationBar.Layer.AddSublayer(navigationGradient); 
-            #endregion
-
-            #region TabBar
-            var tabBarGradient = new CAGradientLayer()
-            {
-                Colors = new[] {
-                        control.BottomTabBarTopColor.ToCGColor(),
-                        control.BottomTabBarBottomColor.ToCGColor()
-                    },
-
-                Bounds = tabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
-            };
-
-            tabBar.BackgroundColor = UIColor.Clear;
-            tabBar.Layer.AddSublayer(tabBarGradient); 
-            #endregion
+            return (GradientShellPage)Element;
         }
     }
 }
