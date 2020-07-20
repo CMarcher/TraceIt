@@ -26,10 +26,10 @@ namespace TraceIt.iOS.Renderers
                 var gradient = new CAGradientLayer()
                 {
                     Colors = new[]
-                {
-                    control.TopColor.ToCGColor(),
-                    control.BottomColor.ToCGColor()
-                },
+                    {
+                       control.TopColor.ToCGColor(),
+                       control.BottomColor.ToCGColor()
+                    },
 
                     Bounds = NavigationBar.Bounds,
                     Locations = new NSNumber[] { 0, 1 }
