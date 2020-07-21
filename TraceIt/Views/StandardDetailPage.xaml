@@ -20,9 +20,8 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                
-            </gradient:SfGradientView>
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                                     Style="{DynamicResource backgroundGradient}"/>
 
             <Label Text="Code: " FontAttributes="Bold"
                    AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
