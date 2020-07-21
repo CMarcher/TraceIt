@@ -16,14 +16,9 @@ namespace TraceIt.iOS.Renderers
 {
     public class GradientShellPageRenderer : ShellRenderer
     {
-        private GradientShellPage page = null;
-
         protected override void OnElementSet(Shell element)
         {
             base.OnElementSet(element);
-
-            if (page is null)
-                page = element as GradientShellPage;
         }
 
         protected override IShellNavBarAppearanceTracker CreateNavBarAppearanceTracker()
