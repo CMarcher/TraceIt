@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.StandardDetailPage"
+             Title="Standard Details">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
+                <Setter Property="AnchorX" Value="0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                
+            </gradient:SfGradientView>
+
+            <Label Text="Code: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Title: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Subject Reference: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Credits: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Level: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Standard Type: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Assessment Type: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Version: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Status: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Label Text="Expiry Date: " FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+            <Button Text="Access PDF" FontAttributes="Bold"
+                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
