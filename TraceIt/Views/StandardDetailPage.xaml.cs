@@ -16,5 +16,10 @@ namespace TraceIt.Views
         {
             InitializeComponent();
         }
+
+        private void buttonAccess_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new StandardWebPage());
+        }
     }
 }

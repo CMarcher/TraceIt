@@ -13,6 +13,10 @@
             <Style TargetType="Label">
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
                 <Setter Property="AnchorX" Value="0"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="BackgroundColor" Value="#000720"/>
+                <Setter Property="Padding" Value="8, 8"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -23,38 +27,41 @@
                                      AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                                      Style="{DynamicResource backgroundGradient}"/>
 
-            <Label Text="Code: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                <StackLayout AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.8, 0.5"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand">
 
-            <Label Text="Title: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Code: " FontAttributes="Bold"/>
 
-            <Label Text="Subject Reference: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Title: " FontAttributes="Bold"/>
 
-            <Label Text="Credits: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Subject Reference: " FontAttributes="Bold"/>
 
-            <Label Text="Level: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Credits: " FontAttributes="Bold"/>
 
-            <Label Text="Standard Type: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Level: " FontAttributes="Bold"/>
 
-            <Label Text="Assessment Type: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Standard Type: " FontAttributes="Bold"/>
 
-            <Label Text="Version: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Assessment Type: " FontAttributes="Bold"/>
 
-            <Label Text="Status: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Version: " FontAttributes="Bold"/>
 
-            <Label Text="Expiry Date: " FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Status: " FontAttributes="Bold"/>
 
-            <Button Text="Access PDF" FontAttributes="Bold"
-                   AbsoluteLayout.LayoutBounds="0.5, 0.1, 1, 0.15"/>
+                    <Label Text="Expiry Date: " FontAttributes="Bold"/>
+
+                    <Button Text="Access PDF" TextColor="White"
+                        FontAttributes="Bold" BackgroundColor="#00002B"
+                        Margin="0, 8" CornerRadius="15" Clicked="buttonAccess_Clicked"/>
+
+                </StackLayout>
+            </ScrollView>
+            
+            
 
         </AbsoluteLayout>
     </ContentPage.Content>
