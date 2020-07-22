@@ -35,8 +35,8 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
                         page.ToolbarTopColor.ToCGColor(),
                         page.ToolbarBottomColor.ToCGColor() },
 
-                Bounds = controller.NavigationBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
+                //Bounds = controller.NavigationBar.Bounds,
+                //Locations = new NSNumber[] { 0, 1 }
             };
 
             controller.NavigationBar.BackgroundColor = UIColor.Clear;

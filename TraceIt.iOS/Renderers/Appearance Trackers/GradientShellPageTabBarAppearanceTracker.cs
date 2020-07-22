@@ -31,8 +31,8 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
                         page.BottomTabBarBottomColor.ToCGColor()
                     },
 
-                Bounds = controller.TabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
+                //Bounds = controller.TabBar.Bounds,
+                //Locations = new NSNumber[] { 0, 1 }
             };
 
             controller.TabBar.BackgroundColor = UIColor.Clear;
