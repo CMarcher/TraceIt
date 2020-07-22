@@ -24,7 +24,7 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
 
         public void ResetAppearance(UINavigationController controller)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SetAppearance(UINavigationController controller, ShellAppearance appearance)
@@ -45,12 +45,12 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
 
         public void SetHasShadow(UINavigationController controller, bool hasShadow)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void UpdateLayout(UINavigationController controller)
         {
-            throw new NotImplementedException();
+            
         }
 
         protected virtual void Dispose(bool disposing)
