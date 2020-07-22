@@ -35,7 +35,7 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
                         page.ToolbarTopColor.ToCGColor(),
                         page.ToolbarBottomColor.ToCGColor() },
 
-                //Bounds = controller.NavigationBar.Bounds,
+                Frame = controller.NavigationBar.Bounds,
                 Locations = new NSNumber[] { 0, 1 }
             };
 
