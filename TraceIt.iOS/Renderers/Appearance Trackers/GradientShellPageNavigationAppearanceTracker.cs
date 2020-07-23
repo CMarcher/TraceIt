@@ -40,7 +40,7 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
             };
 
             controller.NavigationBar.BackgroundColor = UIColor.Clear;
-            controller.NavigationBar.Layer.AddSublayer(navigationGradient);
+            controller.NavigationBar.Layer.InsertSublayer(navigationGradient, 1);
         }
 
         public void SetHasShadow(UINavigationController controller, bool hasShadow)

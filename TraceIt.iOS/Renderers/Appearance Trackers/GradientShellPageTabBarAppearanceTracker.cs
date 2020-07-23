@@ -32,11 +32,11 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
                     },
 
                 Frame = controller.TabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
+                Locations = new NSNumber[] { 0, 1 }  
             };
 
             controller.TabBar.BackgroundColor = UIColor.Clear;
-            controller.TabBar.Layer.AddSublayer(tabBarGradient);
+            controller.TabBar.Layer.InsertSublayer(tabBarGradient, 1);
         }
     }
 }
