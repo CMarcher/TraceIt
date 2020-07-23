@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.StandardCategorisedPage">
+
+    <NavigationPage.TitleView>
+        <buttons:SfChipGroup>
+            <buttons:SfChip x:Name="chipAchievement" Text="Achievement"/>
+            <buttons:SfChip x:Name="chipUnit" Text="Unit"/>
+        </buttons:SfChipGroup>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <AbsoluteLayout>
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
