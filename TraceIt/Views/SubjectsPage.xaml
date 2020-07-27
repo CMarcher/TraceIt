@@ -30,7 +30,7 @@
 
             <!--#region GradientBackground -->
             <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
                                      Style="{DynamicResource backgroundGradient}">
             </gradient:SfGradientView>
             <!--#endregion-->
