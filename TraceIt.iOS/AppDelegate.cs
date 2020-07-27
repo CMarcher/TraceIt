@@ -35,6 +35,7 @@ namespace TraceIt.iOS
             SfButtonRenderer.Init();
             SfGradientViewRenderer.Init();
             SfTabViewRenderer.Init();
+            SfSegmentedControlRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
