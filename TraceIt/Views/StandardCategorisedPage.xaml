@@ -48,8 +48,8 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <AbsoluteLayout>
-
-        </AbsoluteLayout>
+        <StackLayout>
+            <Label Text="Yay!"/>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
