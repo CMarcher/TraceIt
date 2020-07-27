@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using CoreAnimation;
@@ -19,6 +20,11 @@ namespace TraceIt.iOS.Renderers
         protected override void OnElementSet(Shell element)
         {
             base.OnElementSet(element);
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
         }
 
         protected override IShellNavBarAppearanceTracker CreateNavBarAppearanceTracker()
