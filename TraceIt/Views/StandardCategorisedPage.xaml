@@ -4,16 +4,49 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardCategorisedPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="SegmentBackgroundColor" Value="White"/>
+                <Setter Property="SegmentBorderColor" Value="DarkBlue"/>
+                <Setter Property="SelectionTextColor" Value="White"/>
+                <Setter Property="FontColor" Value="DarkBlue"/>
+                <Setter Property="SelectionIndicatorSettings">
+                    <Setter.Value>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="DarkBlue"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <NavigationPage.TitleView>
-        <buttons:SfChipGroup>
-            <buttons:SfChip x:Name="chipAchievement" Text="Achievement"/>
-            <buttons:SfChip x:Name="chipUnit" Text="Unit"/>
-        </buttons:SfChipGroup>
+        <StackLayout Orientation="Horizontal">
+
+            <buttons:SfSegmentedControl x:Name="assessmentSelector"
+                                        HorizontalOptions="Start">
+                <system:List x:TypeArguments="x:String">
+                    <x:String>Achievement</x:String>
+                    <x:String>Unit</x:String>
+                </system:List>
+            </buttons:SfSegmentedControl>
+
+            <buttons:SfSegmentedControl x:Name="levelSelector"
+                                        HorizontalOptions="End">
+                <system:List x:TypeArguments="x:String">
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                </system:List>
+            </buttons:SfSegmentedControl>
+
+        </StackLayout>
     </NavigationPage.TitleView>
-    
+
     <ContentPage.Content>
         <AbsoluteLayout>
 
