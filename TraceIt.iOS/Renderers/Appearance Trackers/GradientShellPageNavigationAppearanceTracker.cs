@@ -50,7 +50,18 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
 
         public void UpdateLayout(UINavigationController controller)
         {
-            
+            var navigationGradient = new CAGradientLayer()
+            {
+                Colors = new[] {
+                        page.ToolbarTopColor.ToCGColor(),
+                        page.ToolbarBottomColor.ToCGColor() },
+
+                Frame = controller.NavigationBar.Bounds,
+                Locations = new NSNumber[] { 0, 1 }
+            };
+
+            controller.NavigationBar.BackgroundColor = UIColor.Clear;
+            controller.NavigationBar.Layer.InsertSublayer(navigationGradient, 1);
         }
 
         protected virtual void Dispose(bool disposing)
