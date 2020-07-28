@@ -7,7 +7,7 @@ using System.Text;
 
 namespace TraceIt.Models
 {
-    public class Subject
+    public class Subjects
     {
         [PrimaryKey]
         public int ID { get; set; }
@@ -24,6 +24,6 @@ namespace TraceIt.Models
         [NotNull]
         public string Custom { get; set; } = "false";
 
-        public Subject() { }
+        public Subjects() { }
     }
 }
