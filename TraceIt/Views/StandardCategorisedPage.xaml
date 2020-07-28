@@ -17,7 +17,8 @@
                 <Setter Property="FontColor" Value="DarkBlue"/>
                 <Setter Property="SelectionIndicatorSettings">
                     <Setter.Value>
-                        <buttons:SelectionIndicatorSettings Position="Fill" Color="DarkBlue"/>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="DarkBlue"
+                                                            CornerRadius="10"/>
                     </Setter.Value>
                 </Setter>
             </Style>
