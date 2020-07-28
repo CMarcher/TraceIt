@@ -16,7 +16,7 @@ namespace TraceIt.Services
     public class DataService : IDataService
     {
         public static SQLiteAsyncConnection Database;
-        bool Initialised = false;
+        public bool Initialised = false;
 
         public static readonly Lazy<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Lazy<Task<SQLiteAsyncConnection>>(async () =>
         {
