@@ -9,9 +9,9 @@ namespace TraceIt.Models
         public string Name { get; set; }
         enum Level
         {
-            Level_One = 1,
-            Level_Two,
-            Level_Three
+            LevelOne = 1,
+            LevelTwo,
+            LevelThree
         }
         public int SelectedLevel { get; set; }
     }
