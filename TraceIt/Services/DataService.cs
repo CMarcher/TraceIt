@@ -16,7 +16,7 @@ namespace TraceIt.Services
     public class DataService : IDataService
     {
         public static SQLiteAsyncConnection Database;
-        public bool Initialised = false;
+        bool Initialised = false;
 
         public static readonly Lazy<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Lazy<Task<SQLiteAsyncConnection>>(async () =>
         {
@@ -24,7 +24,7 @@ namespace TraceIt.Services
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            //File.Delete(databasePath); // Removed for debugging purposes.
+            File.Delete(databasePath); // Removed for debugging purposes.
 
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
@@ -74,22 +74,22 @@ namespace TraceIt.Services
             await Database.UpdateAsync(standard);
         }
 
-        public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
+        public async Task<ObservableCollection<Subjects>> GetSubjectsAsync()
         {
-            var subjects = await Database.Table<Subject>().ToListAsync();
-            return new ObservableCollection<Subject>(subjects);
+            var subjects = await Database.Table<Subjects>().ToListAsync();
+            return new ObservableCollection<Subjects>(subjects);
         }
 
-        public async Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync()
+        public async Task<ObservableCollection<Subjects>> GetSelectedSubjectsAsync()
         {
-            var subjects = await Database.Table<Subject>()
+            var subjects = await Database.Table<Subjects>()
                 .Where(s => s.Selected == "true")
                 .ToListAsync();
 
-            return new ObservableCollection<Subject>(subjects);
+            return new ObservableCollection<Subjects>(subjects);
         }
 
-        public async Task UpdateSubjectAsync(Subject subject)
+        public async Task UpdateSubjectAsync(Subjects subject)
         {
             await Database.UpdateAsync(subject);
         }
