@@ -25,8 +25,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <AbsoluteLayout VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
+        <AbsoluteLayout>
 
             <!--#region GradientBackground -->
             <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
