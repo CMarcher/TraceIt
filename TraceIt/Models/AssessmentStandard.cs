@@ -8,9 +8,7 @@ namespace TraceIt.Models
 {
     public class AssessmentStandards
     {
-        [PrimaryKey]
-        [NotNull]
-        [Unique]
+        [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
 
         [NotNull]
@@ -19,8 +17,7 @@ namespace TraceIt.Models
         [NotNull]
         public string Domain { get; set; }
 
-        [NotNull]
-        [Unique]
+        [NotNull, Unique]
         public int Code { get; set; }
 
         [NotNull]
