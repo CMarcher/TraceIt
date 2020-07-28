@@ -24,7 +24,7 @@ namespace TraceIt.Services
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            File.Delete(databasePath); // Removed for debugging purposes.
+            //File.Delete(databasePath); // Removed for debugging purposes.
 
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
@@ -54,11 +54,44 @@ namespace TraceIt.Services
             }
         }
 
-        public async Task<ObservableCollection<AssessmentStandards>> GetAssessmentStandards()
+        public async Task<ObservableCollection<AssessmentStandards>> GetAssessmentStandardsAsync()
         {
             var assessmentStandards = await Database.Table<AssessmentStandards>().ToListAsync();
-            var assessmentStandardsConverted = new ObservableCollection<AssessmentStandards>(assessmentStandards);
-            return assessmentStandardsConverted;
+            return new ObservableCollection<AssessmentStandards>(assessmentStandards);
+        }
+
+        public async Task<AssessmentStandards> GetStandardByIDAsync(int id)
+        {
+            var standard = await Database.Table<AssessmentStandards>()
+                .Where(s => s.ID == id)
+                .FirstOrDefaultAsync();
+
+            return standard;
+        }
+
+        public async Task UpdateStandardAsync(AssessmentStandards standard)
+        {
+            await Database.UpdateAsync(standard);
+        }
+
+        public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
+        {
+            var subjects = await Database.Table<Subject>().ToListAsync();
+            return new ObservableCollection<Subject>(subjects);
+        }
+
+        public async Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync()
+        {
+            var subjects = await Database.Table<Subject>()
+                .Where(s => s.Selected == "true")
+                .ToListAsync();
+
+            return new ObservableCollection<Subject>(subjects);
+        }
+
+        public async Task UpdateSubjectAsync(Subject subject)
+        {
+            await Database.UpdateAsync(subject);
         }
 
     }
