@@ -46,7 +46,7 @@ namespace TraceIt.Views
 
         async void SetStandards()
         {
-            standards = await App.DataService.GetAssessmentStandards();
+            standards = await App.DataService.GetAssessmentStandardsAsync();
         }
     }
 }
