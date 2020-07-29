@@ -24,7 +24,7 @@ namespace TraceIt.Services
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            File.Delete(databasePath); // Removed for debugging purposes.
+            //File.Delete(databasePath); // Removed for debugging purposes.
 
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
