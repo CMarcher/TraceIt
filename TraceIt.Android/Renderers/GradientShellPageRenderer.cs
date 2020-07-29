@@ -35,9 +35,9 @@ namespace TraceIt.Droid.Renderers
             return new GradientShellBottomTabBarAppearanceTracker(this, shellItem);
         }
 
-        protected override IShellSectionRenderer CreateShellSectionRenderer(ShellSection shellSection)
+        protected override IShellTabLayoutAppearanceTracker CreateTabLayoutAppearanceTracker(ShellSection shellSection)
         {
-            return base.CreateShellSectionRenderer(shellSection);
+            return new GradientShellTopTabBarAppearanceTracker(this);
         }
 
         public GradientShellPage GetPageInstance()
