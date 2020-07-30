@@ -17,14 +17,10 @@ namespace TraceIt.Views
         public StandardCategorisedPage()
         {
             InitializeComponent();
-
             ViewModel = new StandardCategorisedPageViewModel();
             SetItemsSource();
         }
 
-        void SetItemsSource()
-        {
-            collectionViewCategories.ItemsSource = ViewModel.Subjects;
-        }
+        void SetItemsSource() => collectionViewCategories.ItemsSource = ViewModel.Subjects;
     }
 }
