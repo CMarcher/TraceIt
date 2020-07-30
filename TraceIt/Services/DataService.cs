@@ -54,42 +54,42 @@ namespace TraceIt.Services
             }
         }
 
-        public async Task<ObservableCollection<AssessmentStandards>> GetAssessmentStandardsAsync()
+        public async Task<ObservableCollection<AssessmentStandard>> GetAssessmentStandardsAsync()
         {
-            var assessmentStandards = await Database.Table<AssessmentStandards>().ToListAsync();
-            return new ObservableCollection<AssessmentStandards>(assessmentStandards);
+            var assessmentStandards = await Database.Table<AssessmentStandard>().ToListAsync();
+            return new ObservableCollection<AssessmentStandard>(assessmentStandards);
         }
 
-        public async Task<AssessmentStandards> GetStandardByIDAsync(int id)
+        public async Task<AssessmentStandard> GetStandardByIDAsync(int id)
         {
-            var standard = await Database.Table<AssessmentStandards>()
+            var standard = await Database.Table<AssessmentStandard>()
                 .Where(s => s.ID == id)
                 .FirstOrDefaultAsync();
 
             return standard;
         }
 
-        public async Task UpdateStandardAsync(AssessmentStandards standard)
+        public async Task UpdateStandardAsync(AssessmentStandard standard)
         {
             await Database.UpdateAsync(standard);
         }
 
-        public async Task<ObservableCollection<Subjects>> GetSubjectsAsync()
+        public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
         {
-            var subjects = await Database.Table<Subjects>().ToListAsync();
-            return new ObservableCollection<Subjects>(subjects);
+            var subjects = await Database.Table<Subject>().ToListAsync();
+            return new ObservableCollection<Subject>(subjects);
         }
 
-        public async Task<ObservableCollection<Subjects>> GetSelectedSubjectsAsync()
+        public async Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync()
         {
-            var subjects = await Database.Table<Subjects>()
+            var subjects = await Database.Table<Subject>()
                 .Where(s => s.Selected == "true")
                 .ToListAsync();
 
-            return new ObservableCollection<Subjects>(subjects);
+            return new ObservableCollection<Subject>(subjects);
         }
 
-        public async Task UpdateSubjectAsync(Subjects subject)
+        public async Task UpdateSubjectAsync(Subject subject)
         {
             await Database.UpdateAsync(subject);
         }

@@ -11,7 +11,7 @@ namespace TraceIt.ViewModels
 {
     public class SubjectSelectionPageViewModel
     {
-        public ObservableCollection<Subjects> subjects = new ObservableCollection<Subjects>();
+        public ObservableCollection<Subject> subjects = new ObservableCollection<Subject>();
 
         public SubjectSelectionPageViewModel()
         {

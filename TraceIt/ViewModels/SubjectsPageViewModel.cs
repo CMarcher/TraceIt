@@ -10,13 +10,13 @@ namespace TraceIt.ViewModels
 {
     public class SubjectsPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Subjects> Subjects = new ObservableCollection<Subjects>()
+        public ObservableCollection<Subject> Subjects = new ObservableCollection<Subject>()
         {
-            new Subjects() { Name = "Chemistry" },
-            new Subjects() { Name = "Sound Production" },
-            new Subjects() { Name = "English" },
-            new Subjects() { Name = "Computer Studies" },
-            new Subjects() { Name = "Calculus" },
+            new Subject() { Name = "Chemistry" },
+            new Subject() { Name = "Sound Production" },
+            new Subject() { Name = "English" },
+            new Subject() { Name = "Computer Studies" },
+            new Subject() { Name = "Calculus" },
 
         };
 

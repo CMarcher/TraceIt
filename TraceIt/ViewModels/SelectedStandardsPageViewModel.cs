@@ -8,9 +8,9 @@ namespace TraceIt.ViewModels
 {
     public class SelectedStandardsPageViewModel
     {
-        public ObservableCollection<AssessmentStandards> Standards = new ObservableCollection<AssessmentStandards>()
+        public ObservableCollection<AssessmentStandard> Standards = new ObservableCollection<AssessmentStandard>()
         {
-            new AssessmentStandards()
+            new AssessmentStandard()
             {
                 Code = 97321,
                 Title = "Demonstrate understanding of something",
@@ -19,7 +19,7 @@ namespace TraceIt.ViewModels
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandards()
+            new AssessmentStandard()
             {
                 Code = 97321,
                 Title = "Demonstrate understanding of something",
@@ -28,7 +28,7 @@ namespace TraceIt.ViewModels
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandards()
+            new AssessmentStandard()
             {
                 Code = 97321,
                 Title = "Demonstrate understanding of something",
@@ -37,7 +37,7 @@ namespace TraceIt.ViewModels
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandards()
+            new AssessmentStandard()
             {
                 Code = 97321,
                 Title = "Demonstrate understanding of something",
@@ -46,7 +46,7 @@ namespace TraceIt.ViewModels
                 Hyperlink = "Whatever",
                 Credits = 4
             },
-            new AssessmentStandards()
+            new AssessmentStandard()
             {
                 Code = 97321,
                 Title = "Demonstrate understanding of something",

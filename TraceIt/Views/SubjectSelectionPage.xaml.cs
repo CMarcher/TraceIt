@@ -17,7 +17,7 @@ namespace TraceIt.Views
     public partial class SubjectSelectionPage : ContentPage
     {
         public SubjectSelectionPageViewModel ViewModel;
-        ObservableCollection<AssessmentStandards> standards;
+        ObservableCollection<AssessmentStandard> standards;
 
         public SubjectSelectionPage()
         {
