@@ -25,32 +25,34 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-
-            <buttons:SfSegmentedControl x:Name="assessmentSelector"
-                                        HorizontalOptions="Start">
-                <system:List x:TypeArguments="x:String">
-                    <x:String>Achievement</x:String>
-                    <x:String>Unit</x:String>
-                </system:List>
-            </buttons:SfSegmentedControl>
-
-            <buttons:SfSegmentedControl x:Name="levelSelector"
-                                        HorizontalOptions="End">
-                <system:List x:TypeArguments="x:String">
-                    <x:String>1</x:String>
-                    <x:String>2</x:String>
-                    <x:String>3</x:String>
-                </system:List>
-            </buttons:SfSegmentedControl>
-
-        </StackLayout>
-    </NavigationPage.TitleView>
-
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Yay!"/>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+
+            <StackLayout Orientation="Horizontal">
+                <buttons:SfSegmentedControl x:Name="assessmentSelector"
+                                        HorizontalOptions="Start">
+                    <system:List x:TypeArguments="x:String">
+                        <x:String>Achievement</x:String>
+                        <x:String>Unit</x:String>
+                    </system:List>
+                </buttons:SfSegmentedControl>
+
+                <buttons:SfSegmentedControl x:Name="levelSelector"
+                                        HorizontalOptions="End">
+                    <system:List x:TypeArguments="x:String">
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                    </system:List>
+                </buttons:SfSegmentedControl>
+            </StackLayout>
+
+            <StackLayout>
+                <CollectionView x:Name="collectionViewCategories">
+                    
+                </CollectionView>
+            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
