@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Extensions;
 using TraceIt.Models;
+using TraceIt.Models.Query_Models;
 using TraceIt.Utilities;
 using Xamarin.Essentials;
 
@@ -17,6 +18,13 @@ namespace TraceIt.Services
     {
         public static SQLiteAsyncConnection Database;
         public bool Initialised = false;
+
+        public enum FilterOptions
+        {
+            All,
+            Achievement,
+            Unit
+        }
 
         public static readonly Lazy<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Lazy<Task<SQLiteAsyncConnection>>(async () =>
         {
@@ -92,6 +100,29 @@ namespace TraceIt.Services
         public async Task UpdateSubjectAsync(Subject subject)
         {
             await Database.UpdateAsync(subject);
+        }
+
+        public async Task GetSubfieldsAsync(FilterOptions filterOptions)
+        {
+            List<SubfieldModel> subfields;
+
+            switch (filterOptions)
+            {
+                case FilterOptions.All:
+                    subfields = await Database.QueryAsync<SubfieldModel>(
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards");
+                    break;
+                case FilterOptions.Achievement:
+                    subfields = await Database.QueryAsync<SubfieldModel>(
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards" +
+                        "WHERE Standard_Type = 'A'");
+                    break;
+                case FilterOptions.Unit:
+                    subfields = await Database.QueryAsync<SubfieldModel>(
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards" +
+                        "WHERE Standard_Type = 'U'");
+                    break;
+            }
         }
 
     }
