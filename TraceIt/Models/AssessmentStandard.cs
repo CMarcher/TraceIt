@@ -6,7 +6,8 @@ using SQLite;
 
 namespace TraceIt.Models
 {
-    public class AssessmentStandards
+    [Table("AssessmentStandards")]
+    public class AssessmentStandard
     {
         [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
