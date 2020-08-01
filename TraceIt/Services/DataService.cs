@@ -102,26 +102,26 @@ namespace TraceIt.Services
             await Database.UpdateAsync(subject);
         }
 
-        public async Task GetSubfieldsAsync(FilterOptions filterOptions)
+        public async Task<List<SubfieldModel>> GetSubfieldsAsync(FilterOptions filterOptions)
         {
-            List<SubfieldModel> subfields;
-
             switch (filterOptions)
             {
                 case FilterOptions.All:
-                    subfields = await Database.QueryAsync<SubfieldModel>(
+                    return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards");
-                    break;
+
                 case FilterOptions.Achievement:
-                    subfields = await Database.QueryAsync<SubfieldModel>(
+                    return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards" +
                         "WHERE Standard_Type = 'A'");
-                    break;
+
                 case FilterOptions.Unit:
-                    subfields = await Database.QueryAsync<SubfieldModel>(
-                        "SELECT DISTINCT Subfield FROM AssessmentStandards" +
+                    return await Database.QueryAsync<SubfieldModel>(
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards " + 
                         "WHERE Standard_Type = 'U'");
-                    break;
+                    
+                default:
+                    return null;
             }
         }
 
