@@ -62,7 +62,7 @@ namespace TraceIt.Services
             }
         }
 
-        public async Task<ObservableCollection<AssessmentStandard>> GetAssessmentStandardsAsync()
+        public async Task<ObservableCollection<AssessmentStandard>> GetStandardsAsync()
         {
             var assessmentStandards = await Database.Table<AssessmentStandard>().ToListAsync();
             return new ObservableCollection<AssessmentStandard>(assessmentStandards);
