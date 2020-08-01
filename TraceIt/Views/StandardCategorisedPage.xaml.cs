@@ -18,9 +18,20 @@ namespace TraceIt.Views
         {
             InitializeComponent();
             ViewModel = new StandardCategorisedPageViewModel();
-            SetItemsSource();
         }
 
-        void SetItemsSource() => collectionViewCategories.ItemsSource = ViewModel.Subjects;
+        void SetItemsSource()
+        {
+            bool achievementFilterSelected = assessmentSelector.SelectedIndex == 0;
+            if (achievementFilterSelected)
+                collectionViewCategories.ItemsSource = ViewModel.Subjects;
+            else
+                collectionViewCategories.ItemsSource = ViewModel.Subfields;
+        }
+
+        private void assessmentSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
+        {
+            SetItemsSource();
+        }
     }
 }
