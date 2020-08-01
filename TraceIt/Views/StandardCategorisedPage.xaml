@@ -37,13 +37,13 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
-                     Padding="10, 10, 10, 10">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
 
             <SearchBar BackgroundColor="#f5f5f5" FontAttributes="Italic"
                        Placeholder="Search standards..."/>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                         Padding="10, 0, 10, 0" Margin="0">
 
                 <StackLayout>
                     <Label Text="Standard type:" Style="{StaticResource filterLabelStyle}"/>
@@ -75,7 +75,7 @@
                 
             </StackLayout>
 
-            <StackLayout>
+            <StackLayout Padding="15, 10">
                 <forms:SfListView x:Name="collectionViewCategories"
                                   ItemSize="50"
                                   ItemSpacing="8">
