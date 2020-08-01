@@ -16,8 +16,7 @@ namespace TraceIt.ViewModels
             new Subject() { Name = "Sound Production" },
             new Subject() { Name = "English" },
             new Subject() { Name = "Computer Studies" },
-            new Subject() { Name = "Calculus" },
-
+            new Subject() { Name = "Calculus" }
         };
 
         
