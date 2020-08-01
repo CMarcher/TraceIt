@@ -41,6 +41,8 @@ namespace TraceIt.Droid.Renderers.Appearance_Trackers
                 );
 
             tabLayout.SetBackground(gradient);
+            tabLayout.TabMode = 1;
+            tabLayout.TabGravity = 0;
         }
     }
 }
