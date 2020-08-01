@@ -17,16 +17,6 @@ namespace TraceIt.iOS.Renderers
 {
     public class GradientShellPageRenderer : ShellRenderer
     {
-        protected override void OnElementSet(Shell element)
-        {
-            base.OnElementSet(element);
-        }
-
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-        }
-
         protected override IShellNavBarAppearanceTracker CreateNavBarAppearanceTracker()
         {
             return new GradientShellPageNavigationAppearanceTracker((GradientShellPage)Element);
@@ -35,6 +25,11 @@ namespace TraceIt.iOS.Renderers
         protected override IShellTabBarAppearanceTracker CreateTabBarAppearanceTracker()
         {
             return new GradientShellPageTabBarAppearanceTracker((GradientShellPage)Element);
+        }
+
+        protected override IShellItemRenderer CreateShellItemRenderer(ShellItem item)
+        {
+            return base.CreateShellItemRenderer(item);
         }
     }
 }
