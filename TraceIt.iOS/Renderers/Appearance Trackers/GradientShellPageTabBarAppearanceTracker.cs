@@ -37,6 +37,7 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
 
             controller.TabBar.BackgroundColor = UIColor.Clear;
             controller.TabBar.Layer.InsertSublayer(tabBarGradient, 1);
+            controller.TabBar.ItemPositioning = UITabBarItemPositioning.Fill;
         }
     }
 }
