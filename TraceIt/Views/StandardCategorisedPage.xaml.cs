@@ -20,13 +20,20 @@ namespace TraceIt.Views
             ViewModel = new StandardCategorisedPageViewModel();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            SetItemsSource();
+        }
+
         void SetItemsSource()
         {
-            bool achievementFilterSelected = assessmentSelector.SelectedIndex == 0;
-            if (achievementFilterSelected)
-                collectionViewCategories.ItemsSource = ViewModel.Subjects;
-            else
+            bool unitFilterSelected = assessmentSelector.SelectedIndex == 1;
+            if (unitFilterSelected)
                 collectionViewCategories.ItemsSource = ViewModel.Subfields;
+            else
+                collectionViewCategories.ItemsSource = ViewModel.Subjects;
         }
 
         private void assessmentSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
