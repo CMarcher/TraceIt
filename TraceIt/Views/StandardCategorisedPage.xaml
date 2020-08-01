@@ -4,53 +4,117 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
+             xmlns:forms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.StandardCategorisedPage">
+             x:Class="TraceIt.Views.StandardCategorisedPage"
+             Title="Search Standards">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="buttons:SfSegmentedControl">
                 <Setter Property="SegmentBackgroundColor" Value="White"/>
-                <Setter Property="SegmentBorderColor" Value="DarkBlue"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Blue"/>
                 <Setter Property="SelectionTextColor" Value="White"/>
                 <Setter Property="FontColor" Value="DarkBlue"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="SegmentCornerRadius" Value="0"/>
+                <Setter Property="SegmentHeight" Value="35"/>
+                <Setter Property="SelectionAnimationDuration" Value="100"/>
                 <Setter Property="SelectionIndicatorSettings">
                     <Setter.Value>
-                        <buttons:SelectionIndicatorSettings Position="Fill" Color="DarkBlue"
-                                                            CornerRadius="10"/>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="DarkBlue"/>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="filterLabelStyle">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                     Padding="10, 10, 10, 10">
 
-            <StackLayout Orientation="Horizontal">
-                <buttons:SfSegmentedControl x:Name="assessmentSelector"
-                                        HorizontalOptions="Start">
-                    <system:List x:TypeArguments="x:String">
-                        <x:String>Achievement</x:String>
-                        <x:String>Unit</x:String>
-                    </system:List>
-                </buttons:SfSegmentedControl>
+            <SearchBar BackgroundColor="#f5f5f5" FontAttributes="Italic"
+                       Placeholder="Search standards..."/>
 
-                <buttons:SfSegmentedControl x:Name="levelSelector"
-                                        HorizontalOptions="End">
-                    <system:List x:TypeArguments="x:String">
-                        <x:String>1</x:String>
-                        <x:String>2</x:String>
-                        <x:String>3</x:String>
-                    </system:List>
-                </buttons:SfSegmentedControl>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                <StackLayout>
+                    <Label Text="Standard type:" Style="{StaticResource filterLabelStyle}"/>
+                    <buttons:SfSegmentedControl x:Name="assessmentSelector"
+                                            HorizontalOptions="StartAndExpand"
+                                            SelectionChanged="assessmentSelector_SelectionChanged"
+                                            FontSize="16"
+                                            SegmentWidth="120">
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>Achievement</x:String>
+                            <x:String>Unit</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Level:" Style="{StaticResource filterLabelStyle}"/>
+                    <buttons:SfSegmentedControl x:Name="levelSelector"
+                                        HorizontalOptions="End"
+                                            SegmentWidth="40"
+                                            FontSize="18">
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>1</x:String>
+                            <x:String>2</x:String>
+                            <x:String>3</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl>
+                </StackLayout>
+                
             </StackLayout>
 
             <StackLayout>
-                <CollectionView x:Name="collectionViewCategories">
-                    
-                </CollectionView>
+                <forms:SfListView x:Name="collectionViewCategories"
+                                  ItemSize="50"
+                                  ItemSpacing="8">
+                    <forms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="#f5f5f5"
+                               HasShadow="False"
+                               Padding="20,10,0,10"
+                               CornerRadius="20"
+                               BorderColor="#dedede">
+
+                                <StackLayout>
+                                    <Label Text="{Binding Subfield}" TextColor="Black"
+                                       FontSize="16"
+                                       VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+
+                            </Frame>
+                        </DataTemplate>
+                    </forms:SfListView.ItemTemplate>
+
+                    <forms:SfListView.SelectedItemTemplate>
+                        <DataTemplate>
+                            <Frame BackgroundColor="Orange"
+                               HasShadow="False"
+                               Padding="20,10,0,10"
+                               CornerRadius="20"
+                               BorderColor="#dedede">
+
+                                <StackLayout>
+                                    <Label Text="{Binding Subfield}" TextColor="White"
+                                       FontSize="16"
+                                       VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+
+                            </Frame>
+                        </DataTemplate>
+                    </forms:SfListView.SelectedItemTemplate>
+                </forms:SfListView>
             </StackLayout>
             
         </StackLayout>
