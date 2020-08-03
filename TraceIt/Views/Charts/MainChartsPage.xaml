@@ -4,34 +4,86 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:tabs="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms" 
-             xmlns:chart="clr-namespace:TraceIt.Views.Charts"
+             xmlns:chart="clr-namespace:TraceIt.Views.Charts" 
+             xmlns:controls="clr-namespace:TraceIt.Controls" 
+             xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.Charts.MainChartsPage">
-    <ContentPage.Content>
-        <tabs:SfTabView>
+             x:Class="TraceIt.Views.Charts.MainChartsPage"
+             Title="Progress">
 
-            <tabs:SfTabView.SelectionIndicatorSettings>
-                <tabs:SelectionIndicatorSettings/>
-            </tabs:SfTabView.SelectionIndicatorSettings>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="controls:CustomTabView">
+                <Setter Property="DisplayMode" Value="Text"/>
+                <Setter Property="VisibleHeaderCount" Value="3"/>
+            </Style>
+
+            <Style TargetType="tabs:SfTabItem">
+                <Setter Property="SelectionColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+
+        <AbsoluteLayout>
+            <graphics:SfGradientView Style="{DynamicResource backgroundGradient}"/>
+            
+            <controls:CustomTabView TabHeaderBackgroundColor="LightSlateGray" Margin="10" AbsoluteLayout.LayoutFlags="All" 
+                                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" BackgroundColor="Transparent">
+
+            <controls:CustomTabView.SelectionIndicatorSettings>
+                <tabs:SelectionIndicatorSettings Position="Fill" Color="Transparent"/>
+            </controls:CustomTabView.SelectionIndicatorSettings>
             
             <tabs:SfTabItem Title="Credits">
+                <tabs:SfTabItem.HeaderContent>
+                    <StackLayout Padding="15, 0, 5, 0">
+                       <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" VerticalOptions="CenterAndExpand">
+                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+                </tabs:SfTabItem.HeaderContent>
+                
                 <tabs:SfTabItem.Content>
                     <chart:CreditsChartPage/>
                 </tabs:SfTabItem.Content>
             </tabs:SfTabItem>
 
             <tabs:SfTabItem Title="Endorsements">
+                <tabs:SfTabItem.HeaderContent>
+                    <StackLayout Padding="5, 0, 5, 0">
+                        <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" VerticalOptions="CenterAndExpand">
+                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+                </tabs:SfTabItem.HeaderContent>
+                
                 <tabs:SfTabItem.Content>
                     <chart:EndorsementsChartPage/>
                 </tabs:SfTabItem.Content>
             </tabs:SfTabItem>
 
             <tabs:SfTabItem Title="Overall">
+                <tabs:SfTabItem.HeaderContent>
+                    <StackLayout Padding="5, 0, 15, 0">
+                        <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" 
+                               VerticalOptions="CenterAndExpand">
+                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+                        </Frame>
+                    </StackLayout>
+                </tabs:SfTabItem.HeaderContent>
+                
                 <tabs:SfTabItem.Content>
                     <Label Text="Test"/>
                 </tabs:SfTabItem.Content>
             </tabs:SfTabItem>
 
-        </tabs:SfTabView>
+        </controls:CustomTabView>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
