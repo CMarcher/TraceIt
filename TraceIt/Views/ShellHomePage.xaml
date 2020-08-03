@@ -30,11 +30,7 @@
         </Tab>
 
         <Tab Title="Charts">
-            <ShellContent Title="Credits"
-                          ContentTemplate="{DataTemplate charts:CreditsChartPage}"/>
-            
-            <ShellContent Title="Endorsements"
-                          ContentTemplate="{DataTemplate charts:EndorsementsChartPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate charts:MainChartsPage}"/>
         </Tab>
 
         <Tab Title="Settings">
