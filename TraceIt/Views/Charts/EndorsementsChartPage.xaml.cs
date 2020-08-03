@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace TraceIt.Views.Charts
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class EndorsementsChartPage : ContentPage
+    public partial class EndorsementsChartPage : ContentView
     {
         public EndorsementsChartPage()
         {
