@@ -80,6 +80,7 @@
     <Compile Include="Renderers\Appearance Trackers\GradientShellBottomTabBarAppearanceTracker.cs" />
     <Compile Include="Renderers\Appearance Trackers\GradientShellToolbarAppearanceTracker.cs" />
     <Compile Include="Renderers\Appearance Trackers\GradientShellTopTabBarAppearanceTracker.cs" />
+    <Compile Include="Renderers\CustomTabViewRenderer.cs" />
     <Compile Include="Renderers\GradientNavigationPageRenderer.cs" />
     <Compile Include="Renderers\GradientShellPageRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
