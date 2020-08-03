@@ -2,14 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.GradeSelectionPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <gradient:SfGradientView Style="{DynamicResource backgroundGradient}"/>
+
+            <StackLayout Margin="5"
+                         AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
+                
+                <Frame BackgroundColor="#001534" CornerRadius="10">
+                    <buttons:SfSegmentedControl>
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>Not Achieved</x:String>
+                            <x:String>Achieved</x:String>
+                            <x:String>Merit</x:String>
+                            <x:String>Excellence</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl>
+                </Frame>
+                
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
