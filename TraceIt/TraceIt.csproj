@@ -21,6 +21,7 @@
     <PackageReference Include="Syncfusion.Licensing" Version="18.2.0.47" />
     <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.2.0.47" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.2.0.47" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.2.0.47" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.2.0.47" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.2.0.47" />
     <PackageReference Include="Xamarin.Forms" Version="4.7.0.1239" />

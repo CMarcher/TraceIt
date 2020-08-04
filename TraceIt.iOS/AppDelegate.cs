@@ -1,3 +1,4 @@
+using Syncfusion.SfChart.XForms.iOS.Renderers;
 using Syncfusion.XForms.iOS.TabView;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;

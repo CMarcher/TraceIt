@@ -142,6 +142,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Core">
       <Version>18.2.0.47</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfChart">
+      <Version>18.2.0.47</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>18.2.0.47</Version>
     </PackageReference>
