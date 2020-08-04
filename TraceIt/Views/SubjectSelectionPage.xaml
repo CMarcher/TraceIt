@@ -23,11 +23,11 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="addButton" Text="+" Clicked="addButton_Clicked"/>
         <ToolbarItem Text="X"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        
         <AbsoluteLayout BackgroundColor="White"
                         VerticalOptions="StartAndExpand"
                         HorizontalOptions="FillAndExpand">

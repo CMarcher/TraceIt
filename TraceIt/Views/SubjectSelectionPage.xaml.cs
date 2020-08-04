@@ -48,5 +48,10 @@ namespace TraceIt.Views
         {
             standards = await App.DataService.GetStandardsAsync();
         }
+
+        private void addButton_Clicked(object sender, EventArgs e)
+        {
+            DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
+        }
     }
 }
