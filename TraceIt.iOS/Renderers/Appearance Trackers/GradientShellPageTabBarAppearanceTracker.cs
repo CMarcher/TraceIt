@@ -28,11 +28,30 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
             {
                 Colors = new[] {
                         page.BottomTabBarTopColor.ToCGColor(),
+                        page.BottomTabBarBottomColor.ToCGColor() },
+
+                Frame = controller.TabBar.Bounds,
+                Locations = new NSNumber[] { 0, 1 }  
+            };
+
+            controller.TabBar.BackgroundColor = UIColor.Clear;
+            controller.TabBar.Layer.InsertSublayer(tabBarGradient, 1);
+            controller.TabBar.ItemPositioning = UITabBarItemPositioning.Fill;
+        }
+
+        public override void UpdateLayout(UITabBarController controller)
+        {
+            base.UpdateLayout(controller);
+
+            var tabBarGradient = new CAGradientLayer()
+            {
+                Colors = new[] {
+                        page.BottomTabBarTopColor.ToCGColor(),
                         page.BottomTabBarBottomColor.ToCGColor()
                     },
 
                 Frame = controller.TabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }  
+                Locations = new NSNumber[] { 0, 1 }
             };
 
             controller.TabBar.BackgroundColor = UIColor.Clear;
