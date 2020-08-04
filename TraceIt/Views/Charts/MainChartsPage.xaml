@@ -41,7 +41,8 @@
     <ContentPage.Content>
 
         <AbsoluteLayout>
-            <graphics:SfGradientView Style="{DynamicResource backgroundGradient}"/>
+            <graphics:SfGradientView Style="{DynamicResource backgroundGradient}"
+                                     AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
 
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
