@@ -31,12 +31,13 @@ namespace TraceIt.iOS.Renderers
                        control.BottomColor.ToCGColor()
                     },
 
-                    Bounds = NavigationBar.Bounds,
+                    Frame = NavigationBar.Bounds,
                     Locations = new NSNumber[] { 0, 1 }
                 };
 
-                NavigationBar.Layer.AddSublayer(gradient);
-            }
+                NavigationBar.BackgroundColor = UIColor.Clear;
+                NavigationBar.Layer.InsertSublayer(gradient, 1);
+            }   
 
         }
     }
