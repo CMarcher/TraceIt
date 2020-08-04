@@ -10,7 +10,6 @@ using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.Buttons;
-using Sharpnado.Presentation.Forms.iOS;
 
 namespace TraceIt.iOS
 {
