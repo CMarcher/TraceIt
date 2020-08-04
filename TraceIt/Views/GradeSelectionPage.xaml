@@ -15,6 +15,8 @@
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="SegmentCornerRadius" Value="50"/>
+                <Setter Property="SegmentBackgroundColor" Value="White"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -29,6 +31,11 @@
                 
                 <Frame BackgroundColor="#001534" CornerRadius="10">
                     <buttons:SfSegmentedControl>
+
+                        <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                            <buttons:SelectionIndicatorSettings CornerRadius="50" Color="Orange"/>
+                        </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        
                         <system:List x:TypeArguments="x:String">
                             <x:String>Not Achieved</x:String>
                             <x:String>Achieved</x:String>
