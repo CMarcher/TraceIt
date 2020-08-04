@@ -16,5 +16,15 @@ namespace TraceIt.Views.Charts
         {
             InitializeComponent();
         }
+
+        private void tabSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
+        {
+            chartTabs.SelectedIndex = tabSelector.SelectedIndex;
+        }
+
+        private void chartTabs_SelectionChanged(object sender, Syncfusion.XForms.TabView.SelectionChangedEventArgs e)
+        {
+            tabSelector.SelectedIndex = chartTabs.SelectedIndex;
+        }
     }
 }

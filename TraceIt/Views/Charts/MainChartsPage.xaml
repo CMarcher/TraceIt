@@ -5,18 +5,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:tabs="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms" 
              xmlns:chart="clr-namespace:TraceIt.Views.Charts" 
-             xmlns:controls="clr-namespace:TraceIt.Controls" 
-             xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:TraceIt.Controls"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.MainChartsPage"
              Title="Progress">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="controls:CustomTabView">
-                <Setter Property="DisplayMode" Value="Text"/>
-                <Setter Property="VisibleHeaderCount" Value="3"/>
-            </Style>
 
             <Style TargetType="tabs:SfTabItem">
                 <Setter Property="SelectionColor" Value="White"/>
@@ -25,65 +23,70 @@
             <Style TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
+
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="SegmentCornerRadius" Value="12"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VisibleSegmentsCount" Value="3"/>
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
 
         <AbsoluteLayout>
             <graphics:SfGradientView Style="{DynamicResource backgroundGradient}"/>
-            
-            <controls:CustomTabView TabHeaderBackgroundColor="LightSlateGray" Margin="10" AbsoluteLayout.LayoutFlags="All" 
-                                    AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1" BackgroundColor="Transparent">
 
-            <controls:CustomTabView.SelectionIndicatorSettings>
-                <tabs:SelectionIndicatorSettings Position="Fill" Color="Transparent"/>
-            </controls:CustomTabView.SelectionIndicatorSettings>
-            
-            <tabs:SfTabItem Title="Credits">
-                <tabs:SfTabItem.HeaderContent>
-                    <StackLayout Padding="15, 0, 5, 0">
-                       <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" VerticalOptions="CenterAndExpand">
-                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
-                        </Frame>
-                    </StackLayout>
-                </tabs:SfTabItem.HeaderContent>
-                
-                <tabs:SfTabItem.Content>
-                    <chart:CreditsChartPage/>
-                </tabs:SfTabItem.Content>
-            </tabs:SfTabItem>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
-            <tabs:SfTabItem Title="Endorsements">
-                <tabs:SfTabItem.HeaderContent>
-                    <StackLayout Padding="5, 0, 5, 0">
-                        <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" VerticalOptions="CenterAndExpand">
-                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
-                        </Frame>
-                    </StackLayout>
-                </tabs:SfTabItem.HeaderContent>
-                
-                <tabs:SfTabItem.Content>
-                    <chart:EndorsementsChartPage/>
-                </tabs:SfTabItem.Content>
-            </tabs:SfTabItem>
+                <Frame BackgroundColor="#002147" CornerRadius="30" Padding="10, 5"
+                       Margin="5">
+                <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
+                                            SegmentPadding="5" SegmentHeight="35" FontSize="15">
 
-            <tabs:SfTabItem Title="Overall">
-                <tabs:SfTabItem.HeaderContent>
-                    <StackLayout Padding="5, 0, 15, 0">
-                        <Frame CornerRadius="20" BackgroundColor="DarkBlue" Padding="10" 
-                               VerticalOptions="CenterAndExpand">
-                            <Label Text="Test" TextColor="White" HorizontalOptions="CenterAndExpand"/>
-                        </Frame>
-                    </StackLayout>
-                </tabs:SfTabItem.HeaderContent>
-                
-                <tabs:SfTabItem.Content>
-                    <Label Text="Test"/>
-                </tabs:SfTabItem.Content>
-            </tabs:SfTabItem>
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
 
-        </controls:CustomTabView>
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>Credits</x:String>
+                            <x:String>Endorsements</x:String>
+                            <x:String>Overall</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+                </Frame>
+
+                <tabs:SfTabView VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
+                                    DisplayMode="NoHeader" x:Name="chartTabs" SelectionChanged="chartTabs_SelectionChanged">
+
+                    <tabs:SfTabItem Title="Credits">
+                        <tabs:SfTabItem.Content>
+                            <chart:CreditsChartPage/>
+                        </tabs:SfTabItem.Content>
+                    </tabs:SfTabItem>
+
+                    <tabs:SfTabItem Title="Endorsements">
+                        <tabs:SfTabItem.Content>
+                            <chart:EndorsementsChartPage/>
+                        </tabs:SfTabItem.Content>
+                    </tabs:SfTabItem>
+
+                    <tabs:SfTabItem Title="Overall">
+                        <tabs:SfTabItem.Content>
+                            <Label Text="Test"/>
+                        </tabs:SfTabItem.Content>
+                    </tabs:SfTabItem>
+                </tabs:SfTabView>
+
+            </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
