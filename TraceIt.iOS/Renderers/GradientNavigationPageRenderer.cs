@@ -23,19 +23,7 @@ namespace TraceIt.iOS.Renderers
 
             if (Element != null)
             {
-                var gradient = new CAGradientLayer()
-                {
-                    Colors = new[]
-                    {
-                       control.TopColor.ToCGColor(),
-                       control.BottomColor.ToCGColor()
-                    },
-
-                    Frame = NavigationBar.Bounds,
-                    Locations = new NSNumber[] { 0, 1 }
-                };
-
-                SetToolbar(gradient);
+                SetToolbar(CreateGradient(control));
             }   
 
         }
@@ -43,12 +31,31 @@ namespace TraceIt.iOS.Renderers
         private void SetToolbar(CAGradientLayer gradient)
         {
             Toolbar.Translucent = false;
+            NavigationBar.BarTintColor = UIColor.Clear;
             Toolbar.BackgroundColor = UIColor.Clear;
             Toolbar.Layer.InsertSublayer(gradient, 1);
 
             NavigationBar.Translucent = false;
+            NavigationBar.BarTintColor = UIColor.Clear;
             NavigationBar.BackgroundColor = UIColor.Clear;
             NavigationBar.Layer.InsertSublayer(gradient, 1);
+        }
+
+        private CAGradientLayer CreateGradient(GradientNavigationPage control)
+        {
+            var gradient = new CAGradientLayer()
+            {
+                Colors = new[]
+                    {
+                       control.TopColor.ToCGColor(),
+                       control.BottomColor.ToCGColor()
+                    },
+
+                Frame = NavigationBar.Bounds,
+                Locations = new NSNumber[] { 0, 1 }
+            };
+
+            return gradient;
         }
     }
 }
