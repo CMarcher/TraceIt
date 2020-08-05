@@ -35,10 +35,20 @@ namespace TraceIt.iOS.Renderers
                     Locations = new NSNumber[] { 0, 1 }
                 };
 
-                NavigationBar.BackgroundColor = UIColor.Clear;
-                NavigationBar.Layer.InsertSublayer(gradient, 1);
+                SetToolbar(gradient);
             }   
 
+        }
+
+        private void SetToolbar(CAGradientLayer gradient)
+        {
+            Toolbar.Translucent = false;
+            Toolbar.BackgroundColor = UIColor.Clear;
+            Toolbar.Layer.InsertSublayer(gradient, 1);
+
+            NavigationBar.Translucent = false;
+            NavigationBar.BackgroundColor = UIColor.Clear;
+            NavigationBar.Layer.InsertSublayer(gradient, 1);
         }
     }
 }
