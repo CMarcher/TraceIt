@@ -4,8 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:tabs="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms" 
-             xmlns:chart="clr-namespace:TraceIt.Views.Charts" 
-             xmlns:controls="clr-namespace:TraceIt.Controls"
+             xmlns:chart="clr-namespace:TraceIt.Views.Charts"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
@@ -48,21 +47,21 @@
 
                 <Frame BackgroundColor="#002147" CornerRadius="30" Padding="10, 5"
                        Margin="5">
-                <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
+                    <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
                                             SegmentPadding="5" SegmentHeight="35" FontSize="15">
 
-                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
-                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                            <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                        </buttons:SfSegmentedControl.SelectionIndicatorSettings>
 
-                    <buttons:SfSegmentedControl.ItemsSource>
-                        <system:List x:TypeArguments="x:String">
-                            <x:String>Credits</x:String>
-                            <x:String>Endorsements</x:String>
-                            <x:String>Overall</x:String>
-                        </system:List>
-                    </buttons:SfSegmentedControl.ItemsSource>
-                </buttons:SfSegmentedControl>
+                        <buttons:SfSegmentedControl.ItemsSource>
+                            <system:List x:TypeArguments="x:String">
+                                <x:String>Credits</x:String>
+                                <x:String>Endorsements</x:String>
+                                <x:String>Overall</x:String>
+                            </system:List>
+                        </buttons:SfSegmentedControl.ItemsSource>
+                    </buttons:SfSegmentedControl>
                 </Frame>
 
                 <tabs:SfTabView VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
