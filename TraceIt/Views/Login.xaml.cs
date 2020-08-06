@@ -23,21 +23,15 @@ namespace TraceIt
         async void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             if (InputFieldsInvalid())
-            {
                 await DisplayAlert("There's a problem!", "Please fill the required fields.", "Fine");
-            }
             else
-            {
                 await Navigation.PushModalAsync(new GradientNavigationPage(new SubjectSelectionPage()));
-            }
         }
 
         public bool InputFieldsInvalid()
         {
             if (entryName.Text == "" || pickerLevel.SelectedIndex == -1)
-            {
                 return true;
-            }
             else
                 return false;
 
