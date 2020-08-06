@@ -23,10 +23,7 @@ namespace TraceIt.iOS.Renderers
             var control = (GradientNavigationPage)Element;
 
             if (Element != null)
-            {
                 SetToolbar(CreateGradientImage(control));
-            }   
-
         }
 
         private void SetToolbar(UIImage gradient)
