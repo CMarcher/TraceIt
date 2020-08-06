@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using CoreAnimation;
@@ -23,25 +24,25 @@ namespace TraceIt.iOS.Renderers
 
             if (Element != null)
             {
-                SetToolbar(CreateGradient(control));
+                SetToolbar(CreateGradientImage(control));
             }   
 
         }
 
-        private void SetToolbar(CAGradientLayer gradient)
+        private void SetToolbar(UIImage gradient)
         {
             Toolbar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
             Toolbar.BackgroundColor = UIColor.Clear;
-            Toolbar.Layer.InsertSublayer(gradient, 1);
+            Toolbar.SetBackgroundImage(gradient, UIToolbarPosition.Any, UIBarMetrics.Default);
 
             NavigationBar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
             NavigationBar.BackgroundColor = UIColor.Clear;
-            NavigationBar.Layer.InsertSublayer(gradient, 1);
+            NavigationBar.SetBackgroundImage(gradient, UIBarMetrics.Default);
         }
 
-        private CAGradientLayer CreateGradient(GradientNavigationPage control)
+        private UIImage CreateGradientImage(GradientNavigationPage control)
         {
             var gradient = new CAGradientLayer()
             {
@@ -55,7 +56,12 @@ namespace TraceIt.iOS.Renderers
                 Locations = new NSNumber[] { 0, 1 }
             };
 
-            return gradient;
+            UIGraphics.BeginImageContext(gradient.Frame.Size);
+            gradient.RenderInContext(UIGraphics.GetCurrentContext());
+            UIImage image = UIGraphics.GetImageFromCurrentImageContext();
+            UIGraphics.EndImageContext();
+
+            return image;
         }
     }
 }
