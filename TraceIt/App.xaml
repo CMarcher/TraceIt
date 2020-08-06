@@ -64,6 +64,13 @@
                 </Setter>
             </Style>
 
+            <Style TargetType="Frame" x:Key="primaryFrameStyle">
+                <Setter Property="BackgroundColor" Value="#002147"/>
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+
         </ResourceDictionary>
         
     </Application.Resources>
