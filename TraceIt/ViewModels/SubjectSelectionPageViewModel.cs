@@ -18,9 +18,6 @@ namespace TraceIt.ViewModels
             SetSubjectsAsync().SafeFireAndForget(false);
         }
 
-        async Task SetSubjectsAsync()
-        {
-            subjects = await App.DataService.GetSubjectsAsync();
-        }
+        async Task SetSubjectsAsync() => subjects = await App.DataService.GetSubjectsAsync();
     }
 }
