@@ -28,15 +28,15 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <AbsoluteLayout BackgroundColor="White"
+        <StackLayout BackgroundColor="White"
                         VerticalOptions="StartAndExpand"
                         HorizontalOptions="FillAndExpand">
+
+            <SearchBar Placeholder="Search subjects"/>
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
                                  SelectionMode="Multiple"
                                  ItemSize="50"
-                                 AbsoluteLayout.LayoutFlags="All"
-                                 AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
                                  VerticalOptions="FillAndExpand"
                                  HorizontalOptions="FillAndExpand"
                                  Padding="20, 20, 10, 50">
@@ -81,8 +81,6 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
 
             <button:SfButton x:Name="buttonConfirm"
                              Text="CONFIRM"
-                             AbsoluteLayout.LayoutBounds="0, 1, 1, 50"
-                             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
                              CornerRadius="25,25,0,0"
                              Clicked="buttonConfirm_Clicked">
                 
@@ -96,6 +94,6 @@ xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfL
                 </button:SfButton.BackgroundGradient>
             </button:SfButton>
 
-        </AbsoluteLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
