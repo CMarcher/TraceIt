@@ -31,12 +31,12 @@ namespace TraceIt.iOS.Renderers
             Toolbar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
             Toolbar.BackgroundColor = UIColor.Clear;
-            Toolbar.SetBackgroundImage(gradient, UIToolbarPosition.Any, UIBarMetrics.Default);
+            //Toolbar.SetBackgroundImage(gradient, UIToolbarPosition.Any, UIBarMetrics.Default);
 
             NavigationBar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
-            NavigationBar.BackgroundColor = UIColor.Clear;
-            NavigationBar.SetBackgroundImage(gradient, UIBarMetrics.Default);
+            NavigationBar.BackgroundColor = UIColor.Orange;
+            //NavigationBar.SetBackgroundImage(gradient, UIBarMetrics.Default);
         }
 
         private UIImage CreateGradientImage(GradientNavigationPage control)
