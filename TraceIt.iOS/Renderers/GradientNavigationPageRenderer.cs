@@ -36,7 +36,7 @@ namespace TraceIt.iOS.Renderers
             NavigationBar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
             NavigationBar.BackgroundColor = UIColor.Orange; 
-            UINavigationBar.Appearance.BackgroundColor = UIColor.Orange;
+            UINavigationBar.Appearance.BackgroundColor = UIColor.Blue;
             //NavigationBar.SetBackgroundImage(gradient, UIBarMetrics.Default);
         }
 
