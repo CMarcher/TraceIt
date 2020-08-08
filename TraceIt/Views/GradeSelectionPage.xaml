@@ -22,8 +22,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <gradient:SfGradientView Style="{DynamicResource backgroundGradient}"/>
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Margin="5"
                          AbsoluteLayout.LayoutFlags="All"

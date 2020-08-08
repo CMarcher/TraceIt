@@ -25,18 +25,12 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <AbsoluteLayout>
-
-            <!--#region GradientBackground -->
-            <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                                     Style="{DynamicResource backgroundGradient}">
-            </gradient:SfGradientView>
-            <!--#endregion-->
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
                 <CollectionView x:Name="collectionViewSubjects">
+                    
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
                                      Orientation="Vertical"/>
@@ -46,10 +40,6 @@
                         <DataTemplate>
                             <border:SfBorder Style="{DynamicResource listItemBorder}">
                                 <AbsoluteLayout HeightRequest="180">
-
-                                    <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                                             AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
-                                                             Style="{DynamicResource subjectItemGradient}"/>
 
                                     <Label Text="{Binding Name}"
                                            AbsoluteLayout.LayoutFlags="All"

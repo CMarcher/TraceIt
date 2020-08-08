@@ -7,7 +7,7 @@
              x:Class="TraceIt.Views.SettingsPage">
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{DynamicResource gradientStackLayout}">
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

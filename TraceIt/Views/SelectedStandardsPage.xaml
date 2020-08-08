@@ -25,11 +25,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <AbsoluteLayout>
-            
-            <gradient:SfGradientView Style="{DynamicResource backgroundGradient}"
-                                     AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"/>
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Padding="14, 14, 14, 14" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
@@ -42,10 +38,6 @@
                         <DataTemplate>
                             <border:SfBorder Style="{DynamicResource listItemBorder}">
                                 <AbsoluteLayout HeightRequest="135">
-
-                                    <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                                             AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
-                                                             Style="{DynamicResource subjectItemGradient}"/>
 
                                     <Label Text="{Binding Subject_Reference}"
                                            HorizontalTextAlignment="Start"
