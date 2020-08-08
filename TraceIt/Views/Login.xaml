@@ -59,13 +59,29 @@
 
             <Frame CornerRadius="12" HasShadow="False">
                 <controls:CustomEntry x:Name="entryName"
-                   Placeholder="Enter your name here"
-                   Margin="0,-20"/>
+                   Placeholder="Enter your name here">
+                    <controls:CustomEntry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <OnPlatform.Platforms>
+                                <On Platform="iOS" Value="0"/>
+                                <On Platform="Android" Value="0, -20"/>
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </controls:CustomEntry.Margin>
+                </controls:CustomEntry>
             </Frame>
 
             <Frame CornerRadius="12">
                 <controls:CustomPicker x:Name="pickerLevel"
-                    Title="Select your NCEA level" Margin="0,-20">
+                    Title="Select your NCEA level">
+                    <controls:CustomPicker.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <OnPlatform.Platforms>
+                                <On Platform="iOS" Value="0"/>
+                                <On Platform="Android" Value="0, -20"/>
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </controls:CustomPicker.Margin>
                     <Picker.Items>
                         <x:String>Level 1</x:String>
                         <x:String>Level 2</x:String>
