@@ -17,7 +17,6 @@ namespace TraceIt.Views
     public partial class SubjectSelectionPage : ContentPage
     {
         public SubjectSelectionPageViewModel ViewModel;
-        ObservableCollection<AssessmentStandard> standards;
 
         public SubjectSelectionPage()
         {
@@ -25,12 +24,6 @@ namespace TraceIt.Views
             ViewModel = new SubjectSelectionPageViewModel();
             BindingContext = ViewModel;
             subjectsListView.ItemsSource = ViewModel.subjects;
-
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-            SetStandards();
-            stopwatch.Stop();
-            var elapsed = stopwatch.ElapsedMilliseconds;
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -42,11 +35,6 @@ namespace TraceIt.Views
         {
             Navigation.PopToRootAsync();
             Application.Current.MainPage = new ShellHomePage();
-        }
-
-        async void SetStandards()
-        {
-            standards = await App.DataService.GetStandardsAsync();
         }
 
         private void addButton_Clicked(object sender, EventArgs e)
