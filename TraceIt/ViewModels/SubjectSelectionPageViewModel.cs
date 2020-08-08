@@ -11,11 +11,12 @@ namespace TraceIt.ViewModels
 {
     public class SubjectSelectionPageViewModel
     {
-        public ObservableCollection<Subject> subjects = new ObservableCollection<Subject>();
+        public ObservableCollection<Subject> subjects { get; set; } = new ObservableCollection<Subject>();
 
         public SubjectSelectionPageViewModel()
         {
-            SetSubjectsAsync().SafeFireAndForget(false);
+            //SetSubjectsAsync().SafeFireAndForget(false); 
+            Task.Run(SetSubjectsAsync).Wait();
         }
 
         async Task SetSubjectsAsync() => subjects = await App.DataService.GetSubjectsAsync();
