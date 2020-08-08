@@ -37,6 +37,7 @@ namespace TraceIt.iOS
             SfTabViewRenderer.Init();
             SfSegmentedControlRenderer.Init();
             SfChartRenderer.Init();
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

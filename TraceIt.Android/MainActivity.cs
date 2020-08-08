@@ -16,6 +16,7 @@ namespace TraceIt.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
 
             base.OnCreate(savedInstanceState);
 
