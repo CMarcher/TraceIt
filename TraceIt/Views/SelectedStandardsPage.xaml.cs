@@ -30,7 +30,7 @@ namespace TraceIt.Views
 
         private void buttonAdd_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new GradientNavigationPage(new StandardCategorisedPage()));
+            Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
         }
     }
 }
