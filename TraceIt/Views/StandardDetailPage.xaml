@@ -20,12 +20,9 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        <AbsoluteLayout>
-            <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-                                     Style="{DynamicResource backgroundGradient}"/>
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
@@ -60,8 +57,8 @@
 
                 </StackLayout>
             </ScrollView>
-            
-            
+
+
 
         </AbsoluteLayout>
     </ContentPage.Content>
