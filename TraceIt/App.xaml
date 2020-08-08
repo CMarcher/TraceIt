@@ -18,7 +18,16 @@
             </Style>
 
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="#000C72" />
+                <Setter Property="BarBackground">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0, 0.5" EndPoint="1, 0.5">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#000C72" Offset="0.1"/>
+                                <GradientStop Color="#1392FF" Offset="1.0"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>
             
             <Style TargetType="border:SfBorder" x:Name="listItemBorder">
