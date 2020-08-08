@@ -20,7 +20,11 @@ namespace TraceIt.iOS.Renderers
             base.OnElementChanged(e);
 
             if (Element != null)
+            {
                 Control.BorderStyle = UITextBorderStyle.None;
+                Control.VerticalAlignment = UIControlContentVerticalAlignment.Fill;
+            }
+                
         }
     }
 }
