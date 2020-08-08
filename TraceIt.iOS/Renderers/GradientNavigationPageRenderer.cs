@@ -23,10 +23,10 @@ namespace TraceIt.iOS.Renderers
             var control = (GradientNavigationPage)Element;
 
             if (Element != null)
-                SetToolbar(CreateGradientImage(control));
+                SetToolbar();
         }
 
-        private void SetToolbar(UIImage gradient)
+        private void SetToolbar()
         {
             Toolbar.Translucent = false;
             NavigationBar.BarTintColor = UIColor.Clear;
