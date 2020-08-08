@@ -26,7 +26,7 @@ namespace TraceIt.Services
             Unit
         }
 
-        public static readonly Lazy<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Lazy<Task<SQLiteAsyncConnection>>(async () =>
+        public static readonly Func<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Func<Task<SQLiteAsyncConnection>>(async () =>
         {
             var databaseName = FileNames.DatabaseName;
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -57,7 +57,7 @@ namespace TraceIt.Services
         {
             if (!Initialised)
             {
-                Database = await CreateLazyConnection.Value;
+                Database = await CreateLazyConnection();
                 Initialised = true;
             }
         }
