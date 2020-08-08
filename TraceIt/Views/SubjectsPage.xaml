@@ -38,7 +38,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <border:SfBorder Style="{DynamicResource listItemBorder}">
+                            <Frame Style="{DynamicResource listItemFrame}" Padding="0">
                                 <AbsoluteLayout HeightRequest="180">
 
                                     <Label Text="{Binding Name}"
@@ -64,7 +64,7 @@
                                                      Clicked="buttonViewInfo_Clicked"/>
 
                                 </AbsoluteLayout>
-                            </border:SfBorder>
+                            </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 
