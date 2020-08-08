@@ -29,6 +29,7 @@ namespace TraceIt.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
             Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();
@@ -37,7 +38,6 @@ namespace TraceIt.iOS
             SfTabViewRenderer.Init();
             SfSegmentedControlRenderer.Init();
             SfChartRenderer.Init();
-            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
