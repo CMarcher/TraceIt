@@ -23,43 +23,31 @@ namespace TraceIt.iOS.Renderers
             var control = (GradientNavigationPage)Element;
 
             if (Element != null)
-                SetToolbar();
+                SetToolbar(CreateGradientLayer(control));
         }
 
-        private void SetToolbar()
+        private void SetToolbar(CAGradientLayer gradient)
         {
-            Toolbar.Translucent = false;
-            NavigationBar.BarTintColor = UIColor.Clear;
-            Toolbar.BackgroundColor = UIColor.Clear;
-            //Toolbar.SetBackgroundImage(gradient, UIToolbarPosition.Any, UIBarMetrics.Default);
-
-            NavigationBar.Translucent = false;
-            NavigationBar.BarTintColor = UIColor.Clear;
-            NavigationBar.BackgroundColor = UIColor.Orange; 
-            UINavigationBar.Appearance.BackgroundColor = UIColor.Blue;
-            //NavigationBar.SetBackgroundImage(gradient, UIBarMetrics.Default);
+            UINavigationBar.Appearance.BarTintColor = UIColor.Clear;
+            UINavigationBar.Appearance.BackgroundColor = UIColor.Clear;
+            NavigationController.NavigationBar.Layer.InsertSublayer(gradient, 1);
         }
 
-        private UIImage CreateGradientImage(GradientNavigationPage control)
+        private CAGradientLayer CreateGradientLayer(GradientNavigationPage control)
         {
             var gradient = new CAGradientLayer()
             {
                 Colors = new[]
                     {
-                       control.TopColor.ToCGColor(),
-                       control.BottomColor.ToCGColor()
-                    },
+                    control.TopColor.ToCGColor(),
+                    control.BottomColor.ToCGColor()
+                },
 
-                Frame = NavigationBar.Bounds,
+                Frame = NavigationController.NavigationBar.Bounds,
                 Locations = new NSNumber[] { 0, 1 }
             };
 
-            UIGraphics.BeginImageContext(gradient.Frame.Size);
-            gradient.RenderInContext(UIGraphics.GetCurrentContext());
-            UIImage image = UIGraphics.GetImageFromCurrentImageContext();
-            UIGraphics.EndImageContext();
-
-            return image;
+            return gradient;
         }
     }
 }
