@@ -1650,6 +1650,7 @@ namespace TraceIt.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.String.fab_transformation_sheet_behavior = global::TraceIt.Droid.Resource.String.fab_transformation_sheet_behavior;
 			global::Xamarin.Forms.Platform.Android.Resource.String.hide_bottom_view_on_scroll_behavior = global::TraceIt.Droid.Resource.String.hide_bottom_view_on_scroll_behavior;
 			global::Xamarin.Forms.Platform.Android.Resource.String.mtrl_chip_close_icon_content_description = global::TraceIt.Droid.Resource.String.mtrl_chip_close_icon_content_description;
+			global::Xamarin.Forms.Platform.Android.Resource.String.overflow_tab_title = global::TraceIt.Droid.Resource.String.overflow_tab_title;
 			global::Xamarin.Forms.Platform.Android.Resource.String.password_toggle_content_description = global::TraceIt.Droid.Resource.String.password_toggle_content_description;
 			global::Xamarin.Forms.Platform.Android.Resource.String.path_password_eye = global::TraceIt.Droid.Resource.String.path_password_eye;
 			global::Xamarin.Forms.Platform.Android.Resource.String.path_password_eye_mask_strike_through = global::TraceIt.Droid.Resource.String.path_password_eye_mask_strike_through;
@@ -4219,6 +4220,7 @@ namespace TraceIt.Droid
 			global::Xamarin.Forms.Platform.Resource.String.fab_transformation_sheet_behavior = global::TraceIt.Droid.Resource.String.fab_transformation_sheet_behavior;
 			global::Xamarin.Forms.Platform.Resource.String.hide_bottom_view_on_scroll_behavior = global::TraceIt.Droid.Resource.String.hide_bottom_view_on_scroll_behavior;
 			global::Xamarin.Forms.Platform.Resource.String.mtrl_chip_close_icon_content_description = global::TraceIt.Droid.Resource.String.mtrl_chip_close_icon_content_description;
+			global::Xamarin.Forms.Platform.Resource.String.overflow_tab_title = global::TraceIt.Droid.Resource.String.overflow_tab_title;
 			global::Xamarin.Forms.Platform.Resource.String.password_toggle_content_description = global::TraceIt.Droid.Resource.String.password_toggle_content_description;
 			global::Xamarin.Forms.Platform.Resource.String.path_password_eye = global::TraceIt.Droid.Resource.String.path_password_eye;
 			global::Xamarin.Forms.Platform.Resource.String.path_password_eye_mask_strike_through = global::TraceIt.Droid.Resource.String.path_password_eye_mask_strike_through;
@@ -9996,76 +9998,79 @@ namespace TraceIt.Droid
 			public const int mtrl_chip_close_icon_content_description = 2131558449;
 			
 			// aapt resource value: 0x7F0D0032
-			public const int password_toggle_content_description = 2131558450;
+			public const int overflow_tab_title = 2131558450;
 			
 			// aapt resource value: 0x7F0D0033
-			public const int path_password_eye = 2131558451;
+			public const int password_toggle_content_description = 2131558451;
 			
 			// aapt resource value: 0x7F0D0034
-			public const int path_password_eye_mask_strike_through = 2131558452;
+			public const int path_password_eye = 2131558452;
 			
 			// aapt resource value: 0x7F0D0035
-			public const int path_password_eye_mask_visible = 2131558453;
+			public const int path_password_eye_mask_strike_through = 2131558453;
 			
 			// aapt resource value: 0x7F0D0036
-			public const int path_password_strike_through = 2131558454;
+			public const int path_password_eye_mask_visible = 2131558454;
 			
 			// aapt resource value: 0x7F0D0037
-			public const int q = 2131558455;
+			public const int path_password_strike_through = 2131558455;
 			
 			// aapt resource value: 0x7F0D0038
-			public const int quarter = 2131558456;
+			public const int q = 2131558456;
 			
 			// aapt resource value: 0x7F0D0039
-			public const int search_menu_title = 2131558457;
-			
-			// aapt resource value: 0x7F0D003D
-			public const int sfchart_close_label = 2131558461;
-			
-			// aapt resource value: 0x7F0D003E
-			public const int sfchart_decrease_label = 2131558462;
-			
-			// aapt resource value: 0x7F0D003F
-			public const int sfchart_high_label = 2131558463;
-			
-			// aapt resource value: 0x7F0D0040
-			public const int sfchart_increase_label = 2131558464;
-			
-			// aapt resource value: 0x7F0D0041
-			public const int sfchart_low_label = 2131558465;
-			
-			// aapt resource value: 0x7F0D0042
-			public const int sfchart_maximum_label = 2131558466;
+			public const int quarter = 2131558457;
 			
 			// aapt resource value: 0x7F0D003A
-			public const int sfchart_Median_label = 2131558458;
+			public const int search_menu_title = 2131558458;
+			
+			// aapt resource value: 0x7F0D003E
+			public const int sfchart_close_label = 2131558462;
+			
+			// aapt resource value: 0x7F0D003F
+			public const int sfchart_decrease_label = 2131558463;
+			
+			// aapt resource value: 0x7F0D0040
+			public const int sfchart_high_label = 2131558464;
+			
+			// aapt resource value: 0x7F0D0041
+			public const int sfchart_increase_label = 2131558465;
+			
+			// aapt resource value: 0x7F0D0042
+			public const int sfchart_low_label = 2131558466;
 			
 			// aapt resource value: 0x7F0D0043
-			public const int sfchart_minimum_label = 2131558467;
-			
-			// aapt resource value: 0x7F0D0044
-			public const int sfchart_open_label = 2131558468;
-			
-			// aapt resource value: 0x7F0D0045
-			public const int sfchart_others_label = 2131558469;
+			public const int sfchart_maximum_label = 2131558467;
 			
 			// aapt resource value: 0x7F0D003B
-			public const int sfchart_Q1_label = 2131558459;
+			public const int sfchart_Median_label = 2131558459;
 			
-			// aapt resource value: 0x7F0D003C
-			public const int sfchart_Q3_label = 2131558460;
+			// aapt resource value: 0x7F0D0044
+			public const int sfchart_minimum_label = 2131558468;
+			
+			// aapt resource value: 0x7F0D0045
+			public const int sfchart_open_label = 2131558469;
 			
 			// aapt resource value: 0x7F0D0046
-			public const int sfchart_total_label = 2131558470;
+			public const int sfchart_others_label = 2131558470;
+			
+			// aapt resource value: 0x7F0D003C
+			public const int sfchart_Q1_label = 2131558460;
+			
+			// aapt resource value: 0x7F0D003D
+			public const int sfchart_Q3_label = 2131558461;
 			
 			// aapt resource value: 0x7F0D0047
-			public const int status_bar_notification_info_overflow = 2131558471;
+			public const int sfchart_total_label = 2131558471;
 			
 			// aapt resource value: 0x7F0D0048
-			public const int w = 2131558472;
+			public const int status_bar_notification_info_overflow = 2131558472;
 			
 			// aapt resource value: 0x7F0D0049
-			public const int week = 2131558473;
+			public const int w = 2131558473;
+			
+			// aapt resource value: 0x7F0D004A
+			public const int week = 2131558474;
 			
 			static String()
 			{
