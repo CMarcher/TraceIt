@@ -25,7 +25,7 @@ namespace TraceIt
             if (InputFieldsInvalid())
                 await DisplayAlert("There's a problem!", "Please fill the required fields.", "Fine");
             else
-                await Navigation.PushModalAsync(new GradientNavigationPage(new SubjectSelectionPage()));
+                await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
         }
 
         public bool InputFieldsInvalid()
