@@ -29,9 +29,45 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style TargetType="StackLayout" x:Key="gradientStackLayout">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#4B7BFF" Offset="0.1"/>
+                                <GradientStop Color="#071D57" Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="AbsoluteLayout" x:Key="gradientAbsoluteLayout">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#4B7BFF" Offset="0.1"/>
+                                <GradientStop Color="#071D57" Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             
             <Style TargetType="border:SfBorder" x:Name="listItemBorder">
                 <Setter Property="CornerRadius" Value="28"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#150B47" Offset="0.1"/>
+                                <GradientStop Color="#04020E" Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Style TargetType="gradient:SfGradientView" x:Key="backgroundGradient">
