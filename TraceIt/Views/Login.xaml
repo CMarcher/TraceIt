@@ -26,17 +26,14 @@
 
     <AbsoluteLayout d:BackgroundColor="#0006A3">
 
-        <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                 AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-            <gradient:SfGradientView.BackgroundBrush>
-                <gradient:SfLinearGradientBrush>
-                    <gradient:SfLinearGradientBrush.GradientStops>
-                        <gradient:SfGradientStop Color="#000C72" Offset="0.0"/>
-                        <gradient:SfGradientStop Color="#1392FF" Offset="1.0"/>
-                    </gradient:SfLinearGradientBrush.GradientStops>
-                </gradient:SfLinearGradientBrush>
-            </gradient:SfGradientView.BackgroundBrush>
-        </gradient:SfGradientView>
+        <AbsoluteLayout.Background>
+            <LinearGradientBrush>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#001157" Offset="0.1"/>
+                    <GradientStop Color="#00A2FF" Offset="1.0"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </AbsoluteLayout.Background>
 
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
