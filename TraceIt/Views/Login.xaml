@@ -13,7 +13,7 @@
 
             <Style TargetType="controls:CustomEntry">
                 <Setter Property="PlaceholderColor" Value="DimGray"/>
-                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BackgroundColor" Value="White"/>
             </Style>
 
             <Style TargetType="controls:CustomPicker">
@@ -54,19 +54,17 @@
         <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
-            <Frame CornerRadius="12" HasShadow="False">
-                <controls:CustomEntry x:Name="entryName"
-                   Placeholder="Enter your name here">
-                    <controls:CustomEntry.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="0"/>
-                                <On Platform="Android" Value="0, -20"/>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </controls:CustomEntry.Margin>
-                </controls:CustomEntry>
-            </Frame>
+
+            <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here">
+                <controls:CustomEntry.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <OnPlatform.Platforms>
+                            <On Platform="iOS" Value="20"/>
+                            <On Platform="Android" Value="0, -20"/>
+                        </OnPlatform.Platforms>
+                    </OnPlatform>
+                </controls:CustomEntry.Margin>
+            </controls:CustomEntry>
 
             <Frame CornerRadius="12">
                 <controls:CustomPicker x:Name="pickerLevel"
