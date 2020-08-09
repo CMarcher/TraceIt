@@ -33,7 +33,7 @@
                     
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
-                                     Orientation="Vertical"/>
+                                     Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
@@ -67,18 +67,6 @@
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-
-                    <CollectionView.FooterTemplate>
-                        <DataTemplate>
-                            <border:SfBorder Style="{DynamicResource listItemBorder}"
-                                                     BackgroundColor="Black"
-                                                     HeightRequest="180">
-                                <Button Text="Add Subject"
-                                                TextColor="Yellow"
-                                                BackgroundColor="Transparent"/>
-                            </border:SfBorder>
-                        </DataTemplate>
-                    </CollectionView.FooterTemplate>
 
                 </CollectionView>
             </StackLayout>
