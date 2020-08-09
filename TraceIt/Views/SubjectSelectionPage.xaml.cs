@@ -33,7 +33,6 @@ namespace TraceIt.Views
 
         private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopToRootAsync();
             Application.Current.MainPage = new ShellHomePage();
         }
 
