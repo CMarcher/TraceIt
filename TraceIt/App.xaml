@@ -28,6 +28,7 @@
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
+                <Setter Property="BarTextColor" Value="White"/>
             </Style>
 
             <Style TargetType="StackLayout" x:Key="gradientStackLayout">
