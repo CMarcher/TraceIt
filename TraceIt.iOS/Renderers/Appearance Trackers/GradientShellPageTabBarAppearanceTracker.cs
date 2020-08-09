@@ -5,6 +5,7 @@ using System.Text;
 using CoreAnimation;
 using Foundation;
 using TraceIt.Controls;
+using TraceIt.iOS.Extensions;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -24,39 +25,30 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
         {
             base.SetAppearance(controller, appearance);
 
-            var tabBarGradient = new CAGradientLayer()
-            {
-                Colors = new[] {
-                        page.BottomTabBarTopColor.ToCGColor(),
-                        page.BottomTabBarBottomColor.ToCGColor() },
-
-                Frame = controller.TabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }  
-            };
-
-            controller.TabBar.BackgroundColor = UIColor.Clear;
-            controller.TabBar.Layer.InsertSublayer(tabBarGradient, 1);
-            controller.TabBar.ItemPositioning = UITabBarItemPositioning.Fill;
+            SetToolbar(controller);
         }
 
-        public override void UpdateLayout(UITabBarController controller)
+        private void SetToolbar(UITabBarController controller)
         {
-            base.UpdateLayout(controller);
+            controller.TabBar.ItemPositioning = UITabBarItemPositioning.Fill;
+            controller.TabBar.BackgroundImage = CreateGradientLayer(controller).ToUIImage();
+        }
 
+        private CAGradientLayer CreateGradientLayer(UITabBarController controller)
+        {
             var tabBarGradient = new CAGradientLayer()
             {
                 Colors = new[] {
-                        page.BottomTabBarTopColor.ToCGColor(),
-                        page.BottomTabBarBottomColor.ToCGColor()
-                    },
+                    page.BottomTabBarTopColor.ToCGColor(),
+                    page.BottomTabBarBottomColor.ToCGColor() },
 
                 Frame = controller.TabBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
+                Locations = new NSNumber[] { 0, 1 },
+                StartPoint = new CoreGraphics.CGPoint(0.5, 0),
+                EndPoint = new CoreGraphics.CGPoint(0.5, 1)
             };
 
-            controller.TabBar.BackgroundColor = UIColor.Clear;
-            controller.TabBar.Layer.InsertSublayer(tabBarGradient, 1);
-            controller.TabBar.ItemPositioning = UITabBarItemPositioning.Fill;
+            return tabBarGradient;
         }
     }
 }

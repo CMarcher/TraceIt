@@ -5,6 +5,7 @@ using System.Text;
 using CoreAnimation;
 using Foundation;
 using TraceIt.Controls;
+using TraceIt.iOS.Extensions;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -24,45 +25,45 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
 
         public void ResetAppearance(UINavigationController controller)
         {
-            
+
         }
 
         public void SetAppearance(UINavigationController controller, ShellAppearance appearance)
         {
+            SetToolbar(controller);
+        }
+
+        private void SetToolbar(UINavigationController controller)
+        {
+            var gradientBackground = CreateGradient(controller).ToUIImage();
+
+            controller.NavigationBar.BackgroundColor = UIColor.Clear;
+            controller.NavigationBar.SetBackgroundImage(gradientBackground, UIBarMetrics.Default);
+        }
+
+        private CAGradientLayer CreateGradient(UINavigationController controller)
+        {
             var navigationGradient = new CAGradientLayer()
             {
                 Colors = new[] {
-                        page.ToolbarTopColor.ToCGColor(),
-                        page.ToolbarBottomColor.ToCGColor() },
+                    page.ToolbarTopColor.ToCGColor(),
+                    page.ToolbarBottomColor.ToCGColor() },
 
                 Frame = controller.NavigationBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
+                Locations = new NSNumber[] { 0, 1 },
+                StartPoint = new CoreGraphics.CGPoint(0, 0.5),
+                EndPoint = new CoreGraphics.CGPoint(1, 0.5)
             };
 
-            controller.NavigationBar.BackgroundColor = UIColor.Clear;
-            controller.NavigationBar.Layer.InsertSublayer(navigationGradient, 1);
+            return navigationGradient;
         }
 
         public void SetHasShadow(UINavigationController controller, bool hasShadow)
         {
-            
+
         }
 
-        public void UpdateLayout(UINavigationController controller)
-        {
-            var navigationGradient = new CAGradientLayer()
-            {
-                Colors = new[] {
-                        page.ToolbarTopColor.ToCGColor(),
-                        page.ToolbarBottomColor.ToCGColor() },
-
-                Frame = controller.NavigationBar.Bounds,
-                Locations = new NSNumber[] { 0, 1 }
-            };
-
-            controller.NavigationBar.BackgroundColor = UIColor.Clear;
-            controller.NavigationBar.Layer.InsertSublayer(navigationGradient, 1);
-        }
+        public void UpdateLayout(UINavigationController controller) => SetToolbar(controller);
 
         protected virtual void Dispose(bool disposing)
         {
@@ -92,5 +93,7 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
+        
     }
 }
