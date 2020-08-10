@@ -8,20 +8,20 @@
              xmlns:controls="clr-namespace:TraceIt.Controls"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.ShellHomePage"
-             TitleColor="White"
-             >
+             TitleColor="White" BackgroundColor="Gray">
 
     <Shell.Resources>
         <ResourceDictionary>
-            <Style TargetType="Element">
+            <Style TargetType="controls:GradientShellPage">
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
-                <Setter Property="Shell.TitleColor" Value="White"/>
+                <Setter Property="Shell.TitleColor" Value="Red"/>
                 <Setter Property="Shell.ForegroundColor" Value="White"/>
                 <Setter Property="Shell.UnselectedColor" Value="Gray"/>
                 <Setter Property="Shell.NavBarHasShadow" Value="True"/>
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
             </Style>
+            <Style TargetType="TabBar"/>
         </ResourceDictionary>
     </Shell.Resources>
 
