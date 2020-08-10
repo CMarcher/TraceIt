@@ -71,15 +71,15 @@
                     </CollectionView.ItemTemplate>
 
                     <CollectionView.Footer>
-                        <border:SfBorder Style="{DynamicResource listItemBorder}"
+                        <Frame Style="{DynamicResource listItemFrame}"
                                          BackgroundColor="Black"
-                                         HeightRequest="135">
+                                         HeightRequest="100">
                             <Button Text="Add Standard"
                                     FontSize="22"
                                     TextColor="Yellow"
                                     BackgroundColor="Transparent"
                                     Clicked="buttonAdd_Clicked"/>
-                        </border:SfBorder>
+                        </Frame>
                     </CollectionView.Footer>
                     
                 </CollectionView>
