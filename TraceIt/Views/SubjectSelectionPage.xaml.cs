@@ -40,5 +40,10 @@ namespace TraceIt.Views
         {
             DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
         }
+
+        private void closeButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
     }
 }
