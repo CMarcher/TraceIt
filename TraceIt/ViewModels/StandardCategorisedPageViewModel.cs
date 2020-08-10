@@ -23,7 +23,7 @@ namespace TraceIt.ViewModels
 
         async Task SetSubjects() => Subjects = await App.DataService.GetSubjectsAsync();
 
-        async Task SetSubfields() => Subfields = await App.DataService.GetSubfieldsAsync(Services.DataService.FilterOptions.Unit);
+        async Task SetSubfields() => Subfields = await App.DataService.GetSubfieldsAsync(Services.DataService.StandardType.Unit);
 
     }
 }
