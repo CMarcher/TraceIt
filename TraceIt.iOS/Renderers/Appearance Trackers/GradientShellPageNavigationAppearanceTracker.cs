@@ -36,7 +36,11 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
         private void SetToolbar(UINavigationController controller)
         {
             var gradientBackground = CreateGradient(controller).ToUIImage();
+            var attributes = new UITextAttributes();
+            attributes.TextColor = UIColor.White;
 
+            UINavigationBar.Appearance.SetTitleTextAttributes(attributes);
+            UINavigationBar.Appearance.TintColor = UIColor.White;
             controller.NavigationBar.BackgroundColor = UIColor.Clear;
             controller.NavigationBar.SetBackgroundImage(gradientBackground, UIBarMetrics.Default);
         }
@@ -94,6 +98,6 @@ namespace TraceIt.iOS.Renderers.Appearance_Trackers
             GC.SuppressFinalize(this);
         }
 
-        
+
     }
 }
