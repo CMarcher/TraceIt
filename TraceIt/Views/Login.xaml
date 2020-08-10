@@ -35,7 +35,7 @@
             </LinearGradientBrush>
         </AbsoluteLayout.Background>
 
-        <StackLayout AbsoluteLayout.LayoutBounds=".5, .5, .7, .5" AbsoluteLayout.LayoutFlags="All">
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .25, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
             <Label
                Text="TraceIt"
@@ -51,7 +51,7 @@
 
         </StackLayout>
 
-        <StackLayout AbsoluteLayout.LayoutBounds=".5, 1, .7, .5" AbsoluteLayout.LayoutFlags="All"
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .7, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
 
