@@ -6,11 +6,13 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Models.Query_Models;
 using TraceIt.Utilities;
 using Xamarin.Essentials;
+using System.Linq.Expressions;
 
 namespace TraceIt.Services
 {
@@ -19,11 +21,25 @@ namespace TraceIt.Services
         public static SQLiteAsyncConnection Database;
         public bool Initialised = false;
 
-        public enum FilterOptions
+        public enum StandardType
         {
             All,
             Achievement,
             Unit
+        }
+
+        public enum Level
+        {
+            All,
+            One,
+            Two,
+            Three
+        }
+
+        public enum FilterByOption
+        {
+            Subfield,
+            Subject
         }
 
         public static readonly Func<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Func<Task<SQLiteAsyncConnection>>(async () =>
@@ -68,6 +84,22 @@ namespace TraceIt.Services
             return new ObservableCollection<AssessmentStandard>(assessmentStandards);
         }
 
+        public async Task<ObservableCollection<AssessmentStandard>> GetFilteredStandardsAsync(string parameter, FilterByOption filterByOption)
+        {
+            Expression<Func<AssessmentStandard, bool>> subjectQuery = standard => standard.Subject == parameter;
+            Expression<Func<AssessmentStandard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
+            Expression<Func<AssessmentStandard, bool>> finalQuery;
+
+            bool isSubjectQuery = filterByOption == FilterByOption.Subject;
+            if (isSubjectQuery)
+                finalQuery = subjectQuery;
+            else
+                finalQuery = subfieldQuery;
+
+            var standards = await Database.Table<AssessmentStandard>().Where(finalQuery).ToListAsync();
+            return new ObservableCollection<AssessmentStandard>(standards);
+        }
+
         public async Task<AssessmentStandard> GetStandardByIDAsync(int id)
         {
             var standard = await Database.Table<AssessmentStandard>()
@@ -102,20 +134,20 @@ namespace TraceIt.Services
             await Database.UpdateAsync(subject);
         }
 
-        public async Task<List<SubfieldModel>> GetSubfieldsAsync(FilterOptions filterOptions)
+        public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
             switch (filterOptions)
             {
-                case FilterOptions.All:
+                case StandardType.All:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards");
 
-                case FilterOptions.Achievement:
+                case StandardType.Achievement:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards" +
                         "WHERE Standard_Type = 'A'");
 
-                case FilterOptions.Unit:
+                case StandardType.Unit:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards " + 
                         "WHERE Standard_Type = 'U'");
