@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Models.Query_Models;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -39,6 +40,21 @@ namespace TraceIt.Views
         private void assessmentSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
         {
             SetItemsSource();
+        }
+
+        private void collectionViewCategories_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        {
+            try
+            {
+                var item = (SubfieldModel)e.ItemData;
+                Navigation.PushAsync(new StandardCategorisedDetailPage(item.Subfield, Services.DataService.FilterByOption.Subfield));
+            }
+            catch { DisplayAlert("Error!", "Don't select subject items!", "I'm sorry!"); }
+        }
+
+        private void closeButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

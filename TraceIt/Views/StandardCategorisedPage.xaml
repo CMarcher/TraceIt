@@ -10,6 +10,10 @@
              x:Class="TraceIt.Views.StandardCategorisedPage"
              Title="Search Standards">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="closeButton" Text="X" Clicked="closeButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="buttons:SfSegmentedControl">
@@ -78,7 +82,8 @@
             <StackLayout Padding="15, 10">
                 <forms:SfListView x:Name="collectionViewCategories"
                                   ItemSize="50"
-                                  ItemSpacing="8">
+                                  ItemSpacing="8"
+                                  ItemTapped="collectionViewCategories_ItemTapped">
                     <forms:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Frame BackgroundColor="#f5f5f5"
