@@ -45,5 +45,26 @@ namespace TraceIt.Views
         {
             Navigation.PopModalAsync();
         }
+
+        private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(subjectsListView.DataSource != null)
+            {
+                subjectsListView.DataSource.Filter = FilterSubjects;
+                subjectsListView.DataSource.Refresh();
+            }
+        }
+
+        private bool FilterSubjects(object obj)
+        {
+            if (searchBar.Text == null)
+                return true;
+            
+            var subject = obj as Subject;
+            if (subject.Name.ToLower().Contains(searchBar.Text.ToLower()))
+                return true;
+            else
+                return false;
+        }
     }
 }

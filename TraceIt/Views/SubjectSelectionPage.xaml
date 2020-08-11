@@ -32,14 +32,16 @@
             <StackLayout BackgroundColor="White" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 0.85">
 
-                <SearchBar Placeholder="Search subjects"/>
+                <SearchBar x:Name="searchBar" Placeholder="Search subjects"
+                           TextChanged="searchBar_TextChanged"/>
 
                 <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
                                  SelectionMode="Multiple"
                                  ItemSize="50"
                                  VerticalOptions="StartAndExpand"
                                  HorizontalOptions="FillAndExpand"
-                                 Padding="10, 0, 10, 0" Margin="0, 0, 0, 0">
+                                 Padding="10, 0, 10, 0" Margin="0, 0, 0, 0"
+                                 >
 
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
