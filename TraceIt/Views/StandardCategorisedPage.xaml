@@ -43,8 +43,8 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
 
-            <SearchBar BackgroundColor="#f5f5f5" FontAttributes="Italic"
-                       Placeholder="Search standards..."/>
+            <SearchBar x:Name="searchBar" BackgroundColor="#f5f5f5" FontAttributes="Italic"
+                       Placeholder="Search standards..." TextChanged="searchBar_TextChanged"/>
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
                          Padding="10, 0, 10, 0" Margin="0">
@@ -80,7 +80,7 @@
             </StackLayout>
 
             <StackLayout Padding="15, 10">
-                <forms:SfListView x:Name="collectionViewCategories"
+                <forms:SfListView x:Name="listView"
                                   ItemSize="50"
                                   ItemSpacing="8"
                                   ItemTapped="collectionViewCategories_ItemTapped">

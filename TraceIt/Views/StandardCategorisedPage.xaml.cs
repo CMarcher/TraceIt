@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Models;
 using TraceIt.Models.Query_Models;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
@@ -32,9 +33,9 @@ namespace TraceIt.Views
         {
             bool unitFilterSelected = assessmentSelector.SelectedIndex == 1;
             if (unitFilterSelected)
-                collectionViewCategories.ItemsSource = ViewModel.Subfields;
+                listView.ItemsSource = ViewModel.Subfields;
             else
-                collectionViewCategories.ItemsSource = ViewModel.Subjects;
+                listView.ItemsSource = ViewModel.Subjects;
         }
 
         private void assessmentSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
@@ -55,6 +56,36 @@ namespace TraceIt.Views
         private void closeButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PopModalAsync();
+        }
+
+        private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //if(listView.DataSource != null)
+            //{
+            //    listView.DataSource.Filter = FilterItems;
+            //    listView.DataSource.Refresh();
+            //}
+
+            if (searchBar.Text != null)
+                listView.ItemsSource = await GetFilteredStandards(searchBar.Text);
+            else
+                SetItemsSource();
+        }
+
+        //private bool FilterItems(object obj)
+        //{
+        //    if (searchBar.Text is null)
+        //        return true;
+
+        //    if(obj is Subject)
+        //    {
+
+        //    }
+        //}
+
+        async Task<List<AssessmentStandard>> GetFilteredStandards(string search)
+        {
+            return await App.DataService.GetMatchingStandards(search);
         }
     }
 }
