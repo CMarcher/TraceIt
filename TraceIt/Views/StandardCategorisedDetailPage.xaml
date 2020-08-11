@@ -9,7 +9,10 @@
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill" ItemSize="80">
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Title}"/>
+                        <StackLayout>
+                            <Label Text="{Binding Code}"/>
+                            <Label Text="{Binding Title}"/>
+                        </StackLayout>
                     </DataTemplate>
                 </xforms:SfListView.ItemTemplate>
             </xforms:SfListView>
