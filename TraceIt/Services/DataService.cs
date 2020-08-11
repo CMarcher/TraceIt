@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using TraceIt.Extensions;
@@ -107,6 +105,13 @@ namespace TraceIt.Services
                 .FirstOrDefaultAsync();
 
             return standard;
+        }
+
+        public async Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery)
+        {
+            return await Database.Table<AssessmentStandard>()
+                         .Where(standard =>
+                                standard.Title.ToLower().Contains(searchQuery.ToLower())).Take(50).ToListAsync();
         }
 
         public async Task UpdateStandardAsync(AssessmentStandard standard)
