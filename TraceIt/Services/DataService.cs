@@ -82,7 +82,7 @@ namespace TraceIt.Services
             return new ObservableCollection<AssessmentStandard>(assessmentStandards);
         }
 
-        public async Task<ObservableCollection<AssessmentStandard>> GetFilteredStandardsAsync(string parameter, FilterByOption filterByOption)
+        public async Task<ObservableCollection<AssessmentStandard>> GetCategorisedStandardsAsync(string parameter, FilterByOption filterByOption)
         {
             Expression<Func<AssessmentStandard, bool>> subjectQuery = standard => standard.Subject == parameter;
             Expression<Func<AssessmentStandard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
@@ -109,9 +109,9 @@ namespace TraceIt.Services
 
         public async Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery)
         {
-            return await Database.Table<AssessmentStandard>()
-                         .Where(standard =>
-                                standard.Title.ToLower().Contains(searchQuery.ToLower())).Take(50).ToListAsync();
+            return await Database.QueryAsync<AssessmentStandard>(
+                "SELECT * FROM AssessmentStandards " +
+                "WHERE Title LIKE ? OR cast(Code as TEXT) LIKE ?;", searchQuery);
         }
 
         public async Task UpdateStandardAsync(AssessmentStandard standard)
