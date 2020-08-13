@@ -23,7 +23,7 @@ namespace TraceIt.Views
 
         async Task SetStandards(string parameter, DataService.FilterByOption filterByOption)
         {
-            categorisedStandardsList.ItemsSource = await App.DataService.GetFilteredStandardsAsync(
+            categorisedStandardsList.ItemsSource = await App.DataService.GetCategorisedStandardsAsync(
                 parameter, filterByOption);
         }
     }
