@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using CoreGraphics;
 using Foundation;
 using TraceIt.Controls;
 using TraceIt.iOS.Renderers;
@@ -20,7 +20,15 @@ namespace TraceIt.iOS.Renderers
             base.OnElementChanged(e);
 
             if (Element != null)
+            {
                 Control.BorderStyle = UITextBorderStyle.None;
+
+                Control.LeftView = new UIView(new CGRect(0, 0, 20, Control.Frame.Height));
+                Control.RightView = new UIView(new CGRect(0, 0, 20, Control.Frame.Height));
+                Control.LeftViewMode = UITextFieldViewMode.Always;
+                Control.RightViewMode = UITextFieldViewMode.Always;
+            }
+
         }
     }
 }
