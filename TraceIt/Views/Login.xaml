@@ -21,11 +21,13 @@
             </Style>
 
             <Style TargetType="Frame">
-                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="CornerRadius" Value="15"/>
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="IsClippedToBounds" Value="True"/>
                 <Setter Property="BorderColor" Value="Transparent"/>
                 <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="65"/>
             </Style>
 
         </ResourceDictionary>
@@ -44,7 +46,6 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .25, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
-            <Frame></Frame>
             <Label
                Text="TraceIt"
                HorizontalTextAlignment="Center"
@@ -62,21 +63,21 @@
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .7, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
+            <Frame Margin="0">
+                <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" BackgroundColor="Transparent">
+                    <controls:CustomEntry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <OnPlatform.Platforms>
+                                <On Platform="iOS" Value="0"/>
+                                <On Platform="Android" Value="0, -20"/>
+                            </OnPlatform.Platforms>
+                        </OnPlatform>
+                    </controls:CustomEntry.Margin>
+                </controls:CustomEntry>
+            </Frame>
 
-            <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here">
-                <controls:CustomEntry.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <OnPlatform.Platforms>
-                            <On Platform="iOS" Value="20"/>
-                            <On Platform="Android" Value="0, -20"/>
-                        </OnPlatform.Platforms>
-                    </OnPlatform>
-                </controls:CustomEntry.Margin>
-            </controls:CustomEntry>
-
-            <Frame CornerRadius="12">
-                <controls:CustomPicker x:Name="pickerLevel"
-                    Title="Select your NCEA level">
+            <Frame>
+                <controls:CustomPicker x:Name="pickerLevel" Title="Select your NCEA level">
                     <controls:CustomPicker.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
                             <OnPlatform.Platforms>
