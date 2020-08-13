@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.Login"
-             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:controls="clr-namespace:TraceIt.Controls">
 
     <ContentPage.Resources>
@@ -19,6 +18,14 @@
             <Style TargetType="controls:CustomPicker">
                 <Setter Property="TitleColor" Value="DimGray"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="HasShadow" Value="False"/>
             </Style>
 
         </ResourceDictionary>
@@ -37,6 +44,7 @@
 
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .25, .7, .5" AbsoluteLayout.LayoutFlags="All">
 
+            <Frame></Frame>
             <Label
                Text="TraceIt"
                HorizontalTextAlignment="Center"
