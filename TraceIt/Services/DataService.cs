@@ -111,7 +111,9 @@ namespace TraceIt.Services
         {
             return await Database.QueryAsync<AssessmentStandard>(
                 "SELECT * FROM AssessmentStandards " +
-                "WHERE Title LIKE ? OR cast(Code as TEXT) LIKE ?;", searchQuery);
+                "WHERE Title LIKE '%" + searchQuery +"%' OR Code LIKE '%" + searchQuery + "%' " +
+                "ORDER BY Title " +
+                "LIMIT 100;");
         }
 
         public async Task UpdateStandardAsync(AssessmentStandard standard)
