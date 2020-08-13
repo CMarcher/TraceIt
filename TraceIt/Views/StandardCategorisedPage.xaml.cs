@@ -50,7 +50,11 @@ namespace TraceIt.Views
                 var item = (SubfieldModel)e.ItemData;
                 Navigation.PushAsync(new StandardCategorisedDetailPage(item.Subfield, Services.DataService.FilterByOption.Subfield));
             }
-            catch { DisplayAlert("Error!", "Don't select subject items!", "I'm sorry!"); }
+            catch(Exception ex) { 
+                DisplayAlert("Error!", "Don't select subject items!", "I'm sorry!");
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            
+            }
         }
 
         private void closeButton_Clicked(object sender, EventArgs e)
