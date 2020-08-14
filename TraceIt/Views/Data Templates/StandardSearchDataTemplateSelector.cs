@@ -9,9 +9,9 @@ namespace TraceIt.Views.Data_Templates
 {
     public class StandardSearchDataTemplateSelector : DataTemplateSelector
     {
-        DataTemplate SubjectTemplate { get; set; }
-        DataTemplate SubfieldTemplate { get; set; }
-        DataTemplate StandardTemplate { get; set; }
+        public DataTemplate SubjectTemplate { get; set; }
+        public DataTemplate SubfieldTemplate { get; set; }
+        public DataTemplate StandardTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -23,7 +23,6 @@ namespace TraceIt.Views.Data_Templates
                 return StandardTemplate;
             else
                 throw new Exception("Invalid item type used");
-                
         }
     }
 }
