@@ -17,8 +17,12 @@ namespace TraceIt.ViewModels
 
         public StandardCategorisedPageViewModel()
         {
-            SetSubjects().SafeFireAndForget(false);
-            SetSubfields().SafeFireAndForget(false);
+            Task.Run(async () =>
+            {
+                await SetSubjects();
+                await SetSubfields();
+            }).Wait(); ;
+            
         }
 
         async Task SetSubjects() => Subjects = await App.DataService.GetSubjectsAsync();
