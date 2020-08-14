@@ -6,8 +6,8 @@
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardWebPage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            <WebView Source="https://docs.google.com/viewer?url=https://www.nzqa.govt.nz/nqfdocs/ncea-resource/achievements/2019/as90976.pdf"/>
+        <StackLayout>
+            <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
