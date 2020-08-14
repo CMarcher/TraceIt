@@ -6,6 +6,7 @@
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
              xmlns:forms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:templates="clr-namespace:TraceIt.Views.Data_Templates"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardCategorisedPage"
              Title="Search Standards">
@@ -32,11 +33,67 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
             <Style TargetType="Label" x:Key="filterLabelStyle">
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
+
+            <DataTemplate x:Key="standardTemplate">
+                <Frame BackgroundColor="#f5f5f5"
+               HasShadow="False"
+               Padding="20,10,0,10"
+               CornerRadius="20"
+               BorderColor="#dedede">
+
+                    <StackLayout>
+
+                        <Label Text="{Binding Code}" TextColor="Black"
+                       FontSize="16"/>
+                        <Label Text="{Binding Title}" TextColor="Black"
+                       FontSize="16"
+                       VerticalOptions="CenterAndExpand"/>
+
+                    </StackLayout>
+                </Frame>
+            </DataTemplate>
+
+            <DataTemplate x:Key="subfieldTemplate">
+                <Frame BackgroundColor="#f5f5f5"
+               HasShadow="False"
+               Padding="20,10,0,10"
+               CornerRadius="20"
+               BorderColor="#dedede">
+
+                    <StackLayout>
+
+                        <Label Text="{Binding Subfield}" TextColor="Black"
+                       FontSize="16" VerticalOptions="CenterAndExpand"/>
+
+                    </StackLayout>
+                </Frame>
+            </DataTemplate>
+
+            <DataTemplate x:Key="subjectTemplate">
+                <Frame BackgroundColor="#f5f5f5"
+               HasShadow="False"
+               Padding="20,10,0,10"
+               CornerRadius="20"
+               BorderColor="#dedede">
+
+                    <Label Text="{Binding Name}" TextColor="Black"
+                   FontSize="16"
+                   VerticalOptions="CenterAndExpand"/>
+
+                </Frame>
+            </DataTemplate>
+            
+            <templates:StandardDataTemplate x:Key="standardTemplate1"/>
+            <templates:SubfieldDataTemplate x:Key="subfieldTemplate1"/>
+            <templates:SubjectDataTemplate x:Key="subjectTemplate1"/>
+            <templates:StandardSearchDataTemplateSelector x:Key="dataTemplateSelector"
+                                                          StandardTemplate="{StaticResource standardTemplate}"
+                                                          SubfieldTemplate="{StaticResource subfieldTemplate}"
+                                                          SubjectTemplate="{StaticResource subjectTemplate}"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -66,9 +123,9 @@
                 <StackLayout>
                     <Label Text="Level:" Style="{StaticResource filterLabelStyle}"/>
                     <buttons:SfSegmentedControl x:Name="levelSelector"
-                                        HorizontalOptions="End"
-                                            SegmentWidth="40"
-                                            FontSize="18">
+                                                HorizontalOptions="End"
+                                                SegmentWidth="40"
+                                                FontSize="18">
                         <system:List x:TypeArguments="x:String">
                             <x:String>1</x:String>
                             <x:String>2</x:String>
@@ -76,52 +133,18 @@
                         </system:List>
                     </buttons:SfSegmentedControl>
                 </StackLayout>
-                
+
             </StackLayout>
 
             <StackLayout Padding="15, 10">
                 <forms:SfListView x:Name="listView"
                                   ItemSize="50"
                                   ItemSpacing="8"
-                                  ItemTapped="collectionViewCategories_ItemTapped">
-                    <forms:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame BackgroundColor="#f5f5f5"
-                               HasShadow="False"
-                               Padding="20,10,0,10"
-                               CornerRadius="20"
-                               BorderColor="#dedede">
-
-                                <StackLayout>
-                                    <Label Text="{Binding Subfield}" TextColor="Black"
-                                       FontSize="16"
-                                       VerticalOptions="CenterAndExpand"/>
-                                </StackLayout>
-
-                            </Frame>
-                        </DataTemplate>
-                    </forms:SfListView.ItemTemplate>
-
-                    <forms:SfListView.SelectedItemTemplate>
-                        <DataTemplate>
-                            <Frame BackgroundColor="Orange"
-                               HasShadow="False"
-                               Padding="20,10,0,10"
-                               CornerRadius="20"
-                               BorderColor="#dedede">
-
-                                <StackLayout>
-                                    <Label Text="{Binding Subfield}" TextColor="White"
-                                       FontSize="16"
-                                       VerticalOptions="CenterAndExpand"/>
-                                </StackLayout>
-
-                            </Frame>
-                        </DataTemplate>
-                    </forms:SfListView.SelectedItemTemplate>
-                </forms:SfListView>
+                                  ItemTapped="collectionViewCategories_ItemTapped"
+                                  ItemTemplate="{StaticResource dataTemplateSelector}"
+                                  AutoFitMode="DynamicHeight"/>
             </StackLayout>
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
