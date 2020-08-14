@@ -20,12 +20,6 @@ namespace TraceIt.Views
         {
             InitializeComponent();
             ViewModel = new StandardCategorisedPageViewModel();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
             SetItemsSource();
         }
 
@@ -45,16 +39,20 @@ namespace TraceIt.Views
 
         private void collectionViewCategories_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            try
-            {
-                var item = (SubfieldModel)e.ItemData;
-                Navigation.PushAsync(new StandardCategorisedDetailPage(item.Subfield, Services.DataService.FilterByOption.Subfield));
-            }
-            catch(Exception ex) { 
-                DisplayAlert("Error!", "Don't select subject items!", "I'm sorry!");
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            
-            }
+            PushPage(e.ItemData);
+        }
+
+        private void PushPage(object item)
+        {
+            if (item is SubfieldModel)
+                Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterByOption.Subfield));
+            else if (item is Subject)
+                Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterByOption.Subject));
+            else if (item is AssessmentStandard)
+                Navigation.PushAsync(new StandardDetailPage((AssessmentStandard)item));
+            else
+                throw new Exception("Invalid item type: " + item.GetType());
+
         }
 
         private void closeButton_Clicked(object sender, EventArgs e)
