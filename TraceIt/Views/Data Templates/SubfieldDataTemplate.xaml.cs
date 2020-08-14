@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace TraceIt.Views.Data_Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SubfieldDataTemplate : ViewCell
+    public partial class SubfieldDataTemplate : ContentView
     {
         public SubfieldDataTemplate()
         {
