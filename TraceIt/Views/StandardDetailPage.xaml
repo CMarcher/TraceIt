@@ -31,27 +31,27 @@
                          VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand">
 
-                    <Label Text="Code: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Code, StringFormat='Code: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Title: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Title, StringFormat='Title: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Subject Reference: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Subject_Reference, StringFormat='Subject Reference: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Credits: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Credits, StringFormat='Credits: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Level: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Level, StringFormat='Level: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Standard Type: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Standard_Type, StringFormat='Standard Type: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Assessment Type: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Assessment_Type, StringFormat='Assessment Type: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Version: " FontAttributes="Bold"/>
+                    <Label Text="{Binding CurrentVersion, StringFormat='Version: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Status: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Status, StringFormat='Status: {0}'}" FontAttributes="Bold"/>
 
-                    <Label Text="Expiry Date: " FontAttributes="Bold"/>
+                    <Label Text="{Binding Expiry_Date, StringFormat='Expiry Date: {0}'}" FontAttributes="Bold"/>
 
-                    <Button Text="Access PDF" TextColor="White"
+                    <Button Text="Load PDF" TextColor="White"
                         FontAttributes="Bold" BackgroundColor="#00002B"
                         Margin="0, 8" CornerRadius="15" Clicked="buttonAccess_Clicked"/>
 
