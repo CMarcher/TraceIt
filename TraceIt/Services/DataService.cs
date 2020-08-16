@@ -141,6 +141,8 @@ namespace TraceIt.Services
             await Database.UpdateAsync(subject);
         }
 
+        public async Task UpdateSubjectsAsync(List<Subject> subjects) => await Database.UpdateAllAsync(subjects);
+
         public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
             switch (filterOptions)
