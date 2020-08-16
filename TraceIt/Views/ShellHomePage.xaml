@@ -27,15 +27,21 @@
 
     <TabBar>
         <Tab Title="Subjects">
-            <ShellContent ContentTemplate="{DataTemplate pages:SubjectsPage}"/>
+            <ShellContent>
+                <pages:SubjectsPage/>
+            </ShellContent>
         </Tab>
 
         <Tab Title="Charts">
-            <ShellContent ContentTemplate="{DataTemplate charts:MainChartsPage}"/>
+            <ShellContent>
+                <charts:MainChartsPage/>
+            </ShellContent>
         </Tab>
 
         <Tab Title="Settings">
-            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+            <ShellContent>
+                <pages:SettingsPage/>
+            </ShellContent>
         </Tab>
     </TabBar>
     
