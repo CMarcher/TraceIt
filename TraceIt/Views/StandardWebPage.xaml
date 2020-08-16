@@ -5,9 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardWebPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="launchWebToolbarItem" Text="Go to NZQA" Clicked="launchWebToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
-            <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+            <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
