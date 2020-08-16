@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.DataSource.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -26,13 +27,10 @@ namespace TraceIt.Views
             subjectsListView.ItemsSource = ViewModel.subjects;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            DisplayPromptAsync("New subject", "Enter subject name", "Ok", "Never mind", "Subject");
-        }
+            await App.DataService.UpdateSubjectsAsync(GetSelectedItems());
 
-        private void buttonConfirm_Clicked(object sender, EventArgs e)
-        {
             Application.Current.MainPage = new ShellHomePage();
         }
 
@@ -65,6 +63,19 @@ namespace TraceIt.Views
                 return true;
             else
                 return false;
+        }
+
+        private List<Subject> GetSelectedItems()
+        {
+            var subjects = new List<Subject>();
+
+            foreach(var subject in subjectsListView.SelectedItems)
+            {
+                ((Subject)subject).Selected = "true";
+                subjects.Add(subject as Subject);
+            }
+
+            return subjects;
         }
     }
 }
