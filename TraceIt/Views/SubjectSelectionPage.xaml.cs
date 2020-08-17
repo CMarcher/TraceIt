@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Utilities;
 using TraceIt.ViewModels;
@@ -67,15 +68,8 @@ namespace TraceIt.Views
 
         private List<Subject> GetSelectedItems()
         {
-            var subjects = new List<Subject>();
-
-            foreach(var subject in subjectsListView.SelectedItems)
-            {
-                ((Subject)subject).Selected = "true";
-                subjects.Add(subject as Subject);
-            }
-
-            return subjects;
+            return subjectsListView.SelectedItems.ToListWithAction<Subject>(
+                (subject) => subject.Selected = "true");
         }
     }
 }
