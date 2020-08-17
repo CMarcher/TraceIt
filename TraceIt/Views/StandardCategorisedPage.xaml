@@ -40,18 +40,17 @@
 
             <DataTemplate x:Key="standardTemplate">
                 <Frame BackgroundColor="#f5f5f5"
-               HasShadow="False"
-               Padding="20,10,0,10"
-               CornerRadius="20"
-               BorderColor="#dedede">
+                       HasShadow="False"
+                       Padding="20,10,0,10"
+                       CornerRadius="20"
+                       BorderColor="#dedede">
 
                     <StackLayout>
 
                         <Label Text="{Binding Code}" TextColor="Black"
-                       FontSize="16"/>
+                               FontSize="16"/>
                         <Label Text="{Binding Title}" TextColor="Black"
-                       FontSize="16"
-                       VerticalOptions="CenterAndExpand"/>
+                               FontSize="16" VerticalOptions="CenterAndExpand"/>
 
                     </StackLayout>
                 </Frame>
@@ -86,7 +85,7 @@
 
                 </Frame>
             </DataTemplate>
-            
+
             <templates:StandardDataTemplate x:Key="standardTemplate1"/>
             <templates:SubfieldDataTemplate x:Key="subfieldTemplate1"/>
             <templates:SubjectDataTemplate x:Key="subjectTemplate1"/>
