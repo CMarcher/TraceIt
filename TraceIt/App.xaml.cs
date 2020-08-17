@@ -17,7 +17,7 @@ namespace TraceIt
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjg0ODA1QDMxMzgyZTMyMmUzMFlYWEFCOEZOODM4dXB2QmpHMmlVM3VuZi9kdzhXUFB4SlNDVHhwVmtMWkE9");
             InitializeComponent();
 
-            MainPage = new Login();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
