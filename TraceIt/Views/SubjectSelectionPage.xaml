@@ -40,8 +40,7 @@
                                  ItemSize="50"
                                  VerticalOptions="StartAndExpand"
                                  HorizontalOptions="FillAndExpand"
-                                 Padding="10, 0, 10, 0" Margin="0, 0, 0, 0"
-                                 >
+                                 Padding="10, 0, 10, 0" Margin="0, 0, 0, 0">
 
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
@@ -87,7 +86,7 @@
                              CornerRadius="25,25,0,0"
                              Clicked="buttonConfirm_Clicked" 
                              AbsoluteLayout.LayoutFlags="WidthProportional,PositionProportional"
-                             AbsoluteLayout.LayoutBounds="1, .96, 1, 50"
+                             AbsoluteLayout.LayoutBounds="1, 1, 1, 50"
                              AnchorY="1">
 
                 <button:SfButton.BackgroundGradient>
