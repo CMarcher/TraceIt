@@ -2,18 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardSelectionPage"
-             Title="Smart English">
+             Title="Smart English"
+             BackgroundColor="Black">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="buttonAdd_Clicked"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -23,18 +23,21 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Padding="14, 14, 14, 14" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                
-                <CollectionView x:Name="selectedStandardsCollectionView">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="20" Orientation="Vertical"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
+
+                <xforms:SfListView x:Name="selectedStandardsCollectionView" ItemSize="150" ItemSpacing="10"
+                                   FooterSize="150" AllowSwiping="True">
+                    
+                    <xforms:SfListView.LayoutManager>
+                        <xforms:LinearLayout/>
+                    </xforms:SfListView.LayoutManager>
+
+                    <xforms:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Frame Style="{DynamicResource listItemFrame}" Padding="0">
                                 <AbsoluteLayout HeightRequest="135">
@@ -68,24 +71,38 @@
                                 </AbsoluteLayout>
                             </Frame>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                    </xforms:SfListView.ItemTemplate>
 
-                    <CollectionView.Footer>
-                        <Frame Style="{DynamicResource listItemFrame}"
+                    <xforms:SfListView.RightSwipeTemplate>
+                        <DataTemplate>
+                            <Grid BackgroundColor="Red" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" HeightRequest="150">
+                                <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Label Text="REMOVE" FontSize="24" FontAttributes="Bold"
+                                           Grid.Column="0" Grid.Row="0"/>
+                                </Grid>
+                            </Grid
+                        </DataTemplate>
+                    </xforms:SfListView.RightSwipeTemplate>
+
+                    <xforms:SfListView.FooterTemplate>
+                        <DataTemplate>
+                            <Frame Style="{DynamicResource listItemFrame}"
                                          BackgroundColor="Black"
                                          HeightRequest="100">
-                            <Button Text="Add Standard"
-                                    FontSize="22"
-                                    TextColor="Yellow"
+                                <Button Text="Add Standard"
+                                    FontSize="26"
+                                        FontAttributes="Bold"
+                                    TextColor="DarkOrange"
                                     BackgroundColor="Transparent"
                                     Clicked="buttonAdd_Clicked"/>
-                        </Frame>
-                    </CollectionView.Footer>
-                    
-                </CollectionView>
-                
+                            </Frame>
+                        </DataTemplate>
+                    </xforms:SfListView.FooterTemplate>
+
+                </xforms:SfListView>
+
             </StackLayout>
-            
+
 
         </AbsoluteLayout>
     </ContentPage.Content>
