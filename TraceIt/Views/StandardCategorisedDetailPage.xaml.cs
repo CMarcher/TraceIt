@@ -9,22 +9,27 @@ using TraceIt.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TraceIt.Services;
+using TraceIt.ViewModels;
 
 namespace TraceIt.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StandardCategorisedDetailPage : ContentPage
     {
+        StandardCategorisedDetailPageViewModel ViewModel;
+
         public StandardCategorisedDetailPage(string parameter, DataService.FilterByOption filterByOption)
         {
             InitializeComponent();
-            Task.Run(() => SetStandards(parameter, filterByOption)).Wait();
+            ViewModel = new StandardCategorisedDetailPageViewModel(parameter, filterByOption);
+            BindingContext = ViewModel;
+
+            categorisedStandardsList.ItemsSource = ViewModel.Standards;
         }
 
-        async Task SetStandards(string parameter, DataService.FilterByOption filterByOption)
+        private void categorisedStandardsList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            categorisedStandardsList.ItemsSource = await App.DataService.GetCategorisedStandardsAsync(
-                parameter, filterByOption);
+            Navigation.PushAsync(new StandardDetailPage(e.ItemData as AssessmentStandard));
         }
     }
 }
