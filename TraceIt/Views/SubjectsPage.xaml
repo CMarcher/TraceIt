@@ -2,10 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects">
@@ -29,14 +28,13 @@
 
             <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                <CollectionView x:Name="collectionViewSubjects">
-                    
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
-                                     Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
+                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="20">
 
-                    <CollectionView.ItemTemplate>
+                    <xforms:SfListView.LayoutManager>
+                        <xforms:GridLayout SpanCount="2"/>
+                    </xforms:SfListView.LayoutManager>
+
+                    <xforms:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Frame Style="{DynamicResource listItemFrame}" Padding="0">
                                 <AbsoluteLayout HeightRequest="180">
@@ -66,9 +64,11 @@
                                 </AbsoluteLayout>
                             </Frame>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                    </xforms:SfListView.ItemTemplate>
+                    
+                    
 
-                </CollectionView>
+                </xforms:SfListView>
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
