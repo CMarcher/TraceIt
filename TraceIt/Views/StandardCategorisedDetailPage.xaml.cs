@@ -24,6 +24,7 @@ namespace TraceIt.Views
             ViewModel = new StandardCategorisedDetailPageViewModel(parameter, filterByOption);
             BindingContext = ViewModel;
 
+            Title = parameter;
             categorisedStandardsList.ItemsSource = ViewModel.Standards;
         }
 
