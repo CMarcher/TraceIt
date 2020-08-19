@@ -32,7 +32,7 @@
 
                 <xforms:SfListView x:Name="selectedStandardsCollectionView" ItemSize="150" ItemSpacing="10"
                                    FooterSize="150" AllowSwiping="True">
-                    
+
                     <xforms:SfListView.LayoutManager>
                         <xforms:LinearLayout/>
                     </xforms:SfListView.LayoutManager>
@@ -80,30 +80,33 @@
                                     <Label Text="REMOVE" FontSize="24" FontAttributes="Bold"
                                            Grid.Column="0" Grid.Row="0"/>
                                 </Grid>
-                            </Grid
+                            </Grid>
                         </DataTemplate>
                     </xforms:SfListView.RightSwipeTemplate>
 
                     <xforms:SfListView.FooterTemplate>
                         <DataTemplate>
-                            <Frame Style="{DynamicResource listItemFrame}"
-                                         BackgroundColor="Black"
-                                         HeightRequest="100">
-                                <Button Text="Add Standard"
+
+                            <Button Text="Add Standard"
                                     FontSize="26"
-                                        FontAttributes="Bold"
-                                    TextColor="DarkOrange"
+                                    FontAttributes="Bold"
+                                    TextColor="Black"
                                     BackgroundColor="Transparent"
-                                    Clicked="buttonAdd_Clicked"/>
-                            </Frame>
+                                    Clicked="buttonAdd_Clicked">
+
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Color="#FFC400" Offset="0"/>
+                                            <GradientStop Color="#FFA200" Offset="1"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
                         </DataTemplate>
                     </xforms:SfListView.FooterTemplate>
-
                 </xforms:SfListView>
-
             </StackLayout>
-
-
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
