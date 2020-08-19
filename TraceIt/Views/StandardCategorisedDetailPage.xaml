@@ -5,19 +5,32 @@
              x:Class="TraceIt.Views.StandardCategorisedDetailPage"
              x:Name="myLayout">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-      <StackLayout>
+      <StackLayout Style="{DynamicResource gradientStackLayout}">
+          
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill" ItemSize="80"
-                               ItemTapped="categorisedStandardsList_ItemTapped">
+                               ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
+                               ItemSpacing="10" AutoFitMode="Height" Padding="25">
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Code}"/>
+                        <Frame Style="{DynamicResource listItemFrame}">
+                            <StackLayout>
+                            <Label Text="{Binding Code}" FontAttributes="Bold"/>
                             <Label Text="{Binding Title}"/>
-                        </StackLayout>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </xforms:SfListView.ItemTemplate>
             </xforms:SfListView>
+          
       </StackLayout>
   </ContentPage.Content>
     
