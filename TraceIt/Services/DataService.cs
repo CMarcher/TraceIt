@@ -123,7 +123,10 @@ namespace TraceIt.Services
 
         public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
         {
-            var subjects = await Database.Table<Subject>().ToListAsync();
+            var subjects = await Database.Table<Subject>()
+                .OrderBy(subject => subject.Name)
+                .ToListAsync();
+
             return new ObservableCollection<Subject>(subjects);
         }
 
@@ -149,17 +152,18 @@ namespace TraceIt.Services
             {
                 case StandardType.All:
                     return await Database.QueryAsync<SubfieldModel>(
-                        "SELECT DISTINCT Subfield FROM AssessmentStandards");
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards " +
+                        " ORDER BY Subfield;");
 
                 case StandardType.Achievement:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards" +
-                        "WHERE Standard_Type = 'A'");
+                        "WHERE Standard_Type = 'A' ORDER BY Subfield;");
 
                 case StandardType.Unit:
                     return await Database.QueryAsync<SubfieldModel>(
-                        "SELECT DISTINCT Subfield FROM AssessmentStandards " + 
-                        "WHERE Standard_Type = 'U'");
+                        "SELECT DISTINCT Subfield FROM AssessmentStandards " +
+                        "WHERE Standard_Type = 'U' ORDER BY Subfield;");
                     
                 default:
                     return null;
