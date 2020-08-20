@@ -57,7 +57,7 @@ namespace TraceIt.Models
         public string Hyperlink { get; set; }
 
         [NotNull]
-        public string Selected { get; set; } = "false";
+        public bool Selected { get; set; } = false;
 
 
 
