@@ -7,7 +7,8 @@
              xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
-             Title="Subjects">
+             Title="Subjects"
+             BackgroundColor="Black">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="+"/>

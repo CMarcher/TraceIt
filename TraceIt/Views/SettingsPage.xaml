@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SettingsPage"
-             Title="Settings">
+             Title="Settings"
+             BackgroundColor="Black">
     
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource gradientStackLayout}">

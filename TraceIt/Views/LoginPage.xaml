@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.LoginPage"
-             xmlns:controls="clr-namespace:TraceIt.Controls">
+             xmlns:controls="clr-namespace:TraceIt.Controls"
+             BackgroundColor="Black">
 
     <ContentPage.Resources>
         <ResourceDictionary>

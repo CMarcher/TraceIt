@@ -6,7 +6,8 @@
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardDetailPage"
-             Title="Standard Details">
+             Title="Standard Details"
+             BackgroundColor="Black">
 
     <ContentPage.Resources>
         <ResourceDictionary>
