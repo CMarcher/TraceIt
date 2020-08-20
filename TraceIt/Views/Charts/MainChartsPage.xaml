@@ -6,7 +6,6 @@
              xmlns:tabs="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms" 
              xmlns:chart="clr-namespace:TraceIt.Views.Charts"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
-             xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.MainChartsPage"
