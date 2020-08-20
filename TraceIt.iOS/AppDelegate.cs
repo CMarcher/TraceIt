@@ -38,6 +38,7 @@ namespace TraceIt.iOS
             SfTabViewRenderer.Init();
             SfSegmentedControlRenderer.Init();
             SfChartRenderer.Init();
+            SfCheckBoxRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
