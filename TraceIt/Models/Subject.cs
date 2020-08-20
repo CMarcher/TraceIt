@@ -20,10 +20,10 @@ namespace TraceIt.Models
         public string Subfield { get; set; }
 
         [NotNull]
-        public string Selected { get; set; } = "false";
+        public bool Selected { get; set; } = false;
 
         [NotNull]
-        public string Custom { get; set; } = "false";
+        public bool Custom { get; set; } = false;
 
         public Subject() { }
     }
