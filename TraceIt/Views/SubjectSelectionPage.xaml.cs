@@ -69,7 +69,7 @@ namespace TraceIt.Views
         private List<Subject> GetSelectedItems()
         {
             return subjectsListView.SelectedItems.ToListWithAction<Subject>(
-                (subject) => subject.Selected = "true");
+                (subject) => subject.Selected = false);
         }
     }
 }
