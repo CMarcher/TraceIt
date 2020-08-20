@@ -13,6 +13,8 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StandardWebPage : ContentPage
     {
+        string CurrentSource { get; set; }
+
         public StandardWebPage(AssessmentStandard standard)
         {
             InitializeComponent();
@@ -23,13 +25,33 @@ namespace TraceIt.Views
                 webView.Source = "https://docs.google.com/viewer?url=" + standard.Hyperlink;
         }
 
-        private async void launchWebToolbarItem_Clicked(object sender, EventArgs e)
+        private void loadNZQAToolbarItem_Clicked(object sender, EventArgs e)
         {
-            bool launchWeb = await DisplayAlert("Leaving TraceIt", "This will take you to NZQA's website, outside the app. Continue?",
+            webView.Source = "https://www.nzqa.govt.nz/ncea/subjects/";
+        }
+
+        private async void launchSafariToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            bool launchWeb = await DisplayAlert("Leaving TraceIt", "This will launch the current page outside the app. Continue?",
                 "Sure!", "Never mind");
 
             if (launchWeb)
-                await Launcher.OpenAsync("https://www.nzqa.govt.nz/ncea/subjects/");
+                await Launcher.OpenAsync(CurrentSource);
+        }
+
+        private void backToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            webView.GoBack();
+        }
+
+        private void forwardToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            webView.GoForward();
+        }
+
+        private void webView_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            CurrentSource = e.Url;
         }
     }
 }

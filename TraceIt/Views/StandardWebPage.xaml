@@ -4,16 +4,20 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.StandardWebPage">
+             x:Class="TraceIt.Views.StandardWebPage"
+             BackgroundColor="Black">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="launchWebToolbarItem" Text="Go to NZQA" Clicked="launchWebToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="forwardToolbarItem" Text="Forward" Clicked="forwardToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="loadNZQAToolbarItem" Text="Go to NZQA" Clicked="loadNZQAToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="launchSafariToolbarItem" Text="Load in browser" Clicked="launchSafariToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Style="{DynamicResource gradientStackLayout}">
             <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
-                     HorizontalOptions="FillAndExpand"/>
+                     HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
