@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="TraceIt.Views.StandardCategorisedDetailPage"
              x:Name="myLayout"
              BackgroundColor="Black">
@@ -13,26 +14,27 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-      <StackLayout Style="{DynamicResource gradientStackLayout}">
-          
+        <StackLayout Style="{DynamicResource gradientStackLayout}">
+
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill" ItemSize="80"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
                                ItemSpacing="10" AutoFitMode="Height" Padding="25">
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{DynamicResource listItemFrame}">
-                            <StackLayout>
-                            <Label Text="{Binding Code}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Title}"/>
-                            </StackLayout>
+                            <Grid RowDefinitions="*, *" ColumnDefinitions="2*, 1*">
+                                <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="1"/>
+                                <CheckBox x:Name="selectedCheckBox" CheckedChanged="selectedCheckBox_CheckedChanged"/>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </xforms:SfListView.ItemTemplate>
             </xforms:SfListView>
-          
-      </StackLayout>
-  </ContentPage.Content>
-    
+
+        </StackLayout>
+    </ContentPage.Content>
+
 </ContentPage>
