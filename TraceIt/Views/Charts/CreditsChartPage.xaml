@@ -8,7 +8,7 @@ xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart
              x:Class="TraceIt.Views.Charts.CreditsChartPage">
 
     <ContentView.Content>
-        <Frame BackgroundColor="#002147" Style="{DynamicResource primaryFrameStyle}">
+        <Frame BackgroundColor="#002147" Style="{DynamicResource primaryFrameStyle}" HasShadow="False" Margin="15, 5">
             <chart:SfChart>
                 <chart:SfChart.Title>
                     <chart:ChartTitle Text="Chart"/>
