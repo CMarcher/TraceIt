@@ -27,10 +27,10 @@ namespace TraceIt.ViewModels
 
         async Task UpdateSubjectAsync(Subject subject)
         {
-            if (subject.Selected == "false")
-                subject.Selected = "true";
+            if (subject.Selected == false)
+                subject.Selected = true;
             else
-                subject.Selected = "false";
+                subject.Selected = false;
 
             await App.DataService.UpdateSubjectAsync(subject);
         }
