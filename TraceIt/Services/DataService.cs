@@ -133,7 +133,7 @@ namespace TraceIt.Services
         public async Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync()
         {
             var subjects = await Database.Table<Subject>()
-                .Where(s => s.Selected == "true")
+                .Where(s => s.Selected == true)
                 .ToListAsync();
 
             return new ObservableCollection<Subject>(subjects);
