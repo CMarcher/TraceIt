@@ -43,7 +43,8 @@
 
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
-                <Frame BackgroundColor="#002147" CornerRadius="30" Padding="10, 5" Margin="5">
+                <Frame BackgroundColor="#002147" CornerRadius="0" Padding="5, 10" Margin="0"
+                       HasShadow="False">
                     
                     <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
                                             SegmentPadding="5" SegmentHeight="35" FontSize="15">
