@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:triggers="clr-namespace:TraceIt.Triggers"
              x:Class="TraceIt.Views.StandardCategorisedDetailPage"
              x:Name="myLayout"
              BackgroundColor="Black">
@@ -27,6 +29,25 @@
                             <Grid RowDefinitions="*, *" ColumnDefinitions="2*, 1*">
                                 <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
                                 <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="1"/>
+
+                                <Button x:Name="selectionButton" Text="Add" BackgroundColor="Yellow" 
+                                        TextColor="Black" FontAttributes="Bold"
+                                        Grid.Column="1"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
+                                        CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding Selected}"
+                                                     Value="true">
+                                            <DataTrigger.EnterActions>
+                                                <triggers:SelectedTriggerAction/>
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+                                                <triggers:DeselectedTriggerAction/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
                             </Grid>
                         </Frame>
                     </DataTemplate>
