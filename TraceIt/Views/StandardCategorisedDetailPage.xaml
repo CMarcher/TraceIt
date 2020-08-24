@@ -27,7 +27,6 @@
                             <Grid RowDefinitions="*, *" ColumnDefinitions="2*, 1*">
                                 <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
                                 <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="1"/>
-                                <CheckBox x:Name="selectedCheckBox" CheckedChanged="selectedCheckBox_CheckedChanged"/>
                             </Grid>
                         </Frame>
                     </DataTemplate>
