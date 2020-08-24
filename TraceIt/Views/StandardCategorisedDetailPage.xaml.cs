@@ -32,10 +32,5 @@ namespace TraceIt.Views
         {
             Navigation.PushAsync(new StandardDetailPage(e.ItemData as AssessmentStandard));
         }
-
-        private void selectedCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            
-        }
     }
 }
