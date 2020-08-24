@@ -15,12 +15,14 @@ namespace TraceIt.ViewModels
     {
         public ObservableCollection<AssessmentStandard> Standards { get; private set; }
         public Command NavigateToDetailCommand { get; private set; }
+        public Command ChangeStandardSelectionCommand { get; private set; }
 
         public StandardCategorisedDetailPageViewModel(string parameter, DataService.FilterByOption filterByOption)
         {
             Task.Run(() => SetStandards(parameter, filterByOption)).Wait();
 
             NavigateToDetailCommand = new Command<AssessmentStandard>(async (standard) => await NavigateToDetail(standard));
+            ChangeStandardSelectionCommand = new Command<AssessmentStandard>(async (standard) => await ChangeStandardSelection(standard));
         }
 
         async Task SetStandards(string parameter, DataService.FilterByOption filterByOption) =>
@@ -29,5 +31,11 @@ namespace TraceIt.ViewModels
         
         async Task NavigateToDetail(AssessmentStandard standard) => 
             await App.Current.MainPage.Navigation.PushAsync(new StandardDetailPage(standard));
+
+        async Task ChangeStandardSelection(AssessmentStandard standard)
+        {
+            standard.Selected = !standard.Selected;
+            await App.DataService.UpdateStandardAsync(standard);
+        }
     }
 }
