@@ -7,7 +7,7 @@ using SQLite;
 namespace TraceIt.Models
 {
     [Table("AssessmentStandards")]
-    public class AssessmentStandard
+    public class AssessmentStandard : BaseModel
     {
         [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
@@ -56,13 +56,16 @@ namespace TraceIt.Models
 
         public string Hyperlink { get; set; }
 
+        private bool _selected;
         [NotNull]
-        public bool Selected { get; set; } = false;
-
-
-
-
-
-
+        public bool Selected
+        {
+            get { return _selected; }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged(nameof(Selected));
+            }
+        }
     }
 }
