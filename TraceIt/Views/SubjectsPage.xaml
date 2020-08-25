@@ -29,7 +29,8 @@
 
             <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="20">
+                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="20"
+                                   SelectionMode="None">
 
                     <xforms:SfListView.LayoutManager>
                         <xforms:GridLayout SpanCount="2"/>
