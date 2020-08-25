@@ -17,7 +17,8 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource gradientStackLayout}">
             <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
-                     HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"/>
+                     HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"
+                     Navigating="webView_Navigating"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

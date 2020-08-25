@@ -23,6 +23,14 @@ namespace TraceIt.Views
                 webView.Source = standard.Hyperlink;
             else if (Device.RuntimePlatform == Device.Android)
                 webView.Source = "https://docs.google.com/viewer?url=" + standard.Hyperlink;
+
+            SetToolbarEnabling();
+        }
+
+        void SetToolbarEnabling()
+        {
+            backToolbarItem.IsEnabled = webView.CanGoBack;
+            forwardToolbarItem.IsEnabled = webView.CanGoForward;
         }
 
         private void loadNZQAToolbarItem_Clicked(object sender, EventArgs e)
@@ -52,6 +60,12 @@ namespace TraceIt.Views
         private void webView_Navigated(object sender, WebNavigatedEventArgs e)
         {
             CurrentSource = e.Url;
+            SetToolbarEnabling();
+        }
+
+        private void webView_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            SetToolbarEnabling();
         }
     }
 }
