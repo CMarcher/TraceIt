@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -19,6 +20,18 @@ namespace TraceIt.Extensions
             }
 
             return convertedList;
+        }
+
+        public static ObservableCollection<TResult> ToObservableCollection<TResult>(this IEnumerable list)
+        {
+            var convertedCollection = new ObservableCollection<TResult>();
+
+            foreach(var item in list)
+            {
+                convertedCollection.Add((TResult)item);
+            }
+
+            return convertedCollection;
         }
     }
 }
