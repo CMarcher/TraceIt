@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Models;
 using TraceIt.Services;
+using TraceIt.Utilities;
 using TraceIt.Views;
 using Xamarin.Forms;
 
@@ -34,8 +35,14 @@ namespace TraceIt.ViewModels
 
         async Task ChangeStandardSelection(AssessmentStandard standard)
         {
-            standard.Selected = !standard.Selected;
+            standard.Selected = HandleSelection(standard);
             await App.DataService.UpdateStandardAsync(standard);
+        }
+
+        bool HandleSelection(AssessmentStandard standard)
+        {
+            standard.AddedTo = standard.Selected == false ? StatusTracker.CurrentSubject.Name : null;
+            return standard.Selected == false ? true : false;
         }
     }
 }
