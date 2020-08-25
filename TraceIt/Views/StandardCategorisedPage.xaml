@@ -12,7 +12,7 @@
              Title="Search Standards">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="closeButton" Text="X" Clicked="closeButton_Clicked"/>
+        <ToolbarItem x:Name="closeButton" Text="Done" Clicked="closeButton_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
