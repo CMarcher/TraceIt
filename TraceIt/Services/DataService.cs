@@ -107,13 +107,15 @@ namespace TraceIt.Services
             return standard;
         }
 
-        public async Task<List<AssessmentStandard>> GetSelectedStandards(string subjectName)
+        public async Task<ObservableCollection<AssessmentStandard>> GetSelectedStandards(string subjectName)
         {
-            return await Database.QueryAsync<AssessmentStandard>(
+            var list = await Database.QueryAsync<AssessmentStandard>(
                 "SELECT * FROM AssessmentStandards " +
                 "WHERE AddedTo = '" + subjectName + "' " +
                 "ORDER BY Title;"
                 );
+
+            return list.ToObservableCollection<AssessmentStandard>();
         }
 
         public async Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery)
