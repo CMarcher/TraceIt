@@ -26,9 +26,11 @@
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{DynamicResource listItemFrame}">
-                            <Grid RowDefinitions="*, *" ColumnDefinitions="2*, 1*">
+                            <Grid RowDefinitions="*, *, *" ColumnDefinitions="2*, 1*">
                                 <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
                                 <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="1"/>
+                                <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
+                                       Grid.Column="0" Grid.Row="2"/>
 
                                 <Button x:Name="selectionButton" Text="Add" BackgroundColor="Yellow" 
                                         TextColor="Black" FontAttributes="Bold"
