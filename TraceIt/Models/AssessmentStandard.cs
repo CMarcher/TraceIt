@@ -67,5 +67,16 @@ namespace TraceIt.Models
                 OnPropertyChanged(nameof(Selected));
             }
         }
+
+        private string _addedTo;
+        public string AddedTo
+        {
+            get { return _addedTo; }
+            set
+            {
+                _addedTo = value;
+                OnPropertyChanged(nameof(AddedTo));
+            }
+        }
     }
 }
