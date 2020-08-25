@@ -107,11 +107,20 @@ namespace TraceIt.Services
             return standard;
         }
 
+        public async Task<List<AssessmentStandard>> GetSelectedStandards(string subjectName)
+        {
+            return await Database.QueryAsync<AssessmentStandard>(
+                "SELECT * FROM AssessmentStandards " +
+                "WHERE AddedTo = '" + subjectName + "' " +
+                "ORDER BY Title;"
+                );
+        }
+
         public async Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery)
         {
             return await Database.QueryAsync<AssessmentStandard>(
                 "SELECT * FROM AssessmentStandards " +
-                "WHERE Title LIKE '%" + searchQuery +"%' OR Code LIKE '%" + searchQuery + "%' " +
+                "WHERE Title LIKE '%" + searchQuery + "%' OR Code LIKE '%" + searchQuery + "%' " +
                 "ORDER BY Title " +
                 "LIMIT 100;");
         }
@@ -164,7 +173,7 @@ namespace TraceIt.Services
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards " +
                         "WHERE Standard_Type = 'U' ORDER BY Subfield;");
-                    
+
                 default:
                     return null;
             }
