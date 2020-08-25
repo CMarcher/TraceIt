@@ -23,7 +23,6 @@ namespace TraceIt.Views
             InitializeComponent();
 
             BindingContext = ViewModel;
-            selectedStandardsCollectionView.ItemsSource = ViewModel.Standards;
             Title = StatusTracker.CurrentSubject.Name;
         }
 
@@ -36,6 +35,11 @@ namespace TraceIt.Views
         private void buttonAdd_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }

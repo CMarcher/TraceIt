@@ -31,7 +31,7 @@
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
                 <xforms:SfListView x:Name="selectedStandardsCollectionView" ItemSize="150" ItemSpacing="10"
-                                   FooterSize="75" AllowSwiping="True">
+                                   FooterSize="75" AllowSwiping="True" ItemsSource="{Binding Standards}">
 
                     <xforms:SfListView.LayoutManager>
                         <xforms:LinearLayout/>
