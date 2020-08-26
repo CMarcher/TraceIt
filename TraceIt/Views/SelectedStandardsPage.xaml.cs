@@ -37,6 +37,9 @@ namespace TraceIt.Views
             Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
         }
 
+        /// <summary>
+        /// Used only for debugging class variables at a point in time.
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();
