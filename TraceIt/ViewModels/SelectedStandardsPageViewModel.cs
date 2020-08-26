@@ -31,7 +31,6 @@ namespace TraceIt.ViewModels
             MessagingCenter.Subscribe<StandardCategorisedDetailPageViewModel>(this, "Update standards", (sender) =>
             {
                 Task.Run(SetStandards);
-                MessagingCenter.Send(this, "Update items source");
             });
         }
 
