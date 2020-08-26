@@ -16,13 +16,11 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StandardSelectionPage : ContentPage
     {
-        public SelectedStandardsPageViewModel ViewModel = new SelectedStandardsPageViewModel();
+        public SelectedStandardsPageViewModel ViewModel { get; private set; } = new SelectedStandardsPageViewModel();
 
         public StandardSelectionPage()
         {
             InitializeComponent();
-
-            BindingContext = ViewModel;
             Title = StatusTracker.CurrentSubject.Name;
         }
 
