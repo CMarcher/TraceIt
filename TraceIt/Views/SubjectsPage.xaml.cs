@@ -25,12 +25,12 @@ namespace TraceIt.Views
             collectionViewSubjects.ItemsSource = ViewModel.Subjects;
         }
 
-        private void buttonViewInfo_Clicked(object sender, EventArgs e)
+        private async void buttonViewInfo_Clicked(object sender, EventArgs e)
         {
             var subject = (sender as SfButton)?.BindingContext as Subject;
             StatusTracker.CurrentSubject = subject;
 
-            Navigation.PushAsync(new StandardSelectionPage());
+            await Navigation.PushAsync(new StandardSelectionPage());
         }
     }
 }
