@@ -9,14 +9,25 @@
              mc:Ignorable="d"
              x:Class="TraceIt.Views.GradeSelectionPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="closeToolbarItem" Text="Done"
+                     Clicked="closeToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="buttons:SfSegmentedControl">
-                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="BorderColor" Value="Transparent"/>
-                <Setter Property="SegmentCornerRadius" Value="50"/>
-                <Setter Property="SegmentBackgroundColor" Value="White"/>
+                <Setter Property="SegmentCornerRadius" Value="12"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentPadding" Value="10"/>
+                <Setter Property="SegmentWidth" Value="150"/>
+                <Setter Property="SegmentHeight" Value="80"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -24,15 +35,15 @@
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <StackLayout Margin="5"
+            <StackLayout Margin="15"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
                 
-                <Frame BackgroundColor="#001534" CornerRadius="10">
-                    <buttons:SfSegmentedControl>
+                <Frame Style="{DynamicResource primaryFrameStyle}" CornerRadius="10" VerticalOptions="FillAndExpand">
+                    <buttons:SfSegmentedControl VerticalOptions="Center" HorizontalOptions="Center">
 
                         <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                            <buttons:SelectionIndicatorSettings CornerRadius="50" Color="Orange"/>
+                            <buttons:SelectionIndicatorSettings CornerRadius="12" Color="Orange"/>
                         </buttons:SfSegmentedControl.SelectionIndicatorSettings>
                         
                         <system:List x:TypeArguments="x:String">
