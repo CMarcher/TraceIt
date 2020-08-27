@@ -11,23 +11,23 @@ xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart
         <Frame BackgroundColor="#002147" Style="{DynamicResource primaryFrameStyle}" HasShadow="False" Margin="15, 5">
             <chart:SfChart>
                 <chart:SfChart.Title>
-                    <chart:ChartTitle Text="Chart"/>
+                    <chart:ChartTitle Text="Chart" TextColor="White"/>
                 </chart:SfChart.Title>
                 <chart:SfChart.PrimaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" />
+                            <chart:ChartAxisTitle Text="X Axis" TextColor="White"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
                     <chart:NumericalAxis>
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" />
+                            <chart:ChartAxisTitle Text="Y Axis" TextColor="White"/>
                         </chart:NumericalAxis.Title>
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
-                <chart:ColumnSeries ItemsSource="{Binding Data}" YBindingPath="YValue" XBindingPath="XValue" />
+                <chart:ColumnSeries ItemsSource="{Binding Data}" YBindingPath="YValue" XBindingPath="XValue" Color="White" StrokeColor="White"/>
             </chart:SfChart>
         </Frame>
     </ContentView.Content>
