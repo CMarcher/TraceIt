@@ -36,7 +36,8 @@
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
                 <xforms:SfListView x:Name="selectedStandardsCollectionView" ItemSize="150" ItemSpacing="10"
-                                   FooterSize="75" AllowSwiping="True" ItemsSource="{Binding Standards}">
+                                   FooterSize="75" AllowSwiping="True" ItemsSource="{Binding Standards}"
+                                   SelectionMode="None">
 
                     <xforms:SfListView.LayoutManager>
                         <xforms:LinearLayout/>
@@ -72,6 +73,12 @@
                                                      AbsoluteLayout.LayoutBounds="0.95, 0.85, 0.3, 0.3"
                                                      Clicked="buttonViewMore_Clicked"
                                                      Style="{DynamicResource subjectButtonGradient}"/>
+
+                                    <Button x:Name="selectGradeButton" Text="Select grade" 
+                                            AbsoluteLayout.LayoutFlags="All"
+                                            AbsoluteLayout.LayoutBounds="0.95, 0.40, 0.2, 0.3" 
+                                            Clicked="selectGradeButton_Clicked"
+                                            BackgroundColor="Yellow"/>
 
                                 </AbsoluteLayout>
                             </Frame>

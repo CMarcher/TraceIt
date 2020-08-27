@@ -24,15 +24,20 @@ namespace TraceIt.Views
             Title = StatusTracker.CurrentSubject.Name;
         }
 
-        private void buttonViewMore_Clicked(object sender, EventArgs e)
+        private async void buttonViewMore_Clicked(object sender, EventArgs e)
         {
             var standard = (sender as SfButton)?.BindingContext as AssessmentStandard;
-            Navigation.PushAsync(new StandardDetailPage(standard));
+            await Navigation.PushAsync(new StandardDetailPage(standard));
         }
 
-        private void buttonAdd_Clicked(object sender, EventArgs e)
+        private async void buttonAdd_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
+        }
+
+        private async void selectGradeButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new GradeSelectionPage()));
         }
 
         /// <summary>
@@ -42,5 +47,7 @@ namespace TraceIt.Views
         {
             base.OnAppearing();
         }
+
+
     }
 }
