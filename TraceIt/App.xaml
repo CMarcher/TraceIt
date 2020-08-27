@@ -103,6 +103,7 @@
                 <Setter Property="CornerRadius" Value="30"/>
                 <Setter Property="Margin" Value="15"/>
                 <Setter Property="Padding" Value="10"/>
+                <Setter Property="HasShadow" Value="False"/>
             </Style>
 
         </ResourceDictionary>
