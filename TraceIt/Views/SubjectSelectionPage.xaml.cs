@@ -35,14 +35,14 @@ namespace TraceIt.Views
             Application.Current.MainPage = new ShellHomePage();
         }
 
-        private void addButton_Clicked(object sender, EventArgs e)
+        private async void addButton_Clicked(object sender, EventArgs e)
         {
-            DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
+            await DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
         }
 
-        private void closeButton_Clicked(object sender, EventArgs e)
+        private async void closeButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopModalAsync();
+            await Navigation.PopModalAsync();
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
