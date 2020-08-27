@@ -26,35 +26,67 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
                 <Setter Property="SegmentPadding" Value="10"/>
-                <Setter Property="SegmentWidth" Value="150"/>
                 <Setter Property="SegmentHeight" Value="80"/>
+                <Setter Property="VisibleSegmentsCount" Value="4"/>
+                <Setter Property="SelectionIndicatorSettings">
+                    <Setter.Value>
+                        <buttons:SelectionIndicatorSettings CornerRadius="12" Color="Orange"/>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Margin="15"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
-                
-                <Frame Style="{DynamicResource primaryFrameStyle}" CornerRadius="10" VerticalOptions="FillAndExpand">
-                    <buttons:SfSegmentedControl VerticalOptions="Center" HorizontalOptions="Center">
 
-                        <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                            <buttons:SelectionIndicatorSettings CornerRadius="12" Color="Orange"/>
-                        </buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        
-                        <system:List x:TypeArguments="x:String">
-                            <x:String>Not Achieved</x:String>
-                            <x:String>Achieved</x:String>
-                            <x:String>Merit</x:String>
-                            <x:String>Excellence</x:String>
-                        </system:List>
-                    </buttons:SfSegmentedControl>
+                <Frame Style="{DynamicResource primaryFrameStyle}" CornerRadius="10" VerticalOptions="FillAndExpand">
+
+
+                    <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
+                        <StackLayout Grid.Row="0" HorizontalOptions="Center">
+                            <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
+                            <buttons:SfSegmentedControl>
+                                <system:List x:TypeArguments="x:String">
+                                    <x:String>Not Achieved</x:String>
+                                    <x:String>Achieved</x:String>
+                                    <x:String>Merit</x:String>
+                                    <x:String>Excellence</x:String>
+                                </system:List>
+                            </buttons:SfSegmentedControl>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="1" HorizontalOptions="Center">
+                            <Label Text="Practice Grade" TextColor="White" FontAttributes="Bold"/>
+                            <buttons:SfSegmentedControl>
+                                <system:List x:TypeArguments="x:String">
+                                    <x:String>Not Achieved</x:String>
+                                    <x:String>Achieved</x:String>
+                                    <x:String>Merit</x:String>
+                                    <x:String>Excellence</x:String>
+                                </system:List>
+                            </buttons:SfSegmentedControl>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                            <Label Text="Final Grade" TextColor="White" FontAttributes="Bold"/>
+                            <buttons:SfSegmentedControl>
+                                <system:List x:TypeArguments="x:String">
+                                    <x:String>Not Achieved</x:String>
+                                    <x:String>Achieved</x:String>
+                                    <x:String>Merit</x:String>
+                                    <x:String>Excellence</x:String>
+                                </system:List>
+                            </buttons:SfSegmentedControl>
+                        </StackLayout>
+                    </Grid>
+
                 </Frame>
-                
+
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
