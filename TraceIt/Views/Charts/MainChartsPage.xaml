@@ -15,10 +15,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style TargetType="tabs:SfTabItem">
-                <Setter Property="SelectionColor" Value="White"/>
-            </Style>
-
             <Style TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
@@ -64,7 +60,7 @@
                 </Frame>
 
                 <tabs:SfTabView VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
-                                    DisplayMode="NoHeader" x:Name="chartTabs" SelectionChanged="chartTabs_SelectionChanged">
+                                DisplayMode="NoHeader" x:Name="chartTabs" SelectionChanged="chartTabs_SelectionChanged">
 
                     <tabs:SfTabItem Title="Credits">
                         <tabs:SfTabItem.Content>
