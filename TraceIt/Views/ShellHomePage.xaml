@@ -27,18 +27,30 @@
 
     <TabBar>
         <Tab Title="Subjects">
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Home}"/>
+            </Tab.Icon>
+            
             <ShellContent>
                 <pages:SubjectsPage/>
             </ShellContent>
         </Tab>
 
         <Tab Title="Charts">
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Chart}"/>
+            </Tab.Icon>
+            
             <ShellContent>
                 <charts:MainChartsPage/>
             </ShellContent>
         </Tab>
 
         <Tab Title="Settings">
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Cog}"/>
+            </Tab.Icon>
+            
             <ShellContent>
                 <pages:SettingsPage/>
             </ShellContent>
