@@ -11,7 +11,11 @@
         <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked"/>
         <ToolbarItem x:Name="forwardToolbarItem" Text="Forward" Clicked="forwardToolbarItem_Clicked"/>
         <ToolbarItem x:Name="loadNZQAToolbarItem" Text="Go to NZQA" Clicked="loadNZQAToolbarItem_Clicked"/>
-        <ToolbarItem x:Name="launchSafariToolbarItem" Text="Load in browser" Clicked="launchSafariToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="launchSafariToolbarItem" Clicked="launchSafariToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Safari}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
