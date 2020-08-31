@@ -5,8 +5,10 @@ using TraceIt.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+[assembly: ExportFont("primary-icons.ttf", Alias = "PrimaryIcons")]
 namespace TraceIt
 {
+    
     public partial class App : Application
     {
         public static NavigationService NavigationService { get; } = new NavigationService();
