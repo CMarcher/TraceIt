@@ -12,7 +12,11 @@
              BackgroundColor="Black">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="buttonAdd_Clicked"/>
+        <ToolbarItem Text="Add" Clicked="buttonAdd_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Large" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
