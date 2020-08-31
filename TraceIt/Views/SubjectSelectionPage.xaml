@@ -23,8 +23,17 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="addButton" Text="+" Clicked="addButton_Clicked"/>
-        <ToolbarItem Text="X" x:Name="closeButton" Clicked="closeButton_Clicked"/>
+        <ToolbarItem x:Name="addButton" Clicked="addButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+
+        <ToolbarItem x:Name="closeButton" Clicked="closeButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Cross}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
