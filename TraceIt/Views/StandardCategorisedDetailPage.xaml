@@ -26,26 +26,40 @@
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{DynamicResource listItemFrame}">
-                            <Grid RowDefinitions="*, *, *" ColumnDefinitions="2*, 1*">
+                            <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="Auto, Auto">
                                 <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
                                 <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="1"/>
                                 <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
                                        Grid.Column="0" Grid.Row="2"/>
 
-                                <Button x:Name="selectionButton" Text="Add" BackgroundColor="Yellow" 
-                                        TextColor="Black" FontAttributes="Bold"
+                                <Button x:Name="selectionButton"
                                         Grid.Column="1"
+                                        Grid.RowSpan="2"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
                                         CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}">
+
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0" Color="#FFC400"/>
+                                                <GradientStop Offset="1" Color="#FFA200"/>
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+
+                                    <Button.ImageSource>
+                                        <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
+                                    </Button.ImageSource>
+                                    
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button" Binding="{Binding Selected}"
                                                      Value="true">
                                             <DataTrigger.EnterActions>
-                                                <triggers:SelectedTriggerAction/>
+                                                <triggers:SelectedTriggerAction StartColor="OrangeRed" EndColor="Red"/>
                                             </DataTrigger.EnterActions>
 
                                             <DataTrigger.ExitActions>
-                                                <triggers:DeselectedTriggerAction/>
+                                                <triggers:DeselectedTriggerAction StartColor="#FFC400" EndColor="#FFA200"/>
                                             </DataTrigger.ExitActions>
                                         </DataTrigger>
                                     </Button.Triggers>
