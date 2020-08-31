@@ -12,7 +12,11 @@
              Title="Search Standards">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="closeButton" Text="Done" Clicked="closeButton_Clicked"/>
+        <ToolbarItem x:Name="closeButton" Text="Done" Clicked="closeButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Large" FontFamily="PrimaryIcons" Glyph="{DynamicResource Tick}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
