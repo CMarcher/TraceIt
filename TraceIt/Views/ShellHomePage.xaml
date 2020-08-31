@@ -28,7 +28,8 @@
     <TabBar>
         <Tab Title="Subjects">
             <Tab.Icon>
-                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Home}"/>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Home}"
+                                 Size="Large"/>
             </Tab.Icon>
             
             <ShellContent>
@@ -38,7 +39,8 @@
 
         <Tab Title="Charts">
             <Tab.Icon>
-                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Chart}"/>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Chart}"
+                                 Size="Large"/>
             </Tab.Icon>
             
             <ShellContent>
@@ -48,7 +50,8 @@
 
         <Tab Title="Settings">
             <Tab.Icon>
-                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Cog}"/>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Cog}"
+                                 Size="Large"/>
             </Tab.Icon>
             
             <ShellContent>
