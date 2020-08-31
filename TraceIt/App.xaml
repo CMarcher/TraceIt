@@ -12,6 +12,18 @@
     <Application.Resources>
         
         <ResourceDictionary>
+            
+            <!--Fonts-->
+            <x:String x:Key="Tick">&#xe800;</x:String>
+            <x:String x:Key="Home">&#xe801;</x:String>
+            <x:String x:Key="QuestionMark">&#xf128;</x:String>
+            <x:String x:Key="Plus">&#xe802;</x:String>
+            <x:String x:Key="Cross">&#xe803;</x:String>
+            <x:String x:Key="Trash">&#xf1f8;</x:String>
+            <x:String x:Key="Pencil">&#xe804;</x:String>
+            <x:String x:Key="Cog">&#xe805;</x:String>
+            <x:String x:Key="Safari">&#xf267;</x:String>
+            <x:String x:Key="Chart">&#xe806;</x:String>
 
             <Style TargetType="Button">
                 <Setter Property="CornerRadius" Value="25"/>
