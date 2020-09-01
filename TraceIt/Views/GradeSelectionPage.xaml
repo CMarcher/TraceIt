@@ -44,7 +44,7 @@
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <StackLayout Margin="15"
+            <StackLayout Margin="{OnIdiom Phone=0, Tablet=15}"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
