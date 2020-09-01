@@ -22,7 +22,6 @@ namespace TraceIt.Views
 
             ViewModel = new SubjectsPageViewModel();
             BindingContext = ViewModel;
-            collectionViewSubjects.ItemsSource = ViewModel.Subjects;
         }
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)

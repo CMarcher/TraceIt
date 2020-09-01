@@ -36,10 +36,10 @@
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
+            <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="20"
-                                   SelectionMode="None">
+                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
+                                   SelectionMode="None" ItemsSource="{Binding Subjects}">
 
                     <xforms:SfListView.LayoutManager>
                         <xforms:GridLayout SpanCount="2"/>
