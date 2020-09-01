@@ -19,24 +19,30 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource gradientStackLayout}">
 
-            <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill" ItemSize="80"
+            <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
-                               ItemSpacing="10" AutoFitMode="Height" Padding="25">
+                               ItemSpacing="10" AutoFitMode="Height">
+                <xforms:SfListView.Padding>
+                    <OnIdiom x:TypeArguments="Thickness" Phone="10" Tablet="25"/>
+                </xforms:SfListView.Padding>
+
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{DynamicResource listItemFrame}">
-                            <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="2*, 120">
-                                <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Column="0" Grid.Row="0"/>
-                                <Label Text="{Binding Title}" FontAttributes="Italic" Grid.Column="0" Grid.Row="1"/>
+                            <StackLayout Spacing="10">
+
+                                <Label Text="{Binding Code}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Title}" FontAttributes="Italic"/>
                                 <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
                                        Grid.Column="0" Grid.Row="2"/>
 
                                 <Button x:Name="selectionButton"
-                                        Grid.Column="1"
-                                        Grid.RowSpan="2"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
                                         CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}"
-                                        VerticalOptions="FillAndExpand">
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="Start"
+                                        WidthRequest="150"
+                                        Margin="5, 5, 20, 0">
 
                                     <Button.Background>
                                         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -50,7 +56,7 @@
                                     <Button.ImageSource>
                                         <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
                                     </Button.ImageSource>
-                                    
+
                                     <Button.Triggers>
                                         <DataTrigger TargetType="Button" Binding="{Binding Selected}"
                                                      Value="true">
@@ -64,7 +70,7 @@
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
-                            </Grid>
+                            </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </xforms:SfListView.ItemTemplate>
