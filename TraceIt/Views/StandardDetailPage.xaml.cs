@@ -12,9 +12,9 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StandardDetailPage : ContentPage
     {
-        AssessmentStandard Standard { get; set; }
+        Standard Standard { get; set; }
 
-        public StandardDetailPage(AssessmentStandard standard = null)
+        public StandardDetailPage(Standard standard = null)
         {
             InitializeComponent();
             BindingContext = standard;

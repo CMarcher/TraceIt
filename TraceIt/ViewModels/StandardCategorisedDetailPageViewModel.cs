@@ -14,7 +14,7 @@ namespace TraceIt.ViewModels
 {
     public class StandardCategorisedDetailPageViewModel : BaseViewModel
     {
-        public ObservableCollection<AssessmentStandard> Standards { get; private set; }
+        public ObservableCollection<Standard> Standards { get; private set; }
         public Command NavigateToDetailCommand { get; private set; }
         public Command ChangeStandardSelectionCommand { get; private set; }
 
@@ -22,18 +22,18 @@ namespace TraceIt.ViewModels
         {
             Task.Run(() => SetStandards(parameter, filterByOption)).Wait();
 
-            NavigateToDetailCommand = new Command<AssessmentStandard>(async (standard) => await NavigateToDetail(standard));
-            ChangeStandardSelectionCommand = new Command<AssessmentStandard>(async (standard) => await ChangeStandardSelection(standard));
+            NavigateToDetailCommand = new Command<Standard>(async (standard) => await NavigateToDetail(standard));
+            ChangeStandardSelectionCommand = new Command<Standard>(async (standard) => await ChangeStandardSelection(standard));
         }
 
         async Task SetStandards(string parameter, DataService.FilterByOption filterByOption) =>
             Standards = await App.DataService.GetCategorisedStandardsAsync(
                               parameter, filterByOption);
         
-        async Task NavigateToDetail(AssessmentStandard standard) => 
+        async Task NavigateToDetail(Standard standard) => 
             await App.Current.MainPage.Navigation.PushAsync(new StandardDetailPage(standard));
 
-        async Task ChangeStandardSelection(AssessmentStandard standard)
+        async Task ChangeStandardSelection(Standard standard)
         {
             standard.Selected = HandleSelection(standard);
             await App.DataService.UpdateStandardAsync(standard);
@@ -41,7 +41,7 @@ namespace TraceIt.ViewModels
             MessagingCenter.Send(this, "Update standards");
         }
 
-        bool HandleSelection(AssessmentStandard standard)
+        bool HandleSelection(Standard standard)
         {
             standard.AddedTo = standard.Selected == false ? StatusTracker.CurrentSubject.Name : null;
             return standard.Selected == false ? true : false;

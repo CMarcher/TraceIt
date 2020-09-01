@@ -26,7 +26,7 @@ namespace TraceIt.Views
 
         private async void buttonViewMore_Clicked(object sender, EventArgs e)
         {
-            var standard = (sender as SfButton)?.BindingContext as AssessmentStandard;
+            var standard = (sender as SfButton)?.BindingContext as Standard;
             await Navigation.PushAsync(new StandardDetailPage(standard));
         }
 

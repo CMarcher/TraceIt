@@ -19,7 +19,7 @@ namespace TraceIt.Views.Data_Templates
                 return SubjectTemplate;
             else if (item is SubfieldModel)
                 return SubfieldTemplate;
-            else if (item is AssessmentStandard)
+            else if (item is Standard)
                 return StandardTemplate;
             else
                 throw new Exception("Invalid item type used");

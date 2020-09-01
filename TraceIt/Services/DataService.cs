@@ -76,17 +76,17 @@ namespace TraceIt.Services
             }
         }
 
-        public async Task<ObservableCollection<AssessmentStandard>> GetStandardsAsync()
+        public async Task<ObservableCollection<Standard>> GetStandardsAsync()
         {
-            var assessmentStandards = await Database.Table<AssessmentStandard>().ToListAsync();
-            return new ObservableCollection<AssessmentStandard>(assessmentStandards);
+            var assessmentStandards = await Database.Table<Standard>().ToListAsync();
+            return new ObservableCollection<Standard>(assessmentStandards);
         }
 
-        public async Task<ObservableCollection<AssessmentStandard>> GetCategorisedStandardsAsync(string parameter, FilterByOption filterByOption)
+        public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterByOption filterByOption)
         {
-            Expression<Func<AssessmentStandard, bool>> subjectQuery = standard => standard.Subject == parameter;
-            Expression<Func<AssessmentStandard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
-            Expression<Func<AssessmentStandard, bool>> finalQuery;
+            Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
+            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
+            Expression<Func<Standard, bool>> finalQuery;
 
             bool isSubjectQuery = filterByOption == FilterByOption.Subject;
             if (isSubjectQuery)
@@ -94,40 +94,40 @@ namespace TraceIt.Services
             else
                 finalQuery = subfieldQuery;
 
-            var standards = await Database.Table<AssessmentStandard>().Where(finalQuery).ToListAsync();
-            return new ObservableCollection<AssessmentStandard>(standards);
+            var standards = await Database.Table<Standard>().Where(finalQuery).ToListAsync();
+            return new ObservableCollection<Standard>(standards);
         }
 
-        public async Task<AssessmentStandard> GetStandardByIDAsync(int id)
+        public async Task<Standard> GetStandardByIDAsync(int id)
         {
-            var standard = await Database.Table<AssessmentStandard>()
+            var standard = await Database.Table<Standard>()
                 .Where(s => s.ID == id)
                 .FirstOrDefaultAsync();
 
             return standard;
         }
 
-        public async Task<ObservableCollection<AssessmentStandard>> GetSelectedStandards(string subjectName)
+        public async Task<ObservableCollection<Standard>> GetSelectedStandards(string subjectName)
         {
-            var list = await Database.QueryAsync<AssessmentStandard>(
+            var list = await Database.QueryAsync<Standard>(
                 "SELECT * FROM AssessmentStandards " +
                 "WHERE AddedTo = '" + subjectName + "' " +
                 "ORDER BY Title;"
                 );
 
-            return list.ToObservableCollection<AssessmentStandard>();
+            return list.ToObservableCollection<Standard>();
         }
 
-        public async Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery)
+        public async Task<List<Standard>> GetMatchingStandards(string searchQuery)
         {
-            return await Database.QueryAsync<AssessmentStandard>(
+            return await Database.QueryAsync<Standard>(
                 "SELECT * FROM AssessmentStandards " +
                 "WHERE Title LIKE '%" + searchQuery + "%' OR Code LIKE '%" + searchQuery + "%' " +
                 "ORDER BY Title " +
                 "LIMIT 100;");
         }
 
-        public async Task UpdateStandardAsync(AssessmentStandard standard)
+        public async Task UpdateStandardAsync(Standard standard)
         {
             await Database.UpdateAsync(standard);
         }

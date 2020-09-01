@@ -15,7 +15,7 @@ namespace TraceIt.Views
     {
         string CurrentSource { get; set; }
 
-        public StandardWebPage(AssessmentStandard standard)
+        public StandardWebPage(Standard standard)
         {
             InitializeComponent();
             webView.BindingContext = standard;

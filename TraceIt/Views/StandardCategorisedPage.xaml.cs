@@ -48,8 +48,8 @@ namespace TraceIt.Views
                 Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterByOption.Subfield));
             else if (item is Subject)
                 Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterByOption.Subject));
-            else if (item is AssessmentStandard)
-                Navigation.PushAsync(new StandardDetailPage((AssessmentStandard)item));
+            else if (item is Standard)
+                Navigation.PushAsync(new StandardDetailPage((Standard)item));
             else
                 throw new Exception("Invalid item type: " + item.GetType());
 
@@ -85,7 +85,7 @@ namespace TraceIt.Views
         //    }
         //}
 
-        async Task<List<AssessmentStandard>> GetFilteredStandards(string search)
+        async Task<List<Standard>> GetFilteredStandards(string search)
         {
             return await App.DataService.GetMatchingStandards(search);
         }

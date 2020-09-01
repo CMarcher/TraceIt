@@ -11,8 +11,8 @@ namespace TraceIt.ViewModels
 {
     public class SelectedStandardsPageViewModel : BaseViewModel
     {
-        private ObservableCollection<AssessmentStandard> _standards;
-        public ObservableCollection<AssessmentStandard> Standards
+        private ObservableCollection<Standard> _standards;
+        public ObservableCollection<Standard> Standards
         {
             get { return _standards; }
             set
@@ -24,7 +24,7 @@ namespace TraceIt.ViewModels
 
         public SelectedStandardsPageViewModel()
         {
-            Standards = new ObservableCollection<AssessmentStandard>();
+            Standards = new ObservableCollection<Standard>();
 
             Task.Run(SetStandards).Wait();
 

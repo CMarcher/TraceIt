@@ -30,7 +30,7 @@ namespace TraceIt.Views
 
         private void categorisedStandardsList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            Navigation.PushAsync(new StandardDetailPage(e.ItemData as AssessmentStandard));
+            Navigation.PushAsync(new StandardDetailPage(e.ItemData as Standard));
         }
     }
 }

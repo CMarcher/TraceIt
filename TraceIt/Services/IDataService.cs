@@ -8,14 +8,14 @@ namespace TraceIt.Services
 {
     public interface IDataService
     {
-        Task<ObservableCollection<AssessmentStandard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterByOption filterByOption);
-        Task<List<AssessmentStandard>> GetMatchingStandards(string searchQuery);
+        Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterByOption filterByOption);
+        Task<List<Standard>> GetMatchingStandards(string searchQuery);
         Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync();
-        Task<AssessmentStandard> GetStandardByIDAsync(int id);
-        Task<ObservableCollection<AssessmentStandard>> GetStandardsAsync();
+        Task<Standard> GetStandardByIDAsync(int id);
+        Task<ObservableCollection<Standard>> GetStandardsAsync();
         Task<List<SubfieldModel>> GetSubfieldsAsync(DataService.StandardType filterOptions);
         Task<ObservableCollection<Subject>> GetSubjectsAsync();
-        Task UpdateStandardAsync(AssessmentStandard standard);
+        Task UpdateStandardAsync(Standard standard);
         Task UpdateSubjectAsync(Subject subject);
         Task UpdateSubjectsAsync(List<Subject> subjects);
     }
