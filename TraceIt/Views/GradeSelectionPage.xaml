@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:converters="clr-namespace:TraceIt.Converters"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
@@ -39,8 +40,15 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <converters:SelectedIndexToStandardConverter x:Key="indexConverter"/>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodels:GradeSelectionPageViewModel/>
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
@@ -57,9 +65,10 @@
                             <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
                             <buttons:SfSegmentedControl x:Name="goalGradeSelector" 
                                                         SelectedIndex="{Binding 
-                                                                        GoalGrade, 
-                                                                        Converter={x:Reference converters:SelectedIndexToGradeConverter},
-                                                                        Mode=TwoWay}">
+                                                                        Standard.GoalGrade, 
+                                                                        Converter={StaticResource indexConverter},
+                                                                        Mode=TwoWay}"
+                                                        SelectionChanged="goalGradeSelector_SelectionChanged">
                                 <system:List x:TypeArguments="x:String">
                                     <x:String>Not Achieved</x:String>
                                     <x:String>Achieved</x:String>
