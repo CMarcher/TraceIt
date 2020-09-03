@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 using TraceIt.Models;
 using TraceIt.Utilities;
+using TraceIt.Views;
+using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
 {
@@ -13,6 +17,11 @@ namespace TraceIt.ViewModels
         public GradeSelectionPageViewModel()
         {
             Standard = StatusTracker.CurrentStandard;
+
+            
         }
+
+        async Task UpdateStandard(Standard standard) => await App.DataService.UpdateStandardAsync(standard);
+
     }
 }
