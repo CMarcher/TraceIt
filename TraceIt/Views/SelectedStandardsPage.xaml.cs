@@ -37,6 +37,9 @@ namespace TraceIt.Views
 
         private async void selectGradeButton_Clicked(object sender, EventArgs e)
         {
+            var standard = (sender as Button)?.BindingContext as Standard;
+            StatusTracker.CurrentStandard = standard;
+
             await Navigation.PushModalAsync(new NavigationPage(new GradeSelectionPage()));
         }
 
