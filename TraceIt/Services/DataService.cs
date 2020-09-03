@@ -46,7 +46,8 @@ namespace TraceIt.Services
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            //File.Delete(databasePath); // Removed for debugging purposes.
+            if (App.SaveData is false)
+                File.Delete(databasePath); // Removed for debugging purposes.
 
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
@@ -169,12 +170,12 @@ namespace TraceIt.Services
                 case StandardType.Achievement:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards" +
-                        "WHERE Standard_Type = 'A' ORDER BY Subfield;");
+                        "WHERE StandardType = 'A' ORDER BY Subfield;");
 
                 case StandardType.Unit:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards " +
-                        "WHERE Standard_Type = 'U' ORDER BY Subfield;");
+                        "WHERE StandardType = 'U' ORDER BY Subfield;");
 
                 default:
                     return null;
