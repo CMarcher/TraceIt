@@ -13,48 +13,48 @@ namespace TraceIt.Models
         public int ID { get; set; }
 
         [NotNull]
-        public string Subfield { get; }
+        public string Subfield { get; set; }
 
         [NotNull]
-        public string Domain { get; }
+        public string Domain { get; set; }
 
         [NotNull, Unique]
-        public int Code { get; }
+        public int Code { get; set; }
 
         [NotNull]
-        public string StandardType { get; }
+        public string StandardType { get; set; }
 
         [NotNull]
-        public string AssessmentType { get; }
+        public string AssessmentType { get; set; }
 
-        public string Subject { get; }
+        public string Subject { get; set; }
 
-        public string SubjectReference { get; }
-
-        [NotNull]
-        public string Title { get; }
+        public string SubjectReference { get; set; }
 
         [NotNull]
-        public int Level { get; }
+        public string Title { get; set; }
 
         [NotNull]
-        public int Credits { get; }
+        public int Level { get; set; }
 
         [NotNull]
-        public string GradingScheme { get; }
+        public int Credits { get; set; }
 
         [NotNull]
-        public string Status { get; }
-
-        public string ExpiryDate { get; }
+        public string GradingScheme { get; set; }
 
         [NotNull]
-        public string Publication_Date { get; }
+        public string Status { get; set; }
+
+        public string ExpiryDate { get; set; }
 
         [NotNull]
-        public int CurrentVersion { get; }
+        public string PublicationDate { get; set; }
 
-        public string Hyperlink { get; }
+        [NotNull]
+        public int CurrentVersion { get; set; }
+
+        public string Hyperlink { get; set; }
 
         private bool _selected;
         [NotNull]
@@ -80,16 +80,16 @@ namespace TraceIt.Models
         }
 
         [NotNull]
-        public bool IsLiteracy { get; }
+        public bool IsLiteracy { get; set; }
 
         [NotNull]
-        public bool IsNumeracy { get; }
+        public bool IsNumeracy { get; set; }
 
         [NotNull]
-        public bool IsReading { get; }
+        public bool IsReading { get; set; }
 
         [NotNull]
-        public bool IsWriting { get; }
+        public bool IsWriting { get; set; }
 
         public enum Grade
         {
@@ -99,12 +99,37 @@ namespace TraceIt.Models
             Excellence
         }
 
-        public Grade GoalGrade { get; set; }
+        private Grade _goalGrade;
+        public Grade GoalGrade
+        {
+            get { return _goalGrade; }
+            set
+            {
+                _goalGrade = value;
+                OnPropertyChanged(nameof(GoalGrade));
+            }
+        }
 
-        public Grade PracticeGrade { get; set; }
+        private Grade _practiceGrade;
+        public Grade PracticeGrade
+        {
+            get { return _practiceGrade; }
+            set
+            {
+                _practiceGrade = value;
+                OnPropertyChanged(nameof(PracticeGrade));
+            }
+        }
 
-        public Grade FinalGrade { get; set; }
-
-
+        private Grade _finalGrade;
+        public Grade FinalGrade
+        {
+            get { return _finalGrade; }
+            set
+            {
+                _finalGrade = value;
+                OnPropertyChanged(nameof(FinalGrade));
+            }
+        }
     }
 }
