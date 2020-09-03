@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms" 
+             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
@@ -54,7 +55,11 @@
                     <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
                         <StackLayout Grid.Row="0" HorizontalOptions="Center">
                             <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl>
+                            <buttons:SfSegmentedControl x:Name="goalGradeSelector" 
+                                                        SelectedIndex="{Binding 
+                                                                        GoalGrade, 
+                                                                        Converter={x:Reference converters:SelectedIndexToGradeConverter},
+                                                                        Mode=TwoWay}">
                                 <system:List x:TypeArguments="x:String">
                                     <x:String>Not Achieved</x:String>
                                     <x:String>Achieved</x:String>
@@ -66,7 +71,7 @@
 
                         <StackLayout Grid.Row="1" HorizontalOptions="Center">
                             <Label Text="Practice Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl>
+                            <buttons:SfSegmentedControl x:Name="practiceGradeSelector">
                                 <system:List x:TypeArguments="x:String">
                                     <x:String>Not Achieved</x:String>
                                     <x:String>Achieved</x:String>
@@ -78,7 +83,7 @@
 
                         <StackLayout Grid.Row="2" HorizontalOptions="Center">
                             <Label Text="Final Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl>
+                            <buttons:SfSegmentedControl x:Name="finalGradeSelector" >
                                 <system:List x:TypeArguments="x:String">
                                     <x:String>Not Achieved</x:String>
                                     <x:String>Achieved</x:String>
