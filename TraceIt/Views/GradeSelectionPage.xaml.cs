@@ -23,10 +23,5 @@ namespace TraceIt.Views
         {
             await Navigation.PopModalAsync();
         }
-
-        private void goalGradeSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
-        {
-            var standard = StatusTracker.CurrentStandard;
-        }
     }
 }

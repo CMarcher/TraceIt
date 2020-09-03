@@ -63,12 +63,11 @@
                     <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
                         <StackLayout Grid.Row="0" HorizontalOptions="Center">
                             <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl x:Name="goalGradeSelector" 
+                            <buttons:SfSegmentedControl x:Name="goalGradeSelector" BindingContext="{Binding Standard}"
                                                         SelectedIndex="{Binding 
-                                                                        Standard.GoalGrade, 
+                                                                        GoalGrade, 
                                                                         Converter={StaticResource indexConverter},
-                                                                        Mode=TwoWay}"
-                                                        SelectionChanged="goalGradeSelector_SelectionChanged">
+                                                                        Mode=TwoWay}">
                                 <system:List x:TypeArguments="x:String">
                                     <x:String>Not Achieved</x:String>
                                     <x:String>Achieved</x:String>
