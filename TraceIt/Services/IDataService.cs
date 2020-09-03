@@ -10,6 +10,7 @@ namespace TraceIt.Services
     {
         Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterByOption filterByOption);
         Task<List<Standard>> GetMatchingStandards(string searchQuery);
+        Task<ObservableCollection<Standard>> GetSelectedStandards(string subjectName);
         Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync();
         Task<Standard> GetStandardByIDAsync(int id);
         Task<ObservableCollection<Standard>> GetStandardsAsync();
