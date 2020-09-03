@@ -11,12 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Converters\**" />
-    <EmbeddedResource Remove="Converters\**" />
-    <None Remove="Converters\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Resources\primary-icons.ttf" />
   </ItemGroup>
 
