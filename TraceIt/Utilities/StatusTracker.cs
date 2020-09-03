@@ -8,5 +8,6 @@ namespace TraceIt.Utilities
     public static class StatusTracker
     {
         public static Subject CurrentSubject { get; set; } = null;
+        public static Standard CurrentStandard { get; set; } = null;
     }
 }
