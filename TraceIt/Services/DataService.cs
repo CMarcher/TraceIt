@@ -34,20 +34,19 @@ namespace TraceIt.Services
             Three
         }
 
-        public enum FilterByOption
+        public enum FilterOption
         {
             Subfield,
             Subject
         }
 
-        public static readonly Func<Task<SQLiteAsyncConnection>> CreateLazyConnection = new Func<Task<SQLiteAsyncConnection>>(async () =>
+        public static readonly Func<Task<SQLiteAsyncConnection>> CreateConnection = new Func<Task<SQLiteAsyncConnection>>(async () =>
         {
             var databaseName = FileNames.DatabaseName;
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            if (App.SaveData is false)
-                File.Delete(databasePath); // Removed for debugging purposes.
+            //File.Delete(databasePath); // Removed for debugging purposes.
 
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
@@ -72,7 +71,7 @@ namespace TraceIt.Services
         {
             if (!Initialised)
             {
-                Database = await CreateLazyConnection();
+                Database = await CreateConnection();
                 Initialised = true;
             }
         }
@@ -83,13 +82,13 @@ namespace TraceIt.Services
             return new ObservableCollection<Standard>(assessmentStandards);
         }
 
-        public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterByOption filterByOption)
+        public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterOption filterByOption)
         {
             Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
             Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
             Expression<Func<Standard, bool>> finalQuery;
 
-            bool isSubjectQuery = filterByOption == FilterByOption.Subject;
+            bool isSubjectQuery = filterByOption == FilterOption.Subject;
             if (isSubjectQuery)
                 finalQuery = subjectQuery;
             else
