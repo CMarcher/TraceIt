@@ -16,6 +16,7 @@ namespace TraceIt.Views
         {
             InitializeComponent();
             Title = "Select grades for " + StatusTracker.CurrentSubject.Name;
+            BindingContext = StatusTracker.CurrentStandard;
         }
 
         private async void closeToolbarItem_Clicked(object sender, EventArgs e)
