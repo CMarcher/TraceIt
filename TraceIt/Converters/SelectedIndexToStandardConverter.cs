@@ -11,6 +11,23 @@ namespace TraceIt.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            switch ((Standard.Grade)value)
+            {
+                case Standard.Grade.NotAchieved:
+                    return 0;
+                case Standard.Grade.Achieved:
+                    return 1;
+                case Standard.Grade.Merit:
+                    return 2;
+                case Standard.Grade.Excellence:
+                    return 3;
+                default:
+                    return -1;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
             switch ((int)value)
             {
                 case 0:
@@ -23,23 +40,6 @@ namespace TraceIt.Converters
                     return Standard.Grade.Excellence;
                 default:
                     return null;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            switch((Standard.Grade)value)
-            {
-                case Standard.Grade.NotAchieved:
-                    return 0;
-                case Standard.Grade.Achieved:
-                    return 1;
-                case Standard.Grade.Merit:
-                    return 2;
-                case Standard.Grade.Excellence:
-                    return 3;
-                default:
-                    return -1;
             }
         }
     }
