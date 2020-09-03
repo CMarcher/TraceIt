@@ -85,17 +85,18 @@ namespace TraceIt.Services
 
         public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterByOption filterByOption)
         {
-            Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
-            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
-            Expression<Func<Standard, bool>> finalQuery;
+            //Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
+            //Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
+            //Expression<Func<Standard, bool>> finalQuery;
+            string whereClause;
 
             bool isSubjectQuery = filterByOption == FilterByOption.Subject;
             if (isSubjectQuery)
-                finalQuery = subjectQuery;
+                whereClause = " WHERE Subject = '" + parameter + "';";
             else
-                finalQuery = subfieldQuery;
+                whereClause = " WHERE Subfield = '" + parameter + "';";
 
-            var standards = await Database.Table<Standard>().Where(finalQuery).ToListAsync();
+            var standards = await Database.QueryAsync<Standard>("SELECT * FROM AssessmentStandards" + whereClause);
             return new ObservableCollection<Standard>(standards);
         }
 
