@@ -13,7 +13,6 @@ namespace TraceIt
     {
         public static NavigationService NavigationService { get; } = new NavigationService();
         public static DataService DataService { get; } = new DataService();
-        public static bool SaveData { get; private set; } = true;
 
         public App()
         {
