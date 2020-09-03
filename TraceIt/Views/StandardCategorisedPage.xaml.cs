@@ -45,9 +45,9 @@ namespace TraceIt.Views
         private void PushPage(object item)
         {
             if (item is SubfieldModel)
-                Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterByOption.Subfield));
+                Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterOption.Subfield));
             else if (item is Subject)
-                Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterByOption.Subject));
+                Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterOption.Subject));
             else if (item is Standard)
                 Navigation.PushAsync(new StandardDetailPage((Standard)item));
             else

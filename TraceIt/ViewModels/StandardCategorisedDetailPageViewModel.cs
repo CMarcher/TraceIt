@@ -18,7 +18,7 @@ namespace TraceIt.ViewModels
         public Command NavigateToDetailCommand { get; private set; }
         public Command ChangeStandardSelectionCommand { get; private set; }
 
-        public StandardCategorisedDetailPageViewModel(string parameter, DataService.FilterByOption filterByOption)
+        public StandardCategorisedDetailPageViewModel(string parameter, DataService.FilterOption filterByOption)
         {
             Task.Run(() => SetStandards(parameter, filterByOption)).Wait();
 
@@ -26,7 +26,7 @@ namespace TraceIt.ViewModels
             ChangeStandardSelectionCommand = new Command<Standard>(async (standard) => await ChangeStandardSelection(standard));
         }
 
-        async Task SetStandards(string parameter, DataService.FilterByOption filterByOption) =>
+        async Task SetStandards(string parameter, DataService.FilterOption filterByOption) =>
             Standards = await App.DataService.GetCategorisedStandardsAsync(
                               parameter, filterByOption);
         

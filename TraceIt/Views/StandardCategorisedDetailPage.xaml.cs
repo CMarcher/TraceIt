@@ -18,7 +18,7 @@ namespace TraceIt.Views
     {
         StandardCategorisedDetailPageViewModel ViewModel;
 
-        public StandardCategorisedDetailPage(string parameter, DataService.FilterByOption filterByOption)
+        public StandardCategorisedDetailPage(string parameter, DataService.FilterOption filterByOption)
         {
             InitializeComponent();
             ViewModel = new StandardCategorisedDetailPageViewModel(parameter, filterByOption);
