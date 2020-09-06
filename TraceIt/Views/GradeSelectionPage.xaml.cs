@@ -16,12 +16,27 @@ namespace TraceIt.Views
         public GradeSelectionPage()
         {
             InitializeComponent();
-            Title = "Select grades for " + StatusTracker.CurrentSubject.Name;
+            Title = "Select grades for " + StandardName;
         }
 
         private async void closeToolbarItem_Clicked(object sender, EventArgs e)
         {
+            MessagingCenter.Send(this, "Update standard");
+
             await Navigation.PopModalAsync();
+        }
+
+        public string StandardName
+        {
+            get
+            {
+                var standard = StatusTracker.CurrentStandard;
+
+                if (standard.StandardType == "A")
+                    return standard.SubjectReference;
+                else
+                    return standard.Code.ToString();
+            }
         }
     }
 }
