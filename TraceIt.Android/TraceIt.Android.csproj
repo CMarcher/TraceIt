@@ -75,6 +75,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>18.2.0.56</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar">
+      <Version>18.2.0.56</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfTabView">
       <Version>18.2.0.56</Version>
     </PackageReference>
