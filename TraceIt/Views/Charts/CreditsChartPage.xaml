@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,27 +9,18 @@ xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart
              x:Class="TraceIt.Views.Charts.CreditsChartPage">
 
     <ContentView.Content>
-        <Frame BackgroundColor="#002147" Style="{DynamicResource primaryFrameStyle}" HasShadow="False" Margin="15, 5">
-            <chart:SfChart>
-                <chart:SfChart.Title>
-                    <chart:ChartTitle Text="Chart" TextColor="White"/>
-                </chart:SfChart.Title>
-                <chart:SfChart.PrimaryAxis>
-                    <chart:NumericalAxis>
-                        <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="X Axis" TextColor="White"/>
-                        </chart:NumericalAxis.Title>
-                    </chart:NumericalAxis>
-                </chart:SfChart.PrimaryAxis>
-                <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis>
-                        <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="Y Axis" TextColor="White"/>
-                        </chart:NumericalAxis.Title>
-                    </chart:NumericalAxis>
-                </chart:SfChart.SecondaryAxis>
-                <chart:ColumnSeries ItemsSource="{Binding Data}" YBindingPath="YValue" XBindingPath="XValue" Color="White" StrokeColor="White"/>
-            </chart:SfChart>
+        <Frame Style="{DynamicResource listItemFrame}" HasShadow="False" Margin="15, 15">
+            
+            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="27" Maximum="60" 
+                                               SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
+                                               ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange">
+                
+                <progressbar:SfCircularProgressBar.Content>
+                    <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
+                           TextColor="White" FontSize="40" FontAttributes="Italic, Bold"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                </progressbar:SfCircularProgressBar.Content>
+            </progressbar:SfCircularProgressBar>
         </Frame>
     </ContentView.Content>
     
