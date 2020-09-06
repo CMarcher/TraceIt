@@ -11,6 +11,7 @@ using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.Buttons;
+using Syncfusion.XForms.iOS.ProgressBar;
 
 namespace TraceIt.iOS
 {
@@ -33,6 +34,9 @@ namespace TraceIt.iOS
             Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();
+            SfSwitchRenderer.Init();
+            SfLinearProgressBarRenderer.Init();
+            SfCircularProgressBarRenderer.Init();
             SfButtonRenderer.Init();
             SfGradientViewRenderer.Init();
             SfTabViewRenderer.Init();
