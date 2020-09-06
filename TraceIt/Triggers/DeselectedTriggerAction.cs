@@ -28,7 +28,7 @@ namespace TraceIt.Triggers
             var icon = new FontImageSource()
             {
                 FontFamily = "PrimaryIcons",
-                Glyph = "\ue802",
+                Glyph = "\ue804",
                 Color = Color.Black
             };
 
