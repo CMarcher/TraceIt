@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.App"
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
@@ -15,15 +16,16 @@
             
             <!--Fonts-->
             <x:String x:Key="Tick">&#xe800;</x:String>
-            <x:String x:Key="Home">&#xe801;</x:String>
-            <x:String x:Key="QuestionMark">&#xf128;</x:String>
-            <x:String x:Key="Plus">&#xe802;</x:String>
-            <x:String x:Key="Cross">&#xe803;</x:String>
+            <x:String x:Key="Home">&#xe808;</x:String>
+            <x:String x:Key="QuestionMark">&#xf29c;</x:String>
+            <x:String x:Key="Plus">&#xe804;</x:String>
+            <x:String x:Key="Cross">&#xe806;</x:String>
             <x:String x:Key="Trash">&#xf1f8;</x:String>
-            <x:String x:Key="Pencil">&#xe804;</x:String>
-            <x:String x:Key="Cog">&#xe805;</x:String>
+            <x:String x:Key="Pencil">&#xe805;</x:String>
+            <x:String x:Key="Cog">&#xe802;</x:String>
             <x:String x:Key="Safari">&#xf267;</x:String>
-            <x:String x:Key="Chart">&#xe806;</x:String>
+            <x:String x:Key="Chart">&#xe803;</x:String>
+            <x:String x:Key="Virus">&#xe801;</x:String>
 
             <Style TargetType="Button">
                 <Setter Property="CornerRadius" Value="25"/>
@@ -82,19 +84,6 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property="HasShadow" Value="False"/>
-            </Style>
-
-            <Style TargetType="gradient:SfGradientView" x:Key="subjectItemGradient">
-                <Setter Property="BackgroundBrush">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#150B47" Offset="0"/>
-                                <gradient:SfGradientStop Color="#04020E" Offset="1"/>
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
             </Style>
 
             <Style TargetType="Button:SfButton" x:Key="subjectButtonGradient">
