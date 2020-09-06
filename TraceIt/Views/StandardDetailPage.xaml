@@ -38,21 +38,21 @@
 
                     <Label Text="{Binding Title, StringFormat='Title: {0}'}"/>
 
-                    <Label Text="{Binding Subject_Reference, StringFormat='Subject Reference: {0}'}"/>
+                    <Label Text="{Binding SubjectReference, StringFormat='Subject Reference: {0}'}"/>
 
                     <Label Text="{Binding Credits, StringFormat='Credits: {0}'}"/>
 
                     <Label Text="{Binding Level, StringFormat='Level: {0}'}"/>
 
-                    <Label Text="{Binding Standard_Type, StringFormat='Standard Type: {0}'}"/>
+                    <Label Text="{Binding StandardType, StringFormat='Standard Type: {0}'}"/>
 
-                    <Label Text="{Binding Assessment_Type, StringFormat='Assessment Type: {0}'}"/>
+                    <Label Text="{Binding AssessmentType, StringFormat='Assessment Type: {0}'}"/>
 
                     <Label Text="{Binding CurrentVersion, StringFormat='Version: {0}'}"/>
 
                     <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
 
-                    <Label Text="{Binding Expiry_Date, StringFormat='Expiry Date: {0}'}"/>
+                    <Label Text="{Binding ExpiryDate, StringFormat='Expiry Date: {0}'}"/>
 
                     <Button Text="Load PDF" TextColor="White"
                         FontAttributes="Bold" BackgroundColor="#00002B"
