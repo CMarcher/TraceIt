@@ -3,15 +3,184 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.EndorsementsChartPage">
-    
+
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Frame Style="{DynamicResource listItemFrame}" Margin="15">
+            <Frame.Resources>
+                <converters:IsToggledToMaximumConverter x:Key="isToggledConverter"/>
+            </Frame.Resources>
+            <ScrollView>
+                <StackLayout VerticalOptions="StartAndExpand"
+                         Padding="40, 0" Spacing="20">
+                    <StackLayout.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="baseProgressBar">
+                                <Setter Property="Minimum" Value="0"/>
+                                <Setter Property="HeightRequest" Value="{Binding Source={RelativeSource Self}, Path=TrackHeight}"/>
+                                <Setter Property="SegmentCount" Value="{Binding Source={RelativeSource Self}, Path=Maximum}"/>
+                                <Setter Property="TrackColor" Value="#303030"/>
+                            </Style>
+
+                            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="subjectProgressBar" 
+                               BasedOn="{StaticResource baseProgressBar}">
+                                <Setter Property="TrackHeight" Value="30"/>
+                                <Setter Property="Maximum">
+                                    <Setter.Value>
+                                        <Binding Source="{x:Reference covidSwitch}"
+                                             Path="IsOn"
+                                             ConverterParameter="Subject">
+                                            <Binding.Converter>
+                                                <converters:IsToggledToMaximumConverter/>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+
+                            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="levelProgressBar"
+                               BasedOn="{StaticResource baseProgressBar}">
+                                <Setter Property="TrackHeight" Value="70"/>
+                                <Setter Property="Maximum">
+                                    <Setter.Value>
+                                        <Binding Source="{x:Reference covidSwitch}"
+                                             Path="IsOn"
+                                             ConverterParameter="Level">
+                                            <Binding.Converter>
+                                                <converters:IsToggledToMaximumConverter/>
+                                            </Binding.Converter>
+                                        </Binding>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+
+                            <Style TargetType="Label" x:Key="baseLabelStyle">
+                                <Setter Property="TextColor" Value="White"/>
+                            </Style>
+
+                            <Style TargetType="Label" x:Key="headerLabelStyle"
+                               BasedOn="{StaticResource baseLabelStyle}">
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                            </Style>
+
+                            <Style TargetType="Frame" x:Key="progressBarFrame">
+                                <Setter Property="HasShadow" Value="False"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="IsClippedToBounds" Value="True"/>
+                                <Setter Property="CornerRadius" Value="8"/>
+                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </StackLayout.Resources>
+
+                    <StackLayout>
+
+                        <Label Text="COVID-19 Settings" FontAttributes="Italic"
+                           Style="{StaticResource baseLabelStyle}"/>
+                        <buttons:SfSwitch x:Name="covidSwitch"
+                                      HorizontalOptions="Start" Padding="0, 0, 0, 20"
+                                      VisualType="Cupertino">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup  x:Name="CommonStates">
+                                    <VisualState x:Name="On">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:DefaultSwitchSettings x:TypeArguments="buttons:OnState" ThumbColor="White" 
+                                                                               TrackBorderColor="Transparent" TrackColor="Orange">
+                                                        <buttons:DefaultSwitchSettings.ThumbImageSource>
+                                                            <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Virus}" Color="Orange"/>
+                                                        </buttons:DefaultSwitchSettings.ThumbImageSource>
+                                                    </buttons:DefaultSwitchSettings>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Off">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:DefaultSwitchSettings x:TypeArguments="buttons:OffState" ThumbColor="Orange"
+                                                                               TrackColor="White" ThumbBorderColor="Transparent"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </buttons:SfSwitch>
+
+                        <Label Text="Level 1 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="5" ProgressColor="Orange"
+                                                     Style="{StaticResource levelProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Level 2 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="3" ProgressColor="Orange"
+                                                     Style="{StaticResource levelProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout Padding="0, 0, 0, 30">
+                        <Label Text="Level 3 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="32" ProgressColor="Orange"
+                                                     Style="{StaticResource levelProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Subject Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="11" ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Subject Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="6" ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Subject Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="8" ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Subject Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="5" ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Subject Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                        <Frame Style="{StaticResource progressBarFrame}">
+                            <progressbar:SfLinearProgressBar Progress="10" ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"/>
+                        </Frame>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+        </Frame>
     </ContentView.Content>
-    
+
 </ContentView>
