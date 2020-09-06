@@ -18,7 +18,9 @@ namespace TraceIt.ViewModels
         {
             Standard = StatusTracker.CurrentStandard;
 
-            
+            MessagingCenter.Subscribe<GradeSelectionPage>(this, "Update standard",
+                async (sender) => await UpdateStandard(Standard)
+                );
         }
 
         async Task UpdateStandard(Standard standard) => await App.DataService.UpdateStandardAsync(standard);
