@@ -183,13 +183,13 @@ namespace TraceIt.Services
 
         public async Task<Tuple<int, int>> GetAchievedAndTotalCreditsAsync()
         {
-            var total = await Database.QueryAsync<int>("SELECT Sum(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = '1'");
+            var total = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1");
 
-            var achieved = await Database.QueryAsync<int>("SELECT Sum(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = '1' AND FinalGrade > 0");
+            var achieved = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade > 0");
 
-            return new Tuple<int, int>(total[0], achieved[0]);
+            return new Tuple<int, int>(total, achieved);
         }
 
     }
