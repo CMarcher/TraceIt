@@ -2,16 +2,22 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.CreditsChartPage">
 
+    <ContentView.BindingContext>
+        <viewmodels:CreditsChartPageViewModel/>
+    </ContentView.BindingContext>
+    
     <ContentView.Content>
         <Frame Style="{DynamicResource listItemFrame}" HasShadow="False" Margin="15, 15">
             
-            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="27" Maximum="60" 
+            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="{Binding AchievedCredits}" 
+                                               Maximum="{Binding TotalCredits}" 
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
                                                ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange">
                 
