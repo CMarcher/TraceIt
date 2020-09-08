@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Views;
 using Xamarin.Forms;
+using TraceIt.Services;
 
 namespace TraceIt.ViewModels
 {
@@ -34,9 +35,7 @@ namespace TraceIt.ViewModels
         public CreditsChartPageViewModel()
         {
             Task.Run(SetCredits).Wait();
-
-            MessagingCenter.Subscribe<GradeSelectionPage>(this, "Update standard",
-                async (sender) => await SetCredits());
+            SubscribeToMessage();
         }
 
         async Task SetCredits()
@@ -44,6 +43,12 @@ namespace TraceIt.ViewModels
             var credits = await App.DataService.GetAchievedAndTotalCreditsAsync();
             TotalCredits = credits.Item1;
             AchievedCredits = credits.Item2;
+        }
+
+        void SubscribeToMessage()
+        {
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.UpdateStandard,
+                async (sender) => await SetCredits());
         }
     }
 }
