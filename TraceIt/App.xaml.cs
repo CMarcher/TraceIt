@@ -8,11 +8,12 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("primary-icons.ttf", Alias = "PrimaryIcons")]
 namespace TraceIt
 {
-    
+
     public partial class App : Application
     {
         public static NavigationService NavigationService { get; } = new NavigationService();
         public static DataService DataService { get; } = new DataService();
+        public static MessagingService MessagingService { get; } = new MessagingService();
 
         public App()
         {
