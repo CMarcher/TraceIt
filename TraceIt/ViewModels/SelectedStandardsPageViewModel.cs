@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Models;
 using TraceIt.Utilities;
+using TraceIt.Services;
 using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
@@ -25,13 +26,10 @@ namespace TraceIt.ViewModels
         public SelectedStandardsPageViewModel()
         {
             Standards = new ObservableCollection<Standard>();
-
             Task.Run(SetStandards).Wait();
 
-            MessagingCenter.Subscribe<StandardCategorisedDetailPageViewModel>(this, "Update standards", (sender) =>
-            {
-                Task.Run(SetStandards);
-            });
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.UpdateStandard, 
+                (sender) => Task.Run(SetStandards));
         }
 
         async Task SetStandards() => Standards = await App.DataService.GetSelectedStandards(StatusTracker.CurrentSubject.Name);
