@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Utilities;
+using TraceIt.Services;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,7 +22,7 @@ namespace TraceIt.Views
 
         private async void closeToolbarItem_Clicked(object sender, EventArgs e)
         {
-            MessagingCenter.Send(this, "Update standard");
+            App.MessagingService.Send(MessagingService.MessageType.UpdateStandard);
 
             await Navigation.PopModalAsync();
         }

@@ -38,7 +38,7 @@ namespace TraceIt.ViewModels
             standard.Selected = HandleSelection(standard);
             await App.DataService.UpdateStandardAsync(standard);
 
-            MessagingCenter.Send(this, "Update standards");
+            App.MessagingService.Send(MessagingService.MessageType.UpdateStandard);
         }
 
         bool HandleSelection(Standard standard)
