@@ -28,7 +28,7 @@ namespace TraceIt.ViewModels
             Standards = new ObservableCollection<Standard>();
             Task.Run(SetStandards).Wait();
 
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.UpdateStandard, 
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards, 
                 (sender) => Task.Run(SetStandards));
         }
 
