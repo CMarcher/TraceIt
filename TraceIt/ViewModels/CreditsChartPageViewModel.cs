@@ -47,7 +47,7 @@ namespace TraceIt.ViewModels
 
         void SubscribeToMessage()
         {
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.UpdateStandard,
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
                 async (sender) => await SetCredits());
         }
     }
