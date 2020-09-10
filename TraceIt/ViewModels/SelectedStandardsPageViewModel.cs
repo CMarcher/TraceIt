@@ -29,7 +29,7 @@ namespace TraceIt.ViewModels
             Task.Run(SetStandards).Wait();
 
             App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards, 
-                (sender) => Task.Run(SetStandards));
+                (sender) => Task.Run(SetStandards).Wait());
         }
 
         async Task SetStandards() => Standards = await App.DataService.GetSelectedStandards(StatusTracker.CurrentSubject.Name);
