@@ -13,17 +13,18 @@ namespace TraceIt.ViewModels
 {
     public class GradeSelectionPageViewModel : BaseViewModel
     {
-        public Standard Standard { get; private set; }
+        public Standard Standard { get; set; }
 
         public GradeSelectionPageViewModel()
         {
             Standard = StatusTracker.CurrentStandard;
 
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.UpdateStandard,
-                async (sender) => await UpdateStandard(Standard));
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard, (sender) =>
+                {
+                    Task.Run(Standard.PushChangesAsync).Wait();
+                    App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
+                });
         }
-
-        async Task UpdateStandard(Standard standard) => await App.DataService.UpdateStandardAsync(standard);
 
     }
 }
