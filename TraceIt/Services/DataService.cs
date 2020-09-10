@@ -128,10 +128,8 @@ namespace TraceIt.Services
         }
 
         public async Task UpdateStandardAsync(Standard standard)
-        {
-            await Database.UpdateAsync(standard);
-        }
-
+            => await Database.UpdateAsync(standard);
+        
         public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
         {
             var subjects = await Database.Table<Subject>()
@@ -151,11 +149,10 @@ namespace TraceIt.Services
         }
 
         public async Task UpdateSubjectAsync(Subject subject)
-        {
-            await Database.UpdateAsync(subject);
-        }
-
-        public async Task UpdateSubjectsAsync(List<Subject> subjects) => await Database.UpdateAllAsync(subjects);
+            => await Database.UpdateAsync(subject);
+        
+        public async Task UpdateSubjectsAsync(List<Subject> subjects)
+            => await Database.UpdateAllAsync(subjects);
 
         public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
