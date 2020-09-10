@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using SQLite;
 
 namespace TraceIt.Models
@@ -9,6 +10,7 @@ namespace TraceIt.Models
     [Table("AssessmentStandards")]
     public class Standard : BaseModel
     {
+        #region Properties
         [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
 
@@ -131,5 +133,14 @@ namespace TraceIt.Models
                 OnPropertyChanged(nameof(FinalGrade));
             }
         }
+        #endregion
+
+        #region Methods
+        public async Task PushChangesAsync()
+        {
+            await App.DataService?.UpdateStandardAsync(this);
+        }
+        
+        #endregion
     }
 }
