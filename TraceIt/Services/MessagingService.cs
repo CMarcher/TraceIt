@@ -8,11 +8,13 @@ namespace TraceIt.Services
 {
     public class MessagingService
     {
-        string UpdateStandardMessage = "Update standard";
+        string PushStandardMessage = "Push standard changes";
+        string RefreshStandardsSourceMessage = "Refresh standards source";
 
         public enum MessageType
         {
-            UpdateStandard
+            PushStandard,
+            RefreshStandards
         }
 
         public MessagingService()
@@ -23,20 +25,23 @@ namespace TraceIt.Services
         public void Send(MessageType message) 
             => MessagingCenter.Send(this, GetMessage(message));
         
-
         public void Subscribe(object subscriber, MessageType message, Action<MessagingService> action)
             => MessagingCenter.Subscribe(subscriber, GetMessage(message), action);
         
-
         public string GetMessage(MessageType message)
         {
             string finalMessage;
 
             switch (message)
             {
-                case MessageType.UpdateStandard:
-                    finalMessage = UpdateStandardMessage;
+                case MessageType.PushStandard:
+                    finalMessage = PushStandardMessage;
                     break;
+
+                case MessageType.RefreshStandards:
+                    finalMessage = RefreshStandardsSourceMessage;
+                    break;
+
                 default:
                     finalMessage = null;
                     break;
