@@ -10,11 +10,13 @@ namespace TraceIt.Services
     {
         string PushStandardMessage = "Push standard changes";
         string RefreshStandardsSourceMessage = "Refresh standards source";
+        string RefreshEndorsementsMessage = "Refresh endorsements";
 
         public enum MessageType
         {
             PushStandard,
-            RefreshStandards
+            RefreshStandards,
+            RefreshEndorsements
         }
 
         public MessagingService()
@@ -40,6 +42,10 @@ namespace TraceIt.Services
 
                 case MessageType.RefreshStandards:
                     finalMessage = RefreshStandardsSourceMessage;
+                    break;
+
+                case MessageType.RefreshEndorsements:
+                    finalMessage = RefreshEndorsementsMessage;
                     break;
 
                 default:
