@@ -107,7 +107,7 @@ namespace TraceIt.Services
             return standard;
         }
 
-        public async Task<ObservableCollection<Standard>> GetSelectedStandards(string subjectName)
+        public async Task<ObservableCollection<Standard>> GetStandardsForSubjectAsync(string subjectName)
         {
             var list = await Database.QueryAsync<Standard>(
                 "SELECT * FROM AssessmentStandards " +
@@ -116,6 +116,13 @@ namespace TraceIt.Services
                 );
 
             return list.ToObservableCollection<Standard>();
+        }
+
+        public async Task<List<Standard>> GetSelectedStandardsAsync()
+        {
+            return await Database.Table<Standard>()
+                .Where(standard => standard.Selected == true)
+                .ToListAsync();
         }
 
         public async Task<List<Standard>> GetMatchingStandards(string searchQuery)
