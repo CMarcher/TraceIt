@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using SQLite;
+using TraceIt.Services;
 
 namespace TraceIt.Models
 {
@@ -36,8 +37,15 @@ namespace TraceIt.Models
         [NotNull]
         public string Title { get; set; }
 
+        public enum NCEALevel
+        {
+            One = 1,
+            Two,
+            Three
+        }
+
         [NotNull]
-        public int Level { get; set; }
+        public NCEALevel Level { get; set; }
 
         [NotNull]
         public int Credits { get; set; }
@@ -136,11 +144,14 @@ namespace TraceIt.Models
         #endregion
 
         #region Methods
-        public async Task PushChangesAsync()
+        public async Task PushChangesAsync(bool refreshRequired)
         {
             await App.DataService?.UpdateStandardAsync(this);
+
+            if (refreshRequired)
+                App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
         }
-        
+
         #endregion
     }
 }
