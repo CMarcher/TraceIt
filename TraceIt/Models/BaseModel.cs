@@ -16,5 +16,11 @@ namespace TraceIt.Models
 
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public void SetProperty<T>(ref T property, T value, string propertyName)
+        {
+            property = value;
+            OnPropertyChanged(propertyName);
+        }
     }
 }
