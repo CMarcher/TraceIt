@@ -58,6 +58,19 @@
                 </Setter>
             </Style>
 
+            <Style TargetType="StackLayout" x:Key="secondaryGradientStackLayout">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#150B47" Offset="0.1"/>
+                                <GradientStop Color="#04020E" Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style TargetType="AbsoluteLayout" x:Key="gradientAbsoluteLayout">
                 <Setter Property="Background">
                     <Setter.Value>
