@@ -12,7 +12,7 @@ namespace TraceIt.Models
 
         public DataRepository()
         {
-            Task.Run(InitialiseSubjects).Wait();
+            Task.Run(InitialiseSubjects);
         }
 
         async Task InitialiseSubjects()
