@@ -34,54 +34,54 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <StackLayout Style="{DynamicResource secondaryGradientStackLayout}">
 
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
-
-            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
-
-                <Frame BackgroundColor="#002147" CornerRadius="0" Padding="5, 10" Margin="0"
+            <Frame BackgroundColor="#002147" CornerRadius="0" Padding="5, 10" Margin="0"
                        HasShadow="False">
-                    
-                    <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
+
+                <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
                                             SegmentPadding="5" SegmentHeight="35" FontSize="15">
 
-                        <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                            <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
-                        </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
 
-                        <buttons:SfSegmentedControl.ItemsSource>
-                            <system:List x:TypeArguments="x:String">
-                                <x:String>Credits</x:String>
-                                <x:String>Endorsements</x:String>
-                                <x:String>Overall</x:String>
-                            </system:List>
-                        </buttons:SfSegmentedControl.ItemsSource>
-                    </buttons:SfSegmentedControl>
-                </Frame>
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>Credits</x:String>
+                            <x:String>Endorsements</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+            </Frame>
 
-                <tabs:SfTabView VerticalOptions="FillAndExpand" BackgroundColor="Transparent"
-                                DisplayMode="NoHeader" x:Name="chartTabs" SelectionChanged="chartTabs_SelectionChanged">
+            <CarouselView x:Name="tabsCarouselView" PositionChanged="tabsCarouselView_PositionChanged"
+                          IndicatorView="indicatorView">
 
-                    <tabs:SfTabItem Title="Credits">
-                        <tabs:SfTabItem.Content>
-                            <chart:CreditsChartPage/>
-                        </tabs:SfTabItem.Content>
-                    </tabs:SfTabItem>
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" SnapPointsAlignment="Center"/>
+                </CarouselView.ItemsLayout>
+                
+                <CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type ContentView}">
+                        <chart:CreditsChartPage/>
+                        <chart:EndorsementsChartPage/>
+                    </x:Array>
+                </CarouselView.ItemsSource>
 
-                    <tabs:SfTabItem Title="Endorsements">
-                        <tabs:SfTabItem.Content>
-                            <chart:EndorsementsChartPage/>
-                        </tabs:SfTabItem.Content>
-                    </tabs:SfTabItem>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Content="{Binding .}"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
 
-                    <tabs:SfTabItem Title="Overall">
-                        <tabs:SfTabItem.Content>
-                            <Label Text="Test"/>
-                        </tabs:SfTabItem.Content>
-                    </tabs:SfTabItem>
-                </tabs:SfTabView>
+            </CarouselView>
 
-            </StackLayout>
-        </AbsoluteLayout>
+            <IndicatorView x:Name="indicatorView" IndicatorColor="Gray" 
+                           SelectedIndicatorColor="White"
+                           HorizontalOptions="Center" IndicatorSize="10"
+                           Margin="0, 0, 0, 20"/>
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
