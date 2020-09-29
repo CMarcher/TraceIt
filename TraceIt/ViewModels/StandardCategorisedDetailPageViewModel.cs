@@ -36,9 +36,7 @@ namespace TraceIt.ViewModels
         async Task ChangeStandardSelection(Standard standard)
         {
             standard.Selected = HandleSelection(standard);
-            await standard.PushChangesAsync();
-
-            App.MessagingService.Send(MessagingService.MessageType.PushStandard);
+            await standard.PushChangesAsync(true);
         }
 
         bool HandleSelection(Standard standard)
