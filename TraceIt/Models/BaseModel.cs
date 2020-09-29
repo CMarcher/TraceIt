@@ -17,10 +17,10 @@ namespace TraceIt.Models
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void SetProperty<T>(ref T property, T value, string propertyName)
+        public void SetProperty<T, T2>(ref T property, T value, T2 publicProperty)
         {
             property = value;
-            OnPropertyChanged(propertyName);
+            OnPropertyChanged(nameof(publicProperty));
         }
     }
 }
