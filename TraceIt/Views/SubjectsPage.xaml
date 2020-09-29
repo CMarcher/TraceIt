@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
              xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects"
@@ -24,6 +25,10 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
+    <ContentPage.BindingContext>
+        <viewmodels:SubjectsPageViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White"/>
@@ -38,7 +43,8 @@
 
             <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                <xforms:SfListView x:Name="collectionViewSubjects" ItemSize="180" ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
+                <xforms:SfListView x:Name="collectionViewSubjects" AutoFitMode="Height" 
+                                   ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
                                    SelectionMode="None" ItemsSource="{Binding Subjects}">
 
                     <xforms:SfListView.LayoutManager>
@@ -48,31 +54,22 @@
                     <xforms:SfListView.ItemTemplate>
                         <DataTemplate>
                             <Frame Style="{DynamicResource listItemFrame}" Padding="0">
-                                <AbsoluteLayout HeightRequest="180">
+                                <StackLayout Padding="10, 13, 10, 20">
 
-                                    <Label Text="{Binding Name}"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
-                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" 
+                                           Margin="0, 0, 0, 12"/>
 
-                                    <Label Text="0 / 0 credits"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.35, 0.9, 0.2"/>
+                                    <Label Text="0 / 0 credits"/>
 
-                                    <Label Text="0 standards"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.53, 0.9, 0.2"/>
+                                    <Label Text="0 standards" Margin="0, 0, 0, 12"/>
 
                                     <Button:SfButton Text="View Info" CornerRadius="30"
-                                                     TextColor="Black"
-                                                     FontAttributes="Bold"
-                                                     FontSize="17"
-                                                     AbsoluteLayout.LayoutFlags="All"
-                                                     AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.7, 0.2"
-                                                     Style="{DynamicResource subjectButtonGradient}"
-                                                     Clicked="buttonViewInfo_Clicked"/>
+                                                     TextColor="Black" FontAttributes="Bold" 
+                                                     FontSize="17" Style="{DynamicResource subjectButtonGradient}"
+                                                     Clicked="buttonViewInfo_Clicked" HorizontalOptions="Center"
+                                                     WidthRequest="200" HeightRequest="40"/>
 
-                                </AbsoluteLayout>
+                                </StackLayout>
                             </Frame>
                         </DataTemplate>
                     </xforms:SfListView.ItemTemplate>

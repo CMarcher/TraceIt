@@ -15,13 +15,9 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubjectsPage : ContentPage
     {
-        SubjectsPageViewModel ViewModel;
         public SubjectsPage()
         {
             InitializeComponent();
-
-            ViewModel = new SubjectsPageViewModel();
-            BindingContext = ViewModel;
         }
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
