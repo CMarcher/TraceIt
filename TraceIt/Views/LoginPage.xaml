@@ -65,16 +65,8 @@
                      Spacing="10" Margin="0" Padding="0">
 
             <Frame Margin="0">
-                <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" BackgroundColor="Transparent">
-                    <controls:CustomEntry.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="0"/>
-                                <On Platform="Android" Value="0, -20"/>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </controls:CustomEntry.Margin>
-                </controls:CustomEntry>
+                <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" 
+                                      BackgroundColor="Transparent" Margin="{OnPlatform Android='0,-20', iOS=0}"/>
             </Frame>
 
             <Frame>
