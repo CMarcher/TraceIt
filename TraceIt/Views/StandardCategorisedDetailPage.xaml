@@ -21,7 +21,7 @@
 
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
-                               ItemSpacing="10" AutoFitMode="Height">
+                               ItemSpacing="10" AutoFitMode="DynamicHeight">
                 <xforms:SfListView.Padding>
                     <OnIdiom x:TypeArguments="Thickness" Phone="10" Tablet="25"/>
                 </xforms:SfListView.Padding>
@@ -34,7 +34,8 @@
                                 <Label Text="{Binding Code}" FontAttributes="Bold"/>
                                 <Label Text="{Binding Title}" FontAttributes="Italic"/>
                                 <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
-                                       Grid.Column="0" Grid.Row="2"/>
+                                       Grid.Column="0" Grid.Row="2"
+                                       IsVisible="{Binding Selected}"/>
 
                                 <Button x:Name="selectionButton"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
