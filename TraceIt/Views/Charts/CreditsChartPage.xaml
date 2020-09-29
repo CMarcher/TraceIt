@@ -14,8 +14,7 @@
     </ContentView.BindingContext>
     
     <ContentView.Content>
-        <Frame Style="{DynamicResource listItemFrame}" HasShadow="False" Margin="15, 15">
-            
+        <Frame HasShadow="False" Margin="15, 15" BackgroundColor="Transparent">
             <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="{Binding AchievedCredits}" 
                                                Maximum="{Binding TotalCredits}" 
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
