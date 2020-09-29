@@ -12,10 +12,10 @@ namespace TraceIt
 
     public partial class App : Application
     {
-        public static NavigationService NavigationService { get; } = new NavigationService();
-        public static DataService DataService { get; } = new DataService();
-        public static MessagingService MessagingService { get; } = new MessagingService();
-        public static DataRepository DataRepository { get; } = new DataRepository();
+        public static NavigationService NavigationService { get; private set; }
+        public static DataService DataService { get; private set; }
+        public static MessagingService MessagingService { get; private set; }
+        public static DataRepository DataRepository { get; private set; }
 
         public App()
         {
@@ -23,6 +23,10 @@ namespace TraceIt
             InitializeComponent();
 
             MainPage = new LoginPage();
+
+            DataService = new DataService();
+            DataRepository = new DataRepository();
+            MessagingService = new MessagingService();
         }
 
         protected override void OnStart()
