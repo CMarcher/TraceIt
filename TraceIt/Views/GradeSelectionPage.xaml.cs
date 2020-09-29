@@ -22,9 +22,8 @@ namespace TraceIt.Views
 
         private async void closeToolbarItem_Clicked(object sender, EventArgs e)
         {
-            App.MessagingService.Send(MessagingService.MessageType.PushStandard);
-
             await Navigation.PopModalAsync();
+            App.MessagingService.Send(MessagingService.MessageType.PushStandard);
         }
 
         public string StandardName
