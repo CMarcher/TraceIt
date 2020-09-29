@@ -18,20 +18,14 @@ namespace TraceIt.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubjectSelectionPage : ContentPage
     {
-        public SubjectSelectionPageViewModel ViewModel;
-
         public SubjectSelectionPage()
         {
             InitializeComponent();
-            ViewModel = new SubjectSelectionPageViewModel();
-            BindingContext = ViewModel;
-            subjectsListView.ItemsSource = ViewModel.subjects;
         }
 
         private async void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             await App.DataService.UpdateSubjectsAsync(GetSelectedItems());
-
             Application.Current.MainPage = new ShellHomePage();
         }
 

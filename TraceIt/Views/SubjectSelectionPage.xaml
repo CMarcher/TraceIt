@@ -5,13 +5,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage"
              xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              Title="Select your subjects">
 
     <ContentPage.Resources>
-
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="Header">
                 <Setter Property="FontSize">Large</Setter>
@@ -19,8 +19,11 @@
                 <Setter Property="TextColor">Black</Setter>
             </Style>
         </ResourceDictionary>
-
     </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodels:SubjectSelectionPageViewModel/>
+    </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="addButton" Clicked="addButton_Clicked">
@@ -46,10 +49,11 @@
 
                 <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
                                  SelectionMode="Multiple"
-                                 ItemSize="50"
                                  VerticalOptions="StartAndExpand"
                                  HorizontalOptions="FillAndExpand"
-                                 Padding="10, 0, 10, 0" Margin="0, 0, 0, 0">
+                                 Padding="10, 0" Margin="0"
+                                 AutoFitMode="Height"
+                                 ItemsSource="{Binding Subjects}">
 
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
@@ -62,7 +66,8 @@
                                 <StackLayout>
                                     <Label Text="{Binding Name}" TextColor="Black"
                                        FontSize="16"
-                                       VerticalOptions="CenterAndExpand"/>
+                                       VerticalOptions="CenterAndExpand"
+                                           Margin="8"/>
                                 </StackLayout>
 
                             </Frame>
