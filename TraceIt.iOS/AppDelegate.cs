@@ -30,7 +30,7 @@ namespace TraceIt.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Xamarin.Forms.Forms.SetFlags("Brush_Experimental");
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "CarouselView_Experimental");
             Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();
