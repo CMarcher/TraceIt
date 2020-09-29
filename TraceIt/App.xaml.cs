@@ -1,4 +1,5 @@
 ﻿using System;
+using TraceIt.Models;
 using TraceIt.Services;
 using TraceIt.Utilities;
 using TraceIt.Views;
@@ -14,6 +15,7 @@ namespace TraceIt
         public static NavigationService NavigationService { get; } = new NavigationService();
         public static DataService DataService { get; } = new DataService();
         public static MessagingService MessagingService { get; } = new MessagingService();
+        public static DataRepository DataRepository { get; } = new DataRepository();
 
         public App()
         {
