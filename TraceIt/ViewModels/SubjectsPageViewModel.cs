@@ -15,14 +15,11 @@ namespace TraceIt.ViewModels
 
         public SubjectsPageViewModel()
         {
-            Task.Run(SetSubjects).Wait();
+            SetSubjects();
         }
 
-        private async Task SetSubjects()
-        {
-            Subjects = await App.DataService.GetSelectedSubjectsAsync();
-        }
+        private void SetSubjects()
+            => Subjects = App.DataRepository.SelectedSubjects;
 
-        
     }
 }
