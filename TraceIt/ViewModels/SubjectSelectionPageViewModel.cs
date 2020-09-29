@@ -12,7 +12,7 @@ namespace TraceIt.ViewModels
 {
     public class SubjectSelectionPageViewModel
     {
-        public ObservableCollection<Subject> subjects { get; private set; } = new ObservableCollection<Subject>();
+        public ObservableCollection<Subject> Subjects { get; private set; } = new ObservableCollection<Subject>();
 
         public Command UpdateSubjectCommand { get; private set; }
 
@@ -23,14 +23,11 @@ namespace TraceIt.ViewModels
             Task.Run(SetSubjectsAsync).Wait();
         }
 
-        async Task SetSubjectsAsync() => subjects = await App.DataService.GetSubjectsAsync();
+        async Task SetSubjectsAsync() => Subjects = await App.DataService.GetSubjectsAsync();
 
         async Task UpdateSubjectAsync(Subject subject)
         {
-            if (subject.Selected == false)
-                subject.Selected = true;
-            else
-                subject.Selected = false;
+            subject.Selected = !subject.Selected;
 
             await App.DataService.UpdateSubjectAsync(subject);
         }
