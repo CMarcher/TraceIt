@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
-             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:list="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
@@ -38,104 +38,84 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <StackLayout Padding="14, 14, 14, 14" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+        <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
 
-                <xforms:SfListView x:Name="selectedStandardsCollectionView" ItemSize="150" ItemSpacing="10"
-                                   FooterSize="75" AllowSwiping="True" ItemsSource="{Binding Standards}"
-                                   SelectionMode="None">
+            <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="10" 
+                             AllowSwiping="True" ItemsSource="{Binding Standards}" 
+                             SelectionMode="None" Margin="10"
+                             AutoFitMode="Height">
 
-                    <xforms:SfListView.LayoutManager>
-                        <xforms:LinearLayout/>
-                    </xforms:SfListView.LayoutManager>
+                <list:SfListView.LayoutManager>
+                    <list:LinearLayout/>
+                </list:SfListView.LayoutManager>
 
-                    <xforms:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Style="{DynamicResource listItemFrame}" Padding="0">
-                                <AbsoluteLayout HeightRequest="135">
+                <list:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{DynamicResource listItemFrame}" Padding="27">
+                            <StackLayout>
 
-                                    <Label Text="{Binding SubjectReference}"
-                                           HorizontalTextAlignment="Start"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
-                                           FontAttributes="Bold"/>
+                                <Label Text="{Binding SubjectReference}"
+                                       HorizontalTextAlignment="Start"
+                                       FontAttributes="Bold" Margin="0, 0, 0, 8"/>
 
-                                    <Label Text="{Binding Title}"
-                                           HorizontalTextAlignment="Start"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.55, 0.4, 0.9, 0.2"/>
+                                <Label Text="{Binding Title}"
+                                       HorizontalTextAlignment="Start"/>
 
-                                    <Label Text="{Binding Credits, StringFormat='{0} credits'}"
-                                           HorizontalTextAlignment="Start"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.55, 0.65, 0.9, 0.2"/>
+                                <Label Text="{Binding Credits, StringFormat='{0} credits'}"
+                                       HorizontalTextAlignment="Start" Margin="0, 0, 0, 10"/>
 
-                                    <Button x:Name="selectGradeButton" Text="{Binding FinalGrade, Converter={StaticResource gradeConverter}}"
-                                            TextColor="Black" FontAttributes="Bold" FontSize="Large"
-                                            AbsoluteLayout.LayoutFlags="All"
-                                            AbsoluteLayout.LayoutBounds="0.95, 0.40, 0.2, 0.3" 
-                                            Clicked="selectGradeButton_Clicked">
-                                        <Button.Background>
-                                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                                                <LinearGradientBrush.GradientStops>
-                                                    <GradientStop Color="#FFC400" Offset="0"/>
-                                                    <GradientStop Color="#FFA200" Offset="1"/>
-                                                </LinearGradientBrush.GradientStops>
-                                            </LinearGradientBrush>
-                                        </Button.Background>
-                                    </Button>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                                             Spacing="15">
+                                    <Frame IsClippedToBounds="True" Padding="0" CornerRadius="25">
+                                        <Button x:Name="selectGradeButton" Text="{Binding FinalGrade, Converter={StaticResource gradeConverter}}"
+                                        TextColor="Black" FontAttributes="Bold" 
+                                        FontSize="Large" Clicked="selectGradeButton_Clicked" 
+                                        HeightRequest="50" HorizontalOptions="StartAndExpand"
+                                        WidthRequest="150">
+                                            <Button.Background>
+                                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                    <LinearGradientBrush.GradientStops>
+                                                        <GradientStop Color="#FFC400" Offset="0"/>
+                                                        <GradientStop Color="#FFA200" Offset="1"/>
+                                                    </LinearGradientBrush.GradientStops>
+                                                </LinearGradientBrush>
+                                            </Button.Background>
+                                        </Button>
+                                    </Frame>
 
-                                        <Button:SfButton Text="More" CornerRadius="30"
-                                                     TextColor="Black"
-                                                     FontAttributes="Bold"
-                                                     FontSize="17"
-                                                     BorderColor="Transparent"
-                                                     AbsoluteLayout.LayoutFlags="All"
-                                                     AbsoluteLayout.LayoutBounds="0.95, 0.85, 0.3, 0.3"
-                                                     Clicked="buttonViewMore_Clicked"
-                                                     Style="{DynamicResource subjectButtonGradient}"/>
+                                    <Button:SfButton Text="More" CornerRadius="30"
+                                                     TextColor="Black" FontAttributes="Bold"
+                                                     FontSize="Large" BorderColor="Transparent"
+                                                     Clicked="buttonViewMore_Clicked" Style="{DynamicResource subjectButtonGradient}"
+                                                     WidthRequest="150" HorizontalOptions="Fill" 
+                                                     HeightRequest="50" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </list:SfListView.ItemTemplate>
 
-                                </AbsoluteLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </xforms:SfListView.ItemTemplate>
+                <list:SfListView.FooterTemplate>
+                    <DataTemplate>
 
-                    <xforms:SfListView.RightSwipeTemplate>
-                        <DataTemplate>
-                            <Grid BackgroundColor="Red" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0" HeightRequest="150">
-                                <Grid VerticalOptions="Center" HorizontalOptions="Center">
-                                    <Label Text="REMOVE" FontSize="24" FontAttributes="Bold"
-                                           Grid.Column="0" Grid.Row="0"/>
-                                </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </xforms:SfListView.RightSwipeTemplate>
+                        <Button Text="Add Standard" FontSize="26"
+                                FontAttributes="Bold" TextColor="Black"
+                                BackgroundColor="Transparent" Clicked="buttonAdd_Clicked"
+                                Padding="20">
 
-                    <xforms:SfListView.FooterTemplate>
-                        <DataTemplate>
-
-                            <Button Text="Add Standard"
-                                    FontSize="26"
-                                    FontAttributes="Bold"
-                                    TextColor="Black"
-                                    BackgroundColor="Transparent"
-                                    Clicked="buttonAdd_Clicked">
-
-                                <Button.Background>
-                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                                        <LinearGradientBrush.GradientStops>
-                                            <GradientStop Color="#FFC400" Offset="0"/>
-                                            <GradientStop Color="#FFA200" Offset="1"/>
-                                        </LinearGradientBrush.GradientStops>
-                                    </LinearGradientBrush>
-                                </Button.Background>
-                            </Button>
-                        </DataTemplate>
-                    </xforms:SfListView.FooterTemplate>
-                </xforms:SfListView>
-            </StackLayout>
-        </AbsoluteLayout>
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Color="#FFC400" Offset="0"/>
+                                        <GradientStop Color="#FFA200" Offset="1"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </DataTemplate>
+                </list:SfListView.FooterTemplate>
+            </list:SfListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
