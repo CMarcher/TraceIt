@@ -27,6 +27,25 @@
             <x:String x:Key="Chart">&#xe803;</x:String>
             <x:String x:Key="Virus">&#xe801;</x:String>
 
+            <LinearGradientBrush x:Key="LightBlueToDarkMain">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#4B7BFF" Offset="0.1"/>
+                    <GradientStop Color="#071D57" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1" x:Key="BlueToDarkGradient">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#001360" Offset="0"/>
+                    <GradientStop Color="#02000A" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1" x:Key="OrangeToLightGradient">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#E9A400" Offset="0"/>
+                    <GradientStop Color="#FFCC00" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
             <Style TargetType="Button">
                 <Setter Property="CornerRadius" Value="25"/>
             </Style>
@@ -86,34 +105,25 @@
 
             <Style TargetType="Frame" x:Key="listItemFrame">
                 <Setter Property="CornerRadius" Value="28"/>
+                <Setter Property="Background" Value="{DynamicResource BlueToDarkGradient}"/>
+                <Setter Property="HasShadow" Value="False"/>
+            </Style>
+
+            <Style TargetType="Button" x:Key="subjectButtonGradient">
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                             <LinearGradientBrush.GradientStops>
-                                <GradientStop Color="#150B47" Offset="0.1"/>
-                                <GradientStop Color="#04020E" Offset="1"/>
+                                <GradientStop Color="#FFC400" Offset="0.0"/>
+                                <GradientStop Color="#FFA200" Offset="1"/>
                             </LinearGradientBrush.GradientStops>
                         </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="HasShadow" Value="False"/>
-            </Style>
-
-            <Style TargetType="Button:SfButton" x:Key="subjectButtonGradient">
-                <Setter Property="BackgroundGradient">
-                    <Setter.Value>
-                        <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
-                            <gradient:SfLinearGradientBrush.GradientStops>
-                                <gradient:SfGradientStop Color="#FFC400" Offset="0.0"/>
-                                <gradient:SfGradientStop Color="#FFA200" Offset="1"/>
-                            </gradient:SfLinearGradientBrush.GradientStops>
-                        </gradient:SfLinearGradientBrush>
                     </Setter.Value>
                 </Setter>
             </Style>
 
             <Style TargetType="Frame" x:Key="primaryFrameStyle">
-                <Setter Property="BackgroundColor" Value="#002147"/>
+                <Setter Property="Background" Value="{DynamicResource BlueToDarkGradient}"/>
                 <Setter Property="CornerRadius" Value="30"/>
                 <Setter Property="Margin" Value="15"/>
                 <Setter Property="Padding" Value="10"/>
