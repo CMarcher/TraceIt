@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>TraceIt</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.TraceIt</string>
+	<string>com.codespace.TraceIt</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
