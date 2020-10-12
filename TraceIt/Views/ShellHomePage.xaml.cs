@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,15 +16,11 @@ namespace TraceIt.Views
     {
         public ShellHomePage()
         {
+            var tmr = Stopwatch.StartNew();
             InitializeComponent();
-            RegisterRoutes();
+            tmr.Stop();
+            Debug.WriteLine("Shell took " + tmr.ElapsedMilliseconds + "milliseconds");
         }
 
-        private void RegisterRoutes()
-        {
-            Routing.RegisterRoute("subjectsPage", typeof(SubjectsPage));
-            Routing.RegisterRoute("creditsChartPage", typeof(CreditsChartPage));
-            Routing.RegisterRoute("endorsementsChartPage", typeof(CreditsChartPage));
-        }
     }
 }
