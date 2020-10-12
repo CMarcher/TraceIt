@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:custom="clr-namespace:TraceIt.Controls"
+             xmlns:models="clr-namespace:TraceIt.Models"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardDetailPage"
              Title="Standard Details"
@@ -11,58 +12,214 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label">
-                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All"/>
-                <Setter Property="AnchorX" Value="0"/>
-                <Setter Property="TextColor" Value="White"/>
+
+            <Style TargetType="Label" x:Key="baseHeaderLabel">
+                <Setter Property="TextTransform" Value="Uppercase"/>
+                <Setter Property="FontAttributes" Value="Bold, Italic"/>
                 <Setter Property="FontSize" Value="Large"/>
-                <Setter Property="BackgroundColor" Value="#000720"/>
-                <Setter Property="Padding" Value="8, 8"/>
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
+
+            <Style TargetType="Label" x:Key="baseBodyLabel">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="32"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="blueHeaderLabel"
+                   BasedOn="{StaticResource baseHeaderLabel}">
+                <Setter Property="TextColor" Value="#E3E3E3"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="blueBodyLabel"
+                   BasedOn="{StaticResource baseBodyLabel}">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="orangeHeaderLabel"
+                   BasedOn="{StaticResource baseHeaderLabel}">
+                <Setter Property="TextColor" Value="#3E3E3E"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="orangeBodyLabel"
+                   BasedOn="{StaticResource baseBodyLabel}">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="baseFrame">
+                <Setter Property="CornerRadius" Value="25"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="15"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="blueFrame" BasedOn="{StaticResource baseFrame}">
+                <Setter Property="Background" Value="{DynamicResource BlueToDarkGradient}"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="orangeFrame" BasedOn="{StaticResource baseFrame}">
+                <Setter Property="Background" Value="{DynamicResource OrangeToLightGradient}"/>
+            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}"
+                        x:DataType="models:Standard">
 
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
-                <StackLayout AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.8, 0.5"
-                         VerticalOptions="FillAndExpand"
-                         HorizontalOptions="FillAndExpand">
+                <Grid VerticalOptions="FillAndExpand"
+                      HorizontalOptions="FillAndExpand"
+                      ColumnDefinitions="1*, 1*" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, 80" 
+                      Padding="{OnIdiom Phone='10, 20', Tablet='40, 20'}" RowSpacing="{OnIdiom Phone=10, Tablet=20}" 
+                      ColumnSpacing="{OnIdiom Phone=10, Tablet=20}">
 
-                    <Label Text="{Binding Code, StringFormat='Code: {0}'}"/>
+                    <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="0" Grid.Row="0">
+                        <StackLayout>
+                            <Label Text="Code" Style="{StaticResource blueHeaderLabel}"/>
+                            <Label Text="{Binding Code}" Style="{StaticResource blueBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding Title, StringFormat='Title: {0}'}"/>
+                    <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="1" Grid.Row="0">
+                        <StackLayout>
+                            <Label Text="Credits" Style="{StaticResource blueHeaderLabel}"/>
+                            <Label Text="{Binding Credits}" Style="{StaticResource blueBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding SubjectReference, StringFormat='Subject Reference: {0}'}"/>
+                    <Frame Style="{StaticResource orangeFrame}"
+                           Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
+                        <StackLayout>
+                            <Label Text="Subject Reference" Style="{StaticResource orangeHeaderLabel}"/>
+                            <Label Text="{Binding SubjectReference}" Style="{StaticResource orangeBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding Credits, StringFormat='Credits: {0}'}"/>
+                    <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                        <StackLayout>
+                            <Label Text="Title" Style="{StaticResource blueHeaderLabel}"/>
+                            <Label Text="{Binding Title}" Style="{StaticResource blueBodyLabel}"
+                                   FontSize="26"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding Level, StringFormat='Level: {0}'}"/>
+                    <Frame Style="{StaticResource orangeFrame}"
+                           Grid.Column="0" Grid.Row="3">
+                        <StackLayout>
+                            <Label Text="Assessment Type" Style="{StaticResource orangeHeaderLabel}"/>
+                            <Label Text="{Binding AssessmentType}" Style="{StaticResource orangeBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding StandardType, StringFormat='Standard Type: {0}'}"/>
+                    <Frame Style="{StaticResource orangeFrame}"
+                           Grid.Column="1" Grid.Row="3">
+                        <StackLayout>
+                            <Label Text="Standard Type" Style="{StaticResource orangeHeaderLabel}"/>
+                            <Label Text="{Binding StandardType}" Style="{StaticResource orangeBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding AssessmentType, StringFormat='Assessment Type: {0}'}"/>
+                    <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="0" Grid.Row="4">
+                        <StackLayout>
+                            <Label Text="Subject" Style="{StaticResource blueHeaderLabel}"/>
+                            <Label Text="{Binding Subject}" Style="{StaticResource blueBodyLabel}"
+                                   FontSize="26"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding CurrentVersion, StringFormat='Version: {0}'}"/>
+                    <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="1" Grid.Row="4">
+                        <StackLayout>
+                            <Label Text="Subfield" Style="{StaticResource blueHeaderLabel}"/>
+                            <Label Text="{Binding Subfield}" Style="{StaticResource blueBodyLabel}"
+                                   FontSize="26"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding Status, StringFormat='Status: {0}'}"/>
+                    <Frame Style="{StaticResource orangeFrame}"
+                           Grid.Column="0" Grid.Row="5">
+                        <StackLayout>
+                            <Label Text="Domain" Style="{StaticResource orangeHeaderLabel}"/>
+                            <Label Text="{Binding Domain}" Style="{StaticResource orangeBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
 
-                    <Label Text="{Binding ExpiryDate, StringFormat='Expiry Date: {0}'}"/>
+                    <Frame Style="{StaticResource orangeFrame}"
+                           Grid.Column="1" Grid.Row="5">
+                        <StackLayout>
+                            <Label Text="Level" Style="{StaticResource orangeHeaderLabel}"/>
+                            <Label Text="{Binding Level}" Style="{StaticResource orangeBodyLabel}"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Grid Grid.Row="6" Grid.ColumnSpan="2"
+                          ColumnDefinitions="{OnIdiom Phone='*, *', Tablet='*, *, *, *'}" 
+                          ColumnSpacing="{OnIdiom Phone=10, Tablet=30}"
+                          RowDefinitions="{OnIdiom Phone='*, *', Tablet='*'}">
+
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Setter Property="HorizontalOptions" Value="Center"/>
+                                    <Setter Property="Scale" Value="{OnIdiom Phone=1, Tablet=1.5}"/>
+                                </Style>
+
+                                <Style TargetType="Label">
+                                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                </Style>
+
+                                <Style TargetType="StackLayout">
+                                    <Setter Property="HorizontalOptions" Value="Center"/>
+                                </Style>
+                            </ResourceDictionary>
+                        </Grid.Resources>
+
+                        <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="0" Grid.Row="0">
+                            <StackLayout>
+                                <Label Text="Literacy" Style="{StaticResource blueHeaderLabel}"/>
+                                <CheckBox IsChecked="{Binding IsLiteracy}"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="1" Grid.Row="0">
+                            <StackLayout>
+                                <Label Text="Numeracy" Style="{StaticResource blueHeaderLabel}"/>
+                                <CheckBox IsChecked="{Binding IsNumeracy}"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="{OnIdiom Phone=0, Tablet=2}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
+                            <StackLayout>
+                                <Label Text="Reading" Style="{StaticResource blueHeaderLabel}"/>
+                                <CheckBox IsChecked="{Binding IsReading}"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame Style="{StaticResource blueFrame}"
+                           Grid.Column="{OnIdiom Phone=1, Tablet=3}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
+                            <StackLayout>
+                                <Label Text="Writing" Style="{StaticResource blueHeaderLabel}"/>
+                                <CheckBox IsChecked="{Binding IsWriting}"/>
+                            </StackLayout>
+                        </Frame>
+
+                    </Grid>
 
                     <Button Text="Load PDF" TextColor="White"
                         FontAttributes="Bold" BackgroundColor="#00002B"
-                        Margin="0, 8" CornerRadius="15" Clicked="buttonAccess_Clicked"/>
+                        Margin="0, 8" CornerRadius="15" Clicked="buttonAccess_Clicked"
+                        Grid.Row="7" Grid.ColumnSpan="2"/>
 
-                </StackLayout>
+                </Grid>
             </ScrollView>
-
-
-
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
