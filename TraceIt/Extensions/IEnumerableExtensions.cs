@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using TraceIt.Models;
 
 namespace TraceIt.Extensions
 {
@@ -32,6 +34,32 @@ namespace TraceIt.Extensions
             }
 
             return convertedCollection;
+        }
+
+        public static void ClearCredits(this IEnumerable<Endorsement> endorsements)
+        {
+            foreach (var endorsement in endorsements)
+                endorsement.ClearCredits();
+        }
+
+        public static void RemoveByID(this Collection<Standard> standards, Standard standard)
+        {
+            var search = standards.First(x => x.ID == standard.ID);
+            standards.Remove(search);
+        }
+
+        public static int CountCredits(this IEnumerable<Standard> standards, Func<Standard, bool> predicate)
+        {
+            int credits = 0;
+
+            foreach(var standard in standards)
+            {
+                bool matchesCriteria = predicate(standard);
+                if (matchesCriteria)
+                    credits += standard.Credits;
+            }
+
+            return credits;
         }
     }
 }
