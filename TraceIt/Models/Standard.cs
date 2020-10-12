@@ -50,8 +50,15 @@ namespace TraceIt.Models
         [NotNull]
         public int Credits { get; set; }
 
+        public enum GradeOptions
+        {
+            AchievedOnly,
+            UpToMerit,
+            UpToExcellence
+        }
+
         [NotNull]
-        public string GradingScheme { get; set; }
+        public GradeOptions GradingScheme { get; set; }
 
         [NotNull]
         public string Status { get; set; }
@@ -134,11 +141,11 @@ namespace TraceIt.Models
         private Grade _finalGrade;
         public Grade FinalGrade
         {
-            get { return _finalGrade; }
+            get => _finalGrade;
             set
             {
-                _finalGrade = value;
-                OnPropertyChanged(nameof(FinalGrade));
+                SetProperty(ref _finalGrade, value, nameof(FinalGrade));
+                RaiseFinalGradeChanged();
             }
         }
         #endregion
@@ -152,6 +159,28 @@ namespace TraceIt.Models
                 App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
         }
 
+        public async Task SelectAsync(Subject subject)
+        {
+            AddedTo = subject.Name;
+            Selected = true;
+            await PushChangesAsync(true);
+        }
+
+        public async Task DeselectAsync()
+        {
+            AddedTo = null;
+            Selected = false;
+            GoalGrade = Grade.NotAchieved;
+            PracticeGrade = Grade.NotAchieved;
+            FinalGrade = Grade.NotAchieved;
+            await PushChangesAsync(true);
+        }
+
         #endregion
+
+        public event EventHandler FinalGradeChanged;
+
+        private void RaiseFinalGradeChanged()
+            => FinalGradeChanged?.Invoke(this, new EventArgs());
     }
 }
