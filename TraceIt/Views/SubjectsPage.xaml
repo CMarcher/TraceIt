@@ -1,17 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
              xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:models="clr-namespace:TraceIt.Models"
+             xmlns:views="clr-namespace:TraceIt.Views"
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
              Title="Subjects"
-             BackgroundColor="Black">
+             BackgroundColor="Black"
+             x:Name="Page"
+             x:DataType="viewmodels:SubjectsPageViewModel">
 
-    <ContentPage.ToolbarItems>
+    <views:BasePage.ToolbarItems>
         <ToolbarItem>
             <ToolbarItem.IconImageSource>
                 <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
@@ -23,26 +27,28 @@
                 <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Pencil}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-    </ContentPage.ToolbarItems>
+    </views:BasePage.ToolbarItems>
 
-    <ContentPage.BindingContext>
-        <viewmodels:SubjectsPageViewModel/>
-    </ContentPage.BindingContext>
-
-    <ContentPage.Resources>
+    <views:BasePage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="17"/>
         </Style>
 
-    </ContentPage.Resources>
+        <converters:CreditsTotalLabelConverter x:Key="labelConverter"/>
+    </views:BasePage.Resources>
 
-    <ContentPage.Content>
+    <views:BasePage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
+
+            <ActivityIndicator x:Name="loadingView" IsRunning="True"
+                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1"
+                               AbsoluteLayout.LayoutFlags="All"/>
 
             <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+
                 <xforms:SfListView x:Name="collectionViewSubjects" AutoFitMode="Height" 
                                    ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
                                    SelectionMode="None" ItemsSource="{Binding Subjects}">
@@ -52,25 +58,61 @@
                     </xforms:SfListView.LayoutManager>
 
                     <xforms:SfListView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Style="{DynamicResource listItemFrame}" Padding="0">
-                                <StackLayout Padding="10, 13, 10, 20">
+                        <DataTemplate x:DataType="models:Subject">
+                            <SwipeView BackgroundColor="Transparent">
 
-                                    <Label Text="{Binding Name}" FontAttributes="Bold" 
+                                <SwipeView.RightItems>
+                                    <SwipeItemView Padding="10, 0, 0, 0" 
+                                                   Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveSubjectCommand}"
+                                                   CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}">
+                                        
+                                        <Frame CornerRadius="28" HasShadow="False" 
+                                               WidthRequest="50" Padding="50">
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                    <GradientStop Color="OrangeRed" Offset="0"/>
+                                                    <GradientStop Color="Red" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Color="White" FontFamily="PrimaryIcons"
+                                                                     Glyph="{DynamicResource Trash}" Size="80"/>
+                                                </Image.Source>
+                                            </Image>
+                                        </Frame>
+                                    </SwipeItemView>
+                                </SwipeView.RightItems>
+                                
+                                <Frame Style="{DynamicResource listItemFrame}" Padding="0">
+                                    <StackLayout Padding="10, 13, 10, 20">
+
+                                        <Label Text="{Binding Name}" FontAttributes="Bold" 
                                            Margin="0, 0, 0, 12"/>
 
-                                    <Label Text="0 / 0 credits"/>
+                                        <Label>
+                                            <Label.Text>
+                                                <MultiBinding Converter="{StaticResource labelConverter}">
+                                                    <Binding Path="PassedCredits"/>
+                                                    <Binding Path="Credits"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
 
-                                    <Label Text="0 standards" Margin="0, 0, 0, 12"/>
+                                        <Label Text="{Binding StandardsCount, StringFormat='{0} standards'}" Margin="0, 0, 0, 12"/>
 
-                                    <Button:SfButton Text="View Info" CornerRadius="30"
+                                        <Button Text="View Info" CornerRadius="20"
                                                      TextColor="Black" FontAttributes="Bold" 
                                                      FontSize="17" Style="{DynamicResource subjectButtonGradient}"
                                                      Clicked="buttonViewInfo_Clicked" HorizontalOptions="Center"
-                                                     WidthRequest="200" HeightRequest="40"/>
+                                                     WidthRequest="200" HeightRequest="40"
+                                                     VerticalOptions="End"/>
 
-                                </StackLayout>
-                            </Frame>
+                                    </StackLayout>
+                                </Frame>
+                            </SwipeView>
+                            
                         </DataTemplate>
                     </xforms:SfListView.ItemTemplate>
                     
@@ -79,5 +121,5 @@
                 </xforms:SfListView>
             </StackLayout>
         </AbsoluteLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </views:BasePage.Content>
+</views:BasePage>
