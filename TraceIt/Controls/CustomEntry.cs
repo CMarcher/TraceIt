@@ -7,6 +7,8 @@ namespace TraceIt.Controls
 {
     public class CustomEntry : Entry
     {
-
+        public CustomEntry()
+        {
+        }
     }
 }
