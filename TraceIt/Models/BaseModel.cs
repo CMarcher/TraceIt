@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TraceIt.Models
@@ -9,7 +10,7 @@ namespace TraceIt.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged == null)
                 return;
@@ -17,10 +18,10 @@ namespace TraceIt.Models
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void SetProperty<T, T2>(ref T property, T value, T2 publicProperty)
+        public void SetProperty<T>(ref T property, T value, string propertyName)
         {
             property = value;
-            OnPropertyChanged(nameof(publicProperty));
+            OnPropertyChanged(propertyName);
         }
     }
 }
