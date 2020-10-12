@@ -23,17 +23,22 @@ namespace TraceIt.ViewModels
             }
         }
 
+        public Command RemoveStandardCommand { get; set; }
+
         public SelectedStandardsPageViewModel()
         {
             Standards = new ObservableCollection<Standard>();
-            Task.Run(SetStandards).Wait();
-
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards, 
-                (sender) => Task.Run(SetStandards));
+            SetStandards();
+            SetCommands();
         }
 
-        async Task SetStandards() 
-            => Standards = await App.DataService.GetStandardsForSubjectAsync(StatusTracker.CurrentSubject.Name);
+        void SetStandards()
+            => Standards = StatusTracker.CurrentSubject.Standards;
 
+        void SetCommands()
+            => RemoveStandardCommand = new Command<Standard>(async (standard) => await RemoveStandard(standard));
+        
+        async Task RemoveStandard(Standard standard)
+            => await StatusTracker.CurrentSubject.RemoveStandardAsync(standard);
     }
 }
