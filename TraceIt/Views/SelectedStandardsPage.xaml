@@ -1,26 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
              xmlns:list="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:views="clr-namespace:TraceIt.Views"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.StandardSelectionPage"
+             x:Class="TraceIt.Views.SelectedStandardsPage"
              Title="Smart English"
-             BackgroundColor="Black">
+             BackgroundColor="Black"
+             x:Name="Page">
 
-    <ContentPage.ToolbarItems>
+    <views:BasePage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="buttonAdd_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Size="Large" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-    </ContentPage.ToolbarItems>
+    </views:BasePage.ToolbarItems>
 
-    <ContentPage.Resources>
+    <views:BasePage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
@@ -31,13 +32,13 @@
             <converters:GradeEnumToLetterConverter x:Key="gradeConverter"/>
 
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </views:BasePage.Resources>
 
-    <ContentPage.BindingContext>
+    <views:BasePage.BindingContext>
         <viewmodels:SelectedStandardsPageViewModel/>
-    </ContentPage.BindingContext>
+    </views:BasePage.BindingContext>
 
-    <ContentPage.Content>
+    <views:BasePage.Content>
 
         <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
 
@@ -52,27 +53,70 @@
 
                 <list:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Style="{DynamicResource listItemFrame}" Padding="27">
-                            <StackLayout>
+                        <SwipeView BackgroundColor="Transparent">
 
-                                <Label Text="{Binding SubjectReference}"
+                            <SwipeView.RightItems>
+                                <SwipeItemView Padding="10, 0, 0, 0" 
+                                                   Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveStandardCommand}"
+                                                   CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}">
+
+                                    <Frame CornerRadius="28" HasShadow="False" 
+                                               WidthRequest="50" Padding="50">
+                                        <Frame.Background>
+                                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                <GradientStop Color="OrangeRed" Offset="0"/>
+                                                <GradientStop Color="Red" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Frame.Background>
+
+                                        <Image>
+                                            <Image.Source>
+                                                <FontImageSource Color="White" FontFamily="PrimaryIcons"
+                                                                     Glyph="{DynamicResource Trash}" Size="80"/>
+                                            </Image.Source>
+                                        </Image>
+                                    </Frame>
+                                </SwipeItemView>
+                            </SwipeView.RightItems>
+
+                            <Frame Style="{DynamicResource listItemFrame}" Padding="27">
+                                <StackLayout>
+
+                                    <Label Text="{Binding SubjectReference}"
                                        HorizontalTextAlignment="Start"
                                        FontAttributes="Bold" Margin="0, 0, 0, 8"/>
 
-                                <Label Text="{Binding Title}"
+                                    <Label Text="{Binding Title}"
                                        HorizontalTextAlignment="Start"/>
 
-                                <Label Text="{Binding Credits, StringFormat='{0} credits'}"
+                                    <Label Text="{Binding Credits, StringFormat='{0} credits'}"
                                        HorizontalTextAlignment="Start" Margin="0, 0, 0, 10"/>
 
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
                                              Spacing="15">
-                                    <Frame IsClippedToBounds="True" Padding="0" CornerRadius="25">
-                                        <Button x:Name="selectGradeButton" Text="{Binding FinalGrade, Converter={StaticResource gradeConverter}}"
+                                        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="25">
+                                            <Button x:Name="selectGradeButton" Text="{Binding FinalGrade, Converter={StaticResource gradeConverter}}"
                                         TextColor="Black" FontAttributes="Bold" 
                                         FontSize="Large" Clicked="selectGradeButton_Clicked" 
                                         HeightRequest="50" HorizontalOptions="StartAndExpand"
                                         WidthRequest="150">
+                                                <Button.Background>
+                                                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                        <LinearGradientBrush.GradientStops>
+                                                            <GradientStop Color="#FFC400" Offset="0"/>
+                                                            <GradientStop Color="#FFA200" Offset="1"/>
+                                                        </LinearGradientBrush.GradientStops>
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                            </Button>
+                                        </Frame>
+
+                                        <Button Text="More" CornerRadius="25"
+                                                     TextColor="Black" FontAttributes="Bold"
+                                                     FontSize="Large" BorderColor="Transparent"
+                                                     Clicked="buttonViewMore_Clicked"
+                                                     WidthRequest="150" HorizontalOptions="Fill" 
+                                                     HeightRequest="50" VerticalOptions="Center">
                                             <Button.Background>
                                                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                                                     <LinearGradientBrush.GradientStops>
@@ -82,17 +126,10 @@
                                                 </LinearGradientBrush>
                                             </Button.Background>
                                         </Button>
-                                    </Frame>
-
-                                    <Button:SfButton Text="More" CornerRadius="30"
-                                                     TextColor="Black" FontAttributes="Bold"
-                                                     FontSize="Large" BorderColor="Transparent"
-                                                     Clicked="buttonViewMore_Clicked" Style="{DynamicResource subjectButtonGradient}"
-                                                     WidthRequest="150" HorizontalOptions="Fill" 
-                                                     HeightRequest="50" VerticalOptions="Center"/>
+                                    </StackLayout>
                                 </StackLayout>
-                            </StackLayout>
-                        </Frame>
+                            </Frame>
+                        </SwipeView>
                     </DataTemplate>
                 </list:SfListView.ItemTemplate>
 
@@ -117,5 +154,5 @@
                 </list:SfListView.FooterTemplate>
             </list:SfListView>
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </views:BasePage.Content>
+</views:BasePage>

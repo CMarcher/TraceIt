@@ -14,11 +14,11 @@ using Xamarin.Forms.Xaml;
 namespace TraceIt.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StandardSelectionPage : ContentPage
+    public partial class SelectedStandardsPage : BasePage
     {
         public SelectedStandardsPageViewModel ViewModel { get; private set; } = new SelectedStandardsPageViewModel();
 
-        public StandardSelectionPage()
+        public SelectedStandardsPage()
         {
             InitializeComponent();
             Title = StatusTracker.CurrentSubject.Name;
@@ -26,7 +26,7 @@ namespace TraceIt.Views
 
         private async void buttonViewMore_Clicked(object sender, EventArgs e)
         {
-            var standard = (sender as SfButton)?.BindingContext as Standard;
+            var standard = (sender as Button)?.BindingContext as Standard;
             await Navigation.PushAsync(new StandardDetailPage(standard));
         }
 
