@@ -1,18 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
+using TraceIt.Services;
+using TraceIt.Models.Query_Models;
 
 namespace TraceIt.Models
 {
     public class DataRepository : BaseModel
     {
-        public ObservableCollection<Subject> SelectedSubjects = new ObservableCollection<Subject>();
-
-        public DataRepository()
+        private ObservableCollection<Subject> _selectedSubjects;
+        public ObservableCollection<Subject> SelectedSubjects
         {
-            Task.Run(InitialiseSubjects);
+            get => _selectedSubjects;
+            private set => SetProperty(ref _selectedSubjects, value, nameof(SelectedSubjects));
+        }
+
+        private ObservableCollection<Standard> _selectedStandards;
+        public ObservableCollection<Standard> SelectedStandards
+        {
+            get => _selectedStandards;
+            set => SetProperty(ref _selectedStandards, value, nameof(SelectedStandards));
+        }
+
+        public ObservableCollection<CreditBreakdown> CreditBreakdowns = new ObservableCollection<CreditBreakdown>();
+
+        public bool Initialised { get; private set; }
+
+        public DataRepository() { }
+
+        public async Task InitialiseAsync()
+        {
+            await Task.Run(InitialiseSubjects);
+            await Task.Run(InitialiseStandards);
+            await Task.Run(InitialiseBreakdown);
+
+            App.MessagingService.Send(MessagingService.MessageType.RepositoryInitialisationComplete);
+            App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
         }
 
         async Task InitialiseSubjects()
@@ -20,25 +47,21 @@ namespace TraceIt.Models
             SelectedSubjects = await App.DataService.GetSelectedSubjectsAsync();
 
             foreach (var subject in SelectedSubjects)
-            {
-                var standards = await App.DataService.GetStandardsForSubjectAsync(subject.Name);
-                foreach (var standard in standards)
-                {
-                    SetSubjectCredits(subject, standard);
-                }
+                await subject.InitialiseStandards();
 
-                await subject.PushChanges();
-            }
+            Initialised = true;
         }
 
-        void SetSubjectCredits(Subject subject, Standard standard)
-        {
-            if (standard.FinalGrade == Standard.Grade.Excellence)
-                subject.ExcellenceCredits += standard.Credits;
-            else if (standard.FinalGrade == Standard.Grade.Merit)
-                subject.MeritCredits += standard.Credits;
+        async Task InitialiseStandards()
+            => SelectedStandards = await App.DataService.GetSelectedStandardsAsync();
 
-            subject.Credits += standard.Credits;
+        async Task InitialiseBreakdown()
+            => CreditBreakdowns = await App.DataService.GetCreditBreakdownsAsync();
+        
+        public async Task RemoveSubject(Subject subject)
+        {
+            SelectedSubjects.Remove(subject);
+            await subject.Delete();
         }
     }
 }
