@@ -21,8 +21,7 @@ namespace TraceIt.ViewModels
             {
                 await SetSubjects();
                 await SetSubfields();
-            }).Wait(); ;
-            
+            }).Wait();
         }
 
         async Task SetSubjects() => Subjects = await App.DataService.GetSubjectsAsync();
