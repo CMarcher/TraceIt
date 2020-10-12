@@ -12,21 +12,17 @@ namespace TraceIt
 
     public partial class App : Application
     {
-        public static NavigationService NavigationService { get; private set; }
-        public static DataService DataService { get; private set; }
-        public static MessagingService MessagingService { get; private set; }
-        public static DataRepository DataRepository { get; private set; }
+        public static NavigationService NavigationService { get; private set; } = new NavigationService();
+        public static DataService DataService { get; private set; } = new DataService();
+        public static MessagingService MessagingService { get; private set; } = new MessagingService();
+        public static DataRepository DataRepository { get; private set; } = new DataRepository();
 
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjg0ODA1QDMxMzgyZTMyMmUzMFlYWEFCOEZOODM4dXB2QmpHMmlVM3VuZi9kdzhXUFB4SlNDVHhwVmtMWkE9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzMxOTk3QDMxMzgyZTMzMmUzME1PM1U5eks0N1FEMDZiMFdaRlZjdnl0NUVESVk5a2lmdkFNa0I1WXlEbWs9");
             InitializeComponent();
 
             MainPage = new LoginPage();
-
-            DataService = new DataService();
-            DataRepository = new DataRepository();
-            MessagingService = new MessagingService();
         }
 
         protected override void OnStart()
