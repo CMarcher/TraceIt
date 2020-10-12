@@ -64,7 +64,7 @@ namespace TraceIt.Services
 
         public DataService()
         {
-            InitialiseAsync().SafeFireAndForget(false);
+            Task.Run(InitialiseAsync);
         }
 
         async Task InitialiseAsync()
@@ -85,7 +85,7 @@ namespace TraceIt.Services
         public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterOption filterByOption)
         {
             Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
-            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter;
+            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter && standard.StandardType == "U";
             Expression<Func<Standard, bool>> finalQuery;
 
             bool isSubjectQuery = filterByOption == FilterOption.Subject;
@@ -118,11 +118,13 @@ namespace TraceIt.Services
             return list.ToObservableCollection<Standard>();
         }
 
-        public async Task<List<Standard>> GetSelectedStandardsAsync()
+        public async Task<ObservableCollection<Standard>> GetSelectedStandardsAsync()
         {
-            return await Database.Table<Standard>()
+            var result = await Database.Table<Standard>()
                 .Where(standard => standard.Selected == true)
                 .ToListAsync();
+
+            return result.ToObservableCollection<Standard>();
         }
 
         public async Task<List<Standard>> GetMatchingStandards(string searchQuery)
@@ -161,6 +163,14 @@ namespace TraceIt.Services
         public async Task UpdateSubjectsAsync(List<Subject> subjects)
             => await Database.UpdateAllAsync(subjects);
 
+        public async Task DeleteSubjectAsync(Subject subject)
+        {
+            if (subject.Custom is true)
+                await Database.DeleteAsync(subject);
+            else
+                throw new Exception("Can't delete base subjects.");
+        }
+
         public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
             switch (filterOptions)
@@ -196,5 +206,46 @@ namespace TraceIt.Services
             return new Tuple<int, int>(total, achieved);
         }
 
+        public async Task<ObservableCollection<CreditBreakdown>> GetCreditBreakdownsAsync()
+        {
+            var notAchievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade = 0");
+
+            var achievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade = 1");
+
+            var meritCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade = 2");
+
+            var excellenceCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade = 3");
+
+            var notAchieved = new CreditBreakdown()
+            {
+                Credits = notAchievedCredits,
+                Grade = CreditBreakdown.Grades.NotAchieved
+            };
+
+            var achieved = new CreditBreakdown()
+            {
+                Credits = achievedCredits,
+                Grade = CreditBreakdown.Grades.Achieved
+            };
+
+            var merit = new CreditBreakdown()
+            {
+                Credits = meritCredits,
+                Grade = CreditBreakdown.Grades.Merit
+            };
+
+            var excellence = new CreditBreakdown()
+            {
+                Credits = excellenceCredits,
+                Grade = CreditBreakdown.Grades.Excellence
+            };
+
+            return new ObservableCollection<CreditBreakdown>()
+                { notAchieved, achieved, merit, excellence };
+        }
     }
 }
