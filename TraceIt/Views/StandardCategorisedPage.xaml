@@ -45,7 +45,7 @@
                 <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="BorderColor" Value="Transparent"/>
                 <Setter Property="CornerRadius" Value="20"/>
-                <Setter Property="Padding" Value="20, 10, 0, 10"/>
+                <Setter Property="Padding" Value="{OnIdiom Phone='10, 0, 0, 0', Tablet='20, 0, 0, 0'}"/>
             </Style>
 
             <LinearGradientBrush x:Key="listItemGradient">
@@ -61,22 +61,24 @@
                     <StackLayout>
 
                         <Label Text="{Binding Code}" TextColor="White"
-                               FontSize="16"/>
+                               FontSize="16" Style="{StaticResource filterLabelStyle}"/>
                         <Label Text="{Binding Title}" TextColor="White"
-                               FontSize="16" VerticalOptions="CenterAndExpand"/>
+                               FontSize="16" VerticalOptions="CenterAndExpand"
+                               FontAttributes="Italic"/>
 
                     </StackLayout>
                 </Frame>
             </DataTemplate>
             <DataTemplate x:Key="subfieldTemplate">
                 <Frame Style="{DynamicResource listItemFrame}">
-                    <Label Text="{Binding Subfield}" TextColor="White"
-                           FontSize="16" VerticalOptions="CenterAndExpand"/>
+                    <Label Text="{Binding Subfield}" Style="{StaticResource filterLabelStyle}"
+                           FontSize="16" VerticalOptions="CenterAndExpand"
+                           Margin="0, 7"/>
                 </Frame>
             </DataTemplate>
             <DataTemplate x:Key="subjectTemplate">
                 <Frame Style="{DynamicResource listItemFrame}">
-                    <Label Text="{Binding Name}" TextColor="White"
+                    <Label Text="{Binding Name}" Style="{StaticResource filterLabelStyle}"
                            FontSize="16" VerticalOptions="CenterAndExpand"
                            Margin="0, 7"/>
                 </Frame>
@@ -91,7 +93,7 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
-                     Background="{StaticResource listItemGradient}">
+                     Background="{StaticResource listItemGradient}" Spacing="0">
 
             <StackLayout BackgroundColor="#001124" Padding="0">
             <SearchBar x:Name="searchBar" BackgroundColor="#002147" FontAttributes="Italic"
@@ -127,13 +129,11 @@
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout Padding="20, 0">
-                <forms:SfListView x:Name="listView"
-                                  ItemSpacing="8"
-                                  ItemTapped="collectionViewCategories_ItemTapped"
-                                  ItemTemplate="{StaticResource dataTemplateSelector}"
+            <StackLayout Padding="0">
+                <forms:SfListView x:Name="listView" ItemSpacing="8"
+                                  ItemTapped="collectionViewCategories_ItemTapped" ItemTemplate="{StaticResource dataTemplateSelector}"
                                   AutoFitMode="DynamicHeight" SelectionMode="None"
-                                  Padding="0"/>
+                                  Padding="10, 0"/>
             </StackLayout>
 
         </StackLayout>
