@@ -9,9 +9,9 @@ using Android.Gestures;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using Google.Android.Material.Tabs;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 

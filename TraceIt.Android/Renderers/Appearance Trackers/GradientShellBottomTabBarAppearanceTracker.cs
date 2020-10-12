@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.Graphics.Drawables;
-using Android.OS;
-using Android.Runtime;
-using Android.Support.Design.Widget;
-using Android.Views;
-using Android.Widget;
-using TraceIt.Controls;
+﻿using Android.Graphics.Drawables;
+using Google.Android.Material.BottomNavigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace TraceIt.Droid.Renderers.Appearance_Trackers
 {
@@ -22,7 +9,7 @@ namespace TraceIt.Droid.Renderers.Appearance_Trackers
     {
         IShellContext context;
 
-        public GradientShellBottomTabBarAppearanceTracker(IShellContext context, Xamarin.Forms.ShellItem item) : base(context, item)
+        public GradientShellBottomTabBarAppearanceTracker(IShellContext context, ShellItem item) : base(context, item)
         {
             this.context = context;
         }

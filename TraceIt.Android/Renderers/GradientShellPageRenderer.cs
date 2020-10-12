@@ -8,7 +8,6 @@ using Android.Content;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using TraceIt.Controls;
