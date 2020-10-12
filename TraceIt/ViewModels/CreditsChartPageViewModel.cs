@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using TraceIt.Views;
 using Xamarin.Forms;
 using TraceIt.Services;
+using System.Collections.ObjectModel;
+using TraceIt.Models;
+using TraceIt.Models.Query_Models;
 
 namespace TraceIt.ViewModels
 {
@@ -13,30 +16,46 @@ namespace TraceIt.ViewModels
         private int _totalCredits;
         public int TotalCredits
         {
-            get { return _totalCredits; }
-            set
-            {
-                _totalCredits = value;
-                OnPropertyChanged(nameof(TotalCredits));
-            }
+            get => _totalCredits;
+            set => SetProperty(ref _totalCredits, value, nameof(TotalCredits));
         }
 
         private int _achievedCredits;
         public int AchievedCredits
         {
-            get { return _achievedCredits; }
-            set
-            {
-                _achievedCredits = value;
-                OnPropertyChanged(nameof(AchievedCredits));
-            }
+            get => _achievedCredits;
+            set => SetProperty(ref _achievedCredits, value, nameof(AchievedCredits));
+        }
+
+        private ObservableCollection<Standard> _selectedStandards;
+        public ObservableCollection<Standard> SelectedStandards
+        {
+            get => _selectedStandards;
+            set => SetProperty(ref _selectedStandards, value, nameof(SelectedStandards));
+        }
+
+        private ObservableCollection<CreditBreakdown> _creditBreakdowns;
+        public ObservableCollection<CreditBreakdown> CreditBreakdowns
+        {
+            get => _creditBreakdowns;
+            set => SetProperty(ref _creditBreakdowns, value, nameof(CreditBreakdowns));
         }
 
         public CreditsChartPageViewModel()
         {
-            Task.Run(SetCredits).Wait();
-            SubscribeToMessage();
+            Initialise();
         }
+
+        void Initialise()
+        {
+            Task.Run(SetCredits).Wait();
+            SetStandards();
+            SetCreditBreakdowns();
+            SubscribeToMessages();
+        }
+
+        void SetStandards()
+            => SelectedStandards = App.DataRepository.SelectedStandards;
 
         async Task SetCredits()
         {
@@ -45,10 +64,16 @@ namespace TraceIt.ViewModels
             AchievedCredits = credits.Item2;
         }
 
-        void SubscribeToMessage()
+        void SetCreditBreakdowns()
+            => CreditBreakdowns = App.DataRepository.CreditBreakdowns;
+
+        void SubscribeToMessages()
         {
             App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
                 async (sender) => await SetCredits());
+
+            //App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
+            //    (sender) => SetStandards());
         }
     }
 }
