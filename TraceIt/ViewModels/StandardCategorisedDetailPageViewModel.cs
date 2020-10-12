@@ -15,34 +15,27 @@ namespace TraceIt.ViewModels
     public class StandardCategorisedDetailPageViewModel : BaseViewModel
     {
         public ObservableCollection<Standard> Standards { get; private set; }
-        public Command NavigateToDetailCommand { get; private set; }
         public Command ChangeStandardSelectionCommand { get; private set; }
 
         public StandardCategorisedDetailPageViewModel(string parameter, DataService.FilterOption filterByOption)
         {
             Task.Run(() => SetStandards(parameter, filterByOption)).Wait();
 
-            NavigateToDetailCommand = new Command<Standard>(async (standard) => await NavigateToDetail(standard));
             ChangeStandardSelectionCommand = new Command<Standard>(async (standard) => await ChangeStandardSelection(standard));
         }
 
         async Task SetStandards(string parameter, DataService.FilterOption filterByOption) =>
-            Standards = await App.DataService.GetCategorisedStandardsAsync(
-                              parameter, filterByOption);
-        
-        async Task NavigateToDetail(Standard standard) => 
-            await App.Current.MainPage.Navigation.PushAsync(new StandardDetailPage(standard));
+            Standards = await App.DataService.GetCategorisedStandardsAsync(parameter, filterByOption);
 
         async Task ChangeStandardSelection(Standard standard)
         {
-            standard.Selected = HandleSelection(standard);
-            await standard.PushChangesAsync(true);
-        }
+            var subject = StatusTracker.CurrentSubject;
 
-        bool HandleSelection(Standard standard)
-        {
-            standard.AddedTo = standard.Selected == false ? StatusTracker.CurrentSubject.Name : null;
-            return standard.Selected == false ? true : false;
+            Task task = standard.Selected == false ?
+                subject.AddStandardAsync(standard) :
+                subject.RemoveStandardAsync(standard);
+
+            await task;
         }
     }
 }
