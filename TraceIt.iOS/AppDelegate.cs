@@ -1,5 +1,4 @@
 using Syncfusion.SfChart.XForms.iOS.Renderers;
-using Syncfusion.XForms.iOS.TabView;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.ListView.XForms.iOS;
@@ -30,7 +29,7 @@ namespace TraceIt.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "CarouselView_Experimental");
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "CarouselView_Experimental", "SwipeView_Experimental");
             Xamarin.Forms.Forms.Init();
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();
@@ -39,7 +38,6 @@ namespace TraceIt.iOS
             SfCircularProgressBarRenderer.Init();
             SfButtonRenderer.Init();
             SfGradientViewRenderer.Init();
-            SfTabViewRenderer.Init();
             SfSegmentedControlRenderer.Init();
             SfChartRenderer.Init();
             SfCheckBoxRenderer.Init();

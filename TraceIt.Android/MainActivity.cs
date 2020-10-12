@@ -14,9 +14,7 @@ namespace TraceIt.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
-            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "CarouselView_Experimental");
+            Xamarin.Forms.Forms.SetFlags("Brush_Experimental", "CarouselView_Experimental", "SwipeView_Experimental");
 
             base.OnCreate(savedInstanceState);
 
