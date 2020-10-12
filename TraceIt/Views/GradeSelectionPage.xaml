@@ -33,6 +33,7 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
                 <Setter Property="SegmentPadding" Value="10"/>
+                <Setter Property="SegmentWidth" Value="200"/>
                 <Setter Property="SegmentHeight" Value="80"/>
                 <Setter Property="VisibleSegmentsCount" Value="4"/>
                 <Setter Property="SelectionIndicatorSettings">
@@ -59,10 +60,8 @@
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
                 <Frame Style="{DynamicResource primaryFrameStyle}" CornerRadius="10" VerticalOptions="FillAndExpand">
-
-
                     <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
-                        <StackLayout Grid.Row="0" HorizontalOptions="Center">
+                        <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
                             <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
                             <buttons:SfSegmentedControl x:Name="goalGradeSelector"
                                                         SelectedIndex="{Binding 
@@ -110,9 +109,7 @@
                             </buttons:SfSegmentedControl>
                         </StackLayout>
                     </Grid>
-
                 </Frame>
-
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
