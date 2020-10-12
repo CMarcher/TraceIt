@@ -12,21 +12,74 @@
     <ContentView.BindingContext>
         <viewmodels:CreditsChartPageViewModel/>
     </ContentView.BindingContext>
-    
+
     <ContentView.Content>
-        <Frame HasShadow="False" Margin="15, 15" BackgroundColor="Transparent">
-            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="{Binding AchievedCredits}" 
+        <ScrollView>
+            <StackLayout>
+                <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="{Binding AchievedCredits}" 
                                                Maximum="{Binding TotalCredits}" 
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
-                                               ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange">
-                
-                <progressbar:SfCircularProgressBar.Content>
-                    <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
-                           TextColor="White" FontSize="40" FontAttributes="Italic, Bold"
-                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
-                </progressbar:SfCircularProgressBar.Content>
-            </progressbar:SfCircularProgressBar>
-        </Frame>
+                                               ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange"
+                                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                    <progressbar:SfCircularProgressBar.Content>
+                        <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
+                           TextColor="White" FontSize="40" FontAttributes="Italic, Bold" HorizontalTextAlignment="Center"
+                           VerticalOptions="FillAndExpand"/>
+                    </progressbar:SfCircularProgressBar.Content>
+                </progressbar:SfCircularProgressBar>
+
+                <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <chart:PieSeries ItemsSource="{Binding CreditBreakdowns}"
+                                 XBindingPath="Grade" YBindingPath="Credits"
+                                 DataMarkerPosition="Inside" EnableTooltip="True">
+                        
+                        <chart:PieSeries.ColorModel>
+                            <chart:ChartColorModel Palette="Custom">
+                                <chart:ChartColorModel.CustomBrushes>
+                                    <chart:ChartColorCollection>
+                                        <Color>#020202</Color>
+                                        <Color>#512888</Color>
+                                        <Color>#004F98</Color>
+                                        <Color>Orange</Color>
+                                    </chart:ChartColorCollection>
+                                </chart:ChartColorModel.CustomBrushes>
+                            </chart:ChartColorModel>
+                        </chart:PieSeries.ColorModel>
+                        
+                        <chart:PieSeries.DataMarker>
+                            <chart:ChartDataMarker LabelContent="YValue"/>
+                        </chart:PieSeries.DataMarker>
+                    </chart:PieSeries>
+
+                    <chart:SfChart.Legend>
+                        <chart:ChartLegend>
+                            <chart:ChartLegend.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <StackLayout Orientation="Horizontal" WidthRequest="143">
+
+                                        <BoxView Color="{Binding IconColor}" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="13" WidthRequest="13" />
+
+                                        <Label FontSize="13" VerticalTextAlignment="Center" 
+                                               Text="{Binding DataPoint.Grade}" TextColor="White"/>
+
+                                    </StackLayout>
+
+                                </DataTemplate>
+
+                            </chart:ChartLegend.ItemTemplate>
+                        </chart:ChartLegend>
+                    </chart:SfChart.Legend>
+
+                    <chart:SfChart.Title>
+                        <chart:ChartTitle Text="Test" TextColor="White"/>
+                    </chart:SfChart.Title>
+
+                </chart:SfChart>
+            </StackLayout>
+        </ScrollView>
     </ContentView.Content>
-    
+
 </ContentView>
