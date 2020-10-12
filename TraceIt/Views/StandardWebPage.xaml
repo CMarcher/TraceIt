@@ -17,12 +17,22 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource gradientStackLayout}">
-            <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
+        <AbsoluteLayout>
+
+            <ActivityIndicator x:Name="loadingIndicator"
+                               AbsoluteLayout.LayoutFlags="All"
+                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
+
+            <StackLayout Style="{DynamicResource gradientStackLayout}"
+                         AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+                         AbsoluteLayout.LayoutFlags="All">
+                
+                <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"
                      Navigating="webView_Navigating"/>
-        </StackLayout>
+            </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -34,10 +34,8 @@ namespace TraceIt.Views
         }
 
         private void loadNZQAToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            webView.Source = "https://www.nzqa.govt.nz/ncea/subjects/";
-        }
-
+            => webView.Source = "https://www.nzqa.govt.nz/ncea/subjects/";
+        
         private async void launchSafariToolbarItem_Clicked(object sender, EventArgs e)
         {
             bool launchWeb = await DisplayAlert("Leaving TraceIt", "This will launch the current page outside the app. Continue?",
@@ -48,24 +46,25 @@ namespace TraceIt.Views
         }
 
         private void backToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            webView.GoBack();
-        }
+            => webView.GoBack();
 
         private void forwardToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            webView.GoForward();
-        }
-
+            => webView.GoForward();
+        
         private void webView_Navigated(object sender, WebNavigatedEventArgs e)
         {
             CurrentSource = e.Url;
+            LoadingIndicatorRunning(false);
             SetToolbarEnabling();
         }
 
         private void webView_Navigating(object sender, WebNavigatingEventArgs e)
         {
+            LoadingIndicatorRunning(true);
             SetToolbarEnabling();
         }
+
+        void LoadingIndicatorRunning(bool canRun)
+            => loadingIndicator.IsVisible = loadingIndicator.IsRunning = canRun;
     }
 }
