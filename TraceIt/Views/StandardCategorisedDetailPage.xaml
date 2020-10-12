@@ -21,10 +21,8 @@
 
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
-                               ItemSpacing="10" AutoFitMode="DynamicHeight">
-                <xforms:SfListView.Padding>
-                    <OnIdiom x:TypeArguments="Thickness" Phone="10" Tablet="25"/>
-                </xforms:SfListView.Padding>
+                               ItemSpacing="10" AutoFitMode="DynamicHeight"
+                               Padding="{OnIdiom Phone=10, Tablet=25}">
 
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
@@ -40,10 +38,8 @@
                                 <Button x:Name="selectionButton"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
                                         CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}"
-                                        VerticalOptions="FillAndExpand"
-                                        HorizontalOptions="Start"
-                                        WidthRequest="150"
-                                        Margin="5, 5, 20, 0">
+                                        VerticalOptions="FillAndExpand" HorizontalOptions="Start"
+                                        WidthRequest="150" Margin="5, 5, 20, 0">
 
                                     <Button.Background>
                                         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
