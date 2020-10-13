@@ -32,7 +32,7 @@ namespace TraceIt.Views
             {
                 var standard = StatusTracker.CurrentStandard;
 
-                if (standard.StandardType == "A")
+                if (standard.StandardType == Models.Standard.StandardTypes.Achievement)
                     return standard.SubjectReference;
                 else
                     return standard.Code.ToString();
