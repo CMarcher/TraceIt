@@ -44,7 +44,8 @@
             </Style>
 
             <converters:SelectedIndexToStandardConverter x:Key="indexConverter"/>
-            
+            <converters:GradingSchemeToVisibilityConverter x:Key="visibilityConverter"/>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -53,7 +54,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}" BindingContext="{Binding Standard}">
 
             <StackLayout Margin="{OnIdiom Phone=0, Tablet=15}"
                          AbsoluteLayout.LayoutFlags="All"
@@ -68,11 +69,13 @@
                                                                         GoalGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="x:String">
-                                    <x:String>Not Achieved</x:String>
-                                    <x:String>Achieved</x:String>
-                                    <x:String>Merit</x:String>
-                                    <x:String>Excellence</x:String>
+                                <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                    <buttons:SfSegmentItem Text="Not Achieved"/>
+                                    <buttons:SfSegmentItem Text="Achieved"/>
+                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"/>
+                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"/>
                                 </system:List>
                             </buttons:SfSegmentedControl>
                         </StackLayout>
@@ -84,11 +87,13 @@
                                                                         PracticeGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="x:String">
-                                    <x:String>Not Achieved</x:String>
-                                    <x:String>Achieved</x:String>
-                                    <x:String>Merit</x:String>
-                                    <x:String>Excellence</x:String>
+                                <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                    <buttons:SfSegmentItem Text="Not Achieved"/>
+                                    <buttons:SfSegmentItem Text="Achieved"/>
+                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"/>
+                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"/>
                                 </system:List>
                             </buttons:SfSegmentedControl>
                         </StackLayout>
@@ -100,11 +105,13 @@
                                                                         FinalGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="x:String">
-                                    <x:String>Not Achieved</x:String>
-                                    <x:String>Achieved</x:String>
-                                    <x:String>Merit</x:String>
-                                    <x:String>Excellence</x:String>
+                                <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                    <buttons:SfSegmentItem Text="Not Achieved"/>
+                                    <buttons:SfSegmentItem Text="Achieved"/>
+                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"/>
+                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+                                                        Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"/>
                                 </system:List>
                             </buttons:SfSegmentedControl>
                         </StackLayout>
