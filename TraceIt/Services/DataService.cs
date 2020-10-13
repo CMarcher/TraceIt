@@ -85,7 +85,8 @@ namespace TraceIt.Services
         public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterOption filterByOption)
         {
             Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
-            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter && standard.StandardType == "U";
+            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter 
+                                                                      && standard.StandardType == Standard.StandardTypes.Unit;
             Expression<Func<Standard, bool>> finalQuery;
 
             bool isSubjectQuery = filterByOption == FilterOption.Subject;
