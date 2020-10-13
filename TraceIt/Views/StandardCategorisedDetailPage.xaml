@@ -51,7 +51,8 @@
                                     </Button.Background>
 
                                     <Button.ImageSource>
-                                        <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
+                                        <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"
+                                                         Color="Black"/>
                                     </Button.ImageSource>
 
                                     <Button.Triggers>
