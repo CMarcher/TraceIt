@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:custom="clr-namespace:TraceIt.Controls"
+             xmlns:patch="clr-namespace:Forms9Patch;assembly=Forms9Patch"
              xmlns:models="clr-namespace:TraceIt.Models"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardDetailPage"
@@ -13,33 +14,32 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style TargetType="Label" x:Key="baseHeaderLabel">
-                <Setter Property="TextTransform" Value="Uppercase"/>
+            <Style TargetType="patch:Label" x:Key="baseHeaderLabel">
                 <Setter Property="FontAttributes" Value="Bold, Italic"/>
                 <Setter Property="FontSize" Value="Large"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="baseBodyLabel">
+            <Style TargetType="patch:Label" x:Key="baseBodyLabel">
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="32"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="blueHeaderLabel"
+            <Style TargetType="patch:Label" x:Key="blueHeaderLabel"
                    BasedOn="{StaticResource baseHeaderLabel}">
                 <Setter Property="TextColor" Value="#E3E3E3"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="blueBodyLabel"
+            <Style TargetType="patch:Label" x:Key="blueBodyLabel"
                    BasedOn="{StaticResource baseBodyLabel}">
                 <Setter Property="TextColor" Value="White"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="orangeHeaderLabel"
+            <Style TargetType="patch:Label" x:Key="orangeHeaderLabel"
                    BasedOn="{StaticResource baseHeaderLabel}">
                 <Setter Property="TextColor" Value="#3E3E3E"/>
             </Style>
 
-            <Style TargetType="Label" x:Key="orangeBodyLabel"
+            <Style TargetType="patch:Label" x:Key="orangeBodyLabel"
                    BasedOn="{StaticResource baseBodyLabel}">
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
@@ -76,57 +76,60 @@
                     <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="0" Grid.Row="0">
                         <StackLayout>
-                            <Label Text="Code" Style="{StaticResource blueHeaderLabel}"/>
-                            <Label Text="{Binding Code}" Style="{StaticResource blueBodyLabel}"/>
+                            <patch:Label Text="CODE" Style="{StaticResource blueHeaderLabel}"/>
+                            <patch:Label Text="{Binding Code}" Style="{StaticResource blueBodyLabel}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="1" Grid.Row="0">
                         <StackLayout>
-                            <Label Text="Credits" Style="{StaticResource blueHeaderLabel}"/>
-                            <Label Text="{Binding Credits}" Style="{StaticResource blueBodyLabel}"/>
+                            <patch:Label Text="CREDITS" Style="{StaticResource blueHeaderLabel}"/>
+                            <patch:Label Text="{Binding Credits}" Style="{StaticResource blueBodyLabel}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource orangeFrame}"
                            Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
                         <StackLayout>
-                            <Label Text="Subject Reference" Style="{StaticResource orangeHeaderLabel}"/>
-                            <Label Text="{Binding SubjectReference}" Style="{StaticResource orangeBodyLabel}"/>
+                            <patch:Label Text="SUBJECT REFERENCE" Style="{StaticResource orangeHeaderLabel}"/>
+                            <patch:Label Text="{Binding SubjectReference}" Style="{StaticResource orangeBodyLabel}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
                         <StackLayout>
-                            <Label Text="Title" Style="{StaticResource blueHeaderLabel}"/>
-                            <Label Text="{Binding Title}" Style="{StaticResource blueBodyLabel}"
-                                   FontSize="26"/>
+                            <patch:Label Text="TITLE" Style="{StaticResource blueHeaderLabel}"/>
+                            <patch:Label Text="{Binding Title}" Style="{StaticResource blueBodyLabel}"
+                                   FontSize="20"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource orangeFrame}"
                            Grid.Column="0" Grid.Row="3">
                         <StackLayout>
-                            <Label Text="Assessment Type" Style="{StaticResource orangeHeaderLabel}"/>
-                            <Label Text="{Binding AssessmentType}" Style="{StaticResource orangeBodyLabel}"/>
+                            <patch:Label Text="ASSESSMENT TYPE" Style="{StaticResource orangeHeaderLabel}"
+                                         Lines="1" AutoFit="Width"/>
+                            <patch:Label Text="{Binding AssessmentType}" Style="{StaticResource orangeBodyLabel}"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource orangeFrame}"
                            Grid.Column="1" Grid.Row="3">
                         <StackLayout>
-                            <Label Text="Standard Type" Style="{StaticResource orangeHeaderLabel}"/>
-                            <Label Text="{Binding StandardType}" Style="{StaticResource orangeBodyLabel}"/>
+                            <patch:Label Text="STANDARD TYPE" Style="{StaticResource orangeHeaderLabel}"
+                                         Lines="1" AutoFit="Width"/>
+                            <patch:Label Text="{Binding StandardType}" Style="{StaticResource orangeBodyLabel}"
+                                         AutoFit="Width" Lines="1"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="0" Grid.Row="4">
                         <StackLayout>
-                            <Label Text="Subject" Style="{StaticResource blueHeaderLabel}"/>
-                            <Label Text="{Binding Subject}" Style="{StaticResource blueBodyLabel}"
+                            <patch:Label Text="SUBJECT" Style="{StaticResource blueHeaderLabel}"/>
+                            <patch:Label Text="{Binding Subject}" Style="{StaticResource blueBodyLabel}"
                                    FontSize="26"/>
                         </StackLayout>
                     </Frame>
@@ -134,8 +137,8 @@
                     <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="1" Grid.Row="4">
                         <StackLayout>
-                            <Label Text="Subfield" Style="{StaticResource blueHeaderLabel}"/>
-                            <Label Text="{Binding Subfield}" Style="{StaticResource blueBodyLabel}"
+                            <patch:Label Text="SUBFIELD" Style="{StaticResource blueHeaderLabel}"/>
+                            <patch:Label Text="{Binding Subfield}" Style="{StaticResource blueBodyLabel}"
                                    FontSize="26"/>
                         </StackLayout>
                     </Frame>
@@ -143,16 +146,17 @@
                     <Frame Style="{StaticResource orangeFrame}"
                            Grid.Column="0" Grid.Row="5">
                         <StackLayout>
-                            <Label Text="Domain" Style="{StaticResource orangeHeaderLabel}"/>
-                            <Label Text="{Binding Domain}" Style="{StaticResource orangeBodyLabel}"/>
+                            <patch:Label Text="DOMAIN" Style="{StaticResource orangeHeaderLabel}"/>
+                            <patch:Label Text="{Binding Domain}" Style="{StaticResource orangeBodyLabel}"
+                                         FontSize="26"/>
                         </StackLayout>
                     </Frame>
 
                     <Frame Style="{StaticResource orangeFrame}"
                            Grid.Column="1" Grid.Row="5">
                         <StackLayout>
-                            <Label Text="Level" Style="{StaticResource orangeHeaderLabel}"/>
-                            <Label Text="{Binding Level}" Style="{StaticResource orangeBodyLabel}"/>
+                            <patch:Label Text="LEVEL" Style="{StaticResource orangeHeaderLabel}"/>
+                            <patch:Label Text="{Binding Level}" Style="{StaticResource orangeBodyLabel}"/>
                         </StackLayout>
                     </Frame>
 
@@ -169,7 +173,7 @@
                                     <Setter Property="Scale" Value="{OnIdiom Phone=1, Tablet=1.5}"/>
                                 </Style>
 
-                                <Style TargetType="Label">
+                                <Style TargetType="patch:Label">
                                     <Setter Property="HorizontalTextAlignment" Value="Center"/>
                                 </Style>
 
@@ -182,7 +186,7 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="0" Grid.Row="0">
                             <StackLayout>
-                                <Label Text="Literacy" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="LITERACY" Style="{StaticResource blueHeaderLabel}"/>
                                 <CheckBox IsChecked="{Binding IsLiteracy}"/>
                             </StackLayout>
                         </Frame>
@@ -190,7 +194,7 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="1" Grid.Row="0">
                             <StackLayout>
-                                <Label Text="Numeracy" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="NUMERACY" Style="{StaticResource blueHeaderLabel}"/>
                                 <CheckBox IsChecked="{Binding IsNumeracy}"/>
                             </StackLayout>
                         </Frame>
@@ -198,7 +202,7 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="{OnIdiom Phone=0, Tablet=2}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
                             <StackLayout>
-                                <Label Text="Reading" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="READING" Style="{StaticResource blueHeaderLabel}"/>
                                 <CheckBox IsChecked="{Binding IsReading}"/>
                             </StackLayout>
                         </Frame>
@@ -206,7 +210,7 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="{OnIdiom Phone=1, Tablet=3}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
                             <StackLayout>
-                                <Label Text="Writing" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="WRITING" Style="{StaticResource blueHeaderLabel}"/>
                                 <CheckBox IsChecked="{Binding IsWriting}"/>
                             </StackLayout>
                         </Frame>
