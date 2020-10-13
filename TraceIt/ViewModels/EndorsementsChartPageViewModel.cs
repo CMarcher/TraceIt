@@ -52,15 +52,15 @@ namespace TraceIt.ViewModels
         {
             switch (standard.Level)
             {
-                case Standard.NCEALevel.One:
+                case Standard.Levels.One:
                     LevelOneEndorsement.AddCredits(standard);
                     break;
 
-                case Standard.NCEALevel.Two:
+                case Standard.Levels.Two:
                     LevelTwoEndorsement.AddCredits(standard);
                     break;
 
-                case Standard.NCEALevel.Three:
+                case Standard.Levels.Three:
                     LevelThreeEndorsement.AddCredits(standard);
                     break;
             }
