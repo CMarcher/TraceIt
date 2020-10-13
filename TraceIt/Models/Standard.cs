@@ -11,6 +11,40 @@ namespace TraceIt.Models
     [Table("AssessmentStandards")]
     public class Standard : BaseModel
     {
+        public enum StandardTypes
+        {
+            Unit,
+            Achievement
+        }
+
+        public enum AssessmentTypes
+        {
+            Internal,
+            External
+        }
+
+        public enum Levels
+        {
+            One = 1,
+            Two,
+            Three
+        }
+
+        public enum GradeOptions
+        {
+            AchievedOnly,
+            UpToMerit,
+            UpToExcellence
+        }
+
+        public enum Grade
+        {
+            NotAchieved,
+            Achieved,
+            Merit,
+            Excellence
+        }
+
         #region Properties
         [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
@@ -25,10 +59,10 @@ namespace TraceIt.Models
         public int Code { get; set; }
 
         [NotNull]
-        public string StandardType { get; set; }
+        public StandardTypes StandardType { get; set; }
 
         [NotNull]
-        public string AssessmentType { get; set; }
+        public AssessmentTypes AssessmentType { get; set; }
 
         public string Subject { get; set; }
 
@@ -37,25 +71,11 @@ namespace TraceIt.Models
         [NotNull]
         public string Title { get; set; }
 
-        public enum NCEALevel
-        {
-            One = 1,
-            Two,
-            Three
-        }
-
         [NotNull]
-        public NCEALevel Level { get; set; }
+        public Levels Level { get; set; }
 
         [NotNull]
         public int Credits { get; set; }
-
-        public enum GradeOptions
-        {
-            AchievedOnly,
-            UpToMerit,
-            UpToExcellence
-        }
 
         [NotNull]
         public GradeOptions GradingScheme { get; set; }
@@ -107,14 +127,6 @@ namespace TraceIt.Models
 
         [NotNull]
         public bool IsWriting { get; set; }
-
-        public enum Grade
-        {
-            NotAchieved,
-            Achieved,
-            Merit,
-            Excellence
-        }
 
         private Grade _goalGrade;
         public Grade GoalGrade
