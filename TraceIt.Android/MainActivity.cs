@@ -18,6 +18,7 @@ namespace TraceIt.Droid
 
             base.OnCreate(savedInstanceState);
 
+            Forms9Patch.Droid.Settings.Initialize(this);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
