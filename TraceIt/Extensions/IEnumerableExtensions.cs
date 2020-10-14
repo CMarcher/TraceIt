@@ -61,5 +61,22 @@ namespace TraceIt.Extensions
 
             return credits;
         }
+
+        public static bool IsEligibleForEndorsement(this IEnumerable<Standard> standards)
+        {
+            Func<Standard, bool> criteria = standard => (int)standard.GradingScheme >= 2;
+            int eligibleCreditsCount = 0;
+
+            foreach(var standard in standards)
+            {
+                bool isEligible = criteria(standard);
+                if (isEligible)
+                    eligibleCreditsCount += standard.Credits;
+            }
+
+            bool isEligibleOverall = eligibleCreditsCount >= 12;
+
+            return isEligibleOverall;
+        }
     }
 }
