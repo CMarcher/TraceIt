@@ -37,6 +37,7 @@
         </Style>
 
         <converters:CreditsTotalLabelConverter x:Key="labelConverter"/>
+        <converters:InverseBoolConverter x:Key="invertBoolConverter"/>
     </views:BasePage.Resources>
 
     <views:BasePage.Content>
@@ -101,6 +102,12 @@
                                         </Label>
 
                                         <Label Text="{Binding StandardsCount, StringFormat='{0} standards'}" Margin="0, 0, 0, 12"/>
+
+                                        <Frame CornerRadius="20" BackgroundColor="Orange"
+                                               IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}">
+                                            
+                                            <Label Text="Not eligible for endorsement" TextColor="White"/>
+                                        </Frame>
 
                                         <Button Text="View Info" CornerRadius="20"
                                                      TextColor="Black" FontAttributes="Bold" 
