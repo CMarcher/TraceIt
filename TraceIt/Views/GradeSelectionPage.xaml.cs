@@ -35,7 +35,7 @@ namespace TraceIt.Views
                 if (standard.StandardType == Models.Standard.StandardTypes.Achievement)
                     return standard.SubjectReference;
                 else
-                    return standard.Code.ToString();
+                    return "US" + standard.Code.ToString();
             }
         }
     }
