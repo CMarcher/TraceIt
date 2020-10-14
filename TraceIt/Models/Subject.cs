@@ -81,6 +81,14 @@ namespace TraceIt.Models
             set => SetProperty(ref _custom, value, nameof(Custom));
         }
 
+        private bool _endorsementEligible;
+        [Ignore]
+        public bool EndorsementEligible
+        {
+            get => _endorsementEligible;
+            set => SetProperty(ref _endorsementEligible, value, nameof(EndorsementEligible));
+        }
+
         private int _standardsCount;
         [Column("Standards")]
         public int StandardsCount
@@ -101,6 +109,7 @@ namespace TraceIt.Models
         {
             SetCredits();
             CountStandards();
+            SetEndorsementEligibilty();
             await PushChangesAsync();
         }
 
@@ -174,6 +183,9 @@ namespace TraceIt.Models
                 await standard.DeselectAsync();
             }
         }
+
+        private void SetEndorsementEligibilty()
+            => EndorsementEligible = Standards.IsEligibleForEndorsement();
 
         private void SubscribeToFinalGradeChanged(Standard standard)
             => standard.FinalGradeChanged += new EventHandler(OnFinalGradeChanged);
