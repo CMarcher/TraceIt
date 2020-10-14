@@ -54,7 +54,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}" BindingContext="{Binding Standard}">
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
             <StackLayout Margin="{OnIdiom Phone=0, Tablet=15}"
                          AbsoluteLayout.LayoutFlags="All"
