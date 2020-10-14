@@ -184,12 +184,12 @@ namespace TraceIt.Services
                 case StandardType.Achievement:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards" +
-                        "WHERE StandardType = 'A' ORDER BY Subfield;");
+                        "WHERE StandardType = 0 ORDER BY Subfield;");
 
                 case StandardType.Unit:
                     return await Database.QueryAsync<SubfieldModel>(
                         "SELECT DISTINCT Subfield FROM AssessmentStandards " +
-                        "WHERE StandardType = 'U' ORDER BY Subfield;");
+                        "WHERE StandardType = 0 ORDER BY Subfield;");
 
                 default:
                     return null;
