@@ -50,7 +50,24 @@
             <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
 
-                <xforms:SfListView x:Name="collectionViewSubjects" AutoFitMode="Height" 
+                <Frame BackgroundColor="#001257" CornerRadius="0"
+                       Padding="10" HasShadow="False">
+                    
+                    <Picker Title="Selected year" HeightRequest="50"
+                        BackgroundColor="#000d40" TextColor="White"
+                        TitleColor="White" FontSize="20" 
+                        HorizontalTextAlignment="Center" FontAttributes="Bold">
+                        
+                        <Picker.Items>
+                            <x:String>2018</x:String>
+                            <x:String>2019</x:String>
+                            <x:String>2020</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+                
+
+                <xforms:SfListView x:Name="collectionViewSubjects" AutoFitMode="DynamicHeight" 
                                    ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
                                    SelectionMode="None" ItemsSource="{Binding Subjects}">
 
@@ -103,10 +120,12 @@
 
                                         <Label Text="{Binding StandardsCount, StringFormat='{0} standards'}" Margin="0, 0, 0, 12"/>
 
-                                        <Frame CornerRadius="20" BackgroundColor="Orange"
-                                               IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}">
+                                        <Frame CornerRadius="15" BackgroundColor="DodgerBlue"
+                                               IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}"
+                                               IsClippedToBounds="True" Padding="0" Margin="0" HorizontalOptions="Center">
                                             
-                                            <Label Text="Not eligible for endorsement" TextColor="White"/>
+                                            <Label Text="Not eligible for endorsement" TextColor="White" Margin="10, 7"
+                                                   FontSize="12" FontAttributes="Bold, Italic"/>
                                         </Frame>
 
                                         <Button Text="View Info" CornerRadius="20"
@@ -114,7 +133,7 @@
                                                      FontSize="17" Style="{DynamicResource subjectButtonGradient}"
                                                      Clicked="buttonViewInfo_Clicked" HorizontalOptions="Center"
                                                      WidthRequest="200" HeightRequest="40"
-                                                     VerticalOptions="End"/>
+                                                     VerticalOptions="EndAndExpand"/>
 
                                     </StackLayout>
                                 </Frame>
