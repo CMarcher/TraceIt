@@ -9,5 +9,6 @@ namespace TraceIt.Utilities
     {
         public static Subject CurrentSubject { get; set; } = null;
         public static Standard CurrentStandard { get; set; } = null;
+        public static int CurrentYear { get; set; } = 2020;
     }
 }
