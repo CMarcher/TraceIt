@@ -70,7 +70,7 @@
             </Frame>
 
             <Frame>
-                <controls:CustomPicker x:Name="pickerLevel" Title="Select your NCEA level">
+                <controls:CustomPicker x:Name="pickerLevel" Title="Select the year you are currently working at">
                     <controls:CustomPicker.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
                             <OnPlatform.Platforms>
@@ -80,9 +80,9 @@
                         </OnPlatform>
                     </controls:CustomPicker.Margin>
                     <Picker.Items>
-                        <x:String>Level 1</x:String>
-                        <x:String>Level 2</x:String>
-                        <x:String>Level 3</x:String>
+                        <x:String>2018</x:String>
+                        <x:String>2019</x:String>
+                        <x:String>2020</x:String>
                     </Picker.Items>
                 </controls:CustomPicker>
             </Frame>
