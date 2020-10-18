@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Controls;
+using TraceIt.Utilities;
 using TraceIt.Views;
 using Xamarin.Forms;
 
@@ -25,7 +26,10 @@ namespace TraceIt
             if (InputFieldsInvalid())
                 await DisplayAlert("There's a problem!", "Please fill the required fields.", "Fine");
             else
+            {
+                StatusTracker.CurrentYear = int.Parse((string)pickerLevel.SelectedItem);
                 await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
+            }
         }
 
         public bool InputFieldsInvalid()
@@ -34,7 +38,6 @@ namespace TraceIt
                 return true;
             else
                 return false;
-
         }
     }
 }
