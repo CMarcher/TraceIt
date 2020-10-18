@@ -17,7 +17,7 @@ namespace TraceIt.Services
         Task<List<SubfieldModel>> GetSubfieldsAsync(DataService.StandardType filterOptions);
         Task<ObservableCollection<Subject>> GetSubjectsAsync();
         Task UpdateStandardAsync(Standard standard);
-        Task UpdateSubjectAsync(Subject subject);
+        Task UpdateOrInsertSubjectAsync(Subject subject);
         Task UpdateSubjectsAsync(List<Subject> subjects);
     }
 }
