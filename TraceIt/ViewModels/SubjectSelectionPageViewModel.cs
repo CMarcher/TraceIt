@@ -29,7 +29,7 @@ namespace TraceIt.ViewModels
         {
             subject.Selected = !subject.Selected;
 
-            await App.DataService.UpdateSubjectAsync(subject);
+            await App.DataService.UpdateOrInsertSubjectAsync(subject);
         }
     }
 }
