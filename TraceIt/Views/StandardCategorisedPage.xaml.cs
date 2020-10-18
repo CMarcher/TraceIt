@@ -37,19 +37,19 @@ namespace TraceIt.Views
             SetItemsSource();
         }
 
-        private void collectionViewCategories_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        private async void collectionViewCategories_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            PushPage(e.ItemData);
+            await PushPage(e.ItemData);
         }
 
-        private void PushPage(object item)
+        private async Task PushPage(object item)
         {
             if (item is SubfieldModel)
-                Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterOption.Subfield));
+                await Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterOption.Subfield));
             else if (item is Subject)
-                Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterOption.Subject));
+                await Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterOption.Subject));
             else if (item is Standard)
-                Navigation.PushAsync(new StandardDetailPage((Standard)item));
+                await Navigation.PushAsync(new StandardDetailPage((Standard)item));
             else
                 throw new Exception("Invalid item type: " + item.GetType());
 
@@ -68,7 +68,7 @@ namespace TraceIt.Views
             //    listView.DataSource.Refresh();
             //}
 
-            if (searchBar.Text != null)
+            if (searchBar.Text != "")
                 listView.ItemsSource = await GetFilteredStandards(searchBar.Text);
             else
                 SetItemsSource();
