@@ -56,7 +56,8 @@
                     <Picker Title="Selected year" HeightRequest="50"
                         BackgroundColor="#000d40" TextColor="White"
                         TitleColor="White" FontSize="20" 
-                        HorizontalTextAlignment="Center" FontAttributes="Bold">
+                        HorizontalTextAlignment="Center" FontAttributes="Bold"
+                        x:Name="yearPicker" SelectedIndexChanged="yearPicker_SelectedIndexChanged">
                         
                         <Picker.Items>
                             <x:String>2018</x:String>
@@ -67,7 +68,7 @@
                 </Frame>
                 
 
-                <xforms:SfListView x:Name="collectionViewSubjects" AutoFitMode="DynamicHeight" 
+                <xforms:SfListView x:Name="listViewSubjects" AutoFitMode="DynamicHeight" 
                                    ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
                                    SelectionMode="None" ItemsSource="{Binding Subjects}">
 

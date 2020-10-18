@@ -21,6 +21,7 @@ namespace TraceIt.Views
         public SubjectsPage()
         {
             InitializeComponent();
+            yearPicker.SelectedIndex = 2;
         }
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
@@ -46,6 +47,25 @@ namespace TraceIt.Views
         {
             BindingContext = await SubjectsPageViewModel.InitialiseAsync();
             Initialised = true;
+        }
+
+        private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listViewSubjects.DataSource.Filter = FilterYear;
+            listViewSubjects.DataSource.Refresh();
+            listViewSubjects.DataSource.RefreshFilter();
+        }
+
+        bool FilterYear(object item)
+        {
+            if (listViewSubjects.DataSource is null || yearPicker.SelectedIndex == -1)
+                return true;
+
+            var subject = item as Subject;
+            int year = int.Parse((string)yearPicker.SelectedItem);
+            bool matchesSelectedYear = subject.Year == year;
+
+            return matchesSelectedYear;
         }
     }
 }
