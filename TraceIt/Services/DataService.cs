@@ -158,11 +158,20 @@ namespace TraceIt.Services
             return new ObservableCollection<Subject>(subjects);
         }
 
-        public async Task UpdateSubjectAsync(Subject subject)
-            => await Database.UpdateAsync(subject);
+        public async Task UpdateOrInsertSubjectAsync(Subject subject)
+        {
+            var rowsUpdated = await Database.UpdateAsync(subject);
+            bool notUpdated = rowsUpdated == 0;
+
+            if (notUpdated)
+                await Database.InsertAsync(subject);
+        }
         
         public async Task UpdateSubjectsAsync(List<Subject> subjects)
-            => await Database.UpdateAllAsync(subjects);
+        {
+            foreach(var subject in subjects)
+                await UpdateOrInsertSubjectAsync(subject);
+        }
 
         public async Task DeleteSubjectAsync(Subject subject)
         {
