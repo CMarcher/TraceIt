@@ -30,7 +30,6 @@ namespace TraceIt.Models
             set => SetProperty(ref _name, value, nameof(Name));
         }
 
-        [NotNull]
         public string Subfield { get; set; }
 
         private int _credits;
@@ -97,13 +96,20 @@ namespace TraceIt.Models
             set => SetProperty(ref _standardsCount, value, nameof(StandardsCount));
         }
 
+        private int _year;
+        public int Year
+        {
+            get => _year;
+            set => SetProperty(ref _year, value, nameof(Year));
+        }
+
         void CountStandards()
             => StandardsCount = Standards.Count;
 
         public Subject() { }
 
         public async Task PushChangesAsync()
-            => await App.DataService.UpdateSubjectAsync(this);
+            => await App.DataService.UpdateOrInsertSubjectAsync(this);
 
         private async Task RefreshAsync()
         {
