@@ -21,6 +21,7 @@ namespace TraceIt.Views
         public SubjectSelectionPage()
         {
             InitializeComponent();
+            Title = "Select Subjects for " + StatusTracker.CurrentYear;
         }
 
         private async void buttonConfirm_Clicked(object sender, EventArgs e)
@@ -31,17 +32,22 @@ namespace TraceIt.Views
 
         private async void addButton_Clicked(object sender, EventArgs e)
         {
-            await DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
+            string subjectName = await DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
+            var viewmodel = BindingContext as SubjectSelectionPageViewModel;
+
+            viewmodel.Subjects.Add(new Subject()
+            {
+                Name = subjectName,
+                Custom = true
+            });
         }
 
         private async void closeButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopModalAsync();
-        }
+            => await Navigation.PopModalAsync();
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(subjectsListView.DataSource != null)
+            if (subjectsListView.DataSource != null)
             {
                 subjectsListView.DataSource.Filter = FilterSubjects;
                 subjectsListView.DataSource.Refresh();
@@ -52,7 +58,7 @@ namespace TraceIt.Views
         {
             if (searchBar.Text == null)
                 return true;
-            
+
             var subject = obj as Subject;
             if (subject.Name.ToLower().Contains(searchBar.Text.ToLower()))
                 return true;
@@ -63,7 +69,10 @@ namespace TraceIt.Views
         private List<Subject> GetSelectedItems()
         {
             return subjectsListView.SelectedItems.ToListWithAction<Subject>(
-                (subject) => subject.Selected = true);
+                (subject) =>
+                {
+                    subject.Selected = true;
+                    subject.Year = StatusTracker.CurrentYear; });
         }
     }
 }

@@ -7,9 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SubjectSelectionPage"
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
-             Title="Select your subjects">
+             x:Class="TraceIt.Views.SubjectSelectionPage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -81,7 +79,7 @@
                     <DataTemplate>
                         <Frame Background="{DynamicResource OrangeToLightGradient}">
 
-                            <Label Text="{Binding Name}" TextColor="#EBEBEB"
+                            <Label Text="{Binding Name}" TextColor="Black"
                                Style="{StaticResource subjectItemLabel}"/>
 
                         </Frame>
