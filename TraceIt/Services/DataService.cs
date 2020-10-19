@@ -46,16 +46,12 @@ namespace TraceIt.Services
             string documentsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var databasePath = Path.Combine(documentsDirectory, databaseName);
 
-            //File.Delete(databasePath); // Removed for debugging purposes.
-
             bool fileExists = File.Exists(databasePath);
             if (!fileExists)
             {
                 using (var assetStream = await FileSystem.OpenAppPackageFileAsync(databaseName))
                 using (var fileStream = new FileStream(databasePath, FileMode.Create, FileAccess.Write))
-                {
                     await assetStream.CopyToAsync(fileStream);
-                }
             }
 
             var connection = new SQLiteAsyncConnection(databasePath, Constants.Flags);
@@ -76,6 +72,7 @@ namespace TraceIt.Services
             }
         }
 
+        #region Standard methods
         public async Task<ObservableCollection<Standard>> GetStandardsAsync()
         {
             var assessmentStandards = await Database.Table<Standard>().ToListAsync();
@@ -139,7 +136,9 @@ namespace TraceIt.Services
 
         public async Task UpdateStandardAsync(Standard standard)
             => await Database.UpdateAsync(standard);
-        
+        #endregion
+
+        #region Subject methods
         public async Task<ObservableCollection<Subject>> GetSubjectsAsync()
         {
             var subjects = await Database.Table<Subject>()
@@ -159,13 +158,7 @@ namespace TraceIt.Services
         }
 
         public async Task UpdateOrInsertSubjectAsync(Subject subject)
-        {
-            var rowsUpdated = await Database.UpdateAsync(subject);
-            bool notUpdated = rowsUpdated == 0;
-
-            if (notUpdated)
-                await Database.InsertAsync(subject);
-        }
+            => await UpdateOrInsertObjectAsync(subject);
         
         public async Task UpdateSubjectsAsync(List<Subject> subjects)
         {
@@ -180,6 +173,22 @@ namespace TraceIt.Services
             else
                 throw new Exception("Can't delete base subjects.");
         }
+        #endregion
+
+        #region SelectedSubject methods
+        public async Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsNewAsync()
+        {
+            var subjects = await Database.Table<SelectedSubject>().ToListAsync();
+
+            return new ObservableCollection<SelectedSubject>(subjects);
+        }
+
+        public async Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject)
+            => await UpdateOrInsertObjectAsync(subject);
+
+        public async Task DeleteSelectedSubjectAsync(SelectedSubject subject)
+            => await Database.DeleteAsync(subject);
+        #endregion
 
         public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
@@ -257,5 +266,18 @@ namespace TraceIt.Services
             return new ObservableCollection<CreditBreakdown>()
                 { notAchieved, achieved, merit, excellence };
         }
+
+        #region Generic methods
+
+        public async Task UpdateOrInsertObjectAsync(object item)
+        {
+            var rowsUpdated = await Database.UpdateAsync(item);
+            bool notUpdated = rowsUpdated == 0;
+
+            if (notUpdated)
+                await Database.InsertAsync(item);
+        }
+
+        #endregion
     }
 }
