@@ -14,21 +14,11 @@ namespace TraceIt.Models
     [Table("Subjects")]
     public class Subject : BaseModel, ISubjectItem
     {
-        private int _id;
         [PrimaryKey]
-        public int ID
-        {
-            get => _id;
-            set => SetProperty(ref _id, value, nameof(ID));
-        }
+        public int ID { get; set; }
 
-        private string _name;
         [NotNull]
-        public string Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value, nameof(Name));
-        }
+        public string Name { get; set; }
 
         public string Subfield { get; set; }
 
