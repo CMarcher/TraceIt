@@ -60,13 +60,13 @@
                         x:Name="yearPicker" SelectedIndexChanged="yearPicker_SelectedIndexChanged">
                         
                         <Picker.Items>
+                            <x:String>2017</x:String>
                             <x:String>2018</x:String>
                             <x:String>2019</x:String>
                             <x:String>2020</x:String>
                         </Picker.Items>
                     </Picker>
                 </Frame>
-                
 
                 <xforms:SfListView x:Name="listViewSubjects" AutoFitMode="DynamicHeight" 
                                    ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
@@ -77,7 +77,7 @@
                     </xforms:SfListView.LayoutManager>
 
                     <xforms:SfListView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Subject">
+                        <DataTemplate x:DataType="models:SelectedSubject">
                             <SwipeView BackgroundColor="Transparent">
 
                                 <SwipeView.RightItems>
@@ -107,7 +107,7 @@
                                 <Frame Style="{DynamicResource listItemFrame}" Padding="0">
                                     <StackLayout Padding="10, 13, 10, 20">
 
-                                        <Label Text="{Binding Name}" FontAttributes="Bold" 
+                                        <Label Text="{Binding BaseSubject.Name}" FontAttributes="Bold" 
                                            Margin="0, 0, 0, 12"/>
 
                                         <Label>
