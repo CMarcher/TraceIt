@@ -26,7 +26,7 @@ namespace TraceIt.Views
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
         {
-            var subject = (sender as Button)?.BindingContext as Subject;
+            var subject = (sender as Button)?.BindingContext as SelectedSubject;
             StatusTracker.CurrentSubject = subject;
 
             await Navigation.PushAsync(new SelectedStandardsPage());
@@ -51,21 +51,22 @@ namespace TraceIt.Views
 
         private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listViewSubjects.DataSource.Filter = FilterYear;
+            listViewSubjects.DataSource.Filter = FilterSubject;
             listViewSubjects.DataSource.Refresh();
             listViewSubjects.DataSource.RefreshFilter();
         }
 
-        bool FilterYear(object item)
+        bool FilterSubject(object item)
         {
             if (listViewSubjects.DataSource is null || yearPicker.SelectedIndex == -1)
                 return true;
 
-            var subject = item as Subject;
+            var subject = item as SelectedSubject;
             int year = int.Parse((string)yearPicker.SelectedItem);
             bool matchesSelectedYear = subject.Year == year;
+            bool isSelected = subject.Selected;
 
-            return matchesSelectedYear;
+            return matchesSelectedYear && isSelected;
         }
     }
 }
