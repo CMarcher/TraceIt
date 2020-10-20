@@ -17,7 +17,7 @@ namespace TraceIt.ViewModels
         public Endorsement LevelOneEndorsement { get; private set; } = new Endorsement();
         public Endorsement LevelTwoEndorsement { get; private set; } = new Endorsement();
         public Endorsement LevelThreeEndorsement { get; private set; } = new Endorsement();
-        public ObservableCollection<SubjectEndorsement> SubjectEndorsements { get; private set; } = new ObservableCollection<SubjectEndorsement>();
+        public ObservableCollection<SelectedSubject> SubjectEndorsements { get; private set; }
 
         bool initialised = false;
 
@@ -69,20 +69,7 @@ namespace TraceIt.ViewModels
         void SetSubjectEndorsements()
         {
             var subjects = App.DataRepository.SelectedSubjects;
-
-            foreach(var subject in subjects)
-            {
-                var meritCredits = subject.MeritCredits; 
-                var excellenceCredits = subject.ExcellenceCredits;
-                var name = subject.Name;
-
-                SubjectEndorsements.Add(new SubjectEndorsement()
-                {
-                    Name = name,
-                    MeritCredits = meritCredits,
-                    ExcellenceCredits = excellenceCredits
-                });
-            }
+            SubjectEndorsements = subjects;
         }
 
         void ClearEndorsements()
@@ -90,9 +77,6 @@ namespace TraceIt.ViewModels
             LevelOneEndorsement.ClearCredits();
             LevelTwoEndorsement.ClearCredits();
             LevelThreeEndorsement.ClearCredits();
-            SubjectEndorsements.ClearCredits();
         }
-
-
     }
 }
