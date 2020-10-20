@@ -9,13 +9,26 @@ using TraceIt.Extensions;
 
 namespace TraceIt.Models
 {
+    [Table("SelectedSubjects")]
     public class SelectedSubject : BaseModel
     {
-        [PrimaryKey]
+        public SelectedSubject() { }
+
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
-        [OneToOne]
+        [ForeignKey(typeof(Subject))]
+        public int SubjectID { get; set; }
+
+        [ManyToOne]
         public Subject BaseSubject { get; set; }
+
+        private bool _selected;
+        public bool Selected
+        {
+            get => _selected;
+            set => SetProperty(ref _selected, value, nameof(Selected));
+        }
 
         private int _credits;
         [NotNull]
@@ -49,22 +62,6 @@ namespace TraceIt.Models
             set => SetProperty(ref _excellenceCredits, value, nameof(ExcellenceCredits));
         }
 
-        private bool _selected;
-        [NotNull]
-        public bool Selected
-        {
-            get => _selected;
-            set => SetProperty(ref _selected, value, nameof(Selected));
-        }
-
-        private bool _custom;
-        [NotNull]
-        public bool Custom
-        {
-            get => _custom;
-            set => SetProperty(ref _custom, value, nameof(Custom));
-        }
-
         private bool _endorsementEligible;
         [Ignore]
         public bool EndorsementEligible
@@ -91,10 +88,20 @@ namespace TraceIt.Models
         void CountStandards()
             => StandardsCount = Standards.Count;
 
-        public SelectedSubject() { }
-
         public async Task PushChangesAsync()
             => await App.DataService.UpdateOrInsertSelectedSubjectAsync(this);
+
+        public async Task Select()
+        {
+            Selected = true;
+            await PushChangesAsync();
+        }
+
+        public async Task Deselect()
+        {
+            Selected = false;
+            await PushChangesAsync();
+        }
 
         private async Task RefreshAsync()
         {
@@ -107,15 +114,7 @@ namespace TraceIt.Models
         public async Task Delete()
         {
             await ClearStandards();
-
-            if (Custom is false)
-            {
-                Selected = false;
-                Credits = MeritCredits = ExcellenceCredits = 0;
-                await PushChangesAsync();
-            }
-            else
-                await App.DataService.DeleteSelectedSubjectAsync(this);
+            await App.DataService.DeleteSelectedSubjectAsync(this);
         }
 
         private void SetCredits()
