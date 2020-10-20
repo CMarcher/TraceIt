@@ -21,7 +21,7 @@ namespace TraceIt.Views
         public SelectedStandardsPage()
         {
             InitializeComponent();
-            Title = StatusTracker.CurrentSubject.Name;
+            Title = StatusTracker.CurrentSubject.BaseSubject.Name;
         }
 
         private async void buttonViewMore_Clicked(object sender, EventArgs e)
@@ -42,15 +42,5 @@ namespace TraceIt.Views
 
             await Navigation.PushModalAsync(new NavigationPage(new GradeSelectionPage()));
         }
-
-        /// <summary>
-        /// Used only for debugging class variables at a point in time.
-        /// </summary>
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
-
     }
 }
