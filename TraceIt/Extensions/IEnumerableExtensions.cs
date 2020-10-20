@@ -24,15 +24,13 @@ namespace TraceIt.Extensions
             return convertedList;
         }
 
-        public static ObservableCollection<TResult> ToObservableCollection<TResult>(this IEnumerable list)
+        public static ObservableCollection<TResult> ToObservableCollection<TResult>(this IEnumerable<TResult> list)
         {
             var convertedCollection = new ObservableCollection<TResult>();
 
             foreach(var item in list)
-            {
-                convertedCollection.Add((TResult)item);
-            }
-
+                convertedCollection.Add(item);
+            
             return convertedCollection;
         }
 
