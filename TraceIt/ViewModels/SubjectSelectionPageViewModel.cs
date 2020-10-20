@@ -12,24 +12,27 @@ using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
 {
-    public class SubjectSelectionPageViewModel
+    public class SubjectSelectionPageViewModel : BaseViewModel
     {
-        public ObservableCollection<SelectedSubject> Subjects { get; private set; } = new ObservableCollection<SelectedSubject>();
+        private ObservableCollection<SelectedSubject> _subjects;
+        public ObservableCollection<SelectedSubject> Subjects
+        {
+            get => _subjects;
+            set => SetProperty(ref _subjects, value, nameof(Subjects));
+        }
         public Command ChangeSelectionCommand { get; private set; }
 
         public SubjectSelectionPageViewModel()
         {
-            Task.Run(SetSubjectsAsync).Wait();
+            SetSubjectsAsync();
             Debug.WriteLine("Subjects finished loading.");
             InitialiseCommands();
         }
 
         private void InitialiseCommands()
-        {
-            ChangeSelectionCommand = new Command<SelectedSubject>(async (subject) => await ChangeSubjectSelection(subject));
-        }
+            => ChangeSelectionCommand = new Command<SelectedSubject>(async (subject) => await ChangeSubjectSelection(subject));
 
-        async Task ChangeSubjectSelection(SelectedSubject subject)
+        private async Task ChangeSubjectSelection(SelectedSubject subject)
         {
             Task task = subject.Selected == false ?
                 subject.Select() :
@@ -38,6 +41,6 @@ namespace TraceIt.ViewModels
             await task;
         }
 
-        async Task SetSubjectsAsync() => Subjects = await App.DataService.GetSelectedSubjectsAsync();
+        private void SetSubjectsAsync() => Subjects = App.DataRepository.SelectedSubjects;
     }
 }
