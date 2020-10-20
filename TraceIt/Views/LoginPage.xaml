@@ -80,6 +80,7 @@
                         </OnPlatform>
                     </controls:CustomPicker.Margin>
                     <Picker.Items>
+                        <x:String>2017</x:String>
                         <x:String>2018</x:String>
                         <x:String>2019</x:String>
                         <x:String>2020</x:String>
