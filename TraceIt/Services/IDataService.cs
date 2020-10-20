@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TraceIt.Models;
@@ -8,16 +9,22 @@ namespace TraceIt.Services
 {
     public interface IDataService
     {
+        Task DeleteSelectedSubjectAsync(SelectedSubject subject);
+        Task DeleteSubjectAsync(Subject subject);
+        Task<Tuple<int, int>> GetAchievedAndTotalCreditsAsync();
         Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterOption filterByOption);
+        Task<ObservableCollection<CreditBreakdown>> GetCreditBreakdownsAsync();
         Task<List<Standard>> GetMatchingStandards(string searchQuery);
-        Task<ObservableCollection<Standard>> GetStandardsForSubjectAsync(string subjectName);
-        Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync();
+        Task<ObservableCollection<Standard>> GetSelectedStandardsAsync();
+        Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsAsync();
         Task<Standard> GetStandardByIDAsync(int id);
         Task<ObservableCollection<Standard>> GetStandardsAsync();
+        Task<ObservableCollection<Standard>> GetStandardsForSubjectAsync(string subjectName);
         Task<List<SubfieldModel>> GetSubfieldsAsync(DataService.StandardType filterOptions);
         Task<ObservableCollection<Subject>> GetSubjectsAsync();
-        Task UpdateStandardAsync(Standard standard);
+        Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject);
         Task UpdateOrInsertSubjectAsync(Subject subject);
+        Task UpdateStandardAsync(Standard standard);
         Task UpdateSubjectsAsync(List<Subject> subjects);
     }
 }
