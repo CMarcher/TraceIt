@@ -7,7 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SubjectSelectionPage">
+             x:Class="TraceIt.Views.SubjectSelectionPage"
+             x:Name="Page">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -59,33 +60,39 @@
                        Grid.Row="0"/>
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
-                             SelectionMode="Multiple" VerticalOptions="StartAndExpand"
-                             HorizontalOptions="FillAndExpand" Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}" 
-                             Margin="0" AutoFitMode="DynamicHeight"
-                             ItemsSource="{Binding Subjects}" Grid.Row="1">
-
+                                 VerticalOptions="StartAndExpand" SelectionMode="None"
+                                 HorizontalOptions="FillAndExpand" Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}" 
+                                 Margin="0" AutoFitMode="DynamicHeight"
+                                 ItemsSource="{Binding Subjects}" Grid.Row="1">
+                
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Background="{DynamicResource BlueToDarkGradient}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ChangeSelectionCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
 
-                            <Label Text="{Binding Name}" TextColor="White"
-                               Style="{StaticResource subjectItemLabel}"/>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding Selected}"
+                                             Value="true">
+                                    <Setter Property="Background" Value="{DynamicResource OrangeToLightGradient}"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+
+                            <Label Text="{Binding BaseSubject.Name}" TextColor="White"
+                                   Style="{StaticResource subjectItemLabel}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Selected}"
+                                             Value="true">
+                                        <Setter Property="TextColor" Value="Black"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
                         </Frame>
                     </DataTemplate>
                 </listview:SfListView.ItemTemplate>
-
-                <listview:SfListView.SelectedItemTemplate>
-                    <DataTemplate>
-                        <Frame Background="{DynamicResource OrangeToLightGradient}">
-
-                            <Label Text="{Binding Name}" TextColor="Black"
-                               Style="{StaticResource subjectItemLabel}"/>
-
-                        </Frame>
-                    </DataTemplate>
-                </listview:SfListView.SelectedItemTemplate>
-
             </listview:SfListView>
 
             <Button x:Name="buttonConfirm" Text="CONFIRM"
@@ -101,6 +108,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
