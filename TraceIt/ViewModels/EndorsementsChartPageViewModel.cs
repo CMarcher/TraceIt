@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Extensions;
@@ -17,14 +18,19 @@ namespace TraceIt.ViewModels
         public Endorsement LevelOneEndorsement { get; private set; } = new Endorsement();
         public Endorsement LevelTwoEndorsement { get; private set; } = new Endorsement();
         public Endorsement LevelThreeEndorsement { get; private set; } = new Endorsement();
-        public ObservableCollection<SelectedSubject> SubjectEndorsements { get; private set; }
+
+        private ObservableCollection<SelectedSubject> _subjectEndorsements;
+        public ObservableCollection<SelectedSubject> SubjectEndorsements
+        {
+            get => _subjectEndorsements;
+            set => SetProperty(ref _subjectEndorsements, value, nameof(SubjectEndorsements));
+        }
 
         bool initialised = false;
 
         public EndorsementsChartPageViewModel()
         {
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.RepositoryInitialisationComplete,
-                (sender) => Initialise());
+            Initialise();
         }
 
         void Initialise()
@@ -68,7 +74,8 @@ namespace TraceIt.ViewModels
 
         void SetSubjectEndorsements()
         {
-            var subjects = App.DataRepository.SelectedSubjects;
+            var subjects = App.DataRepository.SelectedSubjects.Where(x => x.Selected is true)
+                                                              .ToObservableCollection();
             SubjectEndorsements = subjects;
         }
 
