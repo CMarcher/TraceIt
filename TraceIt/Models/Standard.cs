@@ -171,9 +171,9 @@ namespace TraceIt.Models
                 App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
         }
 
-        public async Task SelectAsync(Subject subject)
+        public async Task SelectAsync(SelectedSubject subject)
         {
-            AddedTo = subject.Name;
+            AddedTo = subject.BaseSubject.Name;
             Selected = true;
             await PushChangesAsync(true);
         }
