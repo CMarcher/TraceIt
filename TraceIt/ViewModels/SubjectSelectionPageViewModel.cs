@@ -1,35 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Extensions;
 using TraceIt.Models;
+using TraceIt.Utilities;
 using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
 {
     public class SubjectSelectionPageViewModel
     {
-        public ObservableCollection<Subject> Subjects { get; private set; } = new ObservableCollection<Subject>();
-
-        public Command UpdateSubjectCommand { get; private set; }
+        public ObservableCollection<SelectedSubject> Subjects { get; private set; } = new ObservableCollection<SelectedSubject>();
+        public Command ChangeSelectionCommand { get; private set; }
 
         public SubjectSelectionPageViewModel()
         {
-            UpdateSubjectCommand = new Command<Subject>(async (subject) => await UpdateSubjectAsync(subject));
-
             Task.Run(SetSubjectsAsync).Wait();
+            Debug.WriteLine("Subjects finished loading.");
+            InitialiseCommands();
         }
 
-        async Task SetSubjectsAsync() => Subjects = await App.DataService.GetSubjectsAsync();
-
-        async Task UpdateSubjectAsync(Subject subject)
+        private void InitialiseCommands()
         {
-            subject.Selected = !subject.Selected;
-
-            await App.DataService.UpdateOrInsertSubjectAsync(subject);
+            ChangeSelectionCommand = new Command<SelectedSubject>(async (subject) => await ChangeSubjectSelection(subject));
         }
+
+        async Task ChangeSubjectSelection(SelectedSubject subject)
+        {
+            Task task = subject.Selected == false ?
+                subject.Select() :
+                subject.Deselect();
+
+            await task;
+        }
+
+        async Task SetSubjectsAsync() => Subjects = await App.DataService.GetSelectedSubjectsAsync();
     }
 }
