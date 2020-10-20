@@ -11,6 +11,7 @@ using TraceIt.Models.Query_Models;
 using TraceIt.Utilities;
 using Xamarin.Essentials;
 using System.Linq.Expressions;
+using SQLiteNetExtensionsAsync.Extensions;
 
 namespace TraceIt.Services
 {
@@ -82,7 +83,7 @@ namespace TraceIt.Services
         public async Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, FilterOption filterByOption)
         {
             Expression<Func<Standard, bool>> subjectQuery = standard => standard.Subject == parameter;
-            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter 
+            Expression<Func<Standard, bool>> subfieldQuery = standard => standard.Subfield == parameter
                                                                       && standard.StandardType == Standard.StandardTypes.Unit;
             Expression<Func<Standard, bool>> finalQuery;
 
@@ -148,21 +149,12 @@ namespace TraceIt.Services
             return new ObservableCollection<Subject>(subjects);
         }
 
-        public async Task<ObservableCollection<Subject>> GetSelectedSubjectsAsync()
-        {
-            var subjects = await Database.Table<Subject>()
-                .Where(s => s.Selected == true)
-                .ToListAsync();
-
-            return new ObservableCollection<Subject>(subjects);
-        }
-
         public async Task UpdateOrInsertSubjectAsync(Subject subject)
             => await UpdateOrInsertObjectAsync(subject);
-        
+
         public async Task UpdateSubjectsAsync(List<Subject> subjects)
         {
-            foreach(var subject in subjects)
+            foreach (var subject in subjects)
                 await UpdateOrInsertSubjectAsync(subject);
         }
 
@@ -176,12 +168,17 @@ namespace TraceIt.Services
         #endregion
 
         #region SelectedSubject methods
-        public async Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsNewAsync()
+        public async Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsAsync()
         {
             var subjects = await Database.Table<SelectedSubject>().ToListAsync();
-
+            foreach (var subject in subjects)
+                await Database.GetChildrenAsync(subject);
+            
             return new ObservableCollection<SelectedSubject>(subjects);
         }
+
+        public async Task InsertSelectedSubjectAsync(SelectedSubject subject)
+            => await Database.InsertAsync(subject);
 
         public async Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject)
             => await UpdateOrInsertObjectAsync(subject);
@@ -190,6 +187,7 @@ namespace TraceIt.Services
             => await Database.DeleteAsync(subject);
         #endregion
 
+        #region Other methods
         public async Task<List<SubfieldModel>> GetSubfieldsAsync(StandardType filterOptions)
         {
             switch (filterOptions)
@@ -266,10 +264,11 @@ namespace TraceIt.Services
             return new ObservableCollection<CreditBreakdown>()
                 { notAchieved, achieved, merit, excellence };
         }
+        #endregion
 
         #region Generic methods
 
-        public async Task UpdateOrInsertObjectAsync(object item)
+        async Task UpdateOrInsertObjectAsync(object item)
         {
             var rowsUpdated = await Database.UpdateAsync(item);
             bool notUpdated = rowsUpdated == 0;
