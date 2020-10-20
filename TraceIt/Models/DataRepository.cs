@@ -12,8 +12,8 @@ namespace TraceIt.Models
 {
     public class DataRepository : BaseModel
     {
-        private ObservableCollection<Subject> _selectedSubjects;
-        public ObservableCollection<Subject> SelectedSubjects
+        private ObservableCollection<SelectedSubject> _selectedSubjects;
+        public ObservableCollection<SelectedSubject> SelectedSubjects
         {
             get => _selectedSubjects;
             private set => SetProperty(ref _selectedSubjects, value, nameof(SelectedSubjects));
@@ -58,7 +58,7 @@ namespace TraceIt.Models
         async Task InitialiseBreakdown()
             => CreditBreakdowns = await App.DataService.GetCreditBreakdownsAsync();
         
-        public async Task RemoveSubject(Subject subject)
+        public async Task RemoveSubject(SelectedSubject subject)
         {
             SelectedSubjects.Remove(subject);
             await subject.Delete();
