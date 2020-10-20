@@ -21,12 +21,26 @@ namespace TraceIt.Views
         public SubjectSelectionPage()
         {
             InitializeComponent();
+            Initialise();
+        }
+
+        void Initialise()
+        {
             Title = "Select Subjects for " + StatusTracker.CurrentYear;
+            RefreshDatasource();
+        }
+
+        void RefreshDatasource()
+        {
+            subjectsListView.DataSource.Filter = FilterSubjects;
+            subjectsListView.DataSource.Refresh();
         }
 
         private async void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            await App.DataService.UpdateSubjectsAsync(GetSelectedItems());
+            var viewmodel = BindingContext as SubjectSelectionPageViewModel;
+            //await viewmodel.CreateAndInsertSelectedSubjects(GetSelectedItems());
+
             Application.Current.MainPage = new ShellHomePage();
         }
 
@@ -35,11 +49,7 @@ namespace TraceIt.Views
             string subjectName = await DisplayPromptAsync("Add New Subject", "Enter the name of your subject", "OK", "Cancel", "Subject name");
             var viewmodel = BindingContext as SubjectSelectionPageViewModel;
 
-            viewmodel.Subjects.Add(new Subject()
-            {
-                Name = subjectName,
-                Custom = true
-            });
+            // Add custom subject adding here...
         }
 
         private async void closeButton_Clicked(object sender, EventArgs e)
@@ -48,31 +58,28 @@ namespace TraceIt.Views
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (subjectsListView.DataSource != null)
-            {
-                subjectsListView.DataSource.Filter = FilterSubjects;
-                subjectsListView.DataSource.Refresh();
-            }
+                RefreshDatasource();
         }
 
-        private bool FilterSubjects(object obj)
+        private bool FilterSubjects(object item)
         {
+            if (subjectsListView.DataSource is null)
+                return true;
+
+            var subject = item as SelectedSubject;
+            int year = StatusTracker.CurrentYear;
+            bool matchesSelectedYear = subject.Year == year;
+            bool searchCriteriaMatched;
+
             if (searchBar.Text == null)
-                return true;
-
-            var subject = obj as Subject;
-            if (subject.Name.ToLower().Contains(searchBar.Text.ToLower()))
-                return true;
+                searchCriteriaMatched = true;
             else
-                return false;
+                searchCriteriaMatched = subject.BaseSubject.Name.ToLower().Contains(searchBar.Text.ToLower());
+
+            return matchesSelectedYear is true && searchCriteriaMatched is true;
         }
 
-        private List<Subject> GetSelectedItems()
-        {
-            return subjectsListView.SelectedItems.ToListWithAction<Subject>(
-                (subject) =>
-                {
-                    subject.Selected = true;
-                    subject.Year = StatusTracker.CurrentYear; });
-        }
+        private ObservableCollection<Subject> GetSelectedItems()
+            => subjectsListView.SelectedItems.ToObservableCollection<Subject>();
     }
 }
