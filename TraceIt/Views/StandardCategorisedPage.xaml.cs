@@ -44,12 +44,12 @@ namespace TraceIt.Views
 
         private async Task PushPage(object item)
         {
-            if (item is SubfieldModel)
-                await Navigation.PushAsync(new StandardCategorisedDetailPage(((SubfieldModel)item).Subfield, Services.DataService.FilterOption.Subfield));
-            else if (item is Subject)
-                await Navigation.PushAsync(new StandardCategorisedDetailPage(((Subject)item).Name, Services.DataService.FilterOption.Subject));
-            else if (item is Standard)
-                await Navigation.PushAsync(new StandardDetailPage((Standard)item));
+            if (item is SubfieldModel model)
+                await Navigation.PushAsync(new StandardCategorisedDetailPage(model.Subfield, Services.DataService.FilterOption.Subfield));
+            else if (item is Subject subject)
+                await Navigation.PushAsync(new StandardCategorisedDetailPage(subject.Name, Services.DataService.FilterOption.Subject));
+            else if (item is Standard standard)
+                await Navigation.PushAsync(new StandardDetailPage(standard));
             else
                 throw new Exception("Invalid item type: " + item.GetType());
 
