@@ -13,8 +13,8 @@ namespace TraceIt.ViewModels
 {
     public class SubjectsPageViewModel : BaseViewModel
     {
-        private ObservableCollection<Subject> _subjects;
-        public ObservableCollection<Subject> Subjects
+        private ObservableCollection<SelectedSubject> _subjects;
+        public ObservableCollection<SelectedSubject> Subjects
         {
             get => _subjects;
             set => SetProperty(ref _subjects, value, nameof(Subjects));
@@ -39,10 +39,9 @@ namespace TraceIt.ViewModels
             => Subjects = App.DataRepository.SelectedSubjects;
 
         private void SetCommands()
-            => RemoveSubjectCommand = new Command<Subject>(async (subject) => await RemoveSubject(subject));
+            => RemoveSubjectCommand = new Command<SelectedSubject>(async (subject) => await RemoveSubject(subject));
         
-        private async Task RemoveSubject(Subject subject)
+        private async Task RemoveSubject(SelectedSubject subject)
             => await App.DataRepository.RemoveSubject(subject);
-
     }
 }
