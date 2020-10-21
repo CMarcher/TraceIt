@@ -8,6 +8,7 @@
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:converters="clr-namespace:TraceIt.Converters" 
              xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.EndorsementsChartPage">
 
@@ -168,8 +169,24 @@
                     </Frame>
                 </StackLayout>
 
+                <buttons:SfSegmentedControl VisibleSegmentsCount="4" SegmentPadding="10"
+                                            FontSize="{OnIdiom Tablet=20, Phone=15}">
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="buttons:SfSegmentItem">
+                            <buttons:SfSegmentItem Text="2017"/>
+                            <buttons:SfSegmentItem Text="2018"/>
+                            <buttons:SfSegmentItem Text="2019"/>
+                            <buttons:SfSegmentItem Text="2020"/>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+                
                 <listview:SfListView ItemsSource="{Binding SubjectEndorsements}" AutoFitMode="Height"
-                                     ItemSpacing="12">
+                                     ItemSpacing="12" x:Name="listViewEndorsements">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
