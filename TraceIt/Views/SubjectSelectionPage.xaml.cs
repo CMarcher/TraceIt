@@ -78,8 +78,5 @@ namespace TraceIt.Views
 
             return matchesSelectedYear is true && searchCriteriaMatched is true;
         }
-
-        private ObservableCollection<Subject> GetSelectedItems()
-            => subjectsListView.SelectedItems.ToObservableCollection<Subject>();
     }
 }
