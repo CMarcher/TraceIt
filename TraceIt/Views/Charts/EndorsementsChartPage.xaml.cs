@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Models;
+using TraceIt.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,19 +21,34 @@ namespace TraceIt.Views.Charts
 
         private void Initialise()
         {
-            listViewEndorsements.DataSource.Filter = FilterEndorsements;
+            RefreshDataSource();
         }
 
+        private void RefreshDataSource()
+        {
+            listViewEndorsements.DataSource.Filter = FilterEndorsements;
+            listViewEndorsements.DataSource.RefreshFilter();
+            listViewEndorsements.DataSource.Refresh();
+        }
+        
         private bool FilterEndorsements(object item)
         {
             if (item is SelectedSubject)
             {
+                var viewmodel = BindingContext as EndorsementsChartPageViewModel;
                 var subject = item as SelectedSubject;
                 bool isSelected = subject.Selected;
-                bool matchesSelectedYear = subject.Year == 1;
+                bool matchesSelectedYear = subject.Year == viewmodel.Year;
+
+                return isSelected && matchesSelectedYear;
             }
             else
                 throw new Exception("Invalid item type: " + item.GetType());
+        }
+
+        private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
+        {
+            RefreshDataSource();
         }
     }
 }

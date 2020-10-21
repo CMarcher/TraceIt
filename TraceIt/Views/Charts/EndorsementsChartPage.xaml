@@ -101,6 +101,7 @@
             </Style>
 
             <converters:IsToggledToMaximumConverter x:Key="isToggledConverter"/>
+            <converters:SelectedIndexToYearConverter x:Key="indexToYearConverter"/>
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -170,7 +171,9 @@
                 </StackLayout>
 
                 <buttons:SfSegmentedControl VisibleSegmentsCount="4" SegmentPadding="10"
-                                            FontSize="{OnIdiom Tablet=20, Phone=15}">
+                                            FontSize="{OnIdiom Tablet=20, Phone=15}"
+                                            SelectedIndex="{Binding Year, Mode=TwoWay, Converter={StaticResource indexToYearConverter}}"
+                                            SelectionChanged="SfSegmentedControl_SelectionChanged">
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
                         <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
                     </buttons:SfSegmentedControl.SelectionIndicatorSettings>
