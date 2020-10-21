@@ -28,13 +28,6 @@ namespace TraceIt.ViewModels
             SetCommands();
         }
 
-        public static async Task<SubjectsPageViewModel> InitialiseAsync()
-        {
-            await Task.Run(App.DataRepository.InitialiseAsync);
-            var viewmodel = new SubjectsPageViewModel();
-            return viewmodel;
-        }
-
         private void SetSubjects()
             => Subjects = App.DataRepository.SelectedSubjects;
 
