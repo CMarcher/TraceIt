@@ -173,7 +173,7 @@
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Text="{Binding Name, StringFormat='{0} Endorsement Progress'}" Style="{StaticResource headerLabelStyle}"/>
+                                <Label Text="{Binding BaseSubject.Name, StringFormat='{0} Endorsement Progress'}" Style="{StaticResource headerLabelStyle}"/>
                                 <Frame Style="{StaticResource progressBarFrame}">
                                     <progressbar:SfLinearProgressBar ProgressColor="Orange"
                                                      Style="{StaticResource subjectProgressBar}"/>
