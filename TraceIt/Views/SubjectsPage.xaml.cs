@@ -21,7 +21,23 @@ namespace TraceIt.Views
         public SubjectsPage()
         {
             InitializeComponent();
-            yearPicker.SelectedIndex = 2;
+            yearPicker.SelectedIndex = GetYear();
+        }
+
+        private int GetYear()
+        {
+            var year = StatusTracker.CurrentYear;
+
+            if (year is 2017)
+                return 0;
+            if (year is 2018)
+                return 1;
+            if (year is 2019)
+                return 2;
+            if (year is 2020)
+                return 3;
+            else
+                return 3;
         }
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
@@ -32,21 +48,12 @@ namespace TraceIt.Views
             await Navigation.PushAsync(new SelectedStandardsPage());
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            if (Initialised is false)
-                await SetContext();
-
             loadingView.IsVisible = false;
             loadingView.IsRunning = false;
-        }
-
-        async Task SetContext()
-        {
-            BindingContext = await SubjectsPageViewModel.InitialiseAsync();
-            Initialised = true;
         }
 
         private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)

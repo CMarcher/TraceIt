@@ -15,6 +15,10 @@
              x:Name="Page"
              x:DataType="viewmodels:SubjectsPageViewModel">
 
+    <views:BasePage.BindingContext>
+        <viewmodels:SubjectsPageViewModel/>
+    </views:BasePage.BindingContext>
+
     <views:BasePage.ToolbarItems>
         <ToolbarItem>
             <ToolbarItem.IconImageSource>
