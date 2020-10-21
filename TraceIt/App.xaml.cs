@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TraceIt.Models;
 using TraceIt.Services;
 using TraceIt.Utilities;
@@ -25,8 +26,9 @@ namespace TraceIt
             MainPage = new LoginPage();
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
+            await Task.Run(DataRepository.InitialiseAsync);
         }
 
         protected override void OnSleep()
