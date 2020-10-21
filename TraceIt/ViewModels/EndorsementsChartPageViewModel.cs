@@ -83,10 +83,7 @@ namespace TraceIt.ViewModels
 
         void SetSubjectEndorsements()
         {
-            var subjects = App.DataRepository.SelectedSubjects
-                .Where(x => x.Selected is true)
-                .ToObservableCollection();
-
+            var subjects = App.DataRepository.SelectedSubjects;
             SubjectEndorsements = subjects;
         }
 
