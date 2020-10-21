@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Services;
+using TraceIt.Utilities;
 using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
@@ -26,6 +27,13 @@ namespace TraceIt.ViewModels
             set => SetProperty(ref _subjectEndorsements, value, nameof(SubjectEndorsements));
         }
 
+        private int _year;
+        public int Year
+        {
+            get => _year;
+            set => SetProperty(ref _year, value, nameof(Year));
+        }
+
         bool initialised = false;
 
         public EndorsementsChartPageViewModel()
@@ -38,6 +46,7 @@ namespace TraceIt.ViewModels
             Task.Run(SetStandards).Wait();
             SetEndorsements();
             initialised = true;
+            Year = StatusTracker.CurrentYear;
         }
 
         async Task SetStandards()
@@ -74,8 +83,10 @@ namespace TraceIt.ViewModels
 
         void SetSubjectEndorsements()
         {
-            var subjects = App.DataRepository.SelectedSubjects.Where(x => x.Selected is true)
-                                                              .ToObservableCollection();
+            var subjects = App.DataRepository.SelectedSubjects
+                .Where(x => x.Selected is true)
+                .ToObservableCollection();
+
             SubjectEndorsements = subjects;
         }
 
