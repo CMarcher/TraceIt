@@ -39,6 +39,7 @@ namespace TraceIt.Models
 
         public enum Grade
         {
+            NoGrade = 0,
             NotAchieved,
             Achieved,
             Merit,
@@ -84,9 +85,6 @@ namespace TraceIt.Models
         public string Status { get; set; }
 
         public string ExpiryDate { get; set; }
-
-        [NotNull]
-        public string PublicationDate { get; set; }
 
         [NotNull]
         public int CurrentVersion { get; set; }
