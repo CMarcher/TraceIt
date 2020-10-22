@@ -41,6 +41,8 @@ namespace TraceIt.ViewModels
             set => SetProperty(ref _creditBreakdowns, value, nameof(CreditBreakdowns));
         }
 
+        public bool Initialised { get; set; }
+
         public CreditsChartPageViewModel()
         {
             Initialise();
@@ -52,6 +54,7 @@ namespace TraceIt.ViewModels
             SetStandards();
             SetCreditBreakdowns();
             SubscribeToMessages();
+            Initialised = true;
         }
 
         void SetStandards()
@@ -69,11 +72,17 @@ namespace TraceIt.ViewModels
 
         void SubscribeToMessages()
         {
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
+            if(Initialised is false)
+            {
+                App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
                 async (sender) => await SetCredits());
 
-            //App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
-            //    (sender) => SetStandards());
+                App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
+                    (sender) => Initialise());
+
+                App.MessagingService.Subscribe(this, MessagingService.MessageType.RepositoryInitialisationComplete,
+                    (sender) => Initialise());
+            }
         }
     }
 }
