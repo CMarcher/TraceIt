@@ -53,7 +53,8 @@
                        FontAttributes="Bold"/>
                 <buttons:SfSegmentedControl x:Name="levelSelector" HorizontalOptions="StartAndExpand"
                                             SegmentWidth="40" FontSize="18"
-                                            SelectionChanged="levelSelector_SelectionChanged">
+                                            SelectionChanged="levelSelector_SelectionChanged"
+                                            SelectedIndex="0">
                     <system:List x:TypeArguments="x:String">
                         <x:String>1</x:String>
                         <x:String>2</x:String>
