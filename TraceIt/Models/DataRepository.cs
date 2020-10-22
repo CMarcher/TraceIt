@@ -26,11 +26,22 @@ namespace TraceIt.Models
             set => SetProperty(ref _selectedStandards, value, nameof(SelectedStandards));
         }
 
-        public ObservableCollection<CreditBreakdown> CreditBreakdowns = new ObservableCollection<CreditBreakdown>();
+        private ObservableCollection<CreditBreakdown> _creditBreakdowns;
+        public ObservableCollection<CreditBreakdown> CreditBreakdowns
+        {
+            get => _creditBreakdowns;
+            set => SetProperty(ref _creditBreakdowns, value, nameof(CreditBreakdowns));
+        }
 
         public bool Initialised { get; private set; }
 
         public DataRepository() { }
+
+        void SubscribeToMessages()
+        {
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
+                async (sender) => await Task.Run(InitialiseBreakdown));
+        }
 
         public async Task InitialiseAsync()
         {
@@ -40,6 +51,8 @@ namespace TraceIt.Models
 
             App.MessagingService.Send(MessagingService.MessageType.RepositoryInitialisationComplete);
             App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
+
+            SubscribeToMessages();
         }
 
         async Task InitialiseSubjects()
