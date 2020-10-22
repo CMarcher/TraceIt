@@ -17,13 +17,22 @@ namespace TraceIt
         public static DataService DataService { get; private set; } = new DataService();
         public static MessagingService MessagingService { get; private set; } = new MessagingService();
         public static DataRepository DataRepository { get; private set; } = new DataRepository();
+        public static UserManagerService UserManagerService { get; private set; } = new UserManagerService();
 
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzMxOTk3QDMxMzgyZTMzMmUzME1PM1U5eks0N1FEMDZiMFdaRlZjdnl0NUVESVk5a2lmdkFNa0I1WXlEbWs9");
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            LaunchPage();
+        }
+
+        private void LaunchPage()
+        {
+            if (UserManagerService.LoggedIn)
+                MainPage = new ShellHomePage();
+            else
+                MainPage = new LoginPage();
         }
 
         protected async override void OnStart()
