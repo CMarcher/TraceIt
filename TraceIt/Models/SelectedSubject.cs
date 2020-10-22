@@ -100,6 +100,7 @@ namespace TraceIt.Models
         public async Task Deselect()
         {
             Selected = false;
+            await Delete();
             await PushChangesAsync();
         }
 
@@ -114,7 +115,6 @@ namespace TraceIt.Models
         public async Task Delete()
         {
             await ClearStandards();
-            await App.DataService.DeleteSelectedSubjectAsync(this);
         }
 
         private void SetCredits()
