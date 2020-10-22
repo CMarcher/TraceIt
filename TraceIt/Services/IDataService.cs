@@ -9,7 +9,6 @@ namespace TraceIt.Services
 {
     public interface IDataService
     {
-        Task DeleteSelectedSubjectAsync(SelectedSubject subject);
         Task DeleteSubjectAsync(Subject subject);
         Task<Tuple<int, int>> GetAchievedAndTotalCreditsAsync();
         Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterOption filterByOption);
@@ -22,6 +21,7 @@ namespace TraceIt.Services
         Task<ObservableCollection<Standard>> GetStandardsForSubjectAsync(string subjectName);
         Task<List<SubfieldModel>> GetSubfieldsAsync(DataService.StandardType filterOptions);
         Task<ObservableCollection<Subject>> GetSubjectsAsync();
+        Task InsertSelectedSubjectAsync(SelectedSubject subject);
         Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject);
         Task UpdateOrInsertSubjectAsync(Subject subject);
         Task UpdateStandardAsync(Standard standard);
