@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
-             xmlns:triggers="clr-namespace:TraceIt.Triggers"
+             xmlns:triggers="clr-namespace:TraceIt.Triggers" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              x:Class="TraceIt.Views.StandardCategorisedDetailPage"
              x:Name="myLayout"
              BackgroundColor="Black">
@@ -13,16 +15,57 @@
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="White"/>
             </Style>
+
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="SelectionTextColor" Value="White"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="SegmentCornerRadius" Value="0"/>
+                <Setter Property="SegmentHeight" Value="35"/>
+                <Setter Property="SelectionAnimationDuration" Value="100"/>
+                <Setter Property="SelectionIndicatorSettings">
+                    <Setter.Value>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="Orange"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="filterLabelStyle">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="{OnIdiom Phone='10, 0, 0, 0', Tablet='20, 0, 0, 0'}"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource gradientStackLayout}">
+        <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
+            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#001124"
+                         Padding="20, 10, 10, 10">
+                <Label Text="Level:" TextColor="White"
+                       FontAttributes="Bold"/>
+                <buttons:SfSegmentedControl x:Name="levelSelector" HorizontalOptions="StartAndExpand"
+                                            SegmentWidth="40" FontSize="18"
+                                            SelectionChanged="levelSelector_SelectionChanged">
+                    <system:List x:TypeArguments="x:String">
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                    </system:List>
+                </buttons:SfSegmentedControl>
+            </StackLayout>
 
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
                                ItemSpacing="10" AutoFitMode="DynamicHeight"
-                               Padding="{OnIdiom Phone=10, Tablet=25}">
+                               Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}">
 
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>

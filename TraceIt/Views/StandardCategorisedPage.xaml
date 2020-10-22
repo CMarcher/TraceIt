@@ -99,34 +99,21 @@
             <SearchBar x:Name="searchBar" BackgroundColor="#002147" FontAttributes="Italic"
                        Placeholder="Search standards..." TextChanged="searchBar_TextChanged"/>
 
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand"
                          Padding="20, 0, 10, 10" Margin="0">
 
-                <StackLayout>
                     <Label Text="Standard type:" Style="{StaticResource filterLabelStyle}"/>
-                    <buttons:SfSegmentedControl x:Name="assessmentSelector"
+                        <buttons:SfSegmentedControl x:Name="assessmentSelector"
                                             HorizontalOptions="StartAndExpand"
                                             SelectionChanged="assessmentSelector_SelectionChanged"
                                             FontSize="16">
-                        <system:List x:TypeArguments="x:String">
-                            <x:String>Achievement</x:String>
-                            <x:String>Unit</x:String>
-                        </system:List>
-                    </buttons:SfSegmentedControl>
-                </StackLayout>
+                            <system:List x:TypeArguments="x:String">
+                                <x:String>Achievement</x:String>
+                                <x:String>Unit</x:String>
+                            </system:List>
+                        </buttons:SfSegmentedControl>
 
-                <StackLayout>
-                    <Label Text="Level:" Style="{StaticResource filterLabelStyle}"/>
-                    <buttons:SfSegmentedControl x:Name="levelSelector" HorizontalOptions="End"
-                                                SegmentWidth="40" FontSize="18">
-                        <system:List x:TypeArguments="x:String">
-                            <x:String>1</x:String>
-                            <x:String>2</x:String>
-                            <x:String>3</x:String>
-                        </system:List>
-                    </buttons:SfSegmentedControl>
-                </StackLayout>
-                </StackLayout>
+                    </StackLayout>
             </StackLayout>
 
             <StackLayout Padding="0">
