@@ -216,7 +216,7 @@ namespace TraceIt.Services
                 "WHERE Selected = 1");
 
             var achieved = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade > 0");
+                "WHERE Selected = 1 AND FinalGrade > 1");
 
             return new Tuple<int, int>(total, achieved);
         }
@@ -224,16 +224,16 @@ namespace TraceIt.Services
         public async Task<ObservableCollection<CreditBreakdown>> GetCreditBreakdownsAsync()
         {
             var notAchievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade = 0");
-
-            var achievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
                 "WHERE Selected = 1 AND FinalGrade = 1");
 
-            var meritCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+            var achievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
                 "WHERE Selected = 1 AND FinalGrade = 2");
 
-            var excellenceCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+            var meritCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
                 "WHERE Selected = 1 AND FinalGrade = 3");
+
+            var excellenceCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
+                "WHERE Selected = 1 AND FinalGrade = 4");
 
             var notAchieved = new CreditBreakdown()
             {
