@@ -21,7 +21,21 @@ namespace TraceIt.Views
         public SubjectsPage()
         {
             InitializeComponent();
+            Initialise();
+        }
+
+        private void Initialise()
+        {
             yearPicker.SelectedIndex = GetYear();
+            SetTitle();
+        }
+
+        private void SetTitle()
+        {
+            var usermanager = App.UserManagerService;
+            var username = usermanager.Username;
+
+            Title = username + "'s Subjects";
         }
 
         private int GetYear()
@@ -75,5 +89,8 @@ namespace TraceIt.Views
 
             return matchesSelectedYear && isSelected;
         }
+
+        private async void addSubjectsToolbarItem_Clicked(object sender, EventArgs e)
+            => await Navigation.PushModalAsync(new NavigationPage(new SubjectEditingPage()));
     }
 }
