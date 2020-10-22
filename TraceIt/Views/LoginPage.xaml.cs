@@ -27,17 +27,27 @@ namespace TraceIt
                 await DisplayAlert("There's a problem!", "Please fill the required fields.", "Fine");
             else
             {
+                CreateUser();
                 StatusTracker.CurrentYear = int.Parse((string)pickerLevel.SelectedItem);
                 await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
             }
         }
 
-        public bool InputFieldsInvalid()
+        private bool InputFieldsInvalid()
         {
             if (entryName.Text == "" || pickerLevel.SelectedIndex == -1)
                 return true;
             else
                 return false;
+        }
+
+        private void CreateUser()
+        {
+            var usermanager = App.UserManagerService;
+            var username = entryName.Text;
+
+            usermanager.SetUsername(username);
+            usermanager.SetLoginStatus(true);
         }
     }
 }
