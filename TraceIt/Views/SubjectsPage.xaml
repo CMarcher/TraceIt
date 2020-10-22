@@ -20,15 +20,10 @@
     </views:BasePage.BindingContext>
 
     <views:BasePage.ToolbarItems>
-        <ToolbarItem>
+        <ToolbarItem x:Name="addSubjectsToolbarItem" Clicked="addSubjectsToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
-
-        <ToolbarItem>
-            <ToolbarItem.IconImageSource>
-                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Pencil}"/>
+                <FontImageSource Size="Large" FontFamily="PrimaryIcons" 
+                                 Glyph="{DynamicResource Plus}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </views:BasePage.ToolbarItems>
