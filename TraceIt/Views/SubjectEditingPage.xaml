@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TraceIt.Views.SubjectEditingPage"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             x:Name="Page">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="Header">
+                <Setter Property="FontSize">Large</Setter>
+                <Setter Property="HorizontalTextAlignment">Center</Setter>
+                <Setter Property="TextColor">Black</Setter>
+                <Setter Property="Margin" Value="8"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="subjectItemLabel">
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="20"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewmodels:SubjectEditingPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="closeButton" Clicked="closeButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Tick}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <Grid Background="{DynamicResource LightBlueToDarkMain}" RowDefinitions="Auto, *"
+              RowSpacing="0">
+
+            <SearchBar x:Name="searchBar" Placeholder="Search subjects"
+                       TextChanged="searchBar_TextChanged"
+                       Grid.Row="0"/>
+
+            <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
+                                 VerticalOptions="StartAndExpand" SelectionMode="None"
+                                 HorizontalOptions="FillAndExpand" Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}" 
+                                 Margin="0" AutoFitMode="DynamicHeight"
+                                 ItemsSource="{Binding Subjects}" Grid.Row="1">
+
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Background="{DynamicResource BlueToDarkGradient}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
+
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding Selected}"
+                                             Value="true">
+                                    <Setter Property="Background" Value="{DynamicResource OrangeToLightGradient}"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+
+                            <Label Text="{Binding BaseSubject.Name}" TextColor="White"
+                                   Style="{StaticResource subjectItemLabel}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Selected}"
+                                             Value="true">
+                                        <Setter Property="TextColor" Value="Black"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                        </Frame>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
