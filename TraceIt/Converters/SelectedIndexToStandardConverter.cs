@@ -13,6 +13,8 @@ namespace TraceIt.Converters
         {
             switch ((Standard.Grade)value)
             {
+                case Standard.Grade.NoGrade:
+                    return -1;
                 case Standard.Grade.NotAchieved:
                     return 0;
                 case Standard.Grade.Achieved:
@@ -30,6 +32,8 @@ namespace TraceIt.Converters
         {
             switch ((int)value)
             {
+                case -1:
+                    return Standard.Grade.NoGrade;
                 case 0:
                     return Standard.Grade.NotAchieved;
                 case 1:
@@ -39,7 +43,7 @@ namespace TraceIt.Converters
                 case 3:
                     return Standard.Grade.Excellence;
                 default:
-                    return null;
+                    return Standard.Grade.NoGrade;
             }
         }
     }
