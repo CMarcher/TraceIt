@@ -26,6 +26,9 @@ namespace TraceIt.ViewModels
         {
             SetSubjects();
             SetCommands();
+
+            App.MessagingService.Subscribe(this, Services.MessagingService.MessageType.RepositoryInitialisationComplete,
+                (sender) => SetSubjects());
         }
 
         private void SetSubjects()
