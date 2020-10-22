@@ -173,7 +173,7 @@ namespace TraceIt.Services
             var subjects = await Database.Table<SelectedSubject>().ToListAsync();
             foreach (var subject in subjects)
                 await Database.GetChildrenAsync(subject);
-            
+
             return new ObservableCollection<SelectedSubject>(subjects);
         }
 
@@ -183,8 +183,6 @@ namespace TraceIt.Services
         public async Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject)
             => await UpdateOrInsertObjectAsync(subject);
 
-        public async Task DeleteSelectedSubjectAsync(SelectedSubject subject)
-            => await Database.DeleteAsync(subject);
         #endregion
 
         #region Other methods
