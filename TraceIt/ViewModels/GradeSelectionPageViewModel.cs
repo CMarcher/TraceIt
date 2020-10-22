@@ -20,9 +20,9 @@ namespace TraceIt.ViewModels
             Standard = StatusTracker.CurrentStandard;
 
             App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
-                (sender) =>
+                async (sender) =>
                 {
-                    Task.Run(() => Standard.PushChangesAsync(false));
+                    await Task.Run(() => Standard.PushChangesAsync(true));
                     App.MessagingService.Send(MessagingService.MessageType.RefreshEndorsements);
                 });
         }
