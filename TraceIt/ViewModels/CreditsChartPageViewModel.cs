@@ -8,6 +8,7 @@ using TraceIt.Services;
 using System.Collections.ObjectModel;
 using TraceIt.Models;
 using TraceIt.Models.Query_Models;
+using TraceIt.Extensions;
 
 namespace TraceIt.ViewModels
 {
@@ -48,40 +49,37 @@ namespace TraceIt.ViewModels
             Initialise();
         }
 
-        void Initialise()
+        private void Initialise()
         {
-            Task.Run(SetCredits).Wait();
-            SetStandards();
-            SetCreditBreakdowns();
             SubscribeToMessages();
             Initialised = true;
         }
 
-        void SetStandards()
-            => SelectedStandards = App.DataRepository.SelectedStandards;
-
-        async Task SetCredits()
+        private void Refresh()
         {
-            var credits = await App.DataService.GetAchievedAndTotalCreditsAsync();
+            SetCreditBreakdowns();
+            SetCredits();
+        }
+
+        private void SetCredits()
+        {
+            var credits = App.DataRepository.SelectedSubjects.GetAchievedAndTotalCredits();
             TotalCredits = credits.Item1;
             AchievedCredits = credits.Item2;
         }
 
-        void SetCreditBreakdowns()
-            => CreditBreakdowns = App.DataRepository.CreditBreakdowns;
+        private void SetCreditBreakdowns()
+            => CreditBreakdowns = App.DataRepository.SelectedSubjects.GetCreditBreakdowns();
 
-        void SubscribeToMessages()
+        private void SubscribeToMessages()
         {
-            if(Initialised is false)
+            if (Initialised is false)
             {
-                App.MessagingService.Subscribe(this, MessagingService.MessageType.PushStandard,
-                async (sender) => await SetCredits());
-
                 App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
-                    (sender) => Initialise());
+                    (sender) => Refresh());
 
                 App.MessagingService.Subscribe(this, MessagingService.MessageType.RepositoryInitialisationComplete,
-                    (sender) => Initialise());
+                    (sender) => Refresh());
             }
         }
     }
