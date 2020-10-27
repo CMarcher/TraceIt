@@ -14,12 +14,12 @@
         <ResourceDictionary>
             <Style TargetType="controls:GradientShellPage">
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
-                <Setter Property="Shell.TitleColor" Value="Red"/>
                 <Setter Property="Shell.ForegroundColor" Value="White"/>
                 <Setter Property="Shell.UnselectedColor" Value="Gray"/>
                 <Setter Property="Shell.NavBarHasShadow" Value="True"/>
                 <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
+                <Setter Property="Shell.UnselectedColor" Value="Gray"/>
             </Style>
             <Style TargetType="TabBar"/>
         </ResourceDictionary>
