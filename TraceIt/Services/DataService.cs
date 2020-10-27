@@ -114,7 +114,17 @@ namespace TraceIt.Services
                 "ORDER BY Title;"
                 );
 
-            return list.ToObservableCollection<Standard>();
+            return list.ToObservableCollection();
+        }
+
+        public async Task<ObservableCollection<Standard>> GetStandardsForSubjectAsync(SelectedSubject subject)
+        {
+            var id = subject.ID;
+            var list = await Database.QueryAsync<Standard>(
+                "SELECT * FROM AssessmentStandards " +
+                "WHERE subjectID = " + id + " ORDER BY Title");
+
+            return list.ToObservableCollection();
         }
 
         public async Task<ObservableCollection<Standard>> GetSelectedStandardsAsync()
@@ -123,7 +133,7 @@ namespace TraceIt.Services
                 .Where(standard => standard.Selected == true)
                 .ToListAsync();
 
-            return result.ToObservableCollection<Standard>();
+            return result.ToObservableCollection();
         }
 
         public async Task<List<Standard>> GetMatchingStandards(string searchQuery)
@@ -135,8 +145,14 @@ namespace TraceIt.Services
                 "LIMIT 100;");
         }
 
-        public async Task UpdateStandardAsync(Standard standard)
-            => await Database.UpdateAsync(standard);
+        public async Task<bool> UpdateStandardAsync(Standard standard)
+        {
+            bool updated = false;
+            await Database.UpdateAsync(standard);
+            updated = true;
+
+            return updated;
+        }
         #endregion
 
         #region Subject methods
@@ -219,48 +235,6 @@ namespace TraceIt.Services
                 "WHERE Selected = 1 AND FinalGrade > 1");
 
             return new Tuple<int, int>(total, achieved);
-        }
-
-        public async Task<ObservableCollection<CreditBreakdown>> GetCreditBreakdownsAsync()
-        {
-            var notAchievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade = 1");
-
-            var achievedCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade = 2");
-
-            var meritCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade = 3");
-
-            var excellenceCredits = await Database.ExecuteScalarAsync<int>("SELECT SUM(Credits) FROM AssessmentStandards " +
-                "WHERE Selected = 1 AND FinalGrade = 4");
-
-            var notAchieved = new CreditBreakdown()
-            {
-                Credits = notAchievedCredits,
-                Grade = CreditBreakdown.Grades.NotAchieved
-            };
-
-            var achieved = new CreditBreakdown()
-            {
-                Credits = achievedCredits,
-                Grade = CreditBreakdown.Grades.Achieved
-            };
-
-            var merit = new CreditBreakdown()
-            {
-                Credits = meritCredits,
-                Grade = CreditBreakdown.Grades.Merit
-            };
-
-            var excellence = new CreditBreakdown()
-            {
-                Credits = excellenceCredits,
-                Grade = CreditBreakdown.Grades.Excellence
-            };
-
-            return new ObservableCollection<CreditBreakdown>()
-                { notAchieved, achieved, merit, excellence };
         }
         #endregion
 
