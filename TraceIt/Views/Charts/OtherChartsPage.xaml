@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             x:Class="TraceIt.Views.Charts.OtherChartsPage">
+    
+    <ContentView.BindingContext>
+        <viewmodels:OtherChartsPageViewModel/>
+    </ContentView.BindingContext>
+    
+    <ContentView.Content>
+        <StackLayout>
+            <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   FontAttributes="Bold" TextColor="White"
+                   FontSize="Large"/>
+            <Label Text="{Binding RankScore}"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="White" FontAttributes="Bold"
+                   FontSize="50"/>
+
+            <!--Currently crashing the app due to bug out of my control-->
+            <!--<progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
+                                           HorizontalOptions="CenterAndExpand" TitleAlignment="Start" 
+                                           IsVisible="False">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
+                            <progressbar:StepView.PrimaryFormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Title}" TextColor="White"
+                                          FontAttributes="Bold" FontSize="Small"/>
+                                </FormattedString>
+                            </progressbar:StepView.PrimaryFormattedText>
+                            <progressbar:StepView.SecondaryFormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Progress}" TextColor="LightGray"/>
+                                </FormattedString>
+                            </progressbar:StepView.SecondaryFormattedText>
+                        </progressbar:StepView>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </progressbar:SfStepProgressBar>-->
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
