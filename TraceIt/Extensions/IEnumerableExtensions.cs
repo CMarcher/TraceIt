@@ -15,7 +15,7 @@ namespace TraceIt.Extensions
         {
             var convertedList = new List<TResult>();
 
-            foreach (var item in list) 
+            foreach (var item in list)
             {
                 action.Invoke((TResult)item);
                 convertedList.Add((TResult)item);
@@ -28,9 +28,9 @@ namespace TraceIt.Extensions
         {
             var convertedCollection = new ObservableCollection<TResult>();
 
-            foreach(var item in list)
+            foreach (var item in list)
                 convertedCollection.Add(item);
-            
+
             return convertedCollection;
         }
 
@@ -46,14 +46,15 @@ namespace TraceIt.Extensions
             standards.Remove(search);
         }
 
-        public static int CountCredits(this IEnumerable<Standard> standards, Func<Standard, bool> predicate)
+        public static int CountCredits(this IEnumerable<Standard> standards, Func<Standard, bool> predicate = null)
         {
             int credits = 0;
+            bool noFilterSet = predicate is null;
 
-            foreach(var standard in standards)
+            foreach (var standard in standards)
             {
-                bool matchesCriteria = predicate(standard);
-                if (matchesCriteria)
+                bool matchesFilter = noFilterSet ? true : predicate(standard);
+                if (matchesFilter)
                     credits += standard.Credits;
             }
 
@@ -64,15 +65,20 @@ namespace TraceIt.Extensions
         {
             Func<Standard, bool> criteria = standard => (int)standard.GradingScheme >= 2;
             int eligibleCreditsCount = 0;
+            int externalCreditsCount = 0;
 
-            foreach(var standard in standards)
+            foreach (var standard in standards)
             {
                 bool isEligible = criteria(standard);
                 if (isEligible)
+                {
                     eligibleCreditsCount += standard.Credits;
+                    externalCreditsCount += standard.Credits;
+                }
+
             }
 
-            bool isEligibleOverall = eligibleCreditsCount >= 12;
+            bool isEligibleOverall = eligibleCreditsCount >= 12 && externalCreditsCount >= 3;
 
             return isEligibleOverall;
         }
