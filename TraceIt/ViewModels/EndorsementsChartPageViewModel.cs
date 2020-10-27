@@ -38,32 +38,47 @@ namespace TraceIt.ViewModels
 
         public EndorsementsChartPageViewModel()
         {
+            var usermanager = App.UserManagerService;
+            SubscribeToMessages();
             Initialise();
+
+            if (!usermanager.LoggedIn)
+                SetEndorsements();
         }
 
-        void Initialise()
+        private void Initialise()
         {
-            Task.Run(SetStandards).Wait();
-            SetEndorsements();
             initialised = true;
             Year = StatusTracker.CurrentYear;
         }
 
-        async Task SetStandards()
-            => Standards = await App.DataService.GetSelectedStandardsAsync();
+        private void SubscribeToMessages()
+        {
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.RepositoryInitialisationComplete,
+                (sender) => SetEndorsements());
 
-        void SetEndorsements()
+            App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
+                (sender) => SetEndorsements());
+        }
+
+        private void SetStandards()
+            => Standards = SubjectEndorsements.GetSelectedStandards();
+
+        private void SetEndorsements()
         {
             if (initialised)
+            {
+                SetSubjectEndorsements();
                 ClearEndorsements();
+            }
+
+            SetStandards();
 
             foreach (var standard in Standards)
                 AddToLevelEndorsement(standard);
-
-            SetSubjectEndorsements();
         }
 
-        void AddToLevelEndorsement(Standard standard)
+        private void AddToLevelEndorsement(Standard standard)
         {
             switch (standard.Level)
             {
@@ -81,13 +96,12 @@ namespace TraceIt.ViewModels
             }
         }
 
-        void SetSubjectEndorsements()
+        private void SetSubjectEndorsements()
         {
-            var subjects = App.DataRepository.SelectedSubjects;
-            SubjectEndorsements = subjects;
+            SubjectEndorsements = App.DataRepository.SelectedSubjects;
         }
 
-        void ClearEndorsements()
+        private void ClearEndorsements()
         {
             LevelOneEndorsement.ClearCredits();
             LevelTwoEndorsement.ClearCredits();
