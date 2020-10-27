@@ -26,6 +26,8 @@
             <x:String x:Key="Safari">&#xf267;</x:String>
             <x:String x:Key="Chart">&#xe803;</x:String>
             <x:String x:Key="Virus">&#xe801;</x:String>
+            <x:String x:Key="BackArrow">&#xe75d;</x:String>
+            <x:String x:Key="ForwardArrow">&#xe75e;</x:String>
 
             <LinearGradientBrush x:Key="LightBlueToDarkMain">
                 <LinearGradientBrush.GradientStops>
