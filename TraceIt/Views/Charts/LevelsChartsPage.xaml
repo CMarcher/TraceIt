@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:models="clr-namespace:TraceIt.Models"
+             x:Class="TraceIt.Views.Charts.LevelsChartsPage">
+
+    <ContentView.BindingContext>
+        <viewmodels:LevelsChartPageViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="baseProgressBar">
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="HeightRequest" Value="{Binding Source={RelativeSource Self}, Path=TrackHeight}"/>
+                <Setter Property="SegmentCount" Value="{Binding Source={RelativeSource Self}, Path=Maximum}"/>
+                <Setter Property="TrackColor" Value="#303030"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="levelProgressBar"
+                               BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="70"/>
+                <Setter Property="Progress" Value="{Binding AchievedCredits}"/>
+                <Setter Property="ProgressColor" Value="Orange"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="extraProgressBar"
+                   BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="70"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="progressBarFrame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <StackLayout>
+            <Grid ColumnDefinitions="*, *" RowDefinitions="20, *" Padding="40, 10">
+
+                <Label Text="Literacy progress" FontAttributes="Bold" Grid.Column="0"
+                       TextColor="White"/>
+                <Frame Style="{StaticResource progressBarFrame}" Grid.Column="0" Grid.Row="1">
+                    <progressbar:SfLinearProgressBar Progress="{Binding LiteracyCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                </Frame>
+
+                <Label Text="Numeracy progress" FontAttributes="Bold" Grid.Column="1"
+                       TextColor="White"/>
+                <Frame Style="{StaticResource progressBarFrame}" Grid.Column="1" Grid.Row="1">
+                    <progressbar:SfLinearProgressBar Progress="{Binding NumeracyCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                </Frame>
+            </Grid>
+            
+            <listview:SfListView ItemsSource="{Binding Levels}" AutoFitMode="Height"
+                                 ItemSpacing="20" Padding="20, 0">
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding SelectedLevel, StringFormat='Progress for Level {0}'}"
+                                   TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="{Binding AchievedCredits, StringFormat='{0} / 80 credits'}"
+                                   TextColor="White" FontAttributes="Italic"/>
+                            <Frame Style="{StaticResource progressBarFrame}">
+                                <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}" 
+                                                             Maximum="{Binding RequiredCredits}"
+                                                             VerticalOptions="FillAndExpand"
+                                                             HorizontalOptions="FillAndExpand"/>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
