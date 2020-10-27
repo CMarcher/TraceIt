@@ -39,7 +39,8 @@
                        HasShadow="False">
 
                 <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
-                                            SegmentPadding="5" SegmentHeight="35" FontSize="15">
+                                            SegmentPadding="5" SegmentHeight="35" 
+                                            FontSize="15" VisibleSegmentsCount="4">
 
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
                         <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
@@ -48,7 +49,9 @@
                     <buttons:SfSegmentedControl.ItemsSource>
                         <system:List x:TypeArguments="x:String">
                             <x:String>Credits</x:String>
+                            <x:String>Levels</x:String>
                             <x:String>Endorsements</x:String>
+                            <x:String>Other</x:String>
                         </system:List>
                     </buttons:SfSegmentedControl.ItemsSource>
                 </buttons:SfSegmentedControl>
@@ -64,7 +67,9 @@
                 <CarouselView.ItemsSource>
                     <x:Array Type="{x:Type ContentView}">
                         <chart:CreditsChartPage/>
+                        <chart:LevelsChartsPage/>
                         <chart:EndorsementsChartPage/>
+                        <chart:OtherChartsPage/>
                     </x:Array>
                 </CarouselView.ItemsSource>
 
