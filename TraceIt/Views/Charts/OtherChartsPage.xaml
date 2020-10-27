@@ -10,7 +10,7 @@
     </ContentView.BindingContext>
     
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout Spacing="0" VerticalOptions="Center">
             <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand"
                    FontAttributes="Bold" TextColor="White"
