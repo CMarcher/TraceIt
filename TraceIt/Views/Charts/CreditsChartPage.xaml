@@ -39,7 +39,7 @@
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
                                                ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange"
                                                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                               IsVisible="False" Grid.Row="1">
+                                               IsVisible="False" Grid.Row="1" GapWidth="1.5">
 
                     <progressbar:SfCircularProgressBar.Triggers>
                         <DataTrigger TargetType="progressbar:SfCircularProgressBar" 
@@ -57,7 +57,7 @@
                 </progressbar:SfCircularProgressBar>
 
                 <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               IsVisible="False" Grid.Row="1">
+                               IsVisible="False" Grid.Row="1" BackgroundColor="{OnPlatform Android=Transparent}">
 
                     <chart:SfChart.Triggers>
                         <DataTrigger TargetType="chart:SfChart" 
