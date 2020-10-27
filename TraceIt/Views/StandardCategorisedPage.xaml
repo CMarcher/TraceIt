@@ -6,10 +6,12 @@
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
              xmlns:forms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:templates="clr-namespace:TraceIt.Views.Data_Templates"
+             xmlns:templates="clr-namespace:TraceIt.Views.Data_Templates" 
+             xmlns:triggers="clr-namespace:TraceIt.Triggers"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.StandardCategorisedPage"
-             Title="Search Standards">
+             Title="Search Standards"
+             x:Name="Page">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="closeButton" Text="Done" Clicked="closeButton_Clicked">
@@ -66,6 +68,40 @@
                                FontSize="16" VerticalOptions="CenterAndExpand"
                                FontAttributes="Italic"/>
 
+                        <Button x:Name="selectionButton"
+                                        Command="{Binding Source={x:Reference Page}, Path=BindingContext.ChangeStandardSelectionCommand}" 
+                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                        VerticalOptions="FillAndExpand" HorizontalOptions="Start"
+                                        WidthRequest="150" Margin="5, 5, 20, 0">
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                    <GradientStopCollection>
+                                        <GradientStop Offset="0" Color="#FFC400"/>
+                                        <GradientStop Offset="1" Color="#FFA200"/>
+                                    </GradientStopCollection>
+                                </LinearGradientBrush>
+                            </Button.Background>
+
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"
+                                                         Color="Black"/>
+                            </Button.ImageSource>
+
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Selected}"
+                                                     Value="true">
+                                    <DataTrigger.EnterActions>
+                                        <triggers:SelectedTriggerAction StartColor="OrangeRed" EndColor="Red"/>
+                                    </DataTrigger.EnterActions>
+
+                                    <DataTrigger.ExitActions>
+                                        <triggers:DeselectedTriggerAction StartColor="#FFC400" EndColor="#FFA200"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+
                     </StackLayout>
                 </Frame>
             </DataTemplate>
@@ -92,14 +128,16 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"
                      Background="{StaticResource listItemGradient}" Spacing="0">
 
             <StackLayout BackgroundColor="#001124" Padding="0">
-            <SearchBar x:Name="searchBar" BackgroundColor="#002147" FontAttributes="Italic"
-                       Placeholder="Search standards..." TextChanged="searchBar_TextChanged"/>
+                <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
+                    <SearchBar x:Name="searchBar" BackgroundColor="White" FontAttributes="Italic"
+                         Placeholder="Search standards..." TextChanged="searchBar_TextChanged"/>
+                </Frame>
 
-            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand"
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand"
                          Padding="20, 0, 10, 10" Margin="0">
 
                     <Label Text="Standard type:" Style="{StaticResource filterLabelStyle}"/>
@@ -117,10 +155,10 @@
             </StackLayout>
 
             <StackLayout Padding="0">
-                <forms:SfListView x:Name="listView" ItemSpacing="8"
+                <forms:SfListView x:Name="listView" ItemSpacing="8, 12, 8, 0"
                                   ItemTapped="collectionViewCategories_ItemTapped" ItemTemplate="{StaticResource dataTemplateSelector}"
                                   AutoFitMode="DynamicHeight" SelectionMode="None"
-                                  Padding="10, 0"/>
+                                  Padding="10, 0" VerticalOptions="StartAndExpand" Margin="0"/>
             </StackLayout>
 
         </StackLayout>

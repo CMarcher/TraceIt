@@ -19,7 +19,13 @@ namespace TraceIt.Views
         public StandardCategorisedPage()
         {
             InitializeComponent();
+            Initialise();
+        }
+
+        private void Initialise()
+        {
             ViewModel = new StandardCategorisedPageViewModel();
+            BindingContext = ViewModel;
             SetItemsSource();
         }
 
@@ -30,18 +36,16 @@ namespace TraceIt.Views
                 listView.ItemsSource = ViewModel.Subfields;
             else
                 listView.ItemsSource = ViewModel.Subjects;
+
+            searchBar.Text = "";
         }
 
         private void assessmentSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
-        {
-            SetItemsSource();
-        }
-
+            => SetItemsSource();
+        
         private async void collectionViewCategories_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
-        {
-            await PushPage(e.ItemData);
-        }
-
+            => await PushPage(e.ItemData);
+        
         private async Task PushPage(object item)
         {
             if (item is SubfieldModel model)
@@ -55,39 +59,18 @@ namespace TraceIt.Views
 
         }
 
-        private void closeButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
-
+        private async void closeButton_Clicked(object sender, EventArgs e)
+            => await Navigation.PopModalAsync();
+        
         private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //if(listView.DataSource != null)
-            //{
-            //    listView.DataSource.Filter = FilterItems;
-            //    listView.DataSource.Refresh();
-            //}
-
-            if (searchBar.Text != "")
+            if (searchBar.Text != "" && searchBar.Text != null)
                 listView.ItemsSource = await GetFilteredStandards(searchBar.Text);
             else
                 SetItemsSource();
         }
 
-        //private bool FilterItems(object obj)
-        //{
-        //    if (searchBar.Text is null)
-        //        return true;
-
-        //    if(obj is Subject)
-        //    {
-
-        //    }
-        //}
-
         async Task<List<Standard>> GetFilteredStandards(string search)
-        {
-            return await App.DataService.GetMatchingStandards(search);
-        }
+            => await App.DataService.GetMatchingStandards(search);
     }
 }
