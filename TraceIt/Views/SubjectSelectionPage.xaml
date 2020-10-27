@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
+             xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage"
              x:Name="Page">
@@ -54,16 +55,18 @@
         <Grid Background="{DynamicResource LightBlueToDarkMain}" RowDefinitions="Auto, *, 50"
               RowSpacing="0">
 
-            <SearchBar x:Name="searchBar" Placeholder="Search subjects"
-                       TextChanged="searchBar_TextChanged"
-                       Grid.Row="0"/>
+            <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
+                <SearchBar x:Name="searchBar" Placeholder="Search subjects"
+                           TextChanged="searchBar_TextChanged"
+                           Grid.Row="0" BackgroundColor="White"/>
+            </Frame>
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
                                  VerticalOptions="StartAndExpand" SelectionMode="None"
                                  HorizontalOptions="FillAndExpand" Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}" 
                                  Margin="0" AutoFitMode="DynamicHeight"
                                  ItemsSource="{Binding Subjects}" Grid.Row="1">
-                
+
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Background="{DynamicResource BlueToDarkGradient}">

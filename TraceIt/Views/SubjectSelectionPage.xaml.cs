@@ -36,10 +36,9 @@ namespace TraceIt.Views
             subjectsListView.DataSource.Refresh();
         }
 
-        private async void buttonConfirm_Clicked(object sender, EventArgs e)
+        private void buttonConfirm_Clicked(object sender, EventArgs e)
         {
             var viewmodel = BindingContext as SubjectSelectionPageViewModel;
-            //await viewmodel.CreateAndInsertSelectedSubjects(GetSelectedItems());
 
             Application.Current.MainPage = new ShellHomePage();
         }
