@@ -8,8 +8,18 @@
              BackgroundColor="Black">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked"/>
-        <ToolbarItem x:Name="forwardToolbarItem" Text="Forward" Clicked="forwardToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource BackArrow}"/>
+            </ToolbarItem.IconImageSource>
+            
+        </ToolbarItem>
+        <ToolbarItem x:Name="forwardToolbarItem" Text="Forward" Clicked="forwardToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource ForwardArrow}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        
         <ToolbarItem x:Name="loadNZQAToolbarItem" Text="Go to NZQA" Clicked="loadNZQAToolbarItem_Clicked"/>
         <ToolbarItem x:Name="launchSafariToolbarItem" Clicked="launchSafariToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
@@ -23,7 +33,7 @@
 
             <ActivityIndicator x:Name="loadingIndicator"
                                AbsoluteLayout.LayoutFlags="All"
-                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
+                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1"/>
 
             <StackLayout Style="{DynamicResource gradientStackLayout}"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
