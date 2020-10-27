@@ -22,13 +22,21 @@ namespace TraceIt.ViewModels
 
         public Command RemoveSubjectCommand { get; private set; }
 
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value, nameof(IsBusy));
+        }
+
         public SubjectsPageViewModel()
         {
             SetSubjects();
             SetCommands();
+            IsBusy = true;
 
             App.MessagingService.Subscribe(this, Services.MessagingService.MessageType.RepositoryInitialisationComplete,
-                (sender) => SetSubjects());
+                (sender) => { SetSubjects(); IsBusy = false; });
         }
 
         private void SetSubjects()
@@ -38,6 +46,6 @@ namespace TraceIt.ViewModels
             => RemoveSubjectCommand = new Command<SelectedSubject>(async (subject) => await RemoveSubject(subject));
         
         private async Task RemoveSubject(SelectedSubject subject)
-            => await App.DataRepository.RemoveSubject(subject);
+            => await subject.Deselect();
     }
 }
