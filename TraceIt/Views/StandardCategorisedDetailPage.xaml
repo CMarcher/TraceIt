@@ -46,7 +46,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
+        <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0" Spacing="0">
             <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#001124"
                          Padding="20, 10, 10, 10">
                 <Label Text="Level:" TextColor="White"
