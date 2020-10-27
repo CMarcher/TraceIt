@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using TraceIt.Services;
 using TraceIt.Models.Query_Models;
+using TraceIt.Extensions;
 
 namespace TraceIt.Models
 {
@@ -26,12 +27,6 @@ namespace TraceIt.Models
             set => SetProperty(ref _selectedStandards, value, nameof(SelectedStandards));
         }
 
-        private ObservableCollection<CreditBreakdown> _creditBreakdowns;
-        public ObservableCollection<CreditBreakdown> CreditBreakdowns
-        {
-            get => _creditBreakdowns;
-            set => SetProperty(ref _creditBreakdowns, value, nameof(CreditBreakdowns));
-        }
 
         public bool Initialised { get; private set; }
 
@@ -39,15 +34,12 @@ namespace TraceIt.Models
 
         void SubscribeToMessages()
         {
-            App.MessagingService.Subscribe(this, MessagingService.MessageType.RefreshStandards,
-                async (sender) => await Task.Run(InitialiseBreakdown));
         }
 
         public async Task InitialiseAsync()
         {
             await Task.Run(InitialiseSubjects);
             await Task.Run(InitialiseStandards);
-            await Task.Run(InitialiseBreakdown);
 
             App.MessagingService.Send(MessagingService.MessageType.RepositoryInitialisationComplete);
             App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
@@ -57,7 +49,8 @@ namespace TraceIt.Models
 
         async Task InitialiseSubjects()
         {
-            SelectedSubjects = await App.DataService.GetSelectedSubjectsAsync();
+            var selectedSubjects = await App.DataService.GetSelectedSubjectsAsync();
+            SelectedSubjects = selectedSubjects.OrderBy(x => x.BaseSubject.Name).ToObservableCollection();
 
             foreach (var subject in SelectedSubjects)
                 await subject.InitialiseStandards();
@@ -67,14 +60,5 @@ namespace TraceIt.Models
 
         async Task InitialiseStandards()
             => SelectedStandards = await App.DataService.GetSelectedStandardsAsync();
-
-        async Task InitialiseBreakdown()
-            => CreditBreakdowns = await App.DataService.GetCreditBreakdownsAsync();
-        
-        public async Task RemoveSubject(SelectedSubject subject)
-        {
-            SelectedSubjects.Remove(subject);
-            await subject.Delete();
-        }
     }
 }
