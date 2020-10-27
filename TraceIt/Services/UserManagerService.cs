@@ -69,7 +69,7 @@ namespace TraceIt.Services
             LoggedIn = GetLoginStatus();
         }
 
-        private bool GetLoginStatus()
+        public bool GetLoginStatus()
             => Preferences.Get(loggedInKey, false);
 
         public void SetSubjectsSelected(bool subjectsSelected = false)
