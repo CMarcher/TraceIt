@@ -22,12 +22,12 @@
     <PackageReference Include="Forms9Patch" Version="2.4.6" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="SQLiteNetExtensions.Async" Version="2.1.0" />
-    <PackageReference Include="Syncfusion.Licensing" Version="18.3.0.40" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.40" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.40" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.3.0.40" />
-    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.3.0.40" />
-    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.3.0.40" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.3.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.3.0.44" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1560" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
@@ -48,7 +48,13 @@
     <EmbeddedResource Update="Views\Charts\EndorsementsChartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Charts\LevelsChartsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Charts\MainChartsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Charts\OtherChartsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Data Templates\StandardDataTemplate.xaml">
