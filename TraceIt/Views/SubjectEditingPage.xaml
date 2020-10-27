@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TraceIt.Views.SubjectEditingPage"
              xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
+             xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
              x:Name="Page">
     
     <ContentPage.Resources>
@@ -45,9 +46,11 @@
         <Grid Background="{DynamicResource LightBlueToDarkMain}" RowDefinitions="Auto, *"
               RowSpacing="0">
 
-            <SearchBar x:Name="searchBar" Placeholder="Search subjects"
-                       TextChanged="searchBar_TextChanged"
-                       Grid.Row="0"/>
+            <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
+                <SearchBar x:Name="searchBar" Placeholder="Search subjects"
+                           TextChanged="searchBar_TextChanged"
+                           Grid.Row="0" BackgroundColor="White"/>
+            </Frame>
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
                                  VerticalOptions="StartAndExpand" SelectionMode="None"

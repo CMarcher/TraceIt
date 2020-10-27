@@ -35,6 +35,7 @@ namespace TraceIt.Views
         private async void closeButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+            App.MessagingService.Send(Services.MessagingService.MessageType.RefreshDataSource);
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
