@@ -12,7 +12,9 @@ namespace TraceIt.Models
     [Table("SelectedSubjects")]
     public class SelectedSubject : BaseModel
     {
-        public SelectedSubject() { }
+        public SelectedSubject() 
+        {
+        }
 
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
@@ -94,6 +96,7 @@ namespace TraceIt.Models
         public async Task Select()
         {
             Selected = true;
+            Standards = new ObservableCollection<Standard>();
             await PushChangesAsync();
         }
 
@@ -120,6 +123,8 @@ namespace TraceIt.Models
         private void SetCredits()
         {
             Credits = 0;
+            MeritCredits = 0;
+            ExcellenceCredits = 0;
 
             foreach (var standard in Standards)
                 AddStandardCredits(standard);
@@ -140,7 +145,7 @@ namespace TraceIt.Models
 
         public async Task InitialiseStandards()
         {
-            Standards = await App.DataService.GetStandardsForSubjectAsync(BaseSubject.Name);
+            Standards = await App.DataService.GetStandardsForSubjectAsync(this);
             await RefreshAsync();
 
             foreach (var standard in Standards)
@@ -184,11 +189,14 @@ namespace TraceIt.Models
             => standard.FinalGradeChanged -= OnFinalGradeChanged;
 
         private async void OnFinalGradeChanged(object sender, EventArgs e)
-            => await SetPassedCredits();
+        {
+            await SetPassedCredits();
+            SetCredits();
+        }
 
         private async Task SetPassedCredits()
         {
-            PassedCredits = Standards.CountCredits(standard => (int)standard.FinalGrade >= 1);
+            PassedCredits = Standards.CountCredits(standard => (int)standard.FinalGrade >= 2);
             await PushChangesAsync();
         }
     }
