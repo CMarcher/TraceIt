@@ -50,6 +50,8 @@ namespace TraceIt.Models
         [PrimaryKey, NotNull, Unique]
         public int ID { get; set; }
 
+        public int SubjectID { get; set; }
+
         [NotNull]
         public string Subfield { get; set; }
 
@@ -163,15 +165,16 @@ namespace TraceIt.Models
         #region Methods
         public async Task PushChangesAsync(bool refreshRequired)
         {
-            await App.DataService?.UpdateStandardAsync(this);
+            bool updatedCompleted = await App.DataService?.UpdateStandardAsync(this);
 
-            if (refreshRequired)
+            if (refreshRequired && updatedCompleted)
                 App.MessagingService.Send(MessagingService.MessageType.RefreshStandards);
         }
 
         public async Task SelectAsync(SelectedSubject subject)
         {
             AddedTo = subject.BaseSubject.Name;
+            SubjectID = subject.ID;
             Selected = true;
             await PushChangesAsync(true);
         }
@@ -179,10 +182,11 @@ namespace TraceIt.Models
         public async Task DeselectAsync()
         {
             AddedTo = null;
+            SubjectID = 0;
             Selected = false;
-            GoalGrade = Grade.NotAchieved;
-            PracticeGrade = Grade.NotAchieved;
-            FinalGrade = Grade.NotAchieved;
+            GoalGrade = Grade.NoGrade;
+            PracticeGrade = Grade.NoGrade;
+            FinalGrade = Grade.NoGrade;
             await PushChangesAsync(true);
         }
 
