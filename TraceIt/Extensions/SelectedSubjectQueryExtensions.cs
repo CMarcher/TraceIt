@@ -108,7 +108,7 @@ namespace TraceIt.Extensions
             {
                 if (totalCreditsZeroed(totalAchieved) is false)
                     totalAchieved--;
-                if (totalCreditsZeroed(totalExcellence) is false)
+                else if (totalCreditsZeroed(totalExcellence) is false)
                     totalMerit--;
                 else
                     totalExcellence--;
