@@ -7,12 +7,15 @@
              x:Class="TraceIt.Views.SettingsPage"
              Title="Settings"
              BackgroundColor="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource gradientStackLayout}">
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="entryName" Placeholder="Change your name"
+                   FontSize="Large" Margin="20"/>
         </StackLayout>
     </ContentPage.Content>
     
