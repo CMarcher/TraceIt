@@ -42,7 +42,7 @@
     <views:BasePage.Content>
         <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <ActivityIndicator x:Name="loadingView" IsRunning="True"
+            <ActivityIndicator x:Name="loadingView" IsRunning="{Binding IsBusy}"
                                AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1"
                                AbsoluteLayout.LayoutFlags="All"/>
 
@@ -103,7 +103,8 @@
                                     </SwipeItemView>
                                 </SwipeView.RightItems>
                                 
-                                <Frame Style="{DynamicResource listItemFrame}" Padding="0">
+                                <Frame Style="{DynamicResource listItemFrame}" Padding="0"
+                                       BackgroundColor="{OnPlatform Android='Transparent'}">
                                     <StackLayout Padding="10, 13, 10, 20">
 
                                         <Label Text="{Binding BaseSubject.Name}" FontAttributes="Bold" 
@@ -123,8 +124,8 @@
                                         <Frame CornerRadius="15" BackgroundColor="DodgerBlue"
                                                IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}"
                                                IsClippedToBounds="True" Padding="0" Margin="0" HorizontalOptions="Center">
-                                            
-                                            <Label Text="Not eligible for endorsement" TextColor="White" Margin="10, 7"
+
+                                            <Label Text="Not eligible for endorsement" TextColor="White" Margin="{OnIdiom Phone='7, 4', Tablet='10, 7'}"
                                                    FontSize="12" FontAttributes="Bold, Italic"/>
                                         </Frame>
 

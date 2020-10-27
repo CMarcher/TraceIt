@@ -26,8 +26,10 @@ namespace TraceIt.Views
 
         private void Initialise()
         {
-            yearPicker.SelectedIndex = GetYear();
+            yearPicker.SelectedIndex = GetIndexFromYear();
             SetTitle();
+            SubscribeToMessages();
+            SetUserHasLoggedIn();
         }
 
         private void SetTitle()
@@ -38,7 +40,19 @@ namespace TraceIt.Views
             Title = username + "'s Subjects";
         }
 
-        private int GetYear()
+        private void SubscribeToMessages()
+        {
+            App.MessagingService.Subscribe(this, Services.MessagingService.MessageType.RefreshDataSource,
+                (sender) => RefreshDataSource());
+        }
+
+        private void SetUserHasLoggedIn()
+        {
+            var usermanager = App.UserManagerService;
+            usermanager.SetLoginStatus(true);
+        }
+
+        private int GetIndexFromYear()
         {
             var year = StatusTracker.CurrentYear;
 
@@ -54,6 +68,22 @@ namespace TraceIt.Views
                 return 3;
         }
 
+        private int GetYearFromIndex()
+        {
+            var index = yearPicker.SelectedIndex;
+
+            if (index is 0)
+                return 2017;
+            else if (index is 1)
+                return 2018;
+            else if (index is 2)
+                return 2019;
+            else if (index is 3)
+                return 2020;
+            else
+                return 2020;
+        }
+
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
         {
             var subject = (sender as Button)?.BindingContext as SelectedSubject;
@@ -66,11 +96,16 @@ namespace TraceIt.Views
         {
             base.OnAppearing();
 
-            loadingView.IsVisible = false;
-            loadingView.IsRunning = false;
+            SetTitle();
         }
 
         private void yearPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshDataSource();
+            StatusTracker.CurrentYear = GetYearFromIndex();
+        }
+
+        private void RefreshDataSource()
         {
             listViewSubjects.DataSource.Filter = FilterSubject;
             listViewSubjects.DataSource.Refresh();
