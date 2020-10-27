@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Forms9Patch;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace TraceIt
 
         async void buttonConfirm_Clicked(object sender, EventArgs e)
         {
-            if (InputFieldsInvalid())
+            TrimUsername();
+
+            if (AFieldIsEmpty())
                 await DisplayAlert("There's a problem!", "Please fill the required fields.", "Fine");
             else
             {
@@ -33,13 +36,19 @@ namespace TraceIt
             }
         }
 
-        private bool InputFieldsInvalid()
+        private bool AFieldIsEmpty()
         {
-            if (entryName.Text == "" || pickerLevel.SelectedIndex == -1)
+            bool usernameEmpty = entryName.Text == "" || entryName.Text is null;
+            bool pickerItemNotChosen = pickerLevel.SelectedIndex == -1;
+
+            if (usernameEmpty || pickerItemNotChosen)
                 return true;
             else
                 return false;
         }
+
+        private void TrimUsername()
+            => entryName.Text = entryName.Text.Trim();
 
         private void CreateUser()
         {
@@ -47,7 +56,6 @@ namespace TraceIt
             var username = entryName.Text;
 
             usermanager.SetUsername(username);
-            usermanager.SetLoginStatus(true);
         }
     }
 }
