@@ -42,9 +42,9 @@
 
         <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
 
-            <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="10" 
+            <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="0, 10" 
                              AllowSwiping="True" ItemsSource="{Binding Standards}" 
-                             SelectionMode="None" Margin="10"
+                             SelectionMode="None" Margin="10, 0"
                              AutoFitMode="Height">
 
                 <list:SfListView.LayoutManager>
@@ -79,15 +79,24 @@
                                 </SwipeItemView>
                             </SwipeView.RightItems>
 
-                            <Frame Style="{DynamicResource listItemFrame}" Padding="27">
+                            <Frame Style="{DynamicResource listItemFrame}" Padding="27"
+                                   BackgroundColor="{OnPlatform Android='Transparent'}">
                                 <StackLayout>
 
                                     <Label Text="{Binding SubjectReference}"
                                        HorizontalTextAlignment="Start"
-                                       FontAttributes="Bold" Margin="0, 0, 0, 8"/>
+                                       FontAttributes="Bold" Margin="0, 0, 0, 8">
 
-                                    <Label Text="{Binding Title}"
-                                       HorizontalTextAlignment="Start"/>
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding StandardType}"
+                                                         Value="Unit">
+                                                <Setter Property="Text" Value="{Binding Code}"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                    <Label Text="{Binding Title}" HorizontalTextAlignment="Start"
+                                           FontAttributes="Italic"/>
 
                                     <Label Text="{Binding Credits, StringFormat='{0} credits'}"
                                        HorizontalTextAlignment="Start" Margin="0, 0, 0, 10"/>
@@ -138,8 +147,7 @@
 
                         <Button Text="Add Standard" FontSize="26"
                                 FontAttributes="Bold" TextColor="Black"
-                                BackgroundColor="Transparent" Clicked="buttonAdd_Clicked"
-                                Padding="20">
+                                Clicked="buttonAdd_Clicked" Padding="20">
 
                             <Button.Background>
                                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
