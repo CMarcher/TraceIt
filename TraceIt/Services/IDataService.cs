@@ -12,7 +12,6 @@ namespace TraceIt.Services
         Task DeleteSubjectAsync(Subject subject);
         Task<Tuple<int, int>> GetAchievedAndTotalCreditsAsync();
         Task<ObservableCollection<Standard>> GetCategorisedStandardsAsync(string parameter, DataService.FilterOption filterByOption);
-        Task<ObservableCollection<CreditBreakdown>> GetCreditBreakdownsAsync();
         Task<List<Standard>> GetMatchingStandards(string searchQuery);
         Task<ObservableCollection<Standard>> GetSelectedStandardsAsync();
         Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsAsync();
@@ -24,7 +23,7 @@ namespace TraceIt.Services
         Task InsertSelectedSubjectAsync(SelectedSubject subject);
         Task UpdateOrInsertSelectedSubjectAsync(SelectedSubject subject);
         Task UpdateOrInsertSubjectAsync(Subject subject);
-        Task UpdateStandardAsync(Standard standard);
+        Task<bool> UpdateStandardAsync(Standard standard);
         Task UpdateSubjectsAsync(List<Subject> subjects);
     }
 }
