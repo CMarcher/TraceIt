@@ -22,7 +22,10 @@ namespace TraceIt.Views
             if (FieldIsEmpty())
                 await DisplayAlert("There's a problem!", "Please enter your name properly", "Fine");
             else
+            {
                 SaveUser();
+                await DisplayAlert("Success!", "Name saved", "Great!");
+            }  
         }
 
         private bool FieldIsEmpty()
