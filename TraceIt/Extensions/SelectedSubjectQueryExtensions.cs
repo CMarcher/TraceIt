@@ -17,15 +17,13 @@ namespace TraceIt.Extensions
             var achieved = new CreditBreakdown(CreditBreakdown.Grades.Achieved);
             var merit = new CreditBreakdown(CreditBreakdown.Grades.Merit);
             var excellence = new CreditBreakdown(CreditBreakdown.Grades.Excellence);
-            var filteredSubjects = subjects.Where(standard => standard.Selected is true).ToList();
+            var filteredSubjects = subjects.Where(subject => subject.Selected is true).ToList();
+            var filteredStandards = filteredSubjects.GetSelectedStandards();
 
-            foreach (var subject in filteredSubjects)
-            {
-                notAchieved.AddCreditsFromSubject(subject);
-                achieved.AddCreditsFromSubject(subject);
-                merit.AddCreditsFromSubject(subject);
-                excellence.AddCreditsFromSubject(subject);
-            }
+            notAchieved.SetCredits(filteredStandards);
+            achieved.SetCredits(filteredStandards);
+            merit.SetCredits(filteredStandards);
+            excellence.SetCredits(filteredStandards);
 
             return new ObservableCollection<CreditBreakdown> { notAchieved, achieved, merit, excellence };
         }
@@ -33,7 +31,7 @@ namespace TraceIt.Extensions
         public static Tuple<int, int> GetAchievedAndTotalCredits(this IEnumerable<SelectedSubject> subjects)
         {
             int totalCredits = 0, achievedCredits = 0;
-            Func<Standard, bool> creditsFilter = standard => (int)standard.FinalGrade >= 2;
+            Predicate<Standard> creditsFilter = standard => (int)standard.FinalGrade >= 2;
             var filteredSubjects = subjects.Where(subject => subject.Selected is true).ToList();
 
             foreach (var subject in filteredSubjects)
@@ -76,8 +74,8 @@ namespace TraceIt.Extensions
         public static Tuple<int, int> GetLiteracyAndNumeracyCredits(this IEnumerable<SelectedSubject> subjects)
         {
             var standards = subjects.GetSelectedStandards();
-            Func<Standard, bool> literacyCriteria = standard => (int)standard.FinalGrade >= 2 && standard.IsLiteracy;
-            Func<Standard, bool> numeracyCriteria = standard => (int)standard.FinalGrade >= 2 && standard.IsNumeracy;
+            Predicate<Standard> literacyCriteria = standard => (int)standard.FinalGrade >= 2 && standard.IsLiteracy;
+            Predicate<Standard> numeracyCriteria = standard => (int)standard.FinalGrade >= 2 && standard.IsNumeracy;
 
             var literacyCredits = standards.CountCredits(literacyCriteria);
             var numeracyCredits = standards.CountCredits(numeracyCriteria);
@@ -146,7 +144,7 @@ namespace TraceIt.Extensions
             return subjects;
         }
 
-        private static int CountCredits(this IEnumerable<RankScoreSubject> subjects, Func<Standard, bool> criteria)
+        private static int CountCredits(this IEnumerable<RankScoreSubject> subjects, Predicate<Standard> criteria)
         {
             int credits = 0;
 
