@@ -46,7 +46,7 @@ namespace TraceIt.Extensions
             standards.Remove(search);
         }
 
-        public static int CountCredits(this IEnumerable<Standard> standards, Func<Standard, bool> predicate = null)
+        public static int CountCredits(this IEnumerable<Standard> standards, Predicate<Standard> predicate = null)
         {
             int credits = 0;
             bool noFilterSet = predicate is null;
