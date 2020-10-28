@@ -7,13 +7,20 @@
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.CreditsChartPage">
 
     <ContentView.BindingContext>
         <viewmodels:CreditsChartPageViewModel/>
     </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:SelectedIndexToYBindingPathConverter x:Key="creditsBindingConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
 
     <ContentView.Content>
         <Grid RowDefinitions="50, *" RowSpacing="25">
@@ -56,22 +63,44 @@
                     </progressbar:SfCircularProgressBar.Content>
                 </progressbar:SfCircularProgressBar>
 
-                <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               IsVisible="False" Grid.Row="1" BackgroundColor="{OnPlatform Android=Transparent}">
-
-                    <chart:SfChart.Triggers>
-                        <DataTrigger TargetType="chart:SfChart" 
+            <StackLayout Grid.Row="1" IsVisible="False"
+                         Spacing="20">
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" 
                                      Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
                                      Value="1">
-                            <Setter Property="IsVisible" Value="True"/>
-                        </DataTrigger>
-                    </chart:SfChart.Triggers>
-                    
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                
+                <buttons:SfSegmentedControl x:Name="breakdownFilterSelector" 
+                                            HorizontalOptions="Center" CornerRadius="20" 
+                                            SegmentCornerRadius="0" VisibleSegmentsCount="4"
+                                            SegmentHeight="40" SegmentWidth="70">
+
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="buttons:SfSegmentItem">
+                            <buttons:SfSegmentItem Text="Level 1"/>
+                            <buttons:SfSegmentItem Text="Level 2"/>
+                            <buttons:SfSegmentItem Text="Level 3"/>
+                            <buttons:SfSegmentItem Text="All"/>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+
+                <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                               BackgroundColor="{OnPlatform Android=Transparent}">
+
                     <chart:PieSeries ItemsSource="{Binding CreditBreakdowns}"
-                                 XBindingPath="Grade" YBindingPath="Credits"
+                                 XBindingPath="Grade" YBindingPath="{Binding Source={x:Reference breakdownFilterSelector}, Path=SelectedIndex,
+                                                                    Converter={StaticResource creditsBindingConverter}}"
                                  DataMarkerPosition="Inside" EnableTooltip="True"
                                  ExplodeOnTouch="True" ExplodeAll="False">
-                        
+
                         <chart:PieSeries.ColorModel>
                             <chart:ChartColorModel Palette="Custom">
                                 <chart:ChartColorModel.CustomBrushes>
@@ -115,7 +144,8 @@
                         </chart:ChartLegend>
                     </chart:SfChart.Legend>
                 </chart:SfChart>
-            </Grid>
+            </StackLayout>
+        </Grid>
     </ContentView.Content>
 
 </ContentView>
