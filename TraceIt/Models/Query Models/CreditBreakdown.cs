@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using TraceIt.Extensions;
 
 namespace TraceIt.Models.Query_Models
 {
@@ -14,7 +16,10 @@ namespace TraceIt.Models.Query_Models
             Excellence
         }
 
-        public int Credits { get; set; }
+        public int OverallCredits { get; set; }
+        public int LevelOneCredits { get; set; }
+        public int LevelTwoCredits { get; set; }
+        public int LevelThreeCredits { get; set; }
         public Grades Grade { get; set; }
 
         public CreditBreakdown(Grades grade)
@@ -22,22 +27,36 @@ namespace TraceIt.Models.Query_Models
             Grade = grade;
         }
 
-        public void AddCreditsFromSubject(SelectedSubject subject)
+        public void SetCredits(IEnumerable<Standard> standards)
         {
-            foreach(var standard in subject.Standards)
-            {
-                bool bothNotAchieved = standard.FinalGrade == Standard.Grade.NotAchieved &&
-                                       Grade == Grades.NotAchieved;
-                bool bothAchieved = standard.FinalGrade == Standard.Grade.Achieved &&
-                                    Grade == Grades.Achieved;
-                bool bothMerit = standard.FinalGrade == Standard.Grade.Merit &&
-                                 Grade == Grades.Merit;
-                bool bothExcellence = standard.FinalGrade == Standard.Grade.Excellence &&
-                                      Grade == Grades.Excellence;
-                bool canAddCredits = bothNotAchieved || bothAchieved || bothMerit || bothExcellence;
+            var gradeFilter = GetFilter();
+            Predicate<Standard> levelOneFilter = x => x.Level == Standard.Levels.One;
+            Predicate<Standard> levelTwoFilter = x => x.Level == Standard.Levels.Two;
+            Predicate<Standard> levelThreeFilter = x => x.Level == Standard.Levels.Three;
+            var levelOneStandards = standards.Where(new Func<Standard, bool>(levelOneFilter));
+            var levelTwoStandards = standards.Where(new Func<Standard, bool>(levelTwoFilter));
+            var levelThreeStandards = standards.Where(new Func<Standard, bool>(levelThreeFilter));
 
-                if (canAddCredits)
-                    Credits += standard.Credits;
+            OverallCredits = standards.CountCredits(gradeFilter);
+            LevelOneCredits = levelOneStandards.CountCredits(gradeFilter);
+            LevelTwoCredits = levelTwoStandards.CountCredits(gradeFilter);
+            LevelThreeCredits = levelThreeStandards.CountCredits(gradeFilter);
+        }
+
+        private Predicate<Standard> GetFilter()
+        {
+            switch (Grade)
+            {
+                case Grades.NotAchieved:
+                    return x => x.FinalGrade == Standard.Grade.NotAchieved;
+                case Grades.Achieved:
+                    return x => x.FinalGrade == Standard.Grade.Achieved;
+                case Grades.Merit:
+                    return x => x.FinalGrade == Standard.Grade.Merit;
+                case Grades.Excellence:
+                    return x => x.FinalGrade == Standard.Grade.Excellence;
+                default:
+                    throw new Exception("CreditBreakdown's Grade property not set");
             }
         }
         
