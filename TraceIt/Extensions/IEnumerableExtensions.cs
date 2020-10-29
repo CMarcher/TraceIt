@@ -34,7 +34,7 @@ namespace TraceIt.Extensions
             return convertedCollection;
         }
 
-        public static void ClearCredits(this IEnumerable<Endorsement> endorsements)
+        public static void ClearCredits(this IEnumerable<LevelEndorsement> endorsements)
         {
             foreach (var endorsement in endorsements)
                 endorsement.ClearCredits();
@@ -64,23 +64,13 @@ namespace TraceIt.Extensions
         public static bool IsEligibleForEndorsement(this IEnumerable<Standard> standards)
         {
             Func<Standard, bool> criteria = standard => (int)standard.GradingScheme >= 2;
-            int eligibleCreditsCount = 0;
-            int externalCreditsCount = 0;
+            var filteredStandards = standards.Where(criteria);
+            var internalCredits = filteredStandards.CountCredits(x => x.AssessmentType is Standard.AssessmentTypes.Internal);
+            var externalCredits = filteredStandards.CountCredits(x => x.AssessmentType is Standard.AssessmentTypes.External);
+            var totalCredits = filteredStandards.CountCredits();
 
-            foreach (var standard in standards)
-            {
-                bool isEligible = criteria(standard);
-                if (isEligible)
-                {
-                    eligibleCreditsCount += standard.Credits;
-                    externalCreditsCount += standard.Credits;
-                }
-
-            }
-
-            bool isEligibleOverall = eligibleCreditsCount >= 12 && externalCreditsCount >= 3;
-
-            return isEligibleOverall;
+            bool isEligible = internalCredits >= 3 && externalCredits >= 3 && totalCredits >= 12;
+            return isEligible;
         }
     }
 }
