@@ -28,29 +28,6 @@
             <Style TargetType="progressbar:SfLinearProgressBar" x:Key="subjectProgressBar" 
                                BasedOn="{StaticResource baseProgressBar}">
                 <Setter Property="TrackHeight" Value="30"/>
-                <Setter Property="Maximum">
-                    <Setter.Value>
-                        <Binding Source="{x:Reference covidSwitch}"
-                                             Path="IsOn"
-                                             ConverterParameter="Subject">
-                            <Binding.Converter>
-                                <converters:IsToggledToMaximumConverter/>
-                            </Binding.Converter>
-                        </Binding>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Progress" Value="{Binding ExcellenceCredits}"/>
-                <Setter Property="SecondaryProgress">
-                    <Setter.Value>
-                        <MultiBinding>
-                            <Binding Path="MeritCredits"/>
-                            <Binding Path="ExcellenceCredits"/>
-                            <MultiBinding.Converter>
-                                <converters:TotalCreditsToSecondaryProgressConverter/>
-                            </MultiBinding.Converter>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
             </Style>
 
             <Style TargetType="progressbar:SfLinearProgressBar" x:Key="levelProgressBar"
@@ -108,7 +85,7 @@
     <ContentView.Content>
         <ScrollView>
             <StackLayout VerticalOptions="StartAndExpand"
-                         Padding="{OnIdiom Phone='20, 0', Tablet='40, 0'}" Spacing="20" Margin="{OnIdiom Phone=0, Tablet=20}">
+                         Padding="{OnIdiom Phone='10, 0', Tablet='40, 0'}" Spacing="20" Margin="{OnIdiom Phone=0, Tablet=20}">
 
                 <StackLayout>
                     <Label Text="COVID-19 Settings" FontAttributes="Italic"
@@ -174,6 +151,7 @@
                                             FontSize="{OnIdiom Tablet=20, Phone=15}"
                                             SelectedIndex="{Binding Year, Mode=TwoWay, Converter={StaticResource indexToYearConverter}}"
                                             SelectionChanged="SfSegmentedControl_SelectionChanged">
+                    
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
                         <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
                     </buttons:SfSegmentedControl.SelectionIndicatorSettings>
@@ -187,17 +165,79 @@
                         </system:List>
                     </buttons:SfSegmentedControl.ItemsSource>
                 </buttons:SfSegmentedControl>
-                
+
+                <buttons:SfSegmentedControl VisibleSegmentsCount="2" SegmentPadding="10"
+                                            FontSize="{OnIdiom Tablet=20, Phone=15}"
+                                            x:Name="endorsementTypeSelector"
+                                            SelectionChanged="endorsementTypeSelector_SelectionChanged">
+                    
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="buttons:SfSegmentItem">
+                            <buttons:SfSegmentItem Text="Merit"/>
+                            <buttons:SfSegmentItem Text="Excellence"/>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+
                 <listview:SfListView ItemsSource="{Binding SubjectEndorsements}" AutoFitMode="Height"
-                                     ItemSpacing="12" x:Name="listViewEndorsements">
+                                     ItemSpacing="12" x:Name="listViewEndorsements" SelectionMode="None"
+                                     IsScrollingEnabled="False" VerticalOptions="FillAndExpand">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Text="{Binding BaseSubject.Name, StringFormat='{0} Endorsement Progress'}" Style="{StaticResource headerLabelStyle}"/>
-                                <Frame Style="{StaticResource progressBarFrame}">
-                                    <progressbar:SfLinearProgressBar ProgressColor="Orange"
-                                                     Style="{StaticResource subjectProgressBar}"/>
-                                </Frame>
+                                <Label Text="{Binding Name, StringFormat='{0} Endorsement Progress'}" Style="{StaticResource headerLabelStyle}"/>
+                                <Grid ColumnDefinitions="*, *, 3*" ColumnSpacing="20">
+                                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="0">
+                                        <progressbar:SfLinearProgressBar ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding InternalCredits}" Maximum="3">
+                                            
+                                            <progressbar:SfLinearProgressBar.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                             Value="0" TargetType="progressbar:SfLinearProgressBar">
+                                                    <Setter Property="ProgressColor" Value="DeepSkyBlue"/>
+                                                </DataTrigger>
+                                            </progressbar:SfLinearProgressBar.Triggers>
+                                        </progressbar:SfLinearProgressBar>
+                                    </Frame>
+
+                                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="1">
+                                        <progressbar:SfLinearProgressBar ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding ExternalCredits}" Maximum="3">
+                                            
+                                            <progressbar:SfLinearProgressBar.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                             Value="0" TargetType="progressbar:SfLinearProgressBar">
+                                                    <Setter Property="ProgressColor" Value="DeepSkyBlue"/>
+                                                </DataTrigger>
+                                            </progressbar:SfLinearProgressBar.Triggers>
+                                        </progressbar:SfLinearProgressBar>
+                                    </Frame>
+
+                                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="2">
+                                        <progressbar:SfLinearProgressBar ProgressColor="Orange"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding TotalCredits}" Maximum="11">
+
+                                            <progressbar:SfLinearProgressBar.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Reference covidSwitch}, Path=IsOn}"
+                                                             Value="True" TargetType="progressbar:SfLinearProgressBar">
+                                                    <Setter Property="Maximum" Value="9"/>
+                                                </DataTrigger>
+                                                
+                                                <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                             Value="0" TargetType="progressbar:SfLinearProgressBar">
+                                                    <Setter Property="ProgressColor" Value="DeepSkyBlue"/>
+                                                </DataTrigger>
+                                            </progressbar:SfLinearProgressBar.Triggers>
+                                        </progressbar:SfLinearProgressBar>
+                                    </Frame>
+                                </Grid>
                             </StackLayout>
                         </DataTemplate>
                     </listview:SfListView.ItemTemplate>
