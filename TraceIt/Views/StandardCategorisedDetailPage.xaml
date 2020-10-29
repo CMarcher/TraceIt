@@ -63,7 +63,7 @@
                 </buttons:SfSegmentedControl>
             </StackLayout>
 
-            <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="Fill"
+            <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="FillAndExpand"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
                                ItemSpacing="10" AutoFitMode="DynamicHeight"
                                Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}">

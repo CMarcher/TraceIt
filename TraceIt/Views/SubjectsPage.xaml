@@ -47,7 +47,8 @@
                                AbsoluteLayout.LayoutFlags="All"/>
 
             <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
+                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Spacing="0"
+                         VerticalOptions="FillAndExpand">
 
                 <Frame BackgroundColor="#001257" CornerRadius="0"
                        Padding="10" HasShadow="False">

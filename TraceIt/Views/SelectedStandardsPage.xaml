@@ -45,7 +45,7 @@
             <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="0, 10" 
                              AllowSwiping="True" ItemsSource="{Binding Standards}" 
                              SelectionMode="None" Margin="10, 0"
-                             AutoFitMode="Height">
+                             AutoFitMode="Height" VerticalOptions="FillAndExpand">
 
                 <list:SfListView.LayoutManager>
                     <list:LinearLayout/>
