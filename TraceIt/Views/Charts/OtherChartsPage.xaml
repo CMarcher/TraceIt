@@ -22,9 +22,9 @@
                    FontSize="50"/>
 
             <!--Currently crashing the app due to bug out of my control-->
-            <!--<progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
+            <progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
                                            HorizontalOptions="CenterAndExpand" TitleAlignment="Start" 
-                                           IsVisible="False">
+                                           IsVisible="True">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
@@ -42,7 +42,7 @@
                         </progressbar:StepView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
-            </progressbar:SfStepProgressBar>-->
+            </progressbar:SfStepProgressBar>
         </StackLayout>
     </ContentView.Content>
 </ContentView>
