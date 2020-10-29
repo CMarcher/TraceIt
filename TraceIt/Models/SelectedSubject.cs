@@ -164,10 +164,18 @@ namespace TraceIt.Models
 
         public async Task RemoveStandardAsync(Standard standard)
         {
-            Standards.RemoveByID(standard);
+            try
+            {
+                Standards.RemoveByID(standard);
+                UnsubscribeFromFinalGradeChanged(standard);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
             await standard.DeselectAsync();
             await RefreshAsync();
-            UnsubscribeFromFinalGradeChanged(standard);
         }
 
         private async Task ClearStandards()
