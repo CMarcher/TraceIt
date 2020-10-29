@@ -26,7 +26,7 @@
         <Grid RowDefinitions="50, *" RowSpacing="25">
                 <buttons:SfSegmentedControl x:Name="chartSelector" Margin="0, 10"
                                             SegmentPadding="20" SegmentCornerRadius="25"
-                                            HorizontalOptions="Center" SegmentWidth="150"
+                                            HorizontalOptions="CenterAndExpand" SegmentWidth="150"
                                             Grid.Row="0">
                     
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
