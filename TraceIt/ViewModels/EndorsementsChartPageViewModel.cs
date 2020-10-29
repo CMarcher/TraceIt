@@ -16,12 +16,12 @@ namespace TraceIt.ViewModels
     {
         ObservableCollection<Standard> Standards = new ObservableCollection<Standard>();
 
-        public Endorsement LevelOneEndorsement { get; private set; } = new Endorsement();
-        public Endorsement LevelTwoEndorsement { get; private set; } = new Endorsement();
-        public Endorsement LevelThreeEndorsement { get; private set; } = new Endorsement();
+        public LevelEndorsement LevelOneEndorsement { get; private set; } = new LevelEndorsement();
+        public LevelEndorsement LevelTwoEndorsement { get; private set; } = new LevelEndorsement();
+        public LevelEndorsement LevelThreeEndorsement { get; private set; } = new LevelEndorsement();
 
-        private ObservableCollection<SelectedSubject> _subjectEndorsements;
-        public ObservableCollection<SelectedSubject> SubjectEndorsements
+        private ObservableCollection<SubjectEndorsement> _subjectEndorsements;
+        public ObservableCollection<SubjectEndorsement> SubjectEndorsements
         {
             get => _subjectEndorsements;
             set => SetProperty(ref _subjectEndorsements, value, nameof(SubjectEndorsements));
@@ -62,17 +62,15 @@ namespace TraceIt.ViewModels
         }
 
         private void SetStandards()
-            => Standards = SubjectEndorsements.GetSelectedStandards();
+            => Standards = App.DataRepository.SelectedSubjects.GetSelectedStandards();
 
         private void SetEndorsements()
         {
-            if (initialised)
-            {
-                SetSubjectEndorsements();
-                ClearEndorsements();
-            }
+            if (initialised is true)
+                ClearLevelEndorsements();
 
             SetStandards();
+            SetSubjectEndorsements();
 
             foreach (var standard in Standards)
                 AddToLevelEndorsement(standard);
@@ -97,11 +95,9 @@ namespace TraceIt.ViewModels
         }
 
         private void SetSubjectEndorsements()
-        {
-            SubjectEndorsements = App.DataRepository.SelectedSubjects;
-        }
-
-        private void ClearEndorsements()
+            => SubjectEndorsements = App.DataRepository.SelectedSubjects.GetSubjectEndorsements();
+        
+        private void ClearLevelEndorsements()
         {
             LevelOneEndorsement.ClearCredits();
             LevelTwoEndorsement.ClearCredits();
