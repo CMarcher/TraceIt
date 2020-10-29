@@ -43,6 +43,23 @@ namespace TraceIt.Extensions
             return new Tuple<int, int>(totalCredits, achievedCredits);
         }
 
+        public static ObservableCollection<SubjectEndorsement> GetSubjectEndorsements(this IEnumerable<SelectedSubject> subjects)
+        {
+            subjects = subjects.GetSelectedSubjects();
+            var subjectEndorsements = new ObservableCollection<SubjectEndorsement>();
+
+            Action<SelectedSubject> addEndorsements = subject =>
+            {
+                subjectEndorsements.Add(new SubjectEndorsement(subject, SubjectEndorsement.EndorsementTypes.Merit));
+                subjectEndorsements.Add(new SubjectEndorsement(subject, SubjectEndorsement.EndorsementTypes.Excellence));
+            };
+
+            foreach(var subject in subjects)
+                addEndorsements(subject);
+
+            return subjectEndorsements;
+        }
+
         public static ObservableCollection<Standard> GetSelectedStandards(this IEnumerable<SelectedSubject> subjects)
         {
             var standards = new ObservableCollection<Standard>();
@@ -152,6 +169,14 @@ namespace TraceIt.Extensions
                 credits += subject.Standards.CountCredits(criteria);
 
             return credits;
+        }
+
+        private static List<SelectedSubject> GetSelectedSubjects(this IEnumerable<SelectedSubject> subjects)
+        {
+            Predicate<SelectedSubject> subjectFilter = x => x.Selected is true;
+            subjects = subjects.Where(new Func<SelectedSubject, bool>(subjectFilter));
+
+            return subjects.ToList();
         }
     }
 }
