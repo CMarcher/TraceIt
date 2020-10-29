@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TraceIt.Models
 {
-    public class Endorsement : BaseModel
+    public class LevelEndorsement : BaseModel
     {
         private int _meritCredits;
         public int MeritCredits
