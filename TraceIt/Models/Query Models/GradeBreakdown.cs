@@ -6,7 +6,7 @@ using TraceIt.Extensions;
 
 namespace TraceIt.Models.Query_Models
 {
-    public class CreditBreakdown
+    public class GradeBreakdown
     {
         public enum Grades
         {
@@ -22,7 +22,7 @@ namespace TraceIt.Models.Query_Models
         public int LevelThreeCredits { get; set; }
         public Grades Grade { get; set; }
 
-        public CreditBreakdown(Grades grade)
+        public GradeBreakdown(Grades grade)
         {
             Grade = grade;
         }
