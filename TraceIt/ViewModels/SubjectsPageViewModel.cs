@@ -37,6 +37,9 @@ namespace TraceIt.ViewModels
 
             App.MessagingService.Subscribe(this, Services.MessagingService.MessageType.RepositoryInitialisationComplete,
                 (sender) => { SetSubjects(); IsBusy = false; });
+
+            if (Subjects != null)
+                IsBusy = false;
         }
 
         private void SetSubjects()
