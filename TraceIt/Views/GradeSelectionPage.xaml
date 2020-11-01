@@ -54,13 +54,12 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
+        <AbsoluteLayout Background="{DynamicResource BlueToDarkGradient}">
 
-            <StackLayout Margin="{OnIdiom Phone=0, Tablet=15}"
+            <StackLayout Margin="{OnIdiom Phone=10, Tablet=15}"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
-                <Frame Style="{DynamicResource primaryFrameStyle}" CornerRadius="10" VerticalOptions="FillAndExpand">
                     <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
                         <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
                             <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
@@ -70,14 +69,14 @@
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
                                 <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="Not Achieved"/>
-                                    <buttons:SfSegmentItem Text="Achieved" />
-                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
-                                    
-                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
@@ -93,14 +92,14 @@
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
                                 <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="Not Achieved"/>
-                                    <buttons:SfSegmentItem Text="Achieved" />
-                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
 
-                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
@@ -116,14 +115,14 @@
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
                                 <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="Not Achieved"/>
-                                    <buttons:SfSegmentItem Text="Achieved" />
-                                    <buttons:SfSegmentItem Text="Merit" IsEnabled="{Binding GradingScheme, 
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
 
-                                    <buttons:SfSegmentItem Text="Excellence" IsEnabled="{Binding GradingScheme, 
+                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
@@ -131,7 +130,6 @@
                             </buttons:SfSegmentedControl>
                         </StackLayout>
                     </Grid>
-                </Frame>
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
