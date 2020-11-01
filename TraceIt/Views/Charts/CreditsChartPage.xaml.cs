@@ -15,6 +15,13 @@ namespace TraceIt.Views.Charts
         public CreditsChartPage()
         {
             InitializeComponent();
+            Initialise();
+        }
+
+        private void Initialise()
+        {
+            levelFilterSelector.SelectedIndex = 0;
+            chartSelector.SelectedIndex = 0;
         }
     }
 }
