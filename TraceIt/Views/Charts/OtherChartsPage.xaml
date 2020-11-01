@@ -4,27 +4,77 @@
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
              xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              x:Class="TraceIt.Views.Charts.OtherChartsPage">
-    
+
     <ContentView.BindingContext>
         <viewmodels:OtherChartsPageViewModel/>
     </ContentView.BindingContext>
-    
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="baseProgressBar">
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="HeightRequest" Value="{Binding Source={RelativeSource Self}, Path=TrackHeight}"/>
+                <Setter Property="SegmentCount" Value="{Binding Source={RelativeSource Self}, Path=Maximum}"/>
+                <Setter Property="TrackColor" Value="#303030"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="extraProgressBar"
+                   BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="70"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="progressBarFrame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
     <ContentView.Content>
-        <StackLayout Spacing="0" VerticalOptions="Center">
-            <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
+        <ScrollView>
+            <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0, 0, 0, 20">
+                
+                <Grid ColumnDefinitions="*, *" RowDefinitions="20, *" Padding="{OnIdiom Phone='20, 10, 20, 40', Tablet='40, 10'}">
+
+                    <Label Text="Reading progress" FontAttributes="Bold" Grid.Column="0"
+                       TextColor="White"/>
+                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="0" Grid.Row="1">
+                        <progressbar:SfLinearProgressBar Progress="{Binding ReadingCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                    </Frame>
+
+                    <Label Text="Writing progress" FontAttributes="Bold" Grid.Column="1"
+                       TextColor="White"/>
+                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="1" Grid.Row="1">
+                        <progressbar:SfLinearProgressBar Progress="{Binding WritingCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                    </Frame>
+                </Grid>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
+                             VerticalOptions="Start" Padding="0, 0, 0, 20">
+                    <Label Text="University Entrance" TextColor="White"
+                       FontAttributes="Bold" VerticalTextAlignment="Center"/>
+                    <CheckBox IsChecked="{Binding HasUniEntrance}"/>
+                </StackLayout>
+
+                <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand"
                    FontAttributes="Bold" TextColor="White"
                    FontSize="Large"/>
-            <Label Text="{Binding RankScore}"
+
+                <Label Text="{Binding RankScore}"
                    VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand"
                    TextColor="White" FontAttributes="Bold"
                    FontSize="50"/>
 
-            <!--Currently crashing the app due to bug out of my control-->
-            <progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
-                                           HorizontalOptions="CenterAndExpand" TitleAlignment="Start" 
-                                           IsVisible="True">
+                <!--Currently crashing the app due to bug out of my control-->
+                <!--<progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
+                                           HorizontalOptions="CenterAndExpand" TitleAlignment="Start">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
@@ -42,7 +92,8 @@
                         </progressbar:StepView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
-            </progressbar:SfStepProgressBar>
-        </StackLayout>
+            </progressbar:SfStepProgressBar>-->
+            </StackLayout>
+        </ScrollView>
     </ContentView.Content>
 </ContentView>
