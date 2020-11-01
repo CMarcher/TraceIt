@@ -103,13 +103,14 @@ namespace TraceIt.Models
         public async Task Deselect()
         {
             Selected = false;
-            await Delete();
-            await PushChangesAsync();
+            Task.Run(Delete).Wait();
+            await ClearAttributes();
         }
 
         private async Task RefreshAsync()
         {
             SetCredits();
+            SetPassedCredits();
             CountStandards();
             SetEndorsementEligibilty();
             await PushChangesAsync();
@@ -118,6 +119,17 @@ namespace TraceIt.Models
         public async Task Delete()
         {
             await ClearStandards();
+        }
+
+        private async Task ClearAttributes()
+        {
+            PassedCredits = 0;
+            Credits = 0;
+            MeritCredits = 0;
+            ExcellenceCredits = 0;
+            EndorsementEligible = false;
+            StandardsCount = 0;
+            await PushChangesAsync();
         }
 
         private void SetCredits()
@@ -151,7 +163,7 @@ namespace TraceIt.Models
             foreach (var standard in Standards)
                 SubscribeToFinalGradeChanged(standard);
 
-            await SetPassedCredits();
+            SetPassedCredits();
         }
 
         public async Task AddStandardAsync(Standard standard)
@@ -198,14 +210,14 @@ namespace TraceIt.Models
 
         private async void OnFinalGradeChanged(object sender, EventArgs e)
         {
-            await SetPassedCredits();
+            SetPassedCredits();
             SetCredits();
+            await PushChangesAsync();
         }
 
-        private async Task SetPassedCredits()
+        private void SetPassedCredits()
         {
             PassedCredits = Standards.CountCredits(standard => (int)standard.FinalGrade >= 2);
-            await PushChangesAsync();
         }
     }
 }
