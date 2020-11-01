@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Controls;
+using TraceIt.Extensions;
 using TraceIt.Utilities;
 using TraceIt.Views;
 using Xamarin.Forms;
@@ -32,7 +33,10 @@ namespace TraceIt
             {
                 CreateUser();
                 StatusTracker.CurrentYear = int.Parse((string)pickerLevel.SelectedItem);
+
+                buttonConfirm.SetEnabledForAndroid(false);
                 await Navigation.PushModalAsync(new NavigationPage(new SubjectSelectionPage()));
+                buttonConfirm.SetEnabledForAndroid(true);
             }
         }
 
@@ -48,7 +52,7 @@ namespace TraceIt
         }
 
         private void TrimUsername()
-            => entryName.Text = entryName.Text.Trim();
+            => entryName.Text = entryName.Text?.Trim();
 
         private void CreateUser()
         {
