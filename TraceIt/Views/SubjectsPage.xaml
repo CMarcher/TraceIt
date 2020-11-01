@@ -70,7 +70,8 @@
 
                 <xforms:SfListView x:Name="listViewSubjects" AutoFitMode="DynamicHeight" 
                                    ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
-                                   SelectionMode="None" ItemsSource="{Binding Subjects}">
+                                   SelectionMode="None" ItemsSource="{Binding Subjects}"
+                                   VerticalOptions="FillAndExpand">
 
                     <xforms:SfListView.LayoutManager>
                         <xforms:GridLayout SpanCount="2"/>
@@ -78,7 +79,7 @@
 
                     <xforms:SfListView.ItemTemplate>
                         <DataTemplate x:DataType="models:SelectedSubject">
-                            <SwipeView BackgroundColor="Transparent">
+                            <SwipeView BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
 
                                 <SwipeView.RightItems>
                                     <SwipeItemView Padding="10, 0, 0, 0" 
@@ -86,7 +87,7 @@
                                                    CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}">
                                         
                                         <Frame CornerRadius="28" HasShadow="False" 
-                                               WidthRequest="50" Padding="50">
+                                               WidthRequest="{OnIdiom Tablet=50, Phone=25}" Padding="{OnIdiom Tablet=50, Phone=15}">
                                             <Frame.Background>
                                                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                                                     <GradientStop Color="OrangeRed" Offset="0"/>
@@ -97,7 +98,7 @@
                                             <Image>
                                                 <Image.Source>
                                                     <FontImageSource Color="White" FontFamily="PrimaryIcons"
-                                                                     Glyph="{DynamicResource Trash}" Size="80"/>
+                                                                     Glyph="{DynamicResource Trash}" Size="{OnIdiom Tablet=80, Phone=50}"/>
                                                 </Image.Source>
                                             </Image>
                                         </Frame>
@@ -105,8 +106,10 @@
                                 </SwipeView.RightItems>
                                 
                                 <Frame Style="{DynamicResource listItemFrame}" Padding="0"
-                                       BackgroundColor="{OnPlatform Android='Transparent'}">
-                                    <StackLayout Padding="10, 13, 10, 20">
+                                       BackgroundColor="{OnPlatform Android='Transparent'}"
+                                       VerticalOptions="End"
+                                       Margin="0">
+                                    <StackLayout Padding="10, 13, 10, 20" VerticalOptions="FillAndExpand">
 
                                         <Label Text="{Binding BaseSubject.Name}" FontAttributes="Bold" 
                                            Margin="0, 0, 0, 12"/>
@@ -124,13 +127,14 @@
 
                                         <Frame CornerRadius="15" BackgroundColor="DodgerBlue"
                                                IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}"
-                                               IsClippedToBounds="True" Padding="0" Margin="0" HorizontalOptions="Center">
+                                               IsClippedToBounds="True" Padding="0" Margin="0" HorizontalOptions="Center"
+                                               VerticalOptions="StartAndExpand">
 
                                             <Label Text="Not eligible for endorsement" TextColor="White" Margin="{OnIdiom Phone='7, 4', Tablet='10, 7'}"
                                                    FontSize="12" FontAttributes="Bold, Italic"/>
                                         </Frame>
 
-                                        <Button Text="View Info" CornerRadius="20"
+                                        <Button Text="View Info" CornerRadius="18"
                                                      TextColor="Black" FontAttributes="Bold" 
                                                      FontSize="17" Style="{DynamicResource subjectButtonGradient}"
                                                      Clicked="buttonViewInfo_Clicked" HorizontalOptions="Center"

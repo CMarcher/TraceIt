@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Utilities;
 using TraceIt.ViewModels;
@@ -86,10 +87,13 @@ namespace TraceIt.Views
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)
         {
-            var subject = (sender as Button)?.BindingContext as SelectedSubject;
+            var button = sender as Button;
+            var subject = button?.BindingContext as SelectedSubject;
             StatusTracker.CurrentSubject = subject;
 
+            button.SetEnabledForAndroid(false);
             await Navigation.PushAsync(new SelectedStandardsPage());
+            button.SetEnabledForAndroid(true);
         }
 
         protected override void OnAppearing()
@@ -126,6 +130,12 @@ namespace TraceIt.Views
         }
 
         private async void addSubjectsToolbarItem_Clicked(object sender, EventArgs e)
-            => await Navigation.PushModalAsync(new NavigationPage(new SubjectEditingPage()));
+        {
+            var button = sender as ToolbarItem;
+
+            button.SetEnabledForAndroid(false);
+            await Navigation.PushModalAsync(new NavigationPage(new SubjectEditingPage()));
+            button.SetEnabledForAndroid(true);
+        }
     }
 }
