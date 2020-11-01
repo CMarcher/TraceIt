@@ -14,18 +14,32 @@ namespace TraceIt.ViewModels
 {
     public class CreditsChartPageViewModel : BaseViewModel
     {
-        private int _totalCredits;
-        public int TotalCredits
+        private TotalBreakdown _levelOneBreakdown;
+        public TotalBreakdown LevelOneBreakdown
         {
-            get => _totalCredits;
-            set => SetProperty(ref _totalCredits, value, nameof(TotalCredits));
+            get => _levelOneBreakdown;
+            set => SetProperty(ref _levelOneBreakdown, value, nameof(LevelOneBreakdown));        
         }
 
-        private int _achievedCredits;
-        public int AchievedCredits
+        private TotalBreakdown _levelTwoBreakdown;
+        public TotalBreakdown LevelTwoBreakdown
         {
-            get => _achievedCredits;
-            set => SetProperty(ref _achievedCredits, value, nameof(AchievedCredits));
+            get => _levelTwoBreakdown;
+            set => SetProperty(ref _levelTwoBreakdown, value, nameof(LevelTwoBreakdown));
+        }
+
+        private TotalBreakdown _levelThreeBreakdown;
+        public TotalBreakdown LevelThreeBreakdown
+        {
+            get => _levelThreeBreakdown;
+            set => SetProperty(ref _levelThreeBreakdown, value, nameof(LevelThreeBreakdown));
+        }
+
+        private TotalBreakdown _overallBreakdown;
+        public TotalBreakdown OverallBreakdown
+        {
+            get => _overallBreakdown;
+            set => SetProperty(ref _overallBreakdown, value, nameof(OverallBreakdown));
         }
 
         private ObservableCollection<Standard> _selectedStandards;
@@ -35,11 +49,11 @@ namespace TraceIt.ViewModels
             set => SetProperty(ref _selectedStandards, value, nameof(SelectedStandards));
         }
 
-        private ObservableCollection<CreditBreakdown> _creditBreakdowns;
-        public ObservableCollection<CreditBreakdown> CreditBreakdowns
+        private ObservableCollection<GradeBreakdown> _gradeBreakdowns;
+        public ObservableCollection<GradeBreakdown> GradeBreakdowns
         {
-            get => _creditBreakdowns;
-            set => SetProperty(ref _creditBreakdowns, value, nameof(CreditBreakdowns));
+            get => _gradeBreakdowns;
+            set => SetProperty(ref _gradeBreakdowns, value, nameof(GradeBreakdowns));
         }
 
         public bool Initialised { get; set; }
@@ -58,18 +72,20 @@ namespace TraceIt.ViewModels
         private void Refresh()
         {
             SetCreditBreakdowns();
-            SetCredits();
+            SetTotalBreakdowns();
         }
 
-        private void SetCredits()
+        private void SetTotalBreakdowns()
         {
-            var credits = App.DataRepository.SelectedSubjects.GetAchievedAndTotalCredits();
-            TotalCredits = credits.Item1;
-            AchievedCredits = credits.Item2;
+            var breakdowns = App.DataRepository.SelectedSubjects.GetTotalBreakdowns();
+            LevelOneBreakdown = breakdowns[0];
+            LevelTwoBreakdown = breakdowns[1];
+            LevelThreeBreakdown = breakdowns[2];
+            OverallBreakdown = breakdowns[3];
         }
 
         private void SetCreditBreakdowns()
-            => CreditBreakdowns = App.DataRepository.SelectedSubjects.GetCreditBreakdowns();
+            => GradeBreakdowns = App.DataRepository.SelectedSubjects.GetGradeBreakdowns();
 
         private void SubscribeToMessages()
         {
