@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:chart="clr-namespace:TraceIt.Views.Charts"
              xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.MainChartsPage"
              Title="Progress"
@@ -33,14 +34,16 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout Style="{DynamicResource secondaryGradientStackLayout}">
+        <StackLayout Style="{DynamicResource secondaryGradientStackLayout}" 
+                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
             <Frame BackgroundColor="#002147" CornerRadius="0" Padding="5, 10" Margin="0"
-                       HasShadow="False">
+                   HasShadow="False">
 
                 <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
                                             SegmentPadding="5" SegmentHeight="35" 
-                                            FontSize="15" VisibleSegmentsCount="4">
+                                            FontSize="15" VisibleSegmentsCount="{OnIdiom Tablet=4}"
+                                            SegmentWidth="{OnIdiom Phone=120}">
 
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
                         <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
@@ -57,35 +60,34 @@
                 </buttons:SfSegmentedControl>
             </Frame>
 
-            <CarouselView x:Name="tabsCarouselView" PositionChanged="tabsCarouselView_PositionChanged"
-                          IndicatorView="indicatorView">
+            <tabview:SfTabView x:Name="tabsCarouselView" SelectionChanged="tabsCarouselView_PositionChanged"
+                               DisplayMode="NoHeader">
 
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" SnapPointsAlignment="Center"/>
-                </CarouselView.ItemsLayout>
-                
-                <CarouselView.ItemsSource>
-                    <x:Array Type="{x:Type ContentView}">
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
                         <chart:CreditsChartPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
                         <chart:LevelsChartsPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
                         <chart:EndorsementsChartPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
                         <chart:OtherChartsPage/>
-                    </x:Array>
-                </CarouselView.ItemsSource>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
 
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <ContentView Content="{Binding .}"/>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-
-            </CarouselView>
-
-            <IndicatorView x:Name="indicatorView" IndicatorColor="Gray" 
-                           SelectedIndicatorColor="White"
-                           HorizontalOptions="Center" IndicatorSize="10"
-                           Margin="0, 0, 0, 20"/>
-
+            </tabview:SfTabView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

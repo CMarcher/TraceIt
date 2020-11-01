@@ -19,12 +19,12 @@ namespace TraceIt.Views.Charts
 
         private void tabSelector_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
         {
-            tabsCarouselView.Position = tabSelector.SelectedIndex;
+            tabsCarouselView.SelectedIndex = tabSelector.SelectedIndex;
         }
 
         private void tabsCarouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
-            tabSelector.SelectedIndex = tabsCarouselView.Position;
+            tabSelector.SelectedIndex = tabsCarouselView.SelectedIndex;
         }
     }
 }
