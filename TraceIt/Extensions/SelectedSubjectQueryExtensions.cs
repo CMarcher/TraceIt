@@ -1,4 +1,5 @@
 ﻿using P42.Utils;
+using Syncfusion.ListView.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,12 +12,12 @@ namespace TraceIt.Extensions
 {
     public static class SelectedSubjectQueryExtensions
     {
-        public static ObservableCollection<CreditBreakdown> GetCreditBreakdowns(this IEnumerable<SelectedSubject> subjects)
+        public static ObservableCollection<GradeBreakdown> GetGradeBreakdowns(this IEnumerable<SelectedSubject> subjects)
         {
-            var notAchieved = new CreditBreakdown(CreditBreakdown.Grades.NotAchieved);
-            var achieved = new CreditBreakdown(CreditBreakdown.Grades.Achieved);
-            var merit = new CreditBreakdown(CreditBreakdown.Grades.Merit);
-            var excellence = new CreditBreakdown(CreditBreakdown.Grades.Excellence);
+            var notAchieved = new GradeBreakdown(GradeBreakdown.Grades.NotAchieved);
+            var achieved = new GradeBreakdown(GradeBreakdown.Grades.Achieved);
+            var merit = new GradeBreakdown(GradeBreakdown.Grades.Merit);
+            var excellence = new GradeBreakdown(GradeBreakdown.Grades.Excellence);
             var filteredSubjects = subjects.Where(subject => subject.Selected is true).ToList();
             var filteredStandards = filteredSubjects.GetSelectedStandards();
 
@@ -25,22 +26,21 @@ namespace TraceIt.Extensions
             merit.SetCredits(filteredStandards);
             excellence.SetCredits(filteredStandards);
 
-            return new ObservableCollection<CreditBreakdown> { notAchieved, achieved, merit, excellence };
+            return new ObservableCollection<GradeBreakdown> { notAchieved, achieved, merit, excellence };
         }
 
-        public static Tuple<int, int> GetAchievedAndTotalCredits(this IEnumerable<SelectedSubject> subjects)
+        public static ObservableCollection<TotalBreakdown> GetTotalBreakdowns(this IEnumerable<SelectedSubject> subjects)
         {
-            int totalCredits = 0, achievedCredits = 0;
-            Predicate<Standard> creditsFilter = standard => (int)standard.FinalGrade >= 2;
-            var filteredSubjects = subjects.Where(subject => subject.Selected is true).ToList();
+            var selectedStandards = subjects.GetSelectedStandards();
+            var levelOneBreakdown = new TotalBreakdown(selectedStandards, TotalBreakdown.Levels.One);
+            var levelTwoBreakdown = new TotalBreakdown(selectedStandards, TotalBreakdown.Levels.Two);
+            var levelThreeBreakdown = new TotalBreakdown(selectedStandards, TotalBreakdown.Levels.Three);
+            var allBreakdown = new TotalBreakdown(selectedStandards, TotalBreakdown.Levels.All);
 
-            foreach (var subject in filteredSubjects)
-            {
-                totalCredits += subject.Standards.CountCredits();
-                achievedCredits += subject.Standards.CountCredits(creditsFilter);
-            }
+            var breakdowns = new ObservableCollection<TotalBreakdown>() 
+                    { levelOneBreakdown, levelTwoBreakdown, levelThreeBreakdown, allBreakdown };
 
-            return new Tuple<int, int>(totalCredits, achievedCredits);
+            return breakdowns;
         }
 
         public static ObservableCollection<SubjectEndorsement> GetSubjectEndorsements(this IEnumerable<SelectedSubject> subjects)
@@ -177,6 +177,47 @@ namespace TraceIt.Extensions
             subjects = subjects.Where(new Func<SelectedSubject, bool>(subjectFilter));
 
             return subjects.ToList();
+        }
+
+        public static bool HasAchievedUniversityEntrance(this IEnumerable<SelectedSubject> subjects)
+        {
+            var selectedStandards = subjects.GetSelectedStandards();
+            string lastSubjectName = "";
+            Predicate<Standard> matchesLastSubject = x => x.Subject == lastSubjectName;
+            Predicate<Standard> uniEntranceFilter = x => (int)x.FinalGrade >= 2 && x.Level is Standard.Levels.Three &&
+                                                    x.StandardType is Standard.StandardTypes.Achievement;
+            var creditsPerSubject = new List<int>();
+            int currentIndex = -1;
+
+            foreach(var standard in selectedStandards)
+            {
+                if (matchesLastSubject(standard) is false)
+                {
+                    lastSubjectName = standard.Subject;
+                    creditsPerSubject.Add(new int());
+                    currentIndex += 1;
+                }
+
+                if(uniEntranceFilter(standard))
+                    creditsPerSubject[currentIndex] += standard.Credits;
+            }
+
+            creditsPerSubject = creditsPerSubject.OrderByDescending(x => x).Take(3).ToList();
+            var total = creditsPerSubject.Sum();
+
+            if (total < 36)
+                return false;
+            else
+                return true;
+        }
+
+        public static Tuple<int, int> GetReadingAndWritingCredits(this IEnumerable<SelectedSubject> subjects)
+        {
+            var selectedStandards = subjects.GetSelectedStandards();
+            var readingCredits = selectedStandards.CountCredits(x => (int)x.FinalGrade >= 2 && x.IsReading is true);
+            var writingCredits = selectedStandards.CountCredits(x => (int)x.FinalGrade >= 2 && x.IsWriting is true);
+
+            return new Tuple<int, int>(readingCredits, writingCredits);
         }
     }
 }
