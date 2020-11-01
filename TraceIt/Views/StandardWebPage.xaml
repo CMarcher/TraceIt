@@ -28,12 +28,17 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
+    <NavigationPage.TitleView>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="0, 0, 0, 5"/>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
         <AbsoluteLayout>
 
-            <ActivityIndicator x:Name="loadingIndicator"
-                               AbsoluteLayout.LayoutFlags="All"
-                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1"/>
+            
 
             <StackLayout Style="{DynamicResource gradientStackLayout}"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
@@ -41,7 +46,7 @@
                 
                 <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
                      HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"
-                     Navigating="webView_Navigating"/>
+                     Navigating="webView_Navigating" PropertyChanged="webView_PropertyChanged"/>
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

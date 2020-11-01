@@ -14,17 +14,24 @@ namespace TraceIt.Views
     public partial class StandardWebPage : ContentPage
     {
         string CurrentSource { get; set; }
+        Standard standard;
 
         public StandardWebPage(Standard standard)
         {
             InitializeComponent();
             webView.BindingContext = standard;
+            this.standard = standard;
+
+            SetSource();
+            SetToolbarEnabling();
+        }
+
+        private void SetSource()
+        {
             if (Device.RuntimePlatform == Device.iOS)
                 webView.Source = standard.Hyperlink;
             else if (Device.RuntimePlatform == Device.Android)
                 webView.Source = "https://docs.google.com/viewer?url=" + standard.Hyperlink;
-
-            SetToolbarEnabling();
         }
 
         void SetToolbarEnabling()
@@ -55,16 +62,22 @@ namespace TraceIt.Views
         {
             CurrentSource = e.Url;
             LoadingIndicatorRunning(false);
-            SetToolbarEnabling();
         }
 
         private void webView_Navigating(object sender, WebNavigatingEventArgs e)
         {
             LoadingIndicatorRunning(true);
-            SetToolbarEnabling();
         }
 
         void LoadingIndicatorRunning(bool canRun)
             => loadingIndicator.IsVisible = loadingIndicator.IsRunning = canRun;
+
+        private void webView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CanGoBack")
+                SetToolbarEnabling();
+            else if (e.PropertyName == "CanGoForward")
+                SetToolbarEnabling();
+        }
     }
 }
