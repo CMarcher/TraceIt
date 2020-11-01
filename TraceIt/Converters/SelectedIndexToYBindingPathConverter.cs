@@ -14,13 +14,13 @@ namespace TraceIt.Converters
             int index = (int)value;
 
             if (index is 0)
-                return nameof(CreditBreakdown.LevelOneCredits);
+                return nameof(GradeBreakdown.LevelOneCredits);
             else if (index is 1)
-                return nameof(CreditBreakdown.LevelTwoCredits);
+                return nameof(GradeBreakdown.LevelTwoCredits);
             else if (index is 2)
-                return nameof(CreditBreakdown.LevelThreeCredits);
+                return nameof(GradeBreakdown.LevelThreeCredits);
             else
-                return nameof(CreditBreakdown.OverallCredits);
+                return nameof(GradeBreakdown.OverallCredits);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
