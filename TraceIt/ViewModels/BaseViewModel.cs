@@ -21,9 +21,9 @@ namespace TraceIt.ViewModels
             OnPropertyChanged(propertyName);
         }
 
-        public virtual void Initialize(object parameter)
-        {
+        public event EventHandler ViewModelInitialised;
 
-        }
+        public void RaiseViewModelInitialised()
+            => ViewModelInitialised?.Invoke(this, new EventArgs());
     }
 }
