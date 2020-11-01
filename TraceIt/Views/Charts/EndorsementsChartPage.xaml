@@ -87,7 +87,7 @@
             <StackLayout VerticalOptions="StartAndExpand"
                          Padding="{OnIdiom Phone='10, 0', Tablet='40, 0'}" Spacing="20" Margin="{OnIdiom Phone=0, Tablet=20}">
 
-                <StackLayout>
+                <StackLayout Margin="10, 0">
                     <Label Text="COVID-19 Settings" FontAttributes="Italic"
                            Style="{StaticResource baseLabelStyle}"/>
                     <buttons:SfSwitch x:Name="covidSwitch"
@@ -131,7 +131,7 @@
                     </Frame>
                 </StackLayout>
 
-                <StackLayout>
+                <StackLayout Margin="10, 0">
                     <Label Text="Level 2 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
                     <Frame Style="{StaticResource progressBarFrame}">
                         <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}"
@@ -139,7 +139,7 @@
                     </Frame>
                 </StackLayout>
 
-                <StackLayout Padding="0, 0, 0, 30">
+                <StackLayout Padding="0, 0, 0, 30" Margin="10, 0">
                     <Label Text="Level 3 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
                     <Frame Style="{StaticResource progressBarFrame}">
                         <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}"
@@ -183,9 +183,11 @@
                     </buttons:SfSegmentedControl.ItemsSource>
                 </buttons:SfSegmentedControl>
 
-                <listview:SfListView ItemsSource="{Binding SubjectEndorsements}" AutoFitMode="Height"
-                                     ItemSpacing="12" x:Name="listViewEndorsements" SelectionMode="None"
-                                     IsScrollingEnabled="False" VerticalOptions="FillAndExpand">
+                <listview:SfListView ItemsSource="{Binding SubjectEndorsements}" AutoFitMode="DynamicHeight"
+                                     x:Name="listViewEndorsements" SelectionMode="None"
+                                     VerticalOptions="End" HorizontalOptions="FillAndExpand"
+                                     ItemSpacing="{OnIdiom Tablet='0, 15', Phone='0, 10'}" IsScrollingEnabled="True">
+                    
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>

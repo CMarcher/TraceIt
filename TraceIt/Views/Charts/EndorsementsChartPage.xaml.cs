@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Syncfusion.DataSource;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,25 @@ namespace TraceIt.Views.Charts
 
         private void Initialise()
         {
+            InitialiseData();
+        }
+
+        private void InitialiseData()
+        {
+            InitialiseDataSource();
             RefreshDataSource();
+        }
+
+        private void InitialiseDataSource()
+        {
+            listViewEndorsements.DataSource.Filter = FilterEndorsements;
         }
 
         private void RefreshDataSource()
         {
+            if (listViewEndorsements.DataSource is null)
+                return;
+
             listViewEndorsements.DataSource.Filter = FilterEndorsements;
             listViewEndorsements.DataSource.RefreshFilter();
             listViewEndorsements.DataSource.Refresh();
