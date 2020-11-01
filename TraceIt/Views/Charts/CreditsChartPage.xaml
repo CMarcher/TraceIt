@@ -10,7 +10,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.Charts.CreditsChartPage">
+             x:Class="TraceIt.Views.Charts.CreditsChartPage"
+             x:Name="Page">
 
     <ContentView.BindingContext>
         <viewmodels:CreditsChartPageViewModel/>
@@ -19,84 +20,97 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:SelectedIndexToYBindingPathConverter x:Key="creditsBindingConverter"/>
+            
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="#000d40"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="TitleColor" Value="White"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <ContentView.Content>
-        <Grid RowDefinitions="50, *" RowSpacing="25">
-                <buttons:SfSegmentedControl x:Name="chartSelector" Margin="0, 10"
-                                            SegmentPadding="20" SegmentCornerRadius="25"
-                                            HorizontalOptions="CenterAndExpand" SegmentWidth="150"
-                                            Grid.Row="0">
-                    
-                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="25"/>
-                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                    
-                    <buttons:SfSegmentedControl.ItemsSource>
-                        <system:List x:TypeArguments="buttons:SfSegmentItem">
-                            <buttons:SfSegmentItem Text="Credits Count"/>
-                            <buttons:SfSegmentItem Text="Grade Breakdown"/>
-                        </system:List>
-                    </buttons:SfSegmentedControl.ItemsSource>
-                </buttons:SfSegmentedControl>
+        <Grid RowDefinitions="50, *" RowSpacing="{OnIdiom Phone=12, Tablet=25}">
+            <Grid ColumnDefinitions="*, *">
                 
-                <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" Progress="{Binding AchievedCredits}" 
-                                               Maximum="{Binding TotalCredits}" 
+                <Frame BackgroundColor="#001257" CornerRadius="0"
+                       Padding="{OnIdiom Phone=5, Tablet=10}" HasShadow="False" 
+                       Grid.Column="0">
+                    <Picker x:Name="chartSelector"
+                        SelectedIndex="0">
+                        <Picker.Items>
+                            <x:String>Total Credits</x:String>
+                            <x:String>Grade Breakdown</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+
+                <Frame BackgroundColor="#001257" CornerRadius="0"
+                       Padding="{OnIdiom Phone=5, Tablet=10}" HasShadow="False" 
+                       Grid.Column="1">
+                    <Picker x:Name="levelFilterSelector"
+                            SelectedIndex="0" IsEnabled="False">
+
+                        <Picker.Triggers>
+                            <DataTrigger TargetType="Picker" Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
+                                         Value="1">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Picker.Triggers>
+                        
+                        <Picker.Items>
+                            <x:String>Level 1</x:String>
+                            <x:String>Level 2</x:String>
+                            <x:String>Level 3</x:String>
+                            <x:String>All</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+            </Grid>
+
+            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" 
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
                                                ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange"
-                                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                               IsVisible="False" Grid.Row="1" GapWidth="1.5">
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                               IsVisible="False" Grid.Row="1" GapWidth="1.5"
+                                               Maximum="{Binding TotalCredits}" Progress="{Binding TotalAchievedCredits}"
+                                               BindingContext="{Binding OverallBreakdown}"
+                                               Margin="0">
 
-                    <progressbar:SfCircularProgressBar.Triggers>
-                        <DataTrigger TargetType="progressbar:SfCircularProgressBar" 
+                <progressbar:SfCircularProgressBar.Triggers>
+                    <DataTrigger TargetType="progressbar:SfCircularProgressBar" 
                                      Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
                                      Value="0">
-                            <Setter Property="IsVisible" Value="True"/>
-                        </DataTrigger>
-                    </progressbar:SfCircularProgressBar.Triggers>
-                    
-                    <progressbar:SfCircularProgressBar.Content>
-                        <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </progressbar:SfCircularProgressBar.Triggers>
+
+                <progressbar:SfCircularProgressBar.Content>
+                    <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
                            TextColor="White" FontSize="40" FontAttributes="Italic, Bold" HorizontalTextAlignment="Center"
                            VerticalOptions="FillAndExpand"/>
-                    </progressbar:SfCircularProgressBar.Content>
-                </progressbar:SfCircularProgressBar>
+                </progressbar:SfCircularProgressBar.Content>
+            </progressbar:SfCircularProgressBar>
 
-            <StackLayout Grid.Row="1" IsVisible="False"
-                         Spacing="20">
-                <StackLayout.Triggers>
-                    <DataTrigger TargetType="StackLayout" 
+            <Grid RowDefinitions="*, 50" VerticalOptions="FillAndExpand"
+                  Grid.Row="1" IsVisible="False">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" 
                                      Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
                                      Value="1">
                         <Setter Property="IsVisible" Value="True"/>
                     </DataTrigger>
-                </StackLayout.Triggers>
-                
-                <buttons:SfSegmentedControl x:Name="breakdownFilterSelector" 
-                                            HorizontalOptions="Center" CornerRadius="20" 
-                                            SegmentCornerRadius="0" VisibleSegmentsCount="4"
-                                            SegmentHeight="40" SegmentWidth="70">
-
-                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings Color="Orange"/>
-                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
-
-                    <buttons:SfSegmentedControl.ItemsSource>
-                        <system:List x:TypeArguments="buttons:SfSegmentItem">
-                            <buttons:SfSegmentItem Text="Level 1"/>
-                            <buttons:SfSegmentItem Text="Level 2"/>
-                            <buttons:SfSegmentItem Text="Level 3"/>
-                            <buttons:SfSegmentItem Text="All"/>
-                        </system:List>
-                    </buttons:SfSegmentedControl.ItemsSource>
-                </buttons:SfSegmentedControl>
+                </Grid.Triggers>
 
                 <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               BackgroundColor="{OnPlatform Android=Transparent}">
+                               BackgroundColor="{OnPlatform Android=Transparent}" Margin="0"
+                               Grid.Row="0" ChartPadding="0">
 
-                    <chart:PieSeries ItemsSource="{Binding CreditBreakdowns}"
-                                 XBindingPath="Grade" YBindingPath="{Binding Source={x:Reference breakdownFilterSelector}, Path=SelectedIndex,
+                    <chart:PieSeries ItemsSource="{Binding GradeBreakdowns}"
+                                 XBindingPath="Grade" YBindingPath="{Binding Source={x:Reference levelFilterSelector}, Path=SelectedIndex,
                                                                     Converter={StaticResource creditsBindingConverter}}"
                                  DataMarkerPosition="Inside" EnableTooltip="True"
                                  ExplodeOnTouch="True" ExplodeAll="False">
@@ -113,38 +127,52 @@
                                 </chart:ChartColorModel.CustomBrushes>
                             </chart:ChartColorModel>
                         </chart:PieSeries.ColorModel>
-                        
+
                         <chart:PieSeries.DataMarker>
-                        <chart:ChartDataMarker LabelContent="YValue">
-                            <chart:ChartDataMarker.LabelStyle>
-                                <chart:DataMarkerLabelStyle FontSize="18" FontAttributes="Bold"/>
-                            </chart:ChartDataMarker.LabelStyle>
-                        </chart:ChartDataMarker>
+                            <chart:ChartDataMarker LabelContent="YValue">
+                                <chart:ChartDataMarker.LabelStyle>
+                                    <chart:DataMarkerLabelStyle FontSize="18" FontAttributes="Bold"/>
+                                </chart:ChartDataMarker.LabelStyle>
+                            </chart:ChartDataMarker>
                         </chart:PieSeries.DataMarker>
                     </chart:PieSeries>
-
-                    <chart:SfChart.Legend>
-                        <chart:ChartLegend ItemMargin="14, 0" DockPosition="Bottom" 
-                                           Orientation="Horizontal" Margin="0, 0, 0, 40">
-                            <chart:ChartLegend.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout Orientation="Horizontal" Spacing="14"
-                                                 HorizontalOptions="StartAndExpand">
-                                        <BoxView Color="{Binding IconColor}" HorizontalOptions="Center" 
-                                                 VerticalOptions="Center" HeightRequest="25" 
-                                                 WidthRequest="{Binding Source={RelativeSource Self}, Path=HeightRequest}" 
-                                                 CornerRadius="5"/>
-
-                                        <Label FontSize="16" VerticalTextAlignment="Center" 
-                                               Text="{Binding DataPoint.Grade}" TextColor="White"/>
-
-                                    </StackLayout>
-                                </DataTemplate>
-                            </chart:ChartLegend.ItemTemplate>
-                        </chart:ChartLegend>
-                    </chart:SfChart.Legend>
                 </chart:SfChart>
-            </StackLayout>
+
+                <Grid ColumnDefinitions="*, *, *, *" HorizontalOptions="CenterAndExpand" Grid.Row="1"
+                      ColumnSpacing="20" Margin="10, 0, 10, 20">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="StackLayout">
+                                <Setter Property="VerticalOptions" Value="Center"/>
+                            </Style>
+
+                            <Style TargetType="Label">
+                                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="0">
+                        <BoxView Color="#363636" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=NA, Tablet='Not Achieved'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="1">
+                        <BoxView Color="#512888" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=A, Tablet='Achieved'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="2">
+                        <BoxView Color="#004F98" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=M, Tablet='Merit'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="3">
+                        <BoxView Color="Orange" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=E, Tablet='Excellence'}" TextColor="White"/>
+                    </StackLayout>
+                </Grid>
+            </Grid>
         </Grid>
     </ContentView.Content>
 
