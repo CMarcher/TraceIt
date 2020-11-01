@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraceIt.Controls;
+using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Utilities;
 using TraceIt.ViewModels;
@@ -26,21 +27,32 @@ namespace TraceIt.Views
 
         private async void buttonViewMore_Clicked(object sender, EventArgs e)
         {
-            var standard = (sender as Button)?.BindingContext as Standard;
+            var button = sender as Button;
+            var standard = button?.BindingContext as Standard;
+
+            button.SetEnabledForAndroid(false);
             await Navigation.PushAsync(new StandardDetailPage(standard));
+            button.SetEnabledForAndroid(false);
         }
 
         private async void buttonAdd_Clicked(object sender, EventArgs e)
         {
+            var button = sender as VisualElement;
+
+            button.SetEnabledForAndroid(false);
             await Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
+            button.SetEnabledForAndroid(true);
         }
 
         private async void selectGradeButton_Clicked(object sender, EventArgs e)
         {
-            var standard = (sender as Button)?.BindingContext as Standard;
+            var button = sender as Button;
+            var standard = button?.BindingContext as Standard;
             StatusTracker.CurrentStandard = standard;
 
+            button.SetEnabledForAndroid(false);
             await Navigation.PushModalAsync(new NavigationPage(new GradeSelectionPage()));
+            button.SetEnabledForAndroid(true);
         }
     }
 }

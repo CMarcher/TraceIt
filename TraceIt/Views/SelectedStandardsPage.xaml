@@ -45,7 +45,7 @@
             <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="0, 10" 
                              AllowSwiping="True" ItemsSource="{Binding Standards}" 
                              SelectionMode="None" Margin="10, 0"
-                             AutoFitMode="Height" VerticalOptions="FillAndExpand">
+                             AutoFitMode="DynamicHeight" VerticalOptions="FillAndExpand">
 
                 <list:SfListView.LayoutManager>
                     <list:LinearLayout/>
@@ -81,7 +81,7 @@
 
                             <Frame Style="{DynamicResource listItemFrame}" Padding="27"
                                    BackgroundColor="{OnPlatform Android='Transparent'}">
-                                <StackLayout>
+                                <StackLayout Padding="0">
 
                                     <Label Text="{Binding SubjectReference}"
                                        HorizontalTextAlignment="Start"
@@ -101,14 +101,17 @@
                                     <Label Text="{Binding Credits, StringFormat='{0} credits'}"
                                        HorizontalTextAlignment="Start" Margin="0, 0, 0, 10"/>
 
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-                                             Spacing="15">
-                                        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="25">
+                                    <Grid ColumnDefinitions="{OnIdiom Tablet='150, 150', Phone='*, *'}"
+                                          ColumnSpacing="20" Padding="0" Margin="0"
+                                          VerticalOptions="EndAndExpand">
+                                        
                                             <Button x:Name="selectGradeButton" Text="{Binding FinalGrade, Converter={StaticResource gradeConverter}}"
-                                        TextColor="Black" FontAttributes="Bold" 
-                                        FontSize="Large" Clicked="selectGradeButton_Clicked" 
-                                        HeightRequest="50" HorizontalOptions="StartAndExpand"
-                                        WidthRequest="150">
+                                                    TextColor="Black" FontAttributes="Bold" 
+                                                    FontSize="Large" Clicked="selectGradeButton_Clicked" 
+                                                    HeightRequest="50" HorizontalOptions="FillAndExpand" 
+                                                    VerticalOptions="EndAndExpand"
+                                                    Grid.Column="0">
+                                                
                                                 <Button.Background>
                                                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                                                         <LinearGradientBrush.GradientStops>
@@ -118,14 +121,15 @@
                                                     </LinearGradientBrush>
                                                 </Button.Background>
                                             </Button>
-                                        </Frame>
+                                        
 
                                         <Button Text="More" CornerRadius="25"
-                                                     TextColor="Black" FontAttributes="Bold"
-                                                     FontSize="Large" BorderColor="Transparent"
-                                                     Clicked="buttonViewMore_Clicked"
-                                                     WidthRequest="150" HorizontalOptions="Fill" 
-                                                     HeightRequest="50" VerticalOptions="Center">
+                                                TextColor="Black" FontAttributes="Bold"
+                                                FontSize="Large" BorderColor="Transparent"
+                                                Clicked="buttonViewMore_Clicked" 
+                                                HorizontalOptions="FillAndExpand" HeightRequest="50" 
+                                                VerticalOptions="End"
+                                                Grid.Column="1">
                                             <Button.Background>
                                                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                                                     <LinearGradientBrush.GradientStops>
@@ -135,7 +139,7 @@
                                                 </LinearGradientBrush>
                                             </Button.Background>
                                         </Button>
-                                    </StackLayout>
+                                    </Grid>
                                 </StackLayout>
                             </Frame>
                         </SwipeView>
