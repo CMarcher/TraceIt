@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Services;
 using TraceIt.Utilities;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,7 +26,7 @@ namespace TraceIt.Views
             {
                 SaveUser();
                 await DisplayAlert("Success!", "Name saved", "Great!");
-            }  
+            }
         }
 
         private bool FieldIsEmpty()
@@ -44,6 +45,11 @@ namespace TraceIt.Views
             var username = entryName.Text;
 
             usermanager.SetUsername(username);
+        }
+
+        private void clearCacheButton_Clicked(object sender, EventArgs e)
+        {
+            CacheManagerService.ClearWebCache();
         }
     }
 }
