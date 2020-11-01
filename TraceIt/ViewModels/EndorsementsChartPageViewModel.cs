@@ -34,7 +34,7 @@ namespace TraceIt.ViewModels
             set => SetProperty(ref _year, value, nameof(Year));
         }
 
-        bool initialised = false;
+        bool Initialised = false;
 
         public EndorsementsChartPageViewModel()
         {
@@ -48,7 +48,6 @@ namespace TraceIt.ViewModels
 
         private void Initialise()
         {
-            initialised = true;
             Year = StatusTracker.CurrentYear;
         }
 
@@ -66,7 +65,7 @@ namespace TraceIt.ViewModels
 
         private void SetEndorsements()
         {
-            if (initialised is true)
+            if (Initialised is true)
                 ClearLevelEndorsements();
 
             SetStandards();
@@ -74,6 +73,12 @@ namespace TraceIt.ViewModels
 
             foreach (var standard in Standards)
                 AddToLevelEndorsement(standard);
+
+            if (Initialised is false)
+            {
+                RaiseViewModelInitialised();
+                Initialised = true;
+            }
         }
 
         private void AddToLevelEndorsement(Standard standard)
