@@ -24,34 +24,46 @@ namespace TraceIt.Services
 
         public bool SubjectsSelected { get; private set; }
         public int SelectedYear { get; set; }
+        public string ReviewedVersion { get; private set; }
+        public DateTime ReviewedDate { get; private set; }
 
         string usernameKey = "Username";
         string loggedInKey = "LoggedIn";
         string subjectsSelectedKey = "SubjectsSelected";
         string selectedYearKey = "SelectedYear";
+        string reviewedVersionKey = "ReviewedVersion";
+        string reviewedDateKey = "ReviewedDate";
 
         public UserManagerService()
         {
             CreatePreferencesIfNotSet();
             Username = GetUsername();
             LoggedIn = GetLoginStatus();
+            ReviewedVersion = GetReviewedVersion();
+            ReviewedDate = GetReviewedDate();
         }
 
         private void CreatePreferencesIfNotSet()
         {
-            bool preferencesIntialised =
-                Preferences.ContainsKey(loggedInKey) &&
-                Preferences.ContainsKey(usernameKey) &&
-                Preferences.ContainsKey(subjectsSelectedKey) &&
-                Preferences.ContainsKey(selectedYearKey);
+            bool loggedInKeyInitialised = Preferences.ContainsKey(loggedInKey);
+            bool usernameKeyInitialised = Preferences.ContainsKey(usernameKey);
+            bool subjectsSelectedKeyInitialised = Preferences.ContainsKey(subjectsSelectedKey);
+            bool selectedYearKeyInitialised = Preferences.ContainsKey(selectedYearKey);
+            bool reviewedVersionKeyInitialised = Preferences.ContainsKey(reviewedVersionKey);
+            bool reviewedDateKeyInitialised = Preferences.ContainsKey(reviewedDateKey);
 
-            if(preferencesIntialised is false)
-            {
-                SetUsername();
+            if (loggedInKeyInitialised is false)
                 SetLoginStatus();
+            if (usernameKeyInitialised is false)
+                SetUsername();
+            if (subjectsSelectedKeyInitialised is false)
                 SetSubjectsSelected();
+            if (selectedYearKeyInitialised is false)
                 SetSelectedYear();
-            }
+            if (reviewedVersionKeyInitialised is false)
+                SetReviewedVersion();
+            if (reviewedDateKeyInitialised is false)
+                SetReviewedDate();
         }
 
         public void SetUsername(string name = null)
@@ -89,5 +101,23 @@ namespace TraceIt.Services
 
         private int GetSelectedYear()
             => Preferences.Get(selectedYearKey, 2020);
+
+        public void SetReviewedVersion(string version = null)
+        {
+            Preferences.Set(reviewedVersionKey, version);
+            ReviewedVersion = version;
+        }
+
+        private string GetReviewedVersion()
+            => Preferences.Get(reviewedVersionKey, null);
+
+        public void SetReviewedDate(DateTime reviewDate = new DateTime())
+        {
+            Preferences.Set(reviewedDateKey, reviewDate);
+            ReviewedDate = reviewDate;
+        }
+
+        private DateTime GetReviewedDate()
+            => Preferences.Get(reviewedDateKey, new DateTime());
     }
 }
