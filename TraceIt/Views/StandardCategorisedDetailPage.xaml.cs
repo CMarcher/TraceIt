@@ -41,9 +41,9 @@ namespace TraceIt.Views
             categorisedStandardsList.DataSource.RefreshFilter();
         }
 
-        private void categorisedStandardsList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        private async void categorisedStandardsList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
         {
-            Navigation.PushAsync(new StandardDetailPage(e.ItemData as Standard));
+            await Navigation.PushAsync(new StandardDetailPage(e.ItemData as Standard));
         }
 
         private bool FilterStandards(object item)
