@@ -38,11 +38,11 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="addButton" Clicked="addButton_Clicked">
+        <!--<ToolbarItem x:Name="addButton" Clicked="addButton_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
             </ToolbarItem.IconImageSource>
-        </ToolbarItem>
+        </ToolbarItem>-->
 
         <ToolbarItem x:Name="closeButton" Clicked="closeButton_Clicked">
             <ToolbarItem.IconImageSource>
