@@ -26,7 +26,7 @@
                 <Setter Property="TrackHeight" Value="70"/>
                 <Setter Property="Progress" Value="{Binding AchievedCredits}"/>
                 <Setter Property="ProgressColor" Value="Orange"/>
-                <Setter Property="SegmentCount" Value="{OnIdiom Phone=40}"/>
+                <Setter Property="SegmentCount" Value="{OnIdiom Phone=40, Tablet=80}"/>
             </Style>
 
             <Style TargetType="progressbar:SfLinearProgressBar" x:Key="extraProgressBar"
@@ -65,10 +65,10 @@
                     </Frame>
                 </Grid>
 
-                <listview:SfListView ItemsSource="{Binding Levels}" AutoFitMode="Height"
-                                 ItemSpacing="0, 20" Padding="{OnIdiom Phone='10, 0', Tablet='20, 0'}" 
-                                 IsScrollingEnabled="False" VerticalOptions="FillAndExpand"
-                                 Margin="0">
+                <listview:SfListView ItemsSource="{Binding Levels}" AutoFitMode="DynamicHeight" 
+                                     VerticalOptions="FillAndExpand" Margin="20, 0"
+                                     x:Name="levelCollectionView" IsScrollingEnabled="False"
+                                     ItemSpacing="0, 10" SelectionMode="None">
                     <listview:SfListView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
