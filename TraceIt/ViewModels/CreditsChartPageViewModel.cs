@@ -63,8 +63,17 @@ namespace TraceIt.ViewModels
             Initialise();
         }
 
+        private void InitialiseBreakdownProperties()
+        {
+            LevelOneBreakdown = new TotalBreakdown();
+            LevelTwoBreakdown = new TotalBreakdown();
+            LevelThreeBreakdown = new TotalBreakdown();
+            OverallBreakdown = new TotalBreakdown();
+        }
+
         private void Initialise()
         {
+            InitialiseBreakdownProperties();
             SubscribeToMessages();
             Initialised = true;
         }
