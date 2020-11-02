@@ -70,7 +70,7 @@
             </Frame>
 
             <Frame>
-                <controls:CustomPicker x:Name="pickerLevel" Title="Select the year you are currently working at">
+                <controls:CustomPicker x:Name="pickerLevel" Title="Select year">
                     <controls:CustomPicker.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
                             <OnPlatform.Platforms>
