@@ -93,6 +93,10 @@ namespace TraceIt.Services
             else
                 finalQuery = subfieldQuery;
 
+            bool searchingForMaths = isSubjectQuery && parameter == "Mathematics and Statistics";
+            if (searchingForMaths)
+                finalQuery = standard => standard.Subject == parameter || standard.Subject == "Calculus" || standard.Subject == "Statistics";
+
             var standards = await Database.Table<Standard>().Where(finalQuery).ToListAsync();
             return new ObservableCollection<Standard>(standards);
         }
