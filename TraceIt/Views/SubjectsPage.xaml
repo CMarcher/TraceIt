@@ -51,7 +51,7 @@
                          VerticalOptions="FillAndExpand">
 
                 <Frame BackgroundColor="#001257" CornerRadius="0"
-                       Padding="10" HasShadow="False">
+                       Padding="5" HasShadow="False">
                     
                     <Picker Title="Selected year" HeightRequest="50"
                         BackgroundColor="#000d40" TextColor="White"
@@ -116,7 +116,8 @@
 
                                         <Label>
                                             <Label.Text>
-                                                <MultiBinding Converter="{StaticResource labelConverter}">
+                                                <MultiBinding Converter="{StaticResource labelConverter}" 
+                                                              ConverterParameter="SubjectsPage">
                                                     <Binding Path="PassedCredits"/>
                                                     <Binding Path="Credits"/>
                                                 </MultiBinding>
