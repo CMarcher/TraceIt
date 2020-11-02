@@ -20,6 +20,14 @@ namespace TraceIt.ViewModels
             get => _subjects;
             set => SetProperty(ref _subjects, value, nameof(Subjects));
         }
+
+        private ObservableCollection<SelectedSubject> _customSubjects;
+        public ObservableCollection<SelectedSubject> CustomSubjects
+        {
+            get => _customSubjects;
+            set => SetProperty(ref _customSubjects, value, nameof(CustomSubjects));
+        }
+
         public Command ChangeSelectionCommand { get; private set; }
 
         public SubjectSelectionPageViewModel()
