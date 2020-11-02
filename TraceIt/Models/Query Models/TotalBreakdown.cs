@@ -22,6 +22,8 @@ namespace TraceIt.Models.Query_Models
         public int TotalAchievedCredits { get; private set; }
         public int TotalCredits { get; private set; }
 
+        public TotalBreakdown() { }
+
         public TotalBreakdown(IEnumerable<Standard> standards, Levels level)
         {
             Level = level;
