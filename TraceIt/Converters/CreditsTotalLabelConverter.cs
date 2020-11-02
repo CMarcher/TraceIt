@@ -15,8 +15,11 @@ namespace TraceIt.Converters
 
             var passedCredits = (int)values[0];
             var totalCredits = (int)values[1];
+            var convertType = (string)parameter;
+            bool isSubjectsPageConversion = convertType == "SubjectsPage";
 
-            string result = passedCredits + " / " + totalCredits + " credits";
+            string result = isSubjectsPageConversion ? passedCredits + " / " + totalCredits + " credits" :
+                                                       passedCredits + " / " + totalCredits + " \ncredits";
             return result;
         }
 
