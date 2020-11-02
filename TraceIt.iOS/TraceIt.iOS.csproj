@@ -83,8 +83,6 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <ITunesArtwork Include="iTunesArtwork" />
-    <ITunesArtwork Include="iTunesArtwork%402x" />
     <BundleResource Include="Resources\AssessmentStandards.db3" />
   </ItemGroup>
   <ItemGroup>
@@ -156,61 +154,67 @@
     <Content Include="traceit_logo_1_evn_icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 11024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 11201.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 129.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 140.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1401.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1402.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 158.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1581.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 160.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 176.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 1801.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Artboard 187.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 3.png">
+    <ImageAsset Include="Media.xcassets\Images.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 31.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 310.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 311.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 312.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 313.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 314.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 315.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 316.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 32.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 33.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 34.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 35.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 36.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 37.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 38.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 39.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\traceit-logoAsset 4.png">
+    <ImageAsset Include="Media.xcassets\Images.imageset\LaunchScreenBG.png">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
