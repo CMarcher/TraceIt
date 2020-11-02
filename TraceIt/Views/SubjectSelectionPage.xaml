@@ -98,14 +98,15 @@
             </listview:SfListView>
 
             <Button x:Name="buttonConfirm" Text="CONFIRM"
-                         CornerRadius="25" Clicked="buttonConfirm_Clicked"
-                         Grid.Row="2" TextColor="White">
+                    CornerRadius="25" Clicked="buttonConfirm_Clicked"
+                    Grid.Row="2" TextColor="Black"
+                    FontAttributes="Bold">
 
                 <Button.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <LinearGradientBrush.GradientStops>
-                            <GradientStop Color="#0012FF" Offset="0.0"/>
-                            <GradientStop Color="#000B98" Offset="1.0"/>
+                            <GradientStop Color="#FFC400" Offset="0"/>
+                            <GradientStop Color="#FFA200" Offset="1"/>
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
                 </Button.Background>
