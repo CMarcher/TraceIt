@@ -3,8 +3,6 @@
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -20,7 +18,8 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:SelectedIndexToYBindingPathConverter x:Key="creditsBindingConverter"/>
-            
+            <converters:CreditsTotalLabelConverter x:Key="labelFormattingConverter"/>
+
             <Style TargetType="Picker">
                 <Setter Property="BackgroundColor" Value="#000d40"/>
                 <Setter Property="TextColor" Value="White"/>
@@ -35,11 +34,11 @@
         <Grid RowDefinitions="50, *" RowSpacing="{OnIdiom Phone=12, Tablet=25}">
             <Grid ColumnDefinitions="*, *">
                 
-                <Frame BackgroundColor="#001257" CornerRadius="0"
-                       Padding="{OnIdiom Phone=5, Tablet=10}" HasShadow="False" 
-                       Grid.Column="0">
-                    <Picker x:Name="chartSelector"
-                        SelectedIndex="0">
+                <Frame BackgroundColor="#001257" CornerRadius="10"
+                       Padding="5" HasShadow="False" 
+                       Grid.Column="0" Margin="{OnIdiom Tablet='5, 0'}">
+                    <Picker x:Name="chartSelector" SelectedIndex="0"
+                            >
                         <Picker.Items>
                             <x:String>Total Credits</x:String>
                             <x:String>Grade Breakdown</x:String>
@@ -47,19 +46,13 @@
                     </Picker>
                 </Frame>
 
-                <Frame BackgroundColor="#001257" CornerRadius="0"
-                       Padding="{OnIdiom Phone=5, Tablet=10}" HasShadow="False" 
-                       Grid.Column="1">
-                    <Picker x:Name="levelFilterSelector"
-                            SelectedIndex="0" IsEnabled="False">
+                <Frame BackgroundColor="#001257" CornerRadius="10"
+                       Padding="5" HasShadow="False" 
+                       Grid.Column="1" Margin="{OnIdiom Tablet='5, 0'}">
+                    <Picker x:Name="levelFilterSelector" SelectedIndex="0"
+                            SelectedIndexChanged="levelFilterSelector_SelectedIndexChanged"
+                            FontAttributes="Bold">
 
-                        <Picker.Triggers>
-                            <DataTrigger TargetType="Picker" Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
-                                         Value="1">
-                                <Setter Property="IsEnabled" Value="True"/>
-                            </DataTrigger>
-                        </Picker.Triggers>
-                        
                         <Picker.Items>
                             <x:String>Level 1</x:String>
                             <x:String>Level 2</x:String>
@@ -76,7 +69,6 @@
                                                VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
                                                IsVisible="False" Grid.Row="1" GapWidth="1.5"
                                                Maximum="{Binding TotalCredits}" Progress="{Binding TotalAchievedCredits}"
-                                               BindingContext="{Binding OverallBreakdown}"
                                                Margin="0">
 
                 <progressbar:SfCircularProgressBar.Triggers>
@@ -88,9 +80,16 @@
                 </progressbar:SfCircularProgressBar.Triggers>
 
                 <progressbar:SfCircularProgressBar.Content>
-                    <Label Text="{Binding Source={x:Reference creditsProgressBar}, Path=Progress, StringFormat='{0} &#10; credits'}"
-                           TextColor="White" FontSize="40" FontAttributes="Italic, Bold" HorizontalTextAlignment="Center"
-                           VerticalOptions="FillAndExpand"/>
+                    <Label TextColor="White" FontSize="40" FontAttributes="Italic, Bold" HorizontalTextAlignment="Center"
+                           VerticalOptions="FillAndExpand">
+                        
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource labelFormattingConverter}">
+                                <Binding Path="TotalAchievedCredits"/>
+                                <Binding Path="TotalCredits"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
                 </progressbar:SfCircularProgressBar.Content>
             </progressbar:SfCircularProgressBar>
 
