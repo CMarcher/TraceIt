@@ -58,7 +58,7 @@
                              VerticalOptions="Start" Padding="0, 0, 0, 20">
                     <Label Text="University Entrance" TextColor="White"
                        FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                    <CheckBox IsChecked="{Binding HasUniEntrance}"/>
+                    <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
                 </StackLayout>
 
                 <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 

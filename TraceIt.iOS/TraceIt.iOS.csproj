@@ -61,8 +61,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignKey>Apple Distribution: Caleb Archer (8LTY5TUSXD)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>TraceIt Profile</CodesignProvision>
+    <MtouchExtraArgs>--optimize=experimental-xforms-product-type</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -145,7 +147,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\TraceIt\TraceIt.csproj">
-      <Project>{B72D791C-A6C8-4B5D-8561-C5626824E3A0}</Project>
+      <Project>{2F00420D-AD8B-409C-A139-EFDC729A9C8D}</Project>
       <Name>TraceIt</Name>
     </ProjectReference>
   </ItemGroup>
