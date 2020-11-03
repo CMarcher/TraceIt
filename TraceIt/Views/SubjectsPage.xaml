@@ -84,7 +84,8 @@
                                 <SwipeView.RightItems>
                                     <SwipeItemView Padding="10, 0, 0, 0" 
                                                    Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveSubjectCommand}"
-                                                   CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}">
+                                                   CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                                   HorizontalOptions="{OnPlatform Android=End}">
                                         
                                         <Frame CornerRadius="28" HasShadow="False" 
                                                WidthRequest="{OnIdiom Tablet=50, Phone=25}" Padding="{OnIdiom Tablet=50, Phone=15}">
@@ -107,7 +108,7 @@
                                 
                                 <Frame Style="{DynamicResource listItemFrame}" Padding="0"
                                        BackgroundColor="{OnPlatform Android='Transparent'}"
-                                       VerticalOptions="End"
+                                       VerticalOptions="{OnPlatform iOS=End, Android=FillAndExpand}"
                                        Margin="0">
                                     <StackLayout Padding="10, 13, 10, 20" VerticalOptions="FillAndExpand">
 
