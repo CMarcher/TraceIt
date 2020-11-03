@@ -15,7 +15,7 @@
     <ContentPage.Content>
         <StackLayout Style="{DynamicResource gradientStackLayout}">
             <Entry x:Name="entryName" Placeholder="Change your name"
-                   FontSize="Large" Margin="20"/>
+                   FontSize="Large" Margin="20" BackgroundColor="White"/>
 
             <Button x:Name="clearCacheButton" Text="Clear PDF cache (free up space)"
                     CornerRadius="20" BackgroundColor="Blue" TextColor="White"
