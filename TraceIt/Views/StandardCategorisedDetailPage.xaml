@@ -40,7 +40,7 @@
                 <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="BorderColor" Value="Transparent"/>
                 <Setter Property="CornerRadius" Value="20"/>
-                <Setter Property="Padding" Value="{OnIdiom Phone='10, 0, 0, 0', Tablet='20, 0, 0, 0'}"/>
+                <Setter Property="Padding" Value="{OnIdiom Phone='0', Tablet='20, 0, 0, 0'}"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -71,19 +71,19 @@
                 <xforms:SfListView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{DynamicResource listItemFrame}">
-                            <StackLayout Spacing="10">
+                            <Grid VerticalOptions="StartAndExpand" Padding="0"
+                                  RowDefinitions="Auto, Auto, Auto, 50">
 
-                                <Label Text="{Binding Code}" FontAttributes="Bold"/>
-                                <Label Text="{Binding Title}" FontAttributes="Italic"/>
+                                <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Row="0"/>
+                                <Label Text="{Binding Title}" FontAttributes="Italic" Grid.Row="1"/>
                                 <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
-                                       Grid.Column="0" Grid.Row="2"
-                                       IsVisible="{Binding Selected}"/>
+                                       IsVisible="{Binding Selected}" Grid.Row="2"/>
 
                                 <Button x:Name="selectionButton"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
                                         CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}"
                                         VerticalOptions="FillAndExpand" HorizontalOptions="Start"
-                                        WidthRequest="150" Margin="5, 5, 20, 0">
+                                        WidthRequest="150" Grid.Row="3">
 
                                     <Button.Background>
                                         <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
@@ -112,7 +112,7 @@
                                         </DataTrigger>
                                     </Button.Triggers>
                                 </Button>
-                            </StackLayout>
+                            </Grid>
                         </Frame>
                     </DataTemplate>
                 </xforms:SfListView.ItemTemplate>
