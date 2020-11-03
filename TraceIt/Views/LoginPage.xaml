@@ -64,21 +64,14 @@
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .7, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
-            <Frame Margin="0">
+            <Frame Margin="0" Padding="{OnPlatform Android='15, 0, 0, 0'}">
                 <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" 
                                       BackgroundColor="Transparent" Margin="{OnPlatform Android='0,-20', iOS=0}"/>
             </Frame>
 
-            <Frame>
-                <controls:CustomPicker x:Name="pickerLevel" Title="Select year">
-                    <controls:CustomPicker.Margin>
-                        <OnPlatform x:TypeArguments="Thickness">
-                            <OnPlatform.Platforms>
-                                <On Platform="iOS" Value="0"/>
-                                <On Platform="Android" Value="0, -20"/>
-                            </OnPlatform.Platforms>
-                        </OnPlatform>
-                    </controls:CustomPicker.Margin>
+            <Frame Padding="{OnPlatform Android='15, 0, 0, 0'}">
+                <controls:CustomPicker x:Name="pickerLevel" Title="Select year"
+                                       Margin="{OnPlatform Android='0, -20'}">
                     <Picker.Items>
                         <x:String>2017</x:String>
                         <x:String>2018</x:String>
