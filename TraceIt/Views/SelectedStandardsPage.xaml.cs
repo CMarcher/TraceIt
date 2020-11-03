@@ -32,7 +32,7 @@ namespace TraceIt.Views
 
             button.SetEnabledForAndroid(false);
             await Navigation.PushAsync(new StandardDetailPage(standard));
-            button.SetEnabledForAndroid(false);
+            button.SetEnabledForAndroid(true);
         }
 
         private async void buttonAdd_Clicked(object sender, EventArgs e)
