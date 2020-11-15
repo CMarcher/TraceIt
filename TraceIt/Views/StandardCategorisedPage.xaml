@@ -158,7 +158,7 @@
                 <forms:SfListView x:Name="listView" ItemSpacing="8, 12, 8, 0"
                                   ItemTapped="collectionViewCategories_ItemTapped" ItemTemplate="{StaticResource dataTemplateSelector}"
                                   AutoFitMode="DynamicHeight" SelectionMode="None"
-                                  Padding="10, 0" VerticalOptions="StartAndExpand" Margin="0"/>
+                                  Padding="10, 0" VerticalOptions="FillAndExpand" Margin="0"/>
             </StackLayout>
 
         </StackLayout>
