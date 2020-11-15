@@ -34,12 +34,6 @@ namespace TraceIt.Extensions
             return convertedCollection;
         }
 
-        public static void ClearCredits(this IEnumerable<LevelEndorsement> endorsements)
-        {
-            foreach (var endorsement in endorsements)
-                endorsement.ClearCredits();
-        }
-
         public static void RemoveByID(this Collection<Standard> standards, Standard standard)
         {
             var search = standards.First(x => x.ID == standard.ID);
@@ -61,15 +55,17 @@ namespace TraceIt.Extensions
             return credits;
         }
 
-        public static bool IsEligibleForEndorsement(this IEnumerable<Standard> standards)
+        public static bool IsEligibleForEndorsement(this IEnumerable<Standard> standards, int year)
         {
+            int requiredTotalCredits = year is 2020 ? 12 : 14;
+
             Func<Standard, bool> criteria = standard => (int)standard.GradingScheme >= 2;
             var filteredStandards = standards.Where(criteria);
             var internalCredits = filteredStandards.CountCredits(x => x.AssessmentType is Standard.AssessmentTypes.Internal);
             var externalCredits = filteredStandards.CountCredits(x => x.AssessmentType is Standard.AssessmentTypes.External);
             var totalCredits = filteredStandards.CountCredits();
 
-            bool isEligible = internalCredits >= 3 && externalCredits >= 3 && totalCredits >= 12;
+            bool isEligible = internalCredits >= 3 && externalCredits >= 3 && totalCredits >= requiredTotalCredits;
             return isEligible;
         }
     }
