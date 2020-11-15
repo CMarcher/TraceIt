@@ -144,7 +144,7 @@ namespace TraceIt.Services
         {
             return await Database.QueryAsync<Standard>(
                 "SELECT * FROM AssessmentStandards " +
-                "WHERE Title LIKE '%" + searchQuery + "%' OR Code LIKE '%" + searchQuery + "%' " +
+                "WHERE Title LIKE '%" + searchQuery + "%' OR Code LIKE '%" + searchQuery + "%' " + " OR SubjectReference LIKE '%" + searchQuery + "%' " + 
                 "ORDER BY Title " +
                 "LIMIT 100;");
         }
@@ -190,9 +190,7 @@ namespace TraceIt.Services
         #region SelectedSubject methods
         public async Task<ObservableCollection<SelectedSubject>> GetSelectedSubjectsAsync()
         {
-            var subjects = await Database.Table<SelectedSubject>().ToListAsync();
-            foreach (var subject in subjects)
-                await Database.GetChildrenAsync(subject);
+            var subjects = await Database.GetAllWithChildrenAsync<SelectedSubject>();
 
             return new ObservableCollection<SelectedSubject>(subjects);
         }
