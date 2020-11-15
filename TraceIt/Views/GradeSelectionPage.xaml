@@ -54,9 +54,10 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <AbsoluteLayout Background="{DynamicResource BlueToDarkGradient}">
+        <ScrollView>
+            <AbsoluteLayout Background="{DynamicResource BlueToDarkGradient}">
 
-            <StackLayout Margin="{OnIdiom Phone=10, Tablet=15}"
+                <StackLayout Margin="{OnIdiom Phone=10, Tablet=15}"
                          AbsoluteLayout.LayoutFlags="All"
                          AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
 
@@ -130,7 +131,8 @@
                             </buttons:SfSegmentedControl>
                         </StackLayout>
                     </Grid>
-            </StackLayout>
-        </AbsoluteLayout>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
