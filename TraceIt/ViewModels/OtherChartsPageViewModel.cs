@@ -53,7 +53,7 @@ namespace TraceIt.ViewModels
         private void Initialise()
         {
             SubscribeToMessages();
-            InitialiseRankScoreStepViewProgress();
+            //InitialiseRankScoreStepViewProgress();
 
             if (App.UserManagerService.LoggedIn is false)
                 SetDependentProperties();
@@ -82,16 +82,16 @@ namespace TraceIt.ViewModels
         {
             ProgressIndicators = new ObservableCollection<RankScoreProgressIndicator>()
             {
-                new RankScoreProgressIndicator() { Progress = 150, Status = StepStatus.Completed, Title = "First stage" },
-                new RankScoreProgressIndicator() { Progress = 165, Status = StepStatus.Completed, Title = "Second stage" },
-                new RankScoreProgressIndicator() { Progress = 180, Status = StepStatus.Completed, Title = "Third stage" },
-                new RankScoreProgressIndicator() { Progress = 200, Status = StepStatus.Completed, Title = "Fourth stage" },
-                new RankScoreProgressIndicator() { Progress = 210, Status = StepStatus.Completed, Title = "Fifth stage" },
-                new RankScoreProgressIndicator() { Progress = 230, Status = StepStatus.Completed, Title = "Fifth stage" },
-                new RankScoreProgressIndicator() { Progress = 250, Status = StepStatus.Completed, Title = "Sixth stage" },
-                new RankScoreProgressIndicator() { Progress = 260, Status = StepStatus.Completed, Title = "Seventh stage" },
-                new RankScoreProgressIndicator() { Progress = 275, Status = StepStatus.Completed, Title = "Eighth stage" },
-                new RankScoreProgressIndicator() { Progress = 280, Status = StepStatus.Completed, Title = "Ninth stage" }
+                new RankScoreProgressIndicator() { Progress = 150, Title = "First stage" },
+                new RankScoreProgressIndicator() { Progress = 165, Title = "Second stage" },
+                new RankScoreProgressIndicator() { Progress = 180, Title = "Third stage" },
+                new RankScoreProgressIndicator() { Progress = 200, Title = "Fourth stage" },
+                new RankScoreProgressIndicator() { Progress = 210, Title = "Fifth stage" },
+                new RankScoreProgressIndicator() { Progress = 230, Title = "Fifth stage" },
+                new RankScoreProgressIndicator() { Progress = 250, Title = "Sixth stage" },
+                new RankScoreProgressIndicator() { Progress = 260, Title = "Seventh stage" },
+                new RankScoreProgressIndicator() { Progress = 275, Title = "Eighth stage" },
+                new RankScoreProgressIndicator() { Progress = 280, Title = "Ninth stage" }
             };
         }
 
