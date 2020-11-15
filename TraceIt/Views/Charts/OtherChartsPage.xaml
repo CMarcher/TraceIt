@@ -54,23 +54,39 @@
                     </Frame>
                 </Grid>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center"
-                             VerticalOptions="Start" Padding="0, 0, 0, 20">
-                    <Label Text="University Entrance" TextColor="White"
-                       FontAttributes="Bold" VerticalTextAlignment="Center"/>
-                    <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
-                </StackLayout>
+                <Frame HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center" Padding="20, 10"
+                       BackgroundColor="#03002e" CornerRadius="15"
+                       Margin="20, 20" HasShadow="False">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand"
+                                 HorizontalOptions="Center">
+                         <Label Text="University Entrance" TextColor="White"
+                           FontAttributes="Bold" VerticalTextAlignment="Center"
+                           FontSize="Large"/>
+                         <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
+                    </StackLayout>
+                   
+                </Frame>
 
-                <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand"
-                   FontAttributes="Bold" TextColor="White"
-                   FontSize="Large"/>
+                <Frame HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center" Padding="20, 10"
+                       BackgroundColor="#03002e" CornerRadius="15"
+                       Margin="20, 10, 20, 10" HasShadow="False">
+                    <StackLayout>
+                        <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand"
+                           FontAttributes="Bold" TextColor="White"
+                           FontSize="Large"/>
 
-                <Label Text="{Binding RankScore}"
-                   VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand"
-                   TextColor="White" FontAttributes="Bold"
-                   FontSize="50"/>
+                        <Label Text="{Binding RankScore}"
+                               VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="White" FontAttributes="Bold"
+                               FontSize="50"/>
+                    </StackLayout>
+                    
+                </Frame>
+                
 
                 <!--Currently crashing the app due to bug out of my control-->
                 <!--<progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
