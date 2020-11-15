@@ -37,7 +37,7 @@ namespace TraceIt.Views
 
         private async void buttonAdd_Clicked(object sender, EventArgs e)
         {
-            var button = sender as VisualElement;
+            var button = sender as Element;
 
             button.SetEnabledForAndroid(false);
             await Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));

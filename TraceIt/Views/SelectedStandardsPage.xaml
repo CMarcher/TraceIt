@@ -43,7 +43,7 @@
         <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0">
 
             <list:SfListView x:Name="selectedStandardsCollectionView" ItemSpacing="0, 10" 
-                             AllowSwiping="True" ItemsSource="{Binding Standards}" 
+                             ItemsSource="{Binding Standards}" 
                              SelectionMode="None" Margin="10, 0"
                              AutoFitMode="DynamicHeight" VerticalOptions="FillAndExpand">
 
