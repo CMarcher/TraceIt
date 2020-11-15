@@ -14,7 +14,7 @@ namespace TraceIt.Converters
             switch ((Standard.Grade)value)
             {
                 case Standard.Grade.NoGrade:
-                    return "None";
+                    return "No Grade";
                 case Standard.Grade.NotAchieved:
                     return "NA";
                 case Standard.Grade.Achieved:
