@@ -105,6 +105,8 @@ namespace TraceIt.Models
             Selected = false;
             Task.Run(Delete).Wait();
             await ClearAttributes();
+            App.MessagingService.Send(Services.MessagingService.MessageType.RefreshStandards);
+            App.MessagingService.Send(Services.MessagingService.MessageType.RefreshDataSource);
         }
 
         private async Task RefreshAsync()
@@ -200,7 +202,7 @@ namespace TraceIt.Models
         }
 
         private void SetEndorsementEligibilty()
-            => EndorsementEligible = Standards.IsEligibleForEndorsement();
+            => EndorsementEligible = Standards.IsEligibleForEndorsement(Year);
 
         private void SubscribeToFinalGradeChanged(Standard standard)
             => standard.FinalGradeChanged += new EventHandler(OnFinalGradeChanged);
