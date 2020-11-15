@@ -9,16 +9,16 @@ namespace TraceIt.Extensions
 {
     public static class VisualElementExtensions
     {
-        public static void SetEnabledForAndroid(this VisualElement element, bool enableElement)
+        public static void SetEnabledForAndroid(this Element element, bool enableElement)
         {
             if (DeviceInfo.Platform == DevicePlatform.Android)
-                element.IsEnabled = enableElement is true ? true : false;
-        }
-
-        public static void SetEnabledForAndroid(this ToolbarItem toolbarItem, bool enableElement)
-        {
-            if (DeviceInfo.Platform == DevicePlatform.Android)
-                toolbarItem.IsEnabled = enableElement is true ? true : false;
+            {
+                if (element is Button button)
+                    button.IsEnabled = enableElement is true ? true : false;
+                else if (element is ToolbarItem toolbarItem)
+                    toolbarItem.IsEnabled = enableElement is true ? true : false;
+            }
+                
         }
     }
 }
