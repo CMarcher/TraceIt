@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TraceIt.Extensions;
 
 namespace TraceIt.Models
 {
@@ -20,19 +21,20 @@ namespace TraceIt.Models
             set { SetProperty(ref _excellenceCredits, value, nameof(ExcellenceCredits)); }
         }
 
-        public void AddCredits(Standard standard)
+        public LevelEndorsement(IEnumerable<Standard> standards)
         {
-            if (standard.FinalGrade == Standard.Grade.Merit)
-                MeritCredits += standard.Credits;
-
-            else if (standard.FinalGrade == Standard.Grade.Excellence)
-                ExcellenceCredits += standard.Credits;
+            AddCredits(standards);
         }
 
-        public void ClearCredits()
+        public LevelEndorsement()
         {
-            MeritCredits = 0;
-            ExcellenceCredits = 0;
+
+        }
+
+        public void AddCredits(IEnumerable<Standard> standards)
+        {
+            MeritCredits = standards.CountCredits(x => x.FinalGrade >= Standard.Grade.Merit);
+            ExcellenceCredits = standards.CountCredits(x => x.FinalGrade is Standard.Grade.Excellence);
         }
     }
 }
