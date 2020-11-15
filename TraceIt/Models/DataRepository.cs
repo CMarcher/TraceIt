@@ -53,7 +53,10 @@ namespace TraceIt.Models
             SelectedSubjects = selectedSubjects.OrderBy(x => x.BaseSubject.Name).ToObservableCollection();
 
             foreach (var subject in SelectedSubjects)
-                await subject.InitialiseStandards();
+            {
+                if (subject.Selected is true)
+                    await subject.InitialiseStandards();
+            }
 
             Initialised = true;
         }
