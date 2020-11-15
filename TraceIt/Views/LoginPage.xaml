@@ -64,12 +64,12 @@
         <StackLayout AbsoluteLayout.LayoutBounds=".5, .7, .7, .5" AbsoluteLayout.LayoutFlags="All"
                      Spacing="10" Margin="0" Padding="0">
 
-            <Frame Margin="0" Padding="{OnPlatform Android='15, 0, 0, 0'}">
+            <Frame Margin="0" Padding="{OnPlatform Android='15, 0, 0, 0', iOS='0'}">
                 <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" 
                                       BackgroundColor="Transparent" Margin="{OnPlatform Android='0,-20', iOS=0}"/>
             </Frame>
 
-            <Frame Padding="{OnPlatform Android='15, 0, 0, 0'}">
+            <Frame Padding="{OnPlatform Android='15, 0, 0, 0', iOS='0'}">
                 <controls:CustomPicker x:Name="pickerLevel" Title="Select year"
                                        Margin="{OnPlatform Android='0, -20'}">
                     <Picker.Items>
