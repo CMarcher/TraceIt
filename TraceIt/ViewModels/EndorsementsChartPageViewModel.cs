@@ -14,11 +14,26 @@ namespace TraceIt.ViewModels
 {
     public class EndorsementsChartPageViewModel : BaseViewModel
     {
-        ObservableCollection<Standard> Standards = new ObservableCollection<Standard>();
+        private LevelEndorsement _levelOneEndorsement;
+        public LevelEndorsement LevelOneEndorsement
+        {
+            get => _levelOneEndorsement;
+            private set => SetProperty(ref _levelOneEndorsement, value, nameof(LevelOneEndorsement));
+        }
 
-        public LevelEndorsement LevelOneEndorsement { get; private set; } = new LevelEndorsement();
-        public LevelEndorsement LevelTwoEndorsement { get; private set; } = new LevelEndorsement();
-        public LevelEndorsement LevelThreeEndorsement { get; private set; } = new LevelEndorsement();
+        private LevelEndorsement _levelTwoEndorsement;
+        public LevelEndorsement LevelTwoEndorsement
+        {
+            get => _levelTwoEndorsement;
+            set => SetProperty(ref _levelTwoEndorsement, value, nameof(LevelTwoEndorsement));
+        }
+
+        private LevelEndorsement _levelThreeEndorsement;
+        public LevelEndorsement LevelThreeEndorsement
+        {
+            get => _levelThreeEndorsement;
+            set => SetProperty(ref _levelThreeEndorsement, value, nameof(LevelThreeEndorsement));
+        }
 
         private ObservableCollection<SubjectEndorsement> _subjectEndorsements;
         public ObservableCollection<SubjectEndorsement> SubjectEndorsements
@@ -38,17 +53,26 @@ namespace TraceIt.ViewModels
 
         public EndorsementsChartPageViewModel()
         {
-            var usermanager = App.UserManagerService;
-            SubscribeToMessages();
             Initialise();
-
-            if (!usermanager.LoggedIn)
-                SetEndorsements();
         }
 
         private void Initialise()
         {
+            var usermanager = App.UserManagerService;
+            SubscribeToMessages();
+            InitialiseEndorsements();
+
+            if (!usermanager.LoggedIn)
+                SetEndorsements();
+
             Year = StatusTracker.CurrentYear;
+        }
+
+        private void InitialiseEndorsements()
+        {
+            LevelOneEndorsement = new LevelEndorsement();
+            LevelTwoEndorsement = new LevelEndorsement();
+            LevelThreeEndorsement = new LevelEndorsement();
         }
 
         private void SubscribeToMessages()
@@ -60,19 +84,10 @@ namespace TraceIt.ViewModels
                 (sender) => SetEndorsements());
         }
 
-        private void SetStandards()
-            => Standards = App.DataRepository.SelectedSubjects.GetSelectedStandards();
-
         private void SetEndorsements()
         {
-            if (Initialised is true)
-                ClearLevelEndorsements();
-
-            SetStandards();
             SetSubjectEndorsements();
-
-            foreach (var standard in Standards)
-                AddToLevelEndorsement(standard);
+            SetLevelEndorsements();
 
             if (Initialised is false)
             {
@@ -81,32 +96,18 @@ namespace TraceIt.ViewModels
             }
         }
 
-        private void AddToLevelEndorsement(Standard standard)
-        {
-            switch (standard.Level)
-            {
-                case Standard.Levels.One:
-                    LevelOneEndorsement.AddCredits(standard);
-                    break;
-
-                case Standard.Levels.Two:
-                    LevelTwoEndorsement.AddCredits(standard);
-                    break;
-
-                case Standard.Levels.Three:
-                    LevelThreeEndorsement.AddCredits(standard);
-                    break;
-            }
-        }
-
         private void SetSubjectEndorsements()
             => SubjectEndorsements = App.DataRepository.SelectedSubjects.GetSubjectEndorsements();
-        
-        private void ClearLevelEndorsements()
+
+        private void SetLevelEndorsements()
         {
-            LevelOneEndorsement.ClearCredits();
-            LevelTwoEndorsement.ClearCredits();
-            LevelThreeEndorsement.ClearCredits();
+            var repo = App.DataRepository;
+            var subjects = repo.SelectedSubjects;
+            var levelEndorsements = subjects.GetLevelEndorsements();
+
+            LevelOneEndorsement = levelEndorsements[0];
+            LevelTwoEndorsement = levelEndorsements[1];
+            LevelThreeEndorsement = levelEndorsements[2];
         }
     }
 }
