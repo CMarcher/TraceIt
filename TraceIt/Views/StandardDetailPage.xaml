@@ -162,7 +162,7 @@
 
                     <Grid Grid.Row="6" Grid.ColumnSpan="2"
                           ColumnDefinitions="{OnIdiom Phone='*, *', Tablet='*, *, *, *'}" 
-                          ColumnSpacing="{OnIdiom Phone=10, Tablet=30}"
+                          ColumnSpacing="{OnIdiom Phone=10, Tablet=20}"
                           RowDefinitions="{OnIdiom Phone='*, *', Tablet='*'}">
 
                         <Grid.Resources>
@@ -175,6 +175,8 @@
 
                                 <Style TargetType="patch:Label">
                                     <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    <Setter Property="Lines" Value="1"/>
+                                    <Setter Property="AutoFit" Value="Width"/>
                                 </Style>
 
                                 <Style TargetType="StackLayout">
@@ -186,7 +188,8 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="0" Grid.Row="0">
                             <StackLayout>
-                                <patch:Label Text="LITERACY" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="LITERACY" Style="{StaticResource blueHeaderLabel}"
+                                             AutoFit="Width" Lines="1"/>
                                 <CheckBox IsChecked="{Binding IsLiteracy}"/>
                             </StackLayout>
                         </Frame>
@@ -194,7 +197,8 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="1" Grid.Row="0">
                             <StackLayout>
-                                <patch:Label Text="NUMERACY" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="NUMERACY" Style="{StaticResource blueHeaderLabel}"
+                                             Lines="1" AutoFit="Width"/>
                                 <CheckBox IsChecked="{Binding IsNumeracy}"/>
                             </StackLayout>
                         </Frame>
@@ -202,7 +206,8 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="{OnIdiom Phone=0, Tablet=2}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
                             <StackLayout>
-                                <patch:Label Text="READING" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="READING" Style="{StaticResource blueHeaderLabel}"
+                                             Lines="1" AutoFit="Width"/>
                                 <CheckBox IsChecked="{Binding IsReading}"/>
                             </StackLayout>
                         </Frame>
@@ -210,7 +215,8 @@
                         <Frame Style="{StaticResource blueFrame}"
                            Grid.Column="{OnIdiom Phone=1, Tablet=3}" Grid.Row="{OnIdiom Phone=1, Tablet=0}">
                             <StackLayout>
-                                <patch:Label Text="WRITING" Style="{StaticResource blueHeaderLabel}"/>
+                                <patch:Label Text="WRITING" Style="{StaticResource blueHeaderLabel}"
+                                             Lines="1" AutoFit="Width"/>
                                 <CheckBox IsChecked="{Binding IsWriting}"/>
                             </StackLayout>
                         </Frame>
