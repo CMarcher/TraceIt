@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using TraceIt.Services;
 using TraceIt.ViewModels;
+using System.Collections.Specialized;
 
 namespace TraceIt.Views
 {
@@ -31,7 +32,10 @@ namespace TraceIt.Views
 
             Title = parameter;
             categorisedStandardsList.ItemsSource = ViewModel.Standards;
+
             InitialiseOrRefreshDataSource();
+            SubscribeToDataSourceChanges();
+            OnDataSourceChanged(null, null);
         }
 
         private void InitialiseOrRefreshDataSource()
@@ -39,6 +43,15 @@ namespace TraceIt.Views
             categorisedStandardsList.DataSource.Filter = FilterStandards;
             categorisedStandardsList.DataSource.Refresh();
             categorisedStandardsList.DataSource.RefreshFilter();
+        }
+
+        private void SubscribeToDataSourceChanges()
+            => categorisedStandardsList.DataSource.DisplayItems.CollectionChanged += OnDataSourceChanged;
+
+        void OnDataSourceChanged(object sender, EventArgs e)
+        {
+            var displayItems = categorisedStandardsList.DataSource.DisplayItems;
+            noStandardsLabel.IsVisible = displayItems.Count is 0;
         }
 
         private async void categorisedStandardsList_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
