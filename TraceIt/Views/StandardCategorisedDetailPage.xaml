@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:triggers="clr-namespace:TraceIt.Triggers" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
              x:Class="TraceIt.Views.StandardCategorisedDetailPage"
              x:Name="myLayout"
              BackgroundColor="Black">
@@ -42,6 +42,7 @@
                 <Setter Property="CornerRadius" Value="20"/>
                 <Setter Property="Padding" Value="{OnIdiom Phone='0', Tablet='20, 0, 0, 0'}"/>
             </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -62,6 +63,12 @@
                     </system:List>
                 </buttons:SfSegmentedControl>
             </StackLayout>
+
+            <Label Text="No standards found." FontAttributes="Italic"
+                   TextColor="White" IsVisible="false"
+                   VerticalOptions="Start" HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start" Margin="10"
+                   FontSize="20" x:Name="noStandardsLabel"/>
 
             <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="FillAndExpand"
                                ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
