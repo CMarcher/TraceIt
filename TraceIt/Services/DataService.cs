@@ -71,6 +71,23 @@ namespace TraceIt.Services
                 Database = await CreateConnection();
                 Initialised = true;
             }
+
+            await Create2021RowsIfNotExists();
+        }
+
+        async Task Create2021RowsIfNotExists()
+        {
+            bool rowsExist = await Database.ExecuteScalarAsync<int>(
+                @"SELECT Count(*) FROM SelectedSubjects
+                WHERE Year = 2021") > 0;
+
+            if (rowsExist)
+                return;
+
+            await Database.ExecuteAsync(
+                @"INSERT INTO SelectedSubjects(SubjectID, Year)
+                 SELECT Subjects.ID, 2021
+                 FROM Subjects; ");
         }
 
         #region Standard methods
