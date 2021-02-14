@@ -59,14 +59,16 @@ namespace TraceIt.Views
 
             if (year is 2017)
                 return 0;
-            if (year is 2018)
+            else if (year is 2018)
                 return 1;
-            if (year is 2019)
+            else if (year is 2019)
                 return 2;
-            if (year is 2020)
+            else if (year is 2020)
                 return 3;
+            else if (year is 2021)
+                return 4;
             else
-                return 3;
+                return 4;
         }
 
         private int GetYearFromIndex()
@@ -81,8 +83,10 @@ namespace TraceIt.Views
                 return 2019;
             else if (index is 3)
                 return 2020;
+            else if (index is 4)
+                return 2021;
             else
-                return 2020;
+                return 2021;
         }
 
         private async void buttonViewInfo_Clicked(object sender, EventArgs e)

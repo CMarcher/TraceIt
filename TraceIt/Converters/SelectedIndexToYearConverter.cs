@@ -33,6 +33,8 @@ namespace TraceIt.Converters
                 return 2;
             if (year is 2020)
                 return 3;
+            if (year is 2021)
+                return 4;
             else
                 throw new Exception("Invalid year: " + year);
         }
@@ -49,13 +51,15 @@ namespace TraceIt.Converters
                     return 2019;
                 if (index is 3)
                     return 2020;
+                if (index is 4)
+                    return 2021;
                 else
                     throw new Exception("Invalid index: " + index);
             }
             catch(Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return 2020;
+                return 2021;
             }
         }
     }
