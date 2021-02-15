@@ -22,5 +22,12 @@ namespace TraceIt.Views
             Debug.WriteLine("Shell took " + tmr.ElapsedMilliseconds + "milliseconds");
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
+        }
+
     }
 }
