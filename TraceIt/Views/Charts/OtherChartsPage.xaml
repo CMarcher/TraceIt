@@ -36,7 +36,7 @@
     <ContentView.Content>
         <ScrollView>
             <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0, 0, 0, 20">
-                
+
                 <Grid ColumnDefinitions="*, *" RowDefinitions="20, *" Padding="{OnIdiom Phone='20, 10, 20, 40', Tablet='40, 10'}">
 
                     <Label Text="Reading progress" FontAttributes="Bold" Grid.Column="0"
@@ -57,21 +57,23 @@
                 <Frame HorizontalOptions="FillAndExpand"
                        VerticalOptions="Center" Padding="20, 10"
                        BackgroundColor="#03002e" CornerRadius="15"
-                       Margin="20, 20" HasShadow="False">
+                       Margin="20, 0, 20, 20" HasShadow="False"
+                       BorderColor="White">
                     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand"
                                  HorizontalOptions="Center">
-                         <Label Text="University Entrance" TextColor="White"
+                        <Label Text="University Entrance" TextColor="White"
                            FontAttributes="Bold" VerticalTextAlignment="Center"
                            FontSize="Large"/>
-                         <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
                     </StackLayout>
-                   
+
                 </Frame>
 
                 <Frame HorizontalOptions="FillAndExpand"
                        VerticalOptions="Center" Padding="20, 10"
                        BackgroundColor="#03002e" CornerRadius="15"
-                       Margin="20, 10, 20, 10" HasShadow="False">
+                       Margin="20, 10, 20, 10" HasShadow="False"
+                       BorderColor="White">
                     <StackLayout>
                         <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
                            HorizontalOptions="CenterAndExpand"
@@ -82,33 +84,39 @@
                                VerticalOptions="CenterAndExpand" 
                                HorizontalOptions="CenterAndExpand"
                                TextColor="White" FontAttributes="Bold"
-                               FontSize="50"/>
-                    </StackLayout>
-                    
-                </Frame>
-                
+                               FontSize="50" Margin="0, 0, 0, 12"/>
 
-                <!--Currently crashing the app due to bug out of my control-->
-                <!--<progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
-                                           HorizontalOptions="CenterAndExpand" TitleAlignment="Start">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate>
-                        <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
-                            <progressbar:StepView.PrimaryFormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Title}" TextColor="White"
-                                          FontAttributes="Bold" FontSize="Small"/>
-                                </FormattedString>
-                            </progressbar:StepView.PrimaryFormattedText>
-                            <progressbar:StepView.SecondaryFormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Progress}" TextColor="LightGray"/>
-                                </FormattedString>
-                            </progressbar:StepView.SecondaryFormattedText>
-                        </progressbar:StepView>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </progressbar:SfStepProgressBar>-->
+                        <progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
+                                               HorizontalOptions="CenterAndExpand" TitleAlignment="Start" TitleSpace="20"
+                                               StepTapped="SfStepProgressBar_StepTapped">
+
+                            <progressbar:SfStepProgressBar.NotStartedStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:NotStartedStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.NotStartedStepStyle>
+
+                            <progressbar:SfStepProgressBar.InProgressStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:InProgressStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.InProgressStepStyle>
+
+                            <progressbar:SfStepProgressBar.CompletedStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:CompletedStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.CompletedStepStyle>
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
+                                        <progressbar:StepView.PrimaryFormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Progress}" TextColor="White"
+                                                      FontAttributes="Bold" FontSize="Large"/>
+                                            </FormattedString>
+                                        </progressbar:StepView.PrimaryFormattedText>
+                                    </progressbar:StepView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </progressbar:SfStepProgressBar>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentView.Content>
