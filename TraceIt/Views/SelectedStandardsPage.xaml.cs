@@ -40,7 +40,7 @@ namespace TraceIt.Views
             var button = sender as Element;
 
             button.SetEnabledForAndroid(false);
-            await Navigation.PushModalAsync(new NavigationPage(new StandardCategorisedPage()));
+            await Navigation.TryPushModalAsync(new NavigationPage(new StandardCategorisedPage()));
             button.SetEnabledForAndroid(true);
         }
 
