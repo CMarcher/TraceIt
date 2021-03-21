@@ -33,6 +33,7 @@
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.4.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="18.4.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.4.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfProgressBar" Version="18.4.0.48" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.48" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
