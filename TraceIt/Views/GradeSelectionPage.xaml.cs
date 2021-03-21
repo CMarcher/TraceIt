@@ -8,6 +8,7 @@ using TraceIt.Services;
 using TraceIt.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using TraceIt.Extensions;
 
 namespace TraceIt.Views
 {
@@ -22,7 +23,7 @@ namespace TraceIt.Views
 
         private async void closeToolbarItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopModalAsync();
+            await Navigation.TryPopModalAsync();
             App.MessagingService.Send(MessagingService.MessageType.PushStandard);
         }
 

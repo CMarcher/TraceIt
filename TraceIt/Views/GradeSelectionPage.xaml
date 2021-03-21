@@ -55,84 +55,84 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <AbsoluteLayout Background="{DynamicResource BlueToDarkGradient}">
 
-                <StackLayout Margin="{OnIdiom Phone=10, Tablet=15}"
-                         AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1">
+            <StackLayout Padding="{OnIdiom Phone=10, Tablet=15}" Background="{DynamicResource BlueToDarkGradient}">
 
-                    <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
-                        <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
-                            <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl x:Name="goalGradeSelector"
+                <Label Text="* Goal and Practice Grades do not factor into calculations and are simply for your reference at this time"
+                       FontAttributes="Italic" TextColor="White"
+                       Margin="0, 0, 0, 10"/>
+
+                <Grid RowDefinitions="140, 140, 140" VerticalOptions="CenterAndExpand">
+                    <StackLayout Grid.Row="0" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Goal Grade" TextColor="White" FontAttributes="Bold"/>
+                        <buttons:SfSegmentedControl x:Name="goalGradeSelector"
                                                         SelectedIndex="{Binding 
                                                                         GoalGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
+                            <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
 
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
-                                </system:List>
-                            </buttons:SfSegmentedControl>
-                        </StackLayout>
+                            </system:List>
+                        </buttons:SfSegmentedControl>
+                    </StackLayout>
 
-                        <StackLayout Grid.Row="1" HorizontalOptions="Center">
-                            <Label Text="Practice Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl x:Name="practiceGradeSelector"
+                    <StackLayout Grid.Row="1" HorizontalOptions="Center">
+                        <Label Text="Practice Grade" TextColor="White" FontAttributes="Bold"/>
+                        <buttons:SfSegmentedControl x:Name="practiceGradeSelector"
                                                         SelectedIndex="{Binding 
                                                                         PracticeGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
+                            <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
 
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
-                                </system:List>
-                            </buttons:SfSegmentedControl>
-                        </StackLayout>
+                            </system:List>
+                        </buttons:SfSegmentedControl>
+                    </StackLayout>
 
-                        <StackLayout Grid.Row="2" HorizontalOptions="Center">
-                            <Label Text="Final Grade" TextColor="White" FontAttributes="Bold"/>
-                            <buttons:SfSegmentedControl x:Name="finalGradeSelector"
+                    <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                        <Label Text="Final Grade" TextColor="White" FontAttributes="Bold"/>
+                        <buttons:SfSegmentedControl x:Name="finalGradeSelector"
                                                         SelectedIndex="{Binding 
                                                                         FinalGrade, 
                                                                         Converter={StaticResource indexConverter},
                                                                         Mode=TwoWay}">
-                                <system:List x:TypeArguments="buttons:SfSegmentItem">
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
+                            <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='NA', Tablet='Not Achieved'}"/>
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='A', Tablet='Achieved'}" />
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='M', Tablet='Merit'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='MeritItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
 
-                                    <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
+                                <buttons:SfSegmentItem Text="{OnIdiom Phone='E', Tablet='Excellence'}" IsEnabled="{Binding GradingScheme, 
                                                            Converter={StaticResource visibilityConverter}, ConverterParameter='ExcellenceItem'}"
                                                            BackgroundColor="{Binding Source={RelativeSource Self}, Path=IsEnabled,
                                                            Converter={StaticResource enabledToColorConverter}}"/>
-                                </system:List>
-                            </buttons:SfSegmentedControl>
-                        </StackLayout>
-                    </Grid>
-                </StackLayout>
-            </AbsoluteLayout>
+                            </system:List>
+                        </buttons:SfSegmentedControl>
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
