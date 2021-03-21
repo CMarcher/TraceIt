@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraceIt.Extensions;
 using TraceIt.Models;
 using TraceIt.Models.Query_Models;
 using TraceIt.ViewModels;
@@ -60,17 +61,39 @@ namespace TraceIt.Views
         }
 
         private async void closeButton_Clicked(object sender, EventArgs e)
-            => await Navigation.PopModalAsync();
+            => await Navigation.TryPopModalAsync();
         
         private async void searchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (searchBar.Text != "" && searchBar.Text != null)
+            {
+                searchBar.CheckForInvalidCharacters();
+                ResetSearchBarIfEmpty();
                 listView.ItemsSource = await GetFilteredStandards(searchBar.Text);
+            }
+                
             else
+                SetItemsSource();
+        }
+
+        private void ResetSearchBarIfEmpty()
+        {
+            string text = searchBar.Text;
+            bool searchBarEmpty = text is "" || text is null;
+
+            if (searchBarEmpty)
                 SetItemsSource();
         }
 
         async Task<List<Standard>> GetFilteredStandards(string search)
             => await App.DataService.GetMatchingStandards(search);
+
+        private void searchBar_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            bool textChanged = e.PropertyName == "Text";
+
+            if (textChanged)
+                ResetSearchBarIfEmpty();
+        }
     }
 }

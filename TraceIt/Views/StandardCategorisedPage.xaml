@@ -134,7 +134,8 @@
             <StackLayout BackgroundColor="#001124" Padding="0">
                 <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
                     <SearchBar x:Name="searchBar" BackgroundColor="White" FontAttributes="Italic"
-                         Placeholder="Search standards..." TextChanged="searchBar_TextChanged"/>
+                         Placeholder="Search standards..." TextChanged="searchBar_TextChanged"
+                               PropertyChanged="searchBar_PropertyChanged"/>
                 </Frame>
 
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand"
