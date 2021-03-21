@@ -234,6 +234,7 @@
                             <buttons:SfSegmentItem Text="2018"/>
                             <buttons:SfSegmentItem Text="2019"/>
                             <buttons:SfSegmentItem Text="2020"/>
+                            <buttons:SfSegmentItem Text="2021"/>
                         </system:List>
                     </buttons:SfSegmentedControl.ItemsSource>
                 </buttons:SfSegmentedControl>

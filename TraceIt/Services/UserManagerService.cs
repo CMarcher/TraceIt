@@ -93,14 +93,14 @@ namespace TraceIt.Services
         private bool GetSubjectsSelected()
             => Preferences.Get(subjectsSelectedKey, false);
 
-        public void SetSelectedYear(int year = 2020)
+        public void SetSelectedYear(int year = 2021)
         {
             Preferences.Set(selectedYearKey, year);
             SelectedYear = GetSelectedYear();
         }
 
         private int GetSelectedYear()
-            => Preferences.Get(selectedYearKey, 2020);
+            => Preferences.Get(selectedYearKey, 2021);
 
         public void SetReviewedVersion(string version = null)
         {

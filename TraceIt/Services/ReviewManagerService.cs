@@ -9,6 +9,8 @@ namespace TraceIt.Services
 {
     public static class ReviewManagerService
     {
+        public static bool IsWaitingForChance { get; private set; } = false;
+
         public static async Task RequestReview()
         {
             if (CanRequestReview())
@@ -25,7 +27,7 @@ namespace TraceIt.Services
             double daysFromLastReview = DateTime.Now.Subtract(lastReviewedDate).TotalDays;
 
             bool currentVersionNotReviewed = lastReviewedVersion != AppInfo.VersionString;
-            bool notReviewedInAWhile = lastReviewedDate != default ? daysFromLastReview > 75 : true;
+            bool notReviewedInAWhile = lastReviewedDate != default ? daysFromLastReview > 30 : true;
             bool canReview = currentVersionNotReviewed && notReviewedInAWhile;
 
             return canReview;

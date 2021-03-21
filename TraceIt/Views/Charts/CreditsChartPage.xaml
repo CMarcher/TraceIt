@@ -66,7 +66,7 @@
             <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" 
                                                SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
                                                ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange"
-                                               VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                                IsVisible="False" Grid.Row="1" GapWidth="1.5"
                                                Maximum="{Binding TotalCredits}" Progress="{Binding TotalAchievedCredits}"
                                                Margin="0">

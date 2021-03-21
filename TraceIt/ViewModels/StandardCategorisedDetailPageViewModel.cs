@@ -14,7 +14,13 @@ namespace TraceIt.ViewModels
 {
     public class StandardCategorisedDetailPageViewModel : BaseViewModel
     {
-        public ObservableCollection<Standard> Standards { get; private set; }
+        private ObservableCollection<Standard> _standards;
+        public ObservableCollection<Standard> Standards
+        {
+            get => _standards;
+            set => SetProperty(ref _standards, value, nameof(Standards));
+        }
+
         public Command ChangeStandardSelectionCommand { get; private set; }
 
         public StandardCategorisedDetailPageViewModel(string parameter, DataService.FilterOption filterByOption)

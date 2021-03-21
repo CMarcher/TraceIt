@@ -64,6 +64,7 @@
                             <x:String>2018</x:String>
                             <x:String>2019</x:String>
                             <x:String>2020</x:String>
+                            <x:String>2021</x:String>
                         </Picker.Items>
                     </Picker>
                 </Frame>
