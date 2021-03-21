@@ -12,6 +12,7 @@ using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.Buttons;
 using Syncfusion.XForms.iOS.ProgressBar;
 using Syncfusion.XForms.iOS.TabView;
+using Syncfusion.XForms.iOS.PopupLayout;
 
 namespace TraceIt.iOS
 {
@@ -40,10 +41,10 @@ namespace TraceIt.iOS
             SfLinearProgressBarRenderer.Init();
             SfCircularProgressBarRenderer.Init();
             SfButtonRenderer.Init();
-            SfGradientViewRenderer.Init();
             SfSegmentedControlRenderer.Init();
             SfChartRenderer.Init();
             SfCheckBoxRenderer.Init();
+            SfPopupLayoutRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
