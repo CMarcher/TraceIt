@@ -53,7 +53,7 @@ namespace TraceIt.ViewModels
         private void Initialise()
         {
             SubscribeToMessages();
-            //InitialiseRankScoreStepViewProgress();
+            InitialiseRankScoreStepViewProgress();
 
             if (App.UserManagerService.LoggedIn is false)
                 SetDependentProperties();
@@ -82,23 +82,23 @@ namespace TraceIt.ViewModels
         {
             ProgressIndicators = new ObservableCollection<RankScoreProgressIndicator>()
             {
-                new RankScoreProgressIndicator() { Progress = 150, Title = "First stage" },
-                new RankScoreProgressIndicator() { Progress = 165, Title = "Second stage" },
-                new RankScoreProgressIndicator() { Progress = 180, Title = "Third stage" },
-                new RankScoreProgressIndicator() { Progress = 200, Title = "Fourth stage" },
-                new RankScoreProgressIndicator() { Progress = 210, Title = "Fifth stage" },
-                new RankScoreProgressIndicator() { Progress = 230, Title = "Fifth stage" },
-                new RankScoreProgressIndicator() { Progress = 250, Title = "Sixth stage" },
-                new RankScoreProgressIndicator() { Progress = 260, Title = "Seventh stage" },
-                new RankScoreProgressIndicator() { Progress = 275, Title = "Eighth stage" },
-                new RankScoreProgressIndicator() { Progress = 280, Title = "Ninth stage" }
+                new RankScoreProgressIndicator() { Progress = 150 },
+                new RankScoreProgressIndicator() { Progress = 165 },
+                new RankScoreProgressIndicator() { Progress = 180 },
+                new RankScoreProgressIndicator() { Progress = 200 },
+                new RankScoreProgressIndicator() { Progress = 210 },
+                new RankScoreProgressIndicator() { Progress = 230 },
+                new RankScoreProgressIndicator() { Progress = 250 },
+                new RankScoreProgressIndicator() { Progress = 260 },
+                new RankScoreProgressIndicator() { Progress = 275 },
+                new RankScoreProgressIndicator() { Progress = 280 }
             };
         }
 
         private void SetRankScore()
         {
             RankScore = App.DataRepository.SelectedSubjects.GetRankScore();
-            //CalculateRankScoreStepViewProgress();
+            CalculateRankScoreStepViewProgress();
         }
 
         private void CalculateRankScoreStepViewProgress()
