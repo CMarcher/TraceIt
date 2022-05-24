@@ -13,6 +13,11 @@ This was my first mobile application.
 
 It allows standards to be selected and added to subjects, grades to be chosen for those standards, and then presents your progress visually through several chart types.
 
+# Technology used
+
+- Xamarin Forms
+- SQLite
+
 # Availability
 
 TraceIt is currently available on the [App Store](https://apps.apple.com/nz/app/traceit-ncea-tracker/id1527893664) and [Play Store](https://play.google.com/store/apps/details?id=com.bccodespace.traceit).
