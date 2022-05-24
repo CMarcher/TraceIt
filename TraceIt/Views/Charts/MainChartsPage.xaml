@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:chart="clr-namespace:TraceIt.Views.Charts"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:tabview="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.Charts.MainChartsPage"
+             Title="Progress"
+             BackgroundColor="Black">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="SegmentCornerRadius" Value="12"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VisibleSegmentsCount" Value="3"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Style="{DynamicResource secondaryGradientStackLayout}" 
+                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+            <Frame BackgroundColor="#002147" CornerRadius="0" Padding="5, 10" Margin="0"
+                   HasShadow="False">
+
+                <buttons:SfSegmentedControl x:Name="tabSelector" SelectionChanged="tabSelector_SelectionChanged" 
+                                            SegmentPadding="5" SegmentHeight="35" 
+                                            FontSize="15" VisibleSegmentsCount="{OnIdiom Tablet=4}"
+                                            SegmentWidth="{OnIdiom Phone=120}">
+
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="x:String">
+                            <x:String>Credits</x:String>
+                            <x:String>Levels</x:String>
+                            <x:String>Endorsements</x:String>
+                            <x:String>Other</x:String>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+            </Frame>
+
+            <tabview:SfTabView x:Name="tabsCarouselView" SelectionChanged="tabsCarouselView_PositionChanged"
+                               DisplayMode="NoHeader">
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
+                        <chart:CreditsChartPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
+                        <chart:LevelsChartsPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
+                        <chart:EndorsementsChartPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+                <tabview:SfTabItem>
+                    <tabview:SfTabItem.Content>
+                        <chart:OtherChartsPage/>
+                    </tabview:SfTabItem.Content>
+                </tabview:SfTabItem>
+
+            </tabview:SfTabView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

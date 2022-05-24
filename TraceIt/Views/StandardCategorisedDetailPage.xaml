@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:triggers="clr-namespace:TraceIt.Triggers" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
+             x:Class="TraceIt.Views.StandardCategorisedDetailPage"
+             x:Name="myLayout"
+             BackgroundColor="Black">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="SelectionTextColor" Value="White"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="SegmentCornerRadius" Value="0"/>
+                <Setter Property="SegmentHeight" Value="35"/>
+                <Setter Property="SelectionAnimationDuration" Value="100"/>
+                <Setter Property="SelectionIndicatorSettings">
+                    <Setter.Value>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="Orange"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="filterLabelStyle">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="{OnIdiom Phone='0', Tablet='20, 0, 0, 0'}"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Style="{DynamicResource gradientStackLayout}" Padding="0" Spacing="0">
+            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#001124"
+                         Padding="20, 10, 10, 10">
+                <Label Text="Level:" TextColor="White"
+                       FontAttributes="Bold"/>
+                <buttons:SfSegmentedControl x:Name="levelSelector" HorizontalOptions="StartAndExpand"
+                                            SegmentWidth="40" FontSize="18"
+                                            SelectionChanged="levelSelector_SelectionChanged"
+                                            SelectedIndex="0">
+                    <system:List x:TypeArguments="x:String">
+                        <x:String>1</x:String>
+                        <x:String>2</x:String>
+                        <x:String>3</x:String>
+                    </system:List>
+                </buttons:SfSegmentedControl>
+            </StackLayout>
+
+            <Label Text="No standards found." FontAttributes="Italic"
+                   TextColor="White" IsVisible="false"
+                   VerticalOptions="Start" HorizontalOptions="Start"
+                   HorizontalTextAlignment="Start" Margin="10"
+                   FontSize="20" x:Name="noStandardsLabel"/>
+
+            <xforms:SfListView x:Name="categorisedStandardsList" VerticalOptions="FillAndExpand"
+                               ItemTapped="categorisedStandardsList_ItemTapped" SelectionMode="None"
+                               ItemSpacing="10" AutoFitMode="DynamicHeight"
+                               Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}">
+
+                <xforms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{DynamicResource listItemFrame}">
+                            <Grid VerticalOptions="StartAndExpand" Padding="0"
+                                  RowDefinitions="Auto, Auto, Auto, 50">
+
+                                <Label Text="{Binding Code}" FontAttributes="Bold" Grid.Row="0"/>
+                                <Label Text="{Binding Title}" FontAttributes="Italic" Grid.Row="1"/>
+                                <Label Text="{Binding AddedTo, StringFormat='Added to: {0}'}"
+                                       IsVisible="{Binding Selected}" Grid.Row="2"/>
+
+                                <Button x:Name="selectionButton"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:StandardCategorisedDetailPageViewModel}}, Path=ChangeStandardSelectionCommand}" 
+                                        CommandParameter="{Binding Source={x:Reference selectionButton}, Path=BindingContext}"
+                                        VerticalOptions="FillAndExpand" HorizontalOptions="Start"
+                                        WidthRequest="150" Grid.Row="3">
+
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                            <GradientStopCollection>
+                                                <GradientStop Offset="0" Color="#FFC400"/>
+                                                <GradientStop Offset="1" Color="#FFA200"/>
+                                            </GradientStopCollection>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+
+                                    <Button.ImageSource>
+                                        <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"
+                                                         Color="Black"/>
+                                    </Button.ImageSource>
+
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" Binding="{Binding Selected}"
+                                                     Value="true">
+                                            <DataTrigger.EnterActions>
+                                                <triggers:SelectedTriggerAction StartColor="OrangeRed" EndColor="Red"/>
+                                            </DataTrigger.EnterActions>
+
+                                            <DataTrigger.ExitActions>
+                                                <triggers:DeselectedTriggerAction StartColor="#FFC400" EndColor="#FFA200"/>
+                                            </DataTrigger.ExitActions>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </xforms:SfListView.ItemTemplate>
+            </xforms:SfListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

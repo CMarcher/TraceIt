@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.StandardWebPage"
+             BackgroundColor="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="backToolbarItem" Text="Back" Clicked="backToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource BackArrow}"/>
+            </ToolbarItem.IconImageSource>
+            
+        </ToolbarItem>
+        <ToolbarItem x:Name="forwardToolbarItem" Text="Forward" Clicked="forwardToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource ForwardArrow}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        
+        <ToolbarItem x:Name="loadNZQAToolbarItem" Text="Go to NZQA" Clicked="loadNZQAToolbarItem_Clicked"/>
+        <ToolbarItem x:Name="launchSafariToolbarItem" Clicked="launchSafariToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Safari}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <NavigationPage.TitleView>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="0, 0, 0, 5"/>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+
+            
+
+            <StackLayout Style="{DynamicResource gradientStackLayout}"
+                         AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
+                         AbsoluteLayout.LayoutFlags="All">
+                
+                <WebView x:Name="webView" Source="{Binding Hyperlink}" VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand" Navigated="webView_Navigated"
+                     Navigating="webView_Navigating" PropertyChanged="webView_PropertyChanged"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

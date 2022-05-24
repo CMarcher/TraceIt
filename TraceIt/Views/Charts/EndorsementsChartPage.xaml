@@ -1,17 +1,357 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:converters="clr-namespace:TraceIt.Converters" 
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.Charts.EndorsementsChartPage">
-    
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-    
-</ContentPage>
+
+    <ContentView.BindingContext>
+        <viewmodels:EndorsementsChartPageViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="baseProgressBar">
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="HeightRequest" Value="{Binding Source={RelativeSource Self}, Path=TrackHeight}"/>
+                <Setter Property="SegmentCount" Value="{Binding Source={RelativeSource Self}, Path=Maximum}"/>
+                <Setter Property="TrackColor" Value="#303030"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="subjectProgressBar" 
+                               BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="30"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="levelProgressBar"
+                               BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="70"/>
+                <Setter Property="Maximum">
+                    <Setter.Value>
+                        <Binding Source="{x:Reference covidSwitch}"
+                                             Path="IsOn"
+                                             ConverterParameter="Level">
+                            <Binding.Converter>
+                                <converters:IsToggledToMaximumConverter/>
+                            </Binding.Converter>
+                        </Binding>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Progress" Value="{Binding ExcellenceCredits}"/>
+                <Setter Property="ProgressColor" Value="Orange"/>
+                <Setter Property="SecondaryProgress" Value="{Binding MeritCredits}"/>
+                <Setter Property="SecondaryProgressColor" Value="DodgerBlue"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="headerLabelStyle">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="progressBarFrame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+            <converters:IsToggledToMaximumConverter x:Key="isToggledConverter"/>
+            <converters:SelectedIndexToYearConverter x:Key="indexToYearConverter"/>
+            <converters:SubjectEndorsementToLabelConverter x:Key="endorsementConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="StartAndExpand"
+                         Padding="{OnIdiom Phone='10, 0', Tablet='20, 0'}" Spacing="20" Margin="{OnIdiom Phone=0, Tablet=10}">
+
+                <StackLayout Margin="10, 0">
+                    <Label Text="COVID-19 Settings" FontAttributes="Italic" IsVisible="{OnPlatform Android=False}"/>
+                    <buttons:SfSwitch x:Name="covidSwitch"
+                                      HorizontalOptions="Start" Padding="0, 0, 0, 20"
+                                      VisualType="Cupertino"
+                                      IsVisible="{OnPlatform Android=False}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup  x:Name="CommonStates">
+                                <VisualState x:Name="On">
+                                    <VisualState.Setters>
+                                        <Setter Property="SwitchSettings">
+                                            <Setter.Value>
+                                                <buttons:DefaultSwitchSettings x:TypeArguments="buttons:OnState" ThumbColor="White" 
+                                                                               TrackBorderColor="Transparent" TrackColor="Orange"
+                                                                               ThumbBorderColor="Transparent">
+                                                    <buttons:DefaultSwitchSettings.ThumbImageSource>
+                                                        <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Virus}" Color="Orange"/>
+                                                    </buttons:DefaultSwitchSettings.ThumbImageSource>
+                                                </buttons:DefaultSwitchSettings>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Off">
+                                    <VisualState.Setters>
+                                        <Setter Property="SwitchSettings">
+                                            <Setter.Value>
+                                                <buttons:DefaultSwitchSettings x:TypeArguments="buttons:OffState" ThumbColor="Orange"
+                                                                               TrackColor="White" ThumbBorderColor="Transparent"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </buttons:SfSwitch>
+
+                    <Label Text="Level 1 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                    <Grid ColumnDefinitions="*, *">
+                        <Label Grid.Column="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Merit: "/>
+                                    <Span Text="{Binding Source={x:Reference levelOneEndorsementProgress}, Path=SecondaryProgress, 
+                                                     StringFormat='{0} /'}"/>
+                                    <Span Text="{Binding Source={x:Reference levelOneEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Column="1" HorizontalOptions="End">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Excellence: "/>
+                                    <Span Text="{Binding Source={x:Reference levelOneEndorsementProgress}, Path=Progress, 
+                                                     StringFormat='{0} /'}"/>
+                                    <Span Text="{Binding Source={x:Reference levelOneEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                    <Frame Style="{StaticResource progressBarFrame}">
+                        <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}"
+                                                         BindingContext="{Binding LevelOneEndorsement}"
+                                                         x:Name="levelOneEndorsementProgress"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Margin="10, 0">
+                    <Label Text="Level 2 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                    <Grid ColumnDefinitions="*, *">
+                        <Label Grid.Column="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Merit: "/>
+                                    <Span Text="{Binding Source={x:Reference levelTwoEndorsementProgress}, Path=SecondaryProgress, 
+                                                     StringFormat='{0} /'}"/>
+                                    <Span Text="{Binding Source={x:Reference levelTwoEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Column="1" HorizontalOptions="End">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Excellence: "/>
+                                    <Span Text="{Binding Source={x:Reference levelTwoEndorsementProgress}, Path=Progress, 
+                                                     StringFormat='{0} /'}"/>
+                                    <Span Text="{Binding Source={x:Reference levelTwoEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                    <Frame Style="{StaticResource progressBarFrame}">
+                        <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}"
+                                                         BindingContext="{Binding LevelTwoEndorsement}"
+                                                         x:Name="levelTwoEndorsementProgress"/>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout Padding="0, 0, 0, 30" Margin="10, 0">
+                    <Label Text="Level 3 Endorsement Progress" Style="{StaticResource headerLabelStyle}"/>
+                    <Grid ColumnDefinitions="*, *">
+                        <Label Grid.Column="0">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Merit: "/>
+                                    <Span Text="{Binding Source={x:Reference levelThreeEndorsementProgress}, Path=SecondaryProgress, 
+                                                     StringFormat='{0} /'}"/>
+                                    <Span Text="{Binding Source={x:Reference levelThreeEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Grid.Column="1" HorizontalOptions="End">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Excellence: "/>
+                                    <Span Text="{Binding Source={x:Reference levelThreeEndorsementProgress}, Path=Progress, 
+                                                     StringFormat='{0} / '}"/>
+                                    <Span Text="{Binding Source={x:Reference levelThreeEndorsementProgress}, Path=Maximum, 
+                                                     StringFormat=' {0} credits'}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+
+                    <Frame Style="{StaticResource progressBarFrame}">
+                        <progressbar:SfLinearProgressBar Style="{StaticResource levelProgressBar}"
+                                                         BindingContext="{Binding LevelThreeEndorsement}"
+                                                         x:Name="levelThreeEndorsementProgress"/>
+                    </Frame>
+                </StackLayout>
+
+                <buttons:SfSegmentedControl VisibleSegmentsCount="4" SegmentPadding="10"
+                                            FontSize="{OnIdiom Tablet=20, Phone=15}"
+                                            SelectedIndex="{Binding Year, Mode=TwoWay, Converter={StaticResource indexToYearConverter}}"
+                                            SelectionChanged="SfSegmentedControl_SelectionChanged">
+
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                    <buttons:SfSegmentedControl.ItemsSource>
+                        <system:List x:TypeArguments="buttons:SfSegmentItem">
+                            <buttons:SfSegmentItem Text="2017"/>
+                            <buttons:SfSegmentItem Text="2018"/>
+                            <buttons:SfSegmentItem Text="2019"/>
+                            <buttons:SfSegmentItem Text="2020"/>
+                            <buttons:SfSegmentItem Text="2021"/>
+                        </system:List>
+                    </buttons:SfSegmentedControl.ItemsSource>
+                </buttons:SfSegmentedControl>
+
+                <listview:SfListView ItemsSource="{Binding SubjectEndorsements}" AutoFitMode="DynamicHeight"
+                                     x:Name="listViewEndorsements" SelectionMode="None"
+                                     VerticalOptions="End" HorizontalOptions="FillAndExpand"
+                                     ItemSpacing="{OnIdiom Tablet='0, 15', Phone='0, 10'}" IsScrollingEnabled="True">
+
+                    <listview:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="15" Background="{DynamicResource BlueToDarkGradient}">
+                                <StackLayout>
+                                    <Label Text="{Binding Name, StringFormat='{0} Endorsement Progress'}" Style="{StaticResource headerLabelStyle}"
+                                           Margin="0, 0, 0, 10"/>
+
+                                    <Grid RowDefinitions="Auto, Auto, 40" RowSpacing="15">
+                                        <buttons:SfSegmentedControl VisibleSegmentsCount="2" SegmentPadding="10"
+                                                                FontSize="{OnIdiom Tablet=20, Phone=15}"
+                                                                x:Name="endorsementTypeSelector" Grid.Row="0"
+                                                                HorizontalOptions="Start" SegmentHeight="30"
+                                                                Margin="0" SegmentWidth="{OnPlatform iOS=125}">
+
+                                            <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                                                <buttons:SelectionIndicatorSettings Color="Orange" CornerRadius="12"/>
+                                            </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+
+                                            <buttons:SfSegmentedControl.ItemsSource>
+                                                <system:List x:TypeArguments="buttons:SfSegmentItem">
+                                                    <buttons:SfSegmentItem Text="Merit"/>
+                                                    <buttons:SfSegmentItem Text="Excellence"/>
+                                                </system:List>
+                                            </buttons:SfSegmentedControl.ItemsSource>
+                                        </buttons:SfSegmentedControl>
+
+                                        <Grid ColumnDefinitions="*, *, 3*" ColumnSpacing="20" Grid.Row="1">
+                                            <Frame Style="{StaticResource progressBarFrame}" Grid.Column="0">
+                                                <progressbar:SfLinearProgressBar ProgressColor="DeepSkyBlue"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding MeritInternalCredits}" Maximum="3">
+
+                                                    <progressbar:SfLinearProgressBar.Triggers>
+                                                        <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                             Value="1" TargetType="progressbar:SfLinearProgressBar">
+                                                            <Setter Property="ProgressColor" Value="Orange"/>
+                                                            <Setter Property="Progress" Value="{Binding ExcellenceInternalCredits}"/>
+                                                        </DataTrigger>
+                                                    </progressbar:SfLinearProgressBar.Triggers>
+                                                </progressbar:SfLinearProgressBar>
+                                            </Frame>
+
+                                            <Frame Style="{StaticResource progressBarFrame}" Grid.Column="1">
+                                                <progressbar:SfLinearProgressBar ProgressColor="DeepSkyBlue"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding MeritExternalCredits}" Maximum="3">
+
+                                                    <progressbar:SfLinearProgressBar.Triggers>
+                                                        <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                             Value="1" TargetType="progressbar:SfLinearProgressBar">
+                                                            <Setter Property="ProgressColor" Value="Orange"/>
+                                                            <Setter Property="Progress" Value="{Binding ExcellenceExternalCredits}"/>
+                                                        </DataTrigger>
+                                                    </progressbar:SfLinearProgressBar.Triggers>
+                                                </progressbar:SfLinearProgressBar>
+                                            </Frame>
+
+                                            <Frame Style="{StaticResource progressBarFrame}" Grid.Column="2">
+                                                <progressbar:SfLinearProgressBar ProgressColor="DeepSkyBlue"
+                                                     Style="{StaticResource subjectProgressBar}"
+                                                     Progress="{Binding MeritTotalCredits}" Maximum="8">
+
+                                                    <progressbar:SfLinearProgressBar.Triggers>
+                                                        <DataTrigger Binding="{Binding Year}"
+                                                             Value="2020" TargetType="progressbar:SfLinearProgressBar">
+                                                            <Setter Property="Maximum" Value="6"/>
+                                                        </DataTrigger>
+
+                                                        <DataTrigger Binding="{Binding Source={x:Reference endorsementTypeSelector}, Path=SelectedIndex}"
+                                                                 Value="1" TargetType="progressbar:SfLinearProgressBar">
+                                                            <Setter Property="ProgressColor" Value="Orange"/>
+                                                            <Setter Property="Progress" Value="{Binding ExcellenceTotalCredits}"/>
+                                                        </DataTrigger>
+                                                    </progressbar:SfLinearProgressBar.Triggers>
+                                                </progressbar:SfLinearProgressBar>
+                                            </Frame>
+                                        </Grid>
+
+                                        <Frame Grid.Row="2" CornerRadius="15" 
+                                               Margin="0" Padding="0"
+                                               BackgroundColor="Red" HorizontalOptions="Start"
+                                               IsClippedToBounds="True" VerticalOptions="End">
+
+                                            <Frame.Triggers>
+                                                <DataTrigger Binding="{Binding EndorsementType}" Value="Merit"
+                                                             TargetType="Frame">
+                                                    <Setter Property="BackgroundColor" Value="DodgerBlue"/>
+                                                </DataTrigger>
+
+                                                <DataTrigger Binding="{Binding EndorsementType}" Value="Excellence"
+                                                             TargetType="Frame">
+                                                    <Setter Property="BackgroundColor" Value="Orange"/>
+                                                </DataTrigger>
+                                            </Frame.Triggers>
+                                            
+                                            <Label Text="{Binding ., Converter={StaticResource endorsementConverter}}"
+                                                   Margin="7" FontAttributes="Bold" 
+                                                   VerticalTextAlignment="Center" FontSize="13"/>
+                                        </Frame>
+                                        
+                                    </Grid>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </listview:SfListView.ItemTemplate>
+                </listview:SfListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+
+</ContentView>

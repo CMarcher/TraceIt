@@ -8,7 +8,6 @@ using Android.Content;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
 using TraceIt.Controls;
@@ -35,9 +34,9 @@ namespace TraceIt.Droid.Renderers
             return new GradientShellBottomTabBarAppearanceTracker(this, shellItem);
         }
 
-        protected override IShellSectionRenderer CreateShellSectionRenderer(ShellSection shellSection)
+        protected override IShellTabLayoutAppearanceTracker CreateTabLayoutAppearanceTracker(ShellSection shellSection)
         {
-            return base.CreateShellSectionRenderer(shellSection);
+            return new GradientShellTopTabBarAppearanceTracker(this);
         }
 
         public GradientShellPage GetPageInstance()

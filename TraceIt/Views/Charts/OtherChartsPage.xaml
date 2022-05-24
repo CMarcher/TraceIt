@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             x:Class="TraceIt.Views.Charts.OtherChartsPage">
+
+    <ContentView.BindingContext>
+        <viewmodels:OtherChartsPageViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="baseProgressBar">
+                <Setter Property="Minimum" Value="0"/>
+                <Setter Property="HeightRequest" Value="{Binding Source={RelativeSource Self}, Path=TrackHeight}"/>
+                <Setter Property="SegmentCount" Value="{Binding Source={RelativeSource Self}, Path=Maximum}"/>
+                <Setter Property="TrackColor" Value="#303030"/>
+            </Style>
+
+            <Style TargetType="progressbar:SfLinearProgressBar" x:Key="extraProgressBar"
+                   BasedOn="{StaticResource baseProgressBar}">
+                <Setter Property="TrackHeight" Value="70"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="progressBarFrame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <ScrollView>
+            <StackLayout Spacing="0" VerticalOptions="StartAndExpand" Margin="0, 0, 0, 20">
+
+                <Grid ColumnDefinitions="*, *" RowDefinitions="20, *" Padding="{OnIdiom Phone='20, 10, 20, 40', Tablet='40, 10'}">
+
+                    <Label Text="Reading progress" FontAttributes="Bold" Grid.Column="0"
+                       TextColor="White"/>
+                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="0" Grid.Row="1">
+                        <progressbar:SfLinearProgressBar Progress="{Binding ReadingCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                    </Frame>
+
+                    <Label Text="Writing progress" FontAttributes="Bold" Grid.Column="1"
+                       TextColor="White"/>
+                    <Frame Style="{StaticResource progressBarFrame}" Grid.Column="1" Grid.Row="1">
+                        <progressbar:SfLinearProgressBar Progress="{Binding WritingCredits}" Style="{StaticResource extraProgressBar}"
+                                                     Maximum="5"/>
+                    </Frame>
+                </Grid>
+
+                <Frame HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center" Padding="20, 10"
+                       BackgroundColor="#03002e" CornerRadius="15"
+                       Margin="20, 0, 20, 20" HasShadow="False"
+                       BorderColor="White">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand"
+                                 HorizontalOptions="Center">
+                        <Label Text="University Entrance" TextColor="White"
+                           FontAttributes="Bold" VerticalTextAlignment="Center"
+                           FontSize="Large"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding HasUniEntrance}"/>
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Center" Padding="20, 10"
+                       BackgroundColor="#03002e" CornerRadius="15"
+                       Margin="20, 10, 20, 10" HasShadow="False"
+                       BorderColor="White">
+                    <StackLayout>
+                        <Label Text="Rank Score" VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand"
+                           FontAttributes="Bold" TextColor="White"
+                           FontSize="Large"/>
+
+                        <Label Text="{Binding RankScore}"
+                               VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand"
+                               TextColor="White" FontAttributes="Bold"
+                               FontSize="50" Margin="0, 0, 0, 12"/>
+
+                        <progressbar:SfStepProgressBar BindableLayout.ItemsSource="{Binding ProgressIndicators}" Orientation="Vertical"
+                                               HorizontalOptions="CenterAndExpand" TitleAlignment="Start" TitleSpace="20"
+                                               StepTapped="SfStepProgressBar_StepTapped">
+
+                            <progressbar:SfStepProgressBar.NotStartedStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:NotStartedStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.NotStartedStepStyle>
+
+                            <progressbar:SfStepProgressBar.InProgressStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:InProgressStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.InProgressStepStyle>
+
+                            <progressbar:SfStepProgressBar.CompletedStepStyle>
+                                <progressbar:StepStyle x:TypeArguments="progressbar:CompletedStepState" MarkerSize="30"/>
+                            </progressbar:SfStepProgressBar.CompletedStepStyle>
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <progressbar:StepView ProgressValue="{Binding Progress}" Status="{Binding Status}">
+                                        <progressbar:StepView.PrimaryFormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Progress}" TextColor="White"
+                                                      FontAttributes="Bold" FontSize="Large"/>
+                                            </FormattedString>
+                                        </progressbar:StepView.PrimaryFormattedText>
+                                    </progressbar:StepView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </progressbar:SfStepProgressBar>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

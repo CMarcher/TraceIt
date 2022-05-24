@@ -1,101 +1,117 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels" 
+             xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectSelectionPage"
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
-             Title="Select your subjects">
+             x:Name="Page">
 
     <ContentPage.Resources>
-
         <ResourceDictionary>
             <Style TargetType="Label" x:Key="Header">
                 <Setter Property="FontSize">Large</Setter>
                 <Setter Property="HorizontalTextAlignment">Center</Setter>
                 <Setter Property="TextColor">Black</Setter>
+                <Setter Property="Margin" Value="8"/>
+            </Style>
+
+            <Style TargetType="Label" x:Key="subjectItemLabel">
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="CornerRadius" Value="20"/>
             </Style>
         </ResourceDictionary>
-
     </ContentPage.Resources>
 
+    <ContentPage.BindingContext>
+        <viewmodels:SubjectSelectionPageViewModel/>
+    </ContentPage.BindingContext>
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="X"/>
+        <!--<ToolbarItem x:Name="addButton" Clicked="addButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>-->
+
+        <ToolbarItem x:Name="closeButton" Clicked="closeButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Medium" FontFamily="PrimaryIcons" Glyph="{DynamicResource Cross}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        
-        <AbsoluteLayout BackgroundColor="White"
-                        VerticalOptions="StartAndExpand"
-                        HorizontalOptions="FillAndExpand">
+        <Grid Background="{DynamicResource LightBlueToDarkMain}" RowDefinitions="Auto, *, 50"
+              RowSpacing="0">
+
+            <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
+                <SearchBar x:Name="searchBar" Placeholder="Search subjects"
+                           TextChanged="searchBar_TextChanged"
+                           Grid.Row="0" BackgroundColor="White"/>
+            </Frame>
 
             <listview:SfListView x:Name="subjectsListView" ItemSpacing="7"
-                                 SelectionMode="Multiple"
-                                 ItemSize="50"
-                                 AbsoluteLayout.LayoutFlags="All"
-                                 AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
-                                 VerticalOptions="FillAndExpand"
-                                 HorizontalOptions="FillAndExpand"
-                                 Padding="20, 20, 10, 50">
+                                 VerticalOptions="StartAndExpand" SelectionMode="None"
+                                 HorizontalOptions="FillAndExpand" Padding="{OnIdiom Phone='10, 0', Tablet='25, 0'}" 
+                                 Margin="0" AutoFitMode="DynamicHeight"
+                                 ItemsSource="{Binding Subjects}" Grid.Row="1">
 
                 <listview:SfListView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="#f5f5f5"
-                               HasShadow="False"
-                               Padding="20,10,0,10"
-                               CornerRadius="20"
-                               BorderColor="#dedede">
+                        <Frame Background="{DynamicResource BlueToDarkGradient}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ChangeSelectionCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
 
-                            <StackLayout>
-                                <Label Text="{Binding Name}" TextColor="Black"
-                                       FontSize="16"
-                                       VerticalOptions="CenterAndExpand"/>
-                            </StackLayout>
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding Selected}"
+                                             Value="true">
+                                    <Setter Property="Background" Value="{DynamicResource OrangeToLightGradient}"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+
+                            <Label Text="{Binding BaseSubject.Name}" TextColor="White"
+                                   Style="{StaticResource subjectItemLabel}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Selected}"
+                                             Value="true">
+                                        <Setter Property="TextColor" Value="Black"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
                         </Frame>
                     </DataTemplate>
                 </listview:SfListView.ItemTemplate>
-
-                <listview:SfListView.SelectedItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="Orange"
-                               HasShadow="False"
-                               Padding="20,10,0,10"
-                               CornerRadius="20"
-                               BorderColor="#dedede">
-
-                            <StackLayout>
-                                <Label Text="{Binding Name}" TextColor="White"
-                                       FontSize="16"
-                                       VerticalOptions="CenterAndExpand"/>
-                            </StackLayout>
-
-                        </Frame>
-                    </DataTemplate>
-                </listview:SfListView.SelectedItemTemplate>
-
             </listview:SfListView>
 
-            <button:SfButton x:Name="buttonConfirm"
-                             Text="CONFIRM"
-                             AbsoluteLayout.LayoutBounds="0, 1, 1, 50"
-                             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
-                             CornerRadius="25,25,0,0"
-                             Clicked="buttonConfirm_Clicked">
-                
-                <button:SfButton.BackgroundGradient>
-                    <gradient:SfLinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 0.65">
-                        <gradient:SfLinearGradientBrush.GradientStops>
-                            <gradient:SfGradientStop Color="#0012FF" Offset="0.0"/>
-                            <gradient:SfGradientStop Color="#000B98" Offset="1.0"/>
-                        </gradient:SfLinearGradientBrush.GradientStops>
-                    </gradient:SfLinearGradientBrush>
-                </button:SfButton.BackgroundGradient>
-            </button:SfButton>
+            <Button x:Name="buttonConfirm" Text="CONFIRM"
+                    CornerRadius="25" Clicked="buttonConfirm_Clicked"
+                    Grid.Row="2" TextColor="Black"
+                    FontAttributes="Bold">
 
-        </AbsoluteLayout>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FFC400" Offset="0"/>
+                            <GradientStop Color="#FFA200" Offset="1"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

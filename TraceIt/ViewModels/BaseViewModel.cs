@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace TraceIt.ViewModels
@@ -14,9 +15,15 @@ namespace TraceIt.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public virtual void Initialize(object parameter)
+        public void SetProperty<T>(ref T property, T value, string propertyName)
         {
-
+            property = value;
+            OnPropertyChanged(propertyName);
         }
+
+        public event EventHandler ViewModelInitialised;
+
+        public void RaiseViewModelInitialised()
+            => ViewModelInitialised?.Invoke(this, new EventArgs());
     }
 }

@@ -1,4 +1,4 @@
-using Syncfusion.XForms.iOS.TabView;
+using Syncfusion.SfChart.XForms.iOS.Renderers;
 using Syncfusion.XForms.iOS.Border;
 using Syncfusion.XForms.iOS.Buttons;
 using Syncfusion.ListView.XForms.iOS;
@@ -10,7 +10,9 @@ using Foundation;
 using UIKit;
 using Syncfusion.XForms.iOS.Graphics;
 using Syncfusion.XForms.Buttons;
-using Sharpnado.Presentation.Forms.iOS;
+using Syncfusion.XForms.iOS.ProgressBar;
+using Syncfusion.XForms.iOS.TabView;
+using Syncfusion.XForms.iOS.PopupLayout;
 
 namespace TraceIt.iOS
 {
@@ -30,11 +32,18 @@ namespace TraceIt.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Xamarin.Forms.Forms.Init();
+            Forms9Patch.iOS.Settings.Initialize(this);
             SfListViewRenderer.Init();
             SfBorderRenderer.Init();
-            SfButtonRenderer.Init();
-            SfGradientViewRenderer.Init();
+            SfSwitchRenderer.Init();
             SfTabViewRenderer.Init();
+            SfLinearProgressBarRenderer.Init();
+            SfCircularProgressBarRenderer.Init();
+            SfButtonRenderer.Init();
+            SfSegmentedControlRenderer.Init();
+            SfChartRenderer.Init();
+            SfCheckBoxRenderer.Init();
+            SfPopupLayoutRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

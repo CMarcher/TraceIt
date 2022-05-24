@@ -2,61 +2,43 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using TraceIt.Models;
+using TraceIt.Utilities;
+using TraceIt.Services;
+using Xamarin.Forms;
 
 namespace TraceIt.ViewModels
 {
-    public class SelectedStandardsPageViewModel
+    public class SelectedStandardsPageViewModel : BaseViewModel
     {
-        public ObservableCollection<AssessmentStandards> Standards = new ObservableCollection<AssessmentStandards>()
+        private ObservableCollection<Standard> _standards;
+        public ObservableCollection<Standard> Standards
         {
-            new AssessmentStandards()
+            get { return _standards; }
+            set
             {
-                Code = 97321,
-                Title = "Demonstrate understanding of something",
-                Subject_Reference = "Smart English 1.1",
-                Assessment_Type = "Achievement",
-                Hyperlink = "Whatever",
-                Credits = 4
-            },
-            new AssessmentStandards()
-            {
-                Code = 97321,
-                Title = "Demonstrate understanding of something",
-                Subject_Reference = "Smart English 1.1",
-                Assessment_Type = "Achievement",
-                Hyperlink = "Whatever",
-                Credits = 4
-            },
-            new AssessmentStandards()
-            {
-                Code = 97321,
-                Title = "Demonstrate understanding of something",
-                Subject_Reference = "Smart English 1.1",
-                Assessment_Type = "Achievement",
-                Hyperlink = "Whatever",
-                Credits = 4
-            },
-            new AssessmentStandards()
-            {
-                Code = 97321,
-                Title = "Demonstrate understanding of something",
-                Subject_Reference = "Smart English 1.1",
-                Assessment_Type = "Achievement",
-                Hyperlink = "Whatever",
-                Credits = 4
-            },
-            new AssessmentStandards()
-            {
-                Code = 97321,
-                Title = "Demonstrate understanding of something",
-                Subject_Reference = "Smart English 1.1",
-                Assessment_Type = "Achievement",
-                Hyperlink = "Whatever",
-                Credits = 4
+                _standards = value;
+                OnPropertyChanged(nameof(Standards));
             }
+        }
 
-        };
+        public Command RemoveStandardCommand { get; set; }
 
+        public SelectedStandardsPageViewModel()
+        {
+            Standards = new ObservableCollection<Standard>();
+            SetStandards();
+            SetCommands();
+        }
+
+        void SetStandards()
+            => Standards = StatusTracker.CurrentSubject.Standards;
+
+        void SetCommands()
+            => RemoveStandardCommand = new Command<Standard>(async (standard) => await RemoveStandard(standard));
+        
+        async Task RemoveStandard(Standard standard)
+            => await StatusTracker.CurrentSubject.RemoveStandardAsync(standard);
     }
 }

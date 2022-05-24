@@ -1,98 +1,160 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:Button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
+             xmlns:models="clr-namespace:TraceIt.Models"
+             xmlns:views="clr-namespace:TraceIt.Views"
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.SubjectsPage"
-             Title="Subjects">
+             Title="Subjects"
+             BackgroundColor="Black"
+             x:Name="Page"
+             x:DataType="viewmodels:SubjectsPageViewModel">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="+"/>
-        <ToolbarItem Text="Edit"/>
-    </ContentPage.ToolbarItems>
+    <views:BasePage.BindingContext>
+        <viewmodels:SubjectsPageViewModel/>
+    </views:BasePage.BindingContext>
 
-    <ContentPage.Resources>
+    <views:BasePage.ToolbarItems>
+        <ToolbarItem x:Name="addSubjectsToolbarItem" Clicked="addSubjectsToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Large" FontFamily="PrimaryIcons" 
+                                 Glyph="{DynamicResource Plus}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </views:BasePage.ToolbarItems>
+
+    <views:BasePage.Resources>
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="White"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="17"/>
         </Style>
 
-    </ContentPage.Resources>
+        <converters:CreditsTotalLabelConverter x:Key="labelConverter"/>
+        <converters:InverseBoolConverter x:Key="invertBoolConverter"/>
+    </views:BasePage.Resources>
 
-    <ContentPage.Content>
-        <AbsoluteLayout VerticalOptions="FillAndExpand"
-                        HorizontalOptions="FillAndExpand">
+    <views:BasePage.Content>
+        <AbsoluteLayout Style="{DynamicResource gradientAbsoluteLayout}">
 
-            <!--#region GradientBackground -->
-            <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                     AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
-                                     Style="{DynamicResource backgroundGradient}">
-            </gradient:SfGradientView>
-            <!--#endregion-->
+            <ActivityIndicator x:Name="loadingView" IsRunning="{Binding IsBusy}"
+                               AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.1, 0.1"
+                               AbsoluteLayout.LayoutFlags="All"/>
 
-            <StackLayout Padding="14, 14, 14, 0" AbsoluteLayout.LayoutFlags="All"
-                         AbsoluteLayout.LayoutBounds="0.5, 0, 1, 1">
-                <CollectionView x:Name="collectionViewSubjects">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Span="2" HorizontalItemSpacing="15" VerticalItemSpacing="20"
-                                     Orientation="Vertical"/>
-                    </CollectionView.ItemsLayout>
+            <StackLayout Padding="0" AbsoluteLayout.LayoutFlags="All"
+                         AbsoluteLayout.LayoutBounds="0, 0, 1, 1" Spacing="0"
+                         VerticalOptions="FillAndExpand">
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <border:SfBorder Style="{DynamicResource listItemBorder}">
-                                <AbsoluteLayout HeightRequest="180">
+                <Frame BackgroundColor="#001257" CornerRadius="0"
+                       Padding="5" HasShadow="False">
+                    
+                    <Picker Title="Selected year" HeightRequest="50"
+                        BackgroundColor="#000d40" TextColor="White"
+                        TitleColor="White" FontSize="20" 
+                        HorizontalTextAlignment="Center" FontAttributes="Bold"
+                        x:Name="yearPicker" SelectedIndexChanged="yearPicker_SelectedIndexChanged">
+                        
+                        <Picker.Items>
+                            <x:String>2017</x:String>
+                            <x:String>2018</x:String>
+                            <x:String>2019</x:String>
+                            <x:String>2020</x:String>
+                            <x:String>2021</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
 
-                                    <gradient:SfGradientView AbsoluteLayout.LayoutFlags="All"
-                                                             AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"
-                                                             Style="{DynamicResource subjectItemGradient}"/>
+                <xforms:SfListView x:Name="listViewSubjects" AutoFitMode="DynamicHeight" 
+                                   ItemSpacing="{OnIdiom Tablet=20, Phone=10}"
+                                   SelectionMode="None" ItemsSource="{Binding Subjects}"
+                                   VerticalOptions="FillAndExpand">
 
-                                    <Label Text="{Binding Name}"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.1, 0.9, 0.2"
-                                           FontAttributes="Bold"/>
+                    <xforms:SfListView.LayoutManager>
+                        <xforms:GridLayout SpanCount="2"/>
+                    </xforms:SfListView.LayoutManager>
 
-                                    <Label Text="{Binding Credits, StringFormat='0 / {0} credits'}"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.35, 0.9, 0.2"/>
+                    <xforms:SfListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:SelectedSubject">
+                            <SwipeView BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
 
-                                    <Label Text="{Binding Standards, StringFormat='{0} standards'}"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           AbsoluteLayout.LayoutBounds="0.5, 0.53, 0.9, 0.2"/>
+                                <SwipeView.RightItems>
+                                    <SwipeItemView Padding="10, 0, 0, 0" 
+                                                   Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveSubjectCommand}"
+                                                   CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                                   HorizontalOptions="{OnPlatform Android=End}">
+                                        
+                                        <Frame CornerRadius="28" HasShadow="False" 
+                                               WidthRequest="{OnIdiom Tablet=50, Phone=25}" Padding="{OnIdiom Tablet=50, Phone=15}">
+                                            <Frame.Background>
+                                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                                    <GradientStop Color="OrangeRed" Offset="0"/>
+                                                    <GradientStop Color="Red" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Frame.Background>
+                                            
+                                            <Image>
+                                                <Image.Source>
+                                                    <FontImageSource Color="White" FontFamily="PrimaryIcons"
+                                                                     Glyph="{DynamicResource Trash}" Size="{OnIdiom Tablet=80, Phone=50}"/>
+                                                </Image.Source>
+                                            </Image>
+                                        </Frame>
+                                    </SwipeItemView>
+                                </SwipeView.RightItems>
+                                
+                                <Frame Style="{DynamicResource listItemFrame}" Padding="0"
+                                       BackgroundColor="{OnPlatform Android='Transparent'}"
+                                       VerticalOptions="{OnPlatform iOS=End, Android=FillAndExpand}"
+                                       Margin="0">
+                                    <StackLayout Padding="10, 13, 10, 20" VerticalOptions="FillAndExpand">
 
-                                    <Button:SfButton Text="View Info" CornerRadius="30"
-                                                     TextColor="Black"
-                                                     FontAttributes="Bold"
-                                                     FontSize="17"
-                                                     AbsoluteLayout.LayoutFlags="All"
-                                                     AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.7, 0.2"
-                                                     Style="{DynamicResource subjectButtonGradient}"
-                                                     Clicked="buttonViewInfo_Clicked"/>
+                                        <Label Text="{Binding BaseSubject.Name}" FontAttributes="Bold" 
+                                           Margin="0, 0, 0, 12"/>
 
-                                </AbsoluteLayout>
-                            </border:SfBorder>
+                                        <Label>
+                                            <Label.Text>
+                                                <MultiBinding Converter="{StaticResource labelConverter}" 
+                                                              ConverterParameter="SubjectsPage">
+                                                    <Binding Path="PassedCredits"/>
+                                                    <Binding Path="Credits"/>
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+
+                                        <Label Text="{Binding StandardsCount, StringFormat='{0} standards'}" Margin="0, 0, 0, 12"/>
+
+                                        <Frame CornerRadius="15" BackgroundColor="DodgerBlue"
+                                               IsVisible="{Binding EndorsementEligible, Converter={StaticResource invertBoolConverter}}"
+                                               IsClippedToBounds="True" Padding="0" Margin="0" HorizontalOptions="Center"
+                                               VerticalOptions="StartAndExpand">
+
+                                            <Label Text="Not eligible for endorsement" TextColor="White" Margin="{OnIdiom Phone='7, 4', Tablet='10, 7'}"
+                                                   FontSize="12" FontAttributes="Bold, Italic"/>
+                                        </Frame>
+
+                                        <Button Text="View Info" CornerRadius="18"
+                                                     TextColor="Black" FontAttributes="Bold" 
+                                                     FontSize="17" Style="{DynamicResource subjectButtonGradient}"
+                                                     Clicked="buttonViewInfo_Clicked" HorizontalOptions="Center"
+                                                     WidthRequest="200" HeightRequest="40"
+                                                     VerticalOptions="EndAndExpand"/>
+
+                                    </StackLayout>
+                                </Frame>
+                            </SwipeView>
+                            
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                    </xforms:SfListView.ItemTemplate>
+                    
+                    
 
-                    <CollectionView.FooterTemplate>
-                        <DataTemplate>
-                            <border:SfBorder Style="{DynamicResource listItemBorder}"
-                                                     BackgroundColor="Black"
-                                                     HeightRequest="180">
-                                <Button Text="Add Subject"
-                                                TextColor="Yellow"
-                                                BackgroundColor="Transparent"/>
-                            </border:SfBorder>
-                        </DataTemplate>
-                    </CollectionView.FooterTemplate>
-
-                </CollectionView>
+                </xforms:SfListView>
             </StackLayout>
         </AbsoluteLayout>
-    </ContentPage.Content>
-</ContentPage>
+    </views:BasePage.Content>
+</views:BasePage>

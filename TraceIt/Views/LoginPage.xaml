@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="TraceIt.LoginPage"
+             xmlns:controls="clr-namespace:TraceIt.Controls"
+             BackgroundColor="Black">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="controls:CustomEntry">
+                <Setter Property="PlaceholderColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+
+            <Style TargetType="controls:CustomPicker">
+                <Setter Property="TitleColor" Value="DimGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HeightRequest" Value="65"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout d:BackgroundColor="#0006A3">
+
+        <AbsoluteLayout.Background>
+            <LinearGradientBrush>
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#001157" Offset="0.1"/>
+                    <GradientStop Color="#00A2FF" Offset="1.0"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </AbsoluteLayout.Background>
+
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .25, .7, .5" AbsoluteLayout.LayoutFlags="All">
+
+            <Label
+               Text="TraceIt"
+               HorizontalTextAlignment="Center"
+               FontSize="40"
+               TextColor="White"
+               FontAttributes="Bold"/>
+
+            <Label Text="Your personal NCEA progress tracker" 
+               HorizontalTextAlignment="Center"
+               FontSize="17"
+               TextColor="White"/>
+
+        </StackLayout>
+
+        <StackLayout AbsoluteLayout.LayoutBounds=".5, .7, .7, .5" AbsoluteLayout.LayoutFlags="All"
+                     Spacing="10" Margin="0" Padding="0">
+
+            <Frame Margin="0" Padding="{OnPlatform Android='15, 0, 0, 0', iOS='0'}">
+                <controls:CustomEntry x:Name="entryName" Placeholder="Enter your name here" 
+                                      BackgroundColor="Transparent" Margin="{OnPlatform Android='0,-20', iOS=0}"/>
+            </Frame>
+
+            <Frame Padding="{OnPlatform Android='15, 0, 0, 0', iOS='0'}">
+                <controls:CustomPicker x:Name="pickerLevel" Title="Select year"
+                                       Margin="{OnPlatform Android='0, -20'}">
+                    <Picker.Items>
+                        <x:String>2017</x:String>
+                        <x:String>2018</x:String>
+                        <x:String>2019</x:String>
+                        <x:String>2020</x:String>
+                        <x:String>2021</x:String>
+                    </Picker.Items>
+                </controls:CustomPicker>
+            </Frame>
+
+            <Button x:Name="buttonConfirm"
+                    Text="Confirm"
+                    TextColor="White"
+                    BackgroundColor="#2699FB"
+                    Clicked="buttonConfirm_Clicked"/>
+
+        </StackLayout>
+    </AbsoluteLayout>
+
+</ContentPage>

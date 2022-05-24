@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:system="clr-namespace:System.Collections.Generic;assembly=netstandard" 
+             xmlns:forms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:templates="clr-namespace:TraceIt.Views.Data_Templates" 
+             xmlns:triggers="clr-namespace:TraceIt.Triggers"
+             mc:Ignorable="d"
+             x:Class="TraceIt.Views.StandardCategorisedPage"
+             Title="Search Standards"
+             x:Name="Page">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="closeButton" Text="Done" Clicked="closeButton_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Size="Large" FontFamily="PrimaryIcons" Glyph="{DynamicResource Tick}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="buttons:SfSegmentedControl">
+                <Setter Property="SegmentBackgroundColor" Value="#0051AE"/>
+                <Setter Property="SegmentBorderColor" Value="Transparent"/>
+                <Setter Property="BorderColor" Value="Black"/>
+                <Setter Property="SelectionTextColor" Value="White"/>
+                <Setter Property="FontColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="SegmentCornerRadius" Value="0"/>
+                <Setter Property="SegmentHeight" Value="35"/>
+                <Setter Property="SelectionAnimationDuration" Value="100"/>
+                <Setter Property="SelectionIndicatorSettings">
+                    <Setter.Value>
+                        <buttons:SelectionIndicatorSettings Position="Fill" Color="Orange"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="filterLabelStyle">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Padding" Value="{OnIdiom Phone='10, 0, 0, 0', Tablet='20, 0, 0, 0'}"/>
+            </Style>
+
+            <LinearGradientBrush x:Key="listItemGradient">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Color="#4B7BFF" Offset="0.0"/>
+                    <GradientStop Color="#071D57" Offset="1"/>
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <DataTemplate x:Key="standardTemplate">
+                <Frame Style="{DynamicResource listItemFrame}">
+
+                    <StackLayout>
+
+                        <Label Text="{Binding Code}" TextColor="White"
+                               FontSize="16" Style="{StaticResource filterLabelStyle}"/>
+                        <Label Text="{Binding Title}" TextColor="White"
+                               FontSize="16" VerticalOptions="CenterAndExpand"
+                               FontAttributes="Italic"/>
+
+                        <Button x:Name="selectionButton"
+                                        Command="{Binding Source={x:Reference Page}, Path=BindingContext.ChangeStandardSelectionCommand}" 
+                                        CommandParameter="{Binding Source={RelativeSource Self}, Path=BindingContext}"
+                                        VerticalOptions="FillAndExpand" HorizontalOptions="Start"
+                                        WidthRequest="150" Margin="5, 5, 20, 0">
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                    <GradientStopCollection>
+                                        <GradientStop Offset="0" Color="#FFC400"/>
+                                        <GradientStop Offset="1" Color="#FFA200"/>
+                                    </GradientStopCollection>
+                                </LinearGradientBrush>
+                            </Button.Background>
+
+                            <Button.ImageSource>
+                                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Plus}"
+                                                         Color="Black"/>
+                            </Button.ImageSource>
+
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding Selected}"
+                                                     Value="true">
+                                    <DataTrigger.EnterActions>
+                                        <triggers:SelectedTriggerAction StartColor="OrangeRed" EndColor="Red"/>
+                                    </DataTrigger.EnterActions>
+
+                                    <DataTrigger.ExitActions>
+                                        <triggers:DeselectedTriggerAction StartColor="#FFC400" EndColor="#FFA200"/>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+                    </StackLayout>
+                </Frame>
+            </DataTemplate>
+            <DataTemplate x:Key="subfieldTemplate">
+                <Frame Style="{DynamicResource listItemFrame}">
+                    <Label Text="{Binding Subfield}" Style="{StaticResource filterLabelStyle}"
+                           FontSize="16" VerticalOptions="CenterAndExpand"
+                           Margin="0, 7"/>
+                </Frame>
+            </DataTemplate>
+            <DataTemplate x:Key="subjectTemplate">
+                <Frame Style="{DynamicResource listItemFrame}">
+                    <Label Text="{Binding Name}" Style="{StaticResource filterLabelStyle}"
+                           FontSize="16" VerticalOptions="CenterAndExpand"
+                           Margin="0, 7"/>
+                </Frame>
+            </DataTemplate>
+
+            <templates:StandardSearchDataTemplateSelector x:Key="dataTemplateSelector"
+                                                          StandardTemplate="{StaticResource standardTemplate}"
+                                                          SubfieldTemplate="{StaticResource subfieldTemplate}"
+                                                          SubjectTemplate="{StaticResource subjectTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"
+                     Background="{StaticResource listItemGradient}" Spacing="0">
+
+            <StackLayout BackgroundColor="#001124" Padding="0">
+                <Frame IsClippedToBounds="True" CornerRadius="10" Padding="0" Margin="10">
+                    <SearchBar x:Name="searchBar" BackgroundColor="White" FontAttributes="Italic"
+                         Placeholder="Search standards..." TextChanged="searchBar_TextChanged"
+                               PropertyChanged="searchBar_PropertyChanged"/>
+                </Frame>
+
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand"
+                         Padding="20, 0, 10, 10" Margin="0">
+
+                    <Label Text="Standard type:" Style="{StaticResource filterLabelStyle}"/>
+                        <buttons:SfSegmentedControl x:Name="assessmentSelector"
+                                            HorizontalOptions="StartAndExpand"
+                                            SelectionChanged="assessmentSelector_SelectionChanged"
+                                            FontSize="16">
+                            <system:List x:TypeArguments="x:String">
+                                <x:String>Achievement</x:String>
+                                <x:String>Unit</x:String>
+                            </system:List>
+                        </buttons:SfSegmentedControl>
+
+                    </StackLayout>
+            </StackLayout>
+
+            <StackLayout Padding="0">
+                <forms:SfListView x:Name="listView" ItemSpacing="8, 12, 8, 0"
+                                  ItemTapped="collectionViewCategories_ItemTapped" ItemTemplate="{StaticResource dataTemplateSelector}"
+                                  AutoFitMode="DynamicHeight" SelectionMode="None"
+                                  Padding="10, 0" VerticalOptions="FillAndExpand" Margin="0"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

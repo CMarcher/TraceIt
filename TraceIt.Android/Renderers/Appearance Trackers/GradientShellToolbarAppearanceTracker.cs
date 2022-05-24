@@ -25,7 +25,7 @@ namespace TraceIt.Droid.Renderers.Appearance_Trackers
             this.context = context;
         }
 
-        public override void SetAppearance(Android.Support.V7.Widget.Toolbar toolbar, IShellToolbarTracker toolbarTracker, ShellAppearance appearance)
+        public override void SetAppearance(AndroidX.AppCompat.Widget.Toolbar toolbar, IShellToolbarTracker toolbarTracker, ShellAppearance appearance)
         {
             base.SetAppearance(toolbar, toolbarTracker, appearance);
 
@@ -34,7 +34,7 @@ namespace TraceIt.Droid.Renderers.Appearance_Trackers
 
             var gradient = new GradientDrawable(
                 GradientDrawable.Orientation.LeftRight,
-                new int[] { 
+                new int[] {
                     page.ToolbarTopColor.ToAndroid(),
                     page.ToolbarBottomColor.ToAndroid() }
                 );

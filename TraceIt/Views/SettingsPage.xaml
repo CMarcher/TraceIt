@@ -4,13 +4,22 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.SettingsPage">
+             x:Class="TraceIt.Views.SettingsPage"
+             Title="Settings"
+             BackgroundColor="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Style="{DynamicResource gradientStackLayout}">
+            <Entry x:Name="entryName" Placeholder="Change your name"
+                   FontSize="Large" Margin="20" BackgroundColor="White"/>
+
+            <Button x:Name="clearCacheButton" Text="Clear PDF cache (free up space)"
+                    CornerRadius="20" BackgroundColor="Blue" TextColor="White"
+                    Clicked="clearCacheButton_Clicked" IsVisible="False"/>
         </StackLayout>
     </ContentPage.Content>
     

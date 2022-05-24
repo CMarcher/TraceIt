@@ -1,15 +1,178 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:progressbar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:viewmodels="clr-namespace:TraceIt.ViewModels"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:TraceIt.Converters"
              mc:Ignorable="d"
-             x:Class="TraceIt.Views.Charts.CreditsChartPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             x:Class="TraceIt.Views.Charts.CreditsChartPage"
+             x:Name="Page">
+
+    <ContentView.BindingContext>
+        <viewmodels:CreditsChartPageViewModel/>
+    </ContentView.BindingContext>
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:SelectedIndexToYBindingPathConverter x:Key="creditsBindingConverter"/>
+            <converters:CreditsTotalLabelConverter x:Key="labelFormattingConverter"/>
+
+            <Style TargetType="Picker">
+                <Setter Property="BackgroundColor" Value="#000d40"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="TitleColor" Value="White"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid RowDefinitions="50, *" RowSpacing="{OnIdiom Phone=12, Tablet=25}">
+            <Grid ColumnDefinitions="*, *">
+                
+                <Frame BackgroundColor="#001257" CornerRadius="10"
+                       Padding="5" HasShadow="False" 
+                       Grid.Column="0" Margin="{OnIdiom Tablet='5, 0'}">
+                    <Picker x:Name="chartSelector" SelectedIndex="0"
+                            >
+                        <Picker.Items>
+                            <x:String>Total Credits</x:String>
+                            <x:String>Grade Breakdown</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+
+                <Frame BackgroundColor="#001257" CornerRadius="10"
+                       Padding="5" HasShadow="False" 
+                       Grid.Column="1" Margin="{OnIdiom Tablet='5, 0'}">
+                    <Picker x:Name="levelFilterSelector" SelectedIndex="0"
+                            SelectedIndexChanged="levelFilterSelector_SelectedIndexChanged"
+                            FontAttributes="Bold">
+
+                        <Picker.Items>
+                            <x:String>Level 1</x:String>
+                            <x:String>Level 2</x:String>
+                            <x:String>Level 3</x:String>
+                            <x:String>All</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+            </Grid>
+
+            <progressbar:SfCircularProgressBar x:Name="creditsProgressBar" Minimum="0" 
+                                               SegmentCount="{Binding Source={RelativeSource Self}, Path=Maximum}"
+                                               ShowProgressValue="True" TrackColor="DimGray" ProgressColor="Orange"
+                                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                               IsVisible="False" Grid.Row="1" GapWidth="1.5"
+                                               Maximum="{Binding TotalCredits}" Progress="{Binding TotalAchievedCredits}"
+                                               Margin="0">
+
+                <progressbar:SfCircularProgressBar.Triggers>
+                    <DataTrigger TargetType="progressbar:SfCircularProgressBar" 
+                                     Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
+                                     Value="0">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </progressbar:SfCircularProgressBar.Triggers>
+
+                <progressbar:SfCircularProgressBar.Content>
+                    <Label TextColor="White" FontSize="40" FontAttributes="Italic, Bold" HorizontalTextAlignment="Center"
+                           VerticalOptions="FillAndExpand">
+                        
+                        <Label.Text>
+                            <MultiBinding Converter="{StaticResource labelFormattingConverter}">
+                                <Binding Path="TotalAchievedCredits"/>
+                                <Binding Path="TotalCredits"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </progressbar:SfCircularProgressBar.Content>
+            </progressbar:SfCircularProgressBar>
+
+            <Grid RowDefinitions="*, 50" VerticalOptions="FillAndExpand"
+                  Grid.Row="1" IsVisible="False">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" 
+                                     Binding="{Binding Source={x:Reference chartSelector}, Path=SelectedIndex}"
+                                     Value="1">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <chart:SfChart VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                               BackgroundColor="{OnPlatform Android=Transparent}" Margin="0"
+                               Grid.Row="0" ChartPadding="0">
+
+                    <chart:PieSeries ItemsSource="{Binding GradeBreakdowns}"
+                                 XBindingPath="Grade" YBindingPath="{Binding Source={x:Reference levelFilterSelector}, Path=SelectedIndex,
+                                                                    Converter={StaticResource creditsBindingConverter}}"
+                                 DataMarkerPosition="Inside" EnableTooltip="True"
+                                 ExplodeOnTouch="True" ExplodeAll="False">
+
+                        <chart:PieSeries.ColorModel>
+                            <chart:ChartColorModel Palette="Custom">
+                                <chart:ChartColorModel.CustomBrushes>
+                                    <chart:ChartColorCollection>
+                                        <Color>#363636</Color>
+                                        <Color>#512888</Color>
+                                        <Color>#004F98</Color>
+                                        <Color>Orange</Color>
+                                    </chart:ChartColorCollection>
+                                </chart:ChartColorModel.CustomBrushes>
+                            </chart:ChartColorModel>
+                        </chart:PieSeries.ColorModel>
+
+                        <chart:PieSeries.DataMarker>
+                            <chart:ChartDataMarker LabelContent="YValue">
+                                <chart:ChartDataMarker.LabelStyle>
+                                    <chart:DataMarkerLabelStyle FontSize="18" FontAttributes="Bold"/>
+                                </chart:ChartDataMarker.LabelStyle>
+                            </chart:ChartDataMarker>
+                        </chart:PieSeries.DataMarker>
+                    </chart:PieSeries>
+                </chart:SfChart>
+
+                <Grid ColumnDefinitions="*, *, *, *" HorizontalOptions="CenterAndExpand" Grid.Row="1"
+                      ColumnSpacing="20" Margin="10, 0, 10, 20">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="StackLayout">
+                                <Setter Property="VerticalOptions" Value="Center"/>
+                            </Style>
+
+                            <Style TargetType="Label">
+                                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="0">
+                        <BoxView Color="#363636" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=NA, Tablet='Not Achieved'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="1">
+                        <BoxView Color="#512888" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=A, Tablet='Achieved'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="2">
+                        <BoxView Color="#004F98" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=M, Tablet='Merit'}" TextColor="White"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Grid.Column="3">
+                        <BoxView Color="Orange" WidthRequest="25" HeightRequest="25"/>
+                        <Label Text="{OnIdiom Phone=E, Tablet='Excellence'}" TextColor="White"/>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+
+</ContentView>

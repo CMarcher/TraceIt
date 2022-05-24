@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TraceIt.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : BaseViewModel
     {
     }
 }

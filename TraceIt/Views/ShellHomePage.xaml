@@ -8,33 +8,55 @@
              xmlns:controls="clr-namespace:TraceIt.Controls"
              mc:Ignorable="d"
              x:Class="TraceIt.Views.ShellHomePage"
-             BackgroundColor="DarkBlue">
+             TitleColor="White" BackgroundColor="Gray">
 
     <Shell.Resources>
         <ResourceDictionary>
-            <Style x:Key="primaryStyle" TargetType="Element">
+            <Style TargetType="controls:GradientShellPage">
                 <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.ForegroundColor" Value="White"/>
                 <Setter Property="Shell.UnselectedColor" Value="Gray"/>
                 <Setter Property="Shell.NavBarHasShadow" Value="True"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
+                <Setter Property="Shell.UnselectedColor" Value="Gray"/>
             </Style>
+            <Style TargetType="TabBar"/>
         </ResourceDictionary>
     </Shell.Resources>
 
-    <TabBar Style="{StaticResource primaryStyle}">
+    <TabBar>
         <Tab Title="Subjects">
-            <ShellContent ContentTemplate="{DataTemplate pages:SubjectsPage}"/>
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Home}"
+                                 Size="Large"/>
+            </Tab.Icon>
+            
+            <ShellContent>
+                <pages:SubjectsPage/>
+            </ShellContent>
         </Tab>
 
         <Tab Title="Charts">
-            <ShellContent Title="Credits"
-                          ContentTemplate="{DataTemplate charts:CreditsChartPage}"/>
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Chart}"
+                                 Size="Large"/>
+            </Tab.Icon>
             
-            <ShellContent Title="Endorsements"
-                          ContentTemplate="{DataTemplate charts:EndorsementsChartPage}"/>
+            <ShellContent>
+                <charts:MainChartsPage/>
+            </ShellContent>
         </Tab>
 
         <Tab Title="Settings">
-            <ShellContent ContentTemplate="{DataTemplate pages:SettingsPage}"/>
+            <Tab.Icon>
+                <FontImageSource FontFamily="PrimaryIcons" Glyph="{DynamicResource Cog}"
+                                 Size="Large"/>
+            </Tab.Icon>
+            
+            <ShellContent>
+                <pages:SettingsPage/>
+            </ShellContent>
         </Tab>
     </TabBar>
     
