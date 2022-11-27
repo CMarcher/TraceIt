@@ -20,7 +20,7 @@ It allows standards to be selected and added to subjects, grades to be chosen fo
 
 # Availability
 
-TraceIt is currently available on the [App Store](https://apps.apple.com/nz/app/traceit-ncea-tracker/id1527893664) and [Play Store](https://play.google.com/store/apps/details?id=com.bccodespace.traceit).
+TraceIt is no longer available on the App Store (November 2022), but can still be found on the [Play Store](https://play.google.com/store/apps/details?id=com.bccodespace.traceit).
 
 # Future support
 
